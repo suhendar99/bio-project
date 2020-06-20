@@ -34,9 +34,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <?php 
+                                            $no =1;
+                                        ?>
+                                        @foreach($perangkat as $p)
                                             <tr>
-                                                <td>1</td>
-                                                <td>2346</td>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $p->no_seri }}</td>
                                                 <td>-69.13049</td>
                                                 <td>107.8139920</td>
                                                 <td>Aktif</td>

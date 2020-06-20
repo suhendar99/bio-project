@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\operator;
+use App\Perangkat;
 
 class OperatorController extends Controller
 {
@@ -14,7 +15,8 @@ class OperatorController extends Controller
     }
     public function dataper()
     {
-        return view('Admin.Master.dataper');
+        $perangkat = Perangkat::all();
+        return view('Admin.Master.dataper', compact('perangkat'));
     }
 
     public function store(Request $req)

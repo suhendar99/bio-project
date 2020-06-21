@@ -21,11 +21,9 @@
                     <!-- basic table  -->
                     <!-- ============================================================== -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="card">
-                            <div class="card-title">
-                                <a href="{{ route('data_ruang.index') }}" class="btn btn-primary">Back</a>
-                            </div>
+                        <div class="card">                            
                             <div class="card-body">
+                                <a href="{{ route('data_ruang.index') }}" class="btn btn-primary">Back</a>
                                  @if (session()->has('success'))
                                     <div class="alert alert-success">
                                         {{ session()->get('success') }}

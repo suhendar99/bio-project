@@ -33,18 +33,6 @@ class Dashboard extends Controller
     {
         return view('login');
     }
-    
-
-    public function data_ruang()
-    {
-        return view('Admin.Master.dataruang');
-    }
-
-    public function data_satuan()
-    {
-        return view('Admin.Master.datasatuan');
-    }
-
     public function raw()
     {
         return view('Admin.Monitoring.raw');

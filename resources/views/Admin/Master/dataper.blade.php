@@ -42,11 +42,15 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $p->no_seri }}</td>
-                                                <td>-69.13049</td>
-                                                <td>107.8139920</td>
-                                                <td>Aktif</td>
+                                                <td>{{ $p->latitude }}</td>
+                                                <td>{{ $p->longitude }}</td>
+                                                <td>{{ $p->status }}</td>
                                             </tr>
+<<<<<<< HEAD
+                                            @endforeach
+=======
                                         @endforeach
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
                                         </tbody>
                                     </table>
                                 </div>

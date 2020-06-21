@@ -88,7 +88,7 @@
                                             <a class="nav-link" href="{{ route('data.perangkat') }}">Data Perangkat</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('data.ruang') }}">Data Ruang</a>
+                                            <a class="nav-link" href="{{ route('data_ruang.index') }}">Data Ruang</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('data.satuan') }}">Data Satuan</a>
@@ -97,7 +97,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#monitoring" aria-controls="monitoring"><i class="fa fa-fw fa-rocket"></i>Data Monitoring</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#monitoring" aria-controls="monitoring"><i class="fas fa-fw fa-laptop"></i>Data Monitoring</a>
                                 <div id="monitoring" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -110,7 +110,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#laporan" aria-controls="laporan"><i class="fa fa-fw fa-rocket"></i>Laporan</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#laporan" aria-controls="laporan"><i class=" fas fa-fw fa-book"></i>Laporan</a>
                                 <div id="laporan" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -126,7 +126,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#setting" aria-controls="setting"><i class="fa fa-fw fa-rocket"></i>Pengaturan</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#setting" aria-controls="setting"><i class="fas fa-fw fa-cog"></i>Pengaturan</a>
                                 <div id="setting" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item ">

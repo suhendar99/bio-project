@@ -31,11 +31,12 @@
                                         {{ session()->get('success') }}
                                     </div>                                        
                                 @endif
-                                <form action="{{ route('data_ruang.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('data_ruang.update', $ruangan->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+                                    @method('PUT')
                                     <div class="form-group">
                                         <label for="">Nama ruangan</label>
-                                        <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ old('nama') }}" required  name="nama">
+                                        <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ $ruangan->nama }}" required  name="nama">
 
                                         @error('nama')
                                             <span class="invalid-feedback" role="alert">
@@ -44,8 +45,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Foto ruangan</label>
-                                        <input type="file" class="form-control  @error('foto') is-invalid @enderror"  required  name="foto">
+                                        <label for="">Foto ruangan (Optional)</label>
+                                        <input type="file" class="form-control  @error('foto') is-invalid @enderror" name="foto">
 
                                          @error('foto')
                                             <span class="invalid-feedback" role="alert">

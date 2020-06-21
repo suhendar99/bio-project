@@ -22,12 +22,9 @@
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-<<<<<<< HEAD
-=======
           <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
               Tambah Data 
           </a>
->>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered first">

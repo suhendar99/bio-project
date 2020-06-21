@@ -19,6 +19,11 @@ class OperatorController extends Controller
         return view('Admin.Master.dataper', compact('perangkat'));
     }
 
+    public function create()
+    {
+        return view('Admin.Master.Create.op_create');
+    }
+
     public function store(Request $req)
     {
     	# code...

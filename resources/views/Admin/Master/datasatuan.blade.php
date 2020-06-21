@@ -33,6 +33,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+<<<<<<< HEAD
                                         <?php $no = 1; ?>
                                         @foreach($data as $s)
                                             <tr>
@@ -41,6 +42,15 @@
                                                 <td>{{ $s->satuan }}</td>
                                             </tr>
                                         @endforeach
+=======
+                                            @foreach($data as $s)
+                                            <tr>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $s->parameter }}</td>
+                                                <td>{{ $s->satuan }}</td>
+                                            </tr>
+                                            @endforeach
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
                                         </tbody>
                                     </table>
                                 </div>

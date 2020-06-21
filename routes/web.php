@@ -15,20 +15,54 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/log','Dashboard@login');
+<<<<<<< HEAD
 Auth::routes();
 // Menu
+=======
+// Dashboard
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
 Route::get('/dashboard','Dashboard@index')->name('dashboard');
+Route::get('/room','monitoringController@room')->name('room.monitor');
+// Master Data
+    // Data Op
+Route::get('/operator','OperatorController@index')->name('operator');
+Route::get('/operator_add','OperatorController@create')->name('tambah.data.op');
+    // Data Perangkat
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
+<<<<<<< HEAD
 Route::get('/data_ruang','RuanganController@index')->name('data.ruang');
 Route::get('/data_satuan','SatuanController@index')->name('data.satuan');
 Route::get('/set_monitoring','Dashboard@set_monitoring')->name('setting.monitoring');
 Route::get('/cetak_laporan','LaporanController@index')->name('cetak.laporan');
+=======
+    // Data Ruangan
+Route::get('/data_ruang','RuanganController@index')->name('data.ruang');
+    // Data Satuan
+Route::get('/data_satuan','SatuanController@index')->name('data.satuan');
+// monitoring
+    // raw data
+Route::get('/monitoring','monitoringController@index')->name('monitoring');
+    // pengaturan Monitoring
+Route::get('/set_monitoring','Dashboard@set_monitoring')->name('setting.monitoring');
+// laporan
+    // cetak laporan
+Route::get('/cetak_laporan','Dashboard@cetak_laporan')->name('cetak.laporan');
+    // Pengaturan Laporan
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
 Route::get('/set_laporan','Dashboard@set_laporan')->name('setting.laporan');
+    // Pengaturan Kirim Laporan
+Route::get('/set_kirim_laporan','Dashboard@set_kirim_laporan')->name('setting.kirim.laporan');
+// pengaturan
+    // Pengaturan Aplikasi
 Route::get('/set_app','AppController@index')->name('pengaturan.app');
+<<<<<<< HEAD
 Route::get('/set_mqtt','AppController@set_mqtt')->name('pengaturan.mqtt');
 Route::get('/room','monitoringController@room')->name('room.monitor');
+=======
+    // Pengaturan MQTT
+Route::get('/set_mqtt','Dashboard@set_mqtt')->name('pengaturan.mqtt');
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
 
-Route::get('/operator','OperatorController@index')->name('operator');
 
 Route::get('/operatorEdit/{id}','OperatorController@edit')->name('operatorEdit/{id}');
 Route::post('/operatorUpdate/{id}','OperatorController@update')->name('operatorUpdate/{id}');
@@ -36,5 +70,3 @@ Route::get('/operatorDelete/{id}','OperatorController@delete')->name('operatorDe
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/monitoring','monitoringController@index')->name('monitoring');

@@ -22,6 +22,12 @@
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
+<<<<<<< HEAD
+=======
+          <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
+              Tambah Data 
+          </a>
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered first">
@@ -30,6 +36,7 @@
                                 <th>No</th>
                                 <th>Photo</th>
                                 <th>Name</th>
+                                <th>E Mail</th>
                                 <th>NIK</th>
                                 <th>Instansi</th>
                                 <th>No Handphone</th>
@@ -50,6 +57,7 @@
                                 </div>
                                 </td>
                                 <td>{{ $o->name }}</td>
+                                <td>{{ $o->email }}</td>
                                 <td>{{ $o->nik }}</td>
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
@@ -65,52 +73,4 @@
     <!-- end basic table  -->
     <!-- ============================================================== -->
 </div>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script type="text/javascript">
-
-var options = {
-  chart: {
-    height: 280,
-    type: "radialBar",
-  },
-  series: [67],
-  colors: ["#20E647"],
-  plotOptions: {
-    radialBar: {
-      startAngle: -90,
-      endAngle: 90,
-      track: {
-        background: '#333',
-        startAngle: -90,
-        endAngle: 90,
-      },
-      dataLabels: {
-        name: {
-          show: false,
-        },
-        value: {
-          fontSize: "30px",
-          show: true
-        }
-      }
-    }
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shade: "dark",
-      type: "horizontal",
-      gradientToColors: ["#87D4F9"],
-      stops: [0, 100]
-    }
-  },
-  stroke: {
-    lineCap: "butt"
-  },
-  labels: ["Progress"]
-};
-
-new ApexCharts(document.querySelector("#gaugeChart"), options).render();
-
-</script>
 @endsection

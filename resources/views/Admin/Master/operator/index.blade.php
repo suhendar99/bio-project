@@ -5,6 +5,14 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="page-header">
             <h2 class="pageheader-title">Data Operator</h2>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Operator</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
@@ -14,10 +22,6 @@
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <div class="row">
-                <div id="gaugeChart"></div>
-                <div id="chart"></div>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered first">
@@ -29,7 +33,6 @@
                                 <th>NIK</th>
                                 <th>Instansi</th>
                                 <th>No Handphone</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,10 +53,6 @@
                                 <td>{{ $o->nik }}</td>
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
-                                <td>
-                                    <a href="editOperator/{{$o->id}}" class="btn btn-primary">Edit</a>
-                                    <a href="deleteOperator/{{$o->id}}" class="btn btn-danger">Delete</a>
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>

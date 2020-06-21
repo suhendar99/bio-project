@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>| B I O F A R M A | </title>
+    <title>| B I O F A R M A | M O N I T O R I N G | </title>
     <link href="{{ Asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
 
 <style>

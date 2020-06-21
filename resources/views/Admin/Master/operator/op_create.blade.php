@@ -7,6 +7,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
+                    <a href="/operator" class="btn btn-primary col-2">Back</a>
                     <form action="{{ route('tambah.op') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
@@ -18,8 +19,8 @@
                             <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control" name="email">
                         </div>
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Password</label>
-                                <input id="inputText3" type="password" class="form-control" placeholder="password" name="password">
+                                <label for="inputText3" class="col-form-label">Password *password default : 123456 </label>
+                                <input id="inputText3" type="password" class="form-control" placeholder="password" name="password" value="123456" readonly>
                             </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">NIK</label>

@@ -11,7 +11,7 @@ class RuanganController extends Controller
     {
     	# code...
     	$data = Ruangan::all();
-    	return view('Admin.Ruangan.index', ['data'=>$data]);
+    	return view('Admin.Master.dataruang', ['data'=>$data]);
     }
 
     public function store(Request $req)

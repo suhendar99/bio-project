@@ -18,8 +18,8 @@ Route::get('/log','Dashboard@login');
 // Menu
 Route::get('/dashboard','Dashboard@index')->name('dashboard');
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
-Route::get('/data_ruang','Dashboard@data_ruang')->name('data.ruang');
-Route::get('/data_satuan','Dashboard@data_satuan')->name('data.satuan');
+Route::get('/data_ruang','RuanganController@index')->name('data.ruang');
+Route::get('/data_satuan','SatuanController@index')->name('data.satuan');
 Route::get('/set_monitoring','Dashboard@set_monitoring')->name('setting.monitoring');
 Route::get('/cetak_laporan','Dashboard@cetak_laporan')->name('cetak.laporan');
 Route::get('/set_laporan','Dashboard@set_laporan')->name('setting.laporan');

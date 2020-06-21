@@ -57,22 +57,18 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Photo</th>
-                                                <th>Name</th>
-                                                <th>NIK</th>
-                                                <th>Instansi</th>
-                                                <th>No Handphone</th>
+                                                <th>Parameter</th>
+                                                <th>Satuan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($data as $s)
                                             <tr>
-                                                <td>1</td>
-                                                <td>foto</td>
-                                                <td>Airi Satou</td>
-                                                <td>12345678</td>
-                                                <td>Nama Instansi</td>
-                                                <td>089786675874</td>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $s->parameter }}</td>
+                                                <td>{{ $s->satuan }}</td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

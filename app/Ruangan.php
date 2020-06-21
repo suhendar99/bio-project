@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ruangan extends Model
 {
     protected $table = 'ruangans';
-    protected $fillable - [
+    protected $fillable = [
     	'foto','nama'
     ];
 }

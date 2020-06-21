@@ -27,22 +27,19 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Photo</th>
-                                                <th>Name</th>
-                                                <th>NIK</th>
-                                                <th>Instansi</th>
-                                                <th>No Handphone</th>
+                                                <th>Foto</th>
+                                                <th>Nama Ruang</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <?php $no = 1; ?>
+                                        @foreach( $data as $r)
                                             <tr>
-                                                <td>1</td>
-                                                <td>foto</td>
-                                                <td>Airi Satou</td>
-                                                <td>12345678</td>
-                                                <td>Nama Instansi</td>
-                                                <td>089786675874</td>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $r->foto }}</td>
+                                                <td>{{ $r->nama }}</td>
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

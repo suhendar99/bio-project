@@ -1,4 +1,5 @@
 @extends('Admin.layouts.app')
+
 @section('content')
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -45,6 +46,7 @@
                                                 <td>107.8139920</td>
                                                 <td>Aktif</td>
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

@@ -55,16 +55,62 @@ class RuanganController extends Controller
 
     public function edit($id)
     {
-    	# code...
+    	$data['ruangan'] = Ruangan::find($id);
+        if (!$data['ruangan']) {
+            return back();
+        }
+        return view('Admin.Master.dataruang.edit', $data);
     }
 
-    public function update(Request $req, $id)
+    public function update(Request $request, $id)
     {
-    	# code...
+        $v = Validator::make($request->all(), [             
+            'nama' => 'required|',            
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $ruangan = Ruangan::find($id);
+            
+            $ruangan->update([
+                'nama' => $request->nama
+            ]);
+
+            if($request->hasfile('foto'))
+            {                
+                $name = rand(). '.' . $request->foto->getClientOriginalExtension();           
+                $request->foto->move(public_path("foto/ruangan"), $name);                                       
+                $foto = 'foto/ruangan/'.$name;
+                if(is_writable(public_path($ruangan->foto))) {                    
+                    unlink(public_path($ruangan->foto));
+                }     
+                $foto = 'foto/ruangan/'.$name;
+
+                $ruangan->update([
+                    'foto' => $foto,
+                ]);
+            }            
+            
+            //  LogUser::create([
+            //     'user_id' => Auth::user()->id,
+            //     'detail' => 'added new category  product : '.$request->name
+            // ]);
+            
+            return back()->with('success', 'Data ruangan berhasil di update');
+        }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-    	# code...
+        $ruangan = Ruangan::find($id);
+        if ($ruangan->foto) {            
+            if (is_writable(public_path($ruangan->foto))) {
+                unlink(public_path($ruangan->foto));
+            }
+        }
+        $ruangan->delete();
+        return back();
     }
 }

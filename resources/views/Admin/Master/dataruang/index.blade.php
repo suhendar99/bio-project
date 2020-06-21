@@ -45,8 +45,8 @@
                                                 </td>
                                                 <td>{{ $r->nama }}</td>
                                                 <td>
-                                                    <a href="{{ route('data_ruang.update', $r->id) }}" class="btn btn-success">Edit</a>
-                                                    <a href="" class="btn btn-danger">Delete</a>
+                                                    <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-success">Edit</a>
+                                                    <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -61,4 +61,38 @@
                     <!-- ============================================================== -->
                 </div>
             </div>
+
+
+<form action="" id="formDelete" method="POST">
+    @csrf
+    @method('DELETE')
+
+</form>
+
+<script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+
+<script>
+     function deletes(id){
+        const formDelete = document.getElementById('formDelete')
+        formDelete.action = '/data_ruang/'+id
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                formDelete.submit();
+                Swal.fire(
+                'Deleted!',
+                'Customer berhasil di hapus',
+                'success'
+                )
+            }
+        })
+    }
+</script>            
 @endsection

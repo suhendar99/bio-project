@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/log','Dashboard@login');
+Auth::routes();
 // Menu
 Route::get('/dashboard','Dashboard@index')->name('dashboard');
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
@@ -33,7 +34,6 @@ Route::get('/operatorEdit/{id}','OperatorController@edit')->name('operatorEdit/{
 Route::post('/operatorUpdate/{id}','OperatorController@update')->name('operatorUpdate/{id}');
 Route::get('/operatorDelete/{id}','OperatorController@delete')->name('operatorDelete/{id}');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 

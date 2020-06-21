@@ -9,8 +9,8 @@ class MonitoringController extends Controller
 {
     public function index()
     {
-        // $data = Monitoring::orderBy('created_at','desc')->get();
-        // return view('Admin.Monitoring.raw',['data'=>$data]);
+        $data = Monitoring::orderBy('created_at','desc')->get();
+        return view('Admin.Monitoring.raw',['data'=>$data]);
     }
     public function room()
     {

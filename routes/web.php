@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/log','Dashboard@login');
+
+Auth::routes();
+// Menu
 // Dashboard
 Route::get('/dashboard','Dashboard@index')->name('dashboard');
 Route::get('/room','monitoringController@room')->name('room.monitor');
@@ -28,8 +31,9 @@ Route::put('/op_edit/{id}','OperatorController@update');
 Route::get('/operator_delete/{id}','OperatorController@delete');
     // Data Perangkat
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
+
     // Data Ruangan
-Route::get('/data_ruang','RuanganController@index')->name('data.ruang');
+Route::resource('/data_ruang','RuanganController');
     // Data Satuan
 Route::get('/data_satuan','SatuanController@index')->name('data.satuan');
 // monitoring
@@ -47,6 +51,7 @@ Route::get('/set_kirim_laporan','Dashboard@set_kirim_laporan')->name('setting.ki
 // pengaturan
     // Pengaturan Aplikasi
 Route::get('/set_app','AppController@index')->name('pengaturan.app');
+
     // Pengaturan MQTT
 Route::get('/set_mqtt','Dashboard@set_mqtt')->name('pengaturan.mqtt');
 
@@ -55,6 +60,5 @@ Route::get('/operatorEdit/{id}','OperatorController@edit')->name('operatorEdit/{
 Route::post('/operatorUpdate/{id}','OperatorController@update')->name('operatorUpdate/{id}');
 Route::get('/operatorDelete/{id}','OperatorController@delete')->name('operatorDelete/{id}');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -1,0 +1,5 @@
+Dark 1 : 000204 
+Dark 2 : 003366
+Light 1 : 003d7a
+Light 2 : 0078f0
+Light 3 : 0064c8

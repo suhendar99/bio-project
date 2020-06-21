@@ -13,7 +13,12 @@ class AppController extends Controller
      */
     public function index()
     {
-        //
+        return view('Admin.App.set');
+    }
+
+    public function set_mqtt()
+    {
+        return view('Admin.App.set_mqtt');
     }
 
     /**

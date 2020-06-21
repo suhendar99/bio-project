@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\operator;
 use App\Perangkat;
 
@@ -21,7 +22,7 @@ class OperatorController extends Controller
 
     public function create()
     {
-        return view('Admin.Master.Create.op_create');
+        return view('Admin.Master.operator.op_create');
     }
 
     public function store(Request $req)
@@ -32,7 +33,7 @@ class OperatorController extends Controller
         $operator =  new operator;
         $operator->name = $req->name;
         $operator->email = $req->email;
-        $operator->password = $req->password;
+        $operator->password = Hash::make($req->password);
         $operator->nik = $req->nik;
         $operator->instansi = $req->instansi;
         $operator->no_hp = $req->hp;
@@ -47,7 +48,7 @@ class OperatorController extends Controller
     public function edit($id)
     {
         $data = Operator::findOrFail($id);
-        return view('Admin.Master.edit.op_edit',['data'=>$data]);
+        return view('Admin.Master.operator.op_edit',['data'=>$data]);
     }
 
     public function update(Request $req, $id)
@@ -58,7 +59,7 @@ class OperatorController extends Controller
         $operator =  Operator::find($id);
         $operator->name = $req->name;
         $operator->email = $req->email;
-        $operator->password = $req->password;
+        $operator->password = Hash::make($request->password);
         $operator->nik = $req->nik;
         $operator->instansi = $req->instansi;
         $operator->no_hp = $req->hp;

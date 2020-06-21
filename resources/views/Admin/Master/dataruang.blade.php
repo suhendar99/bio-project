@@ -27,6 +27,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+<<<<<<< HEAD
                                                 <th>Photo</th>
                                                 <th>NamA Ruangan</th>
                                             </tr>
@@ -34,12 +35,25 @@
                                         <tbody>
                                             <?php $no = 1; ?>
                                             @foreach($data as $r)
+=======
+                                                <th>Foto</th>
+                                                <th>Nama Ruang</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $no = 1; ?>
+                                        @foreach( $data as $r)
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $r->foto }}</td>
                                                 <td>{{ $r->nama }}</td>
                                             </tr>
+<<<<<<< HEAD
                                             @endforeach
+=======
+                                        @endforeach
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
                                         </tbody>
                                     </table>
                                 </div>

@@ -1,4 +1,5 @@
 @extends('Admin.layouts.app')
+
 @section('content')
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -45,7 +46,11 @@
                                                 <td>{{ $p->longitude }}</td>
                                                 <td>{{ $p->status }}</td>
                                             </tr>
+<<<<<<< HEAD
                                             @endforeach
+=======
+                                        @endforeach
+>>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
                                         </tbody>
                                     </table>
                                 </div>

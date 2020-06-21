@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('/dashboard','Dashboard@index')->name('dashboard')->middleware('auth');
 Route::get('/room','monitoringController@room')->name('room.monitor')->middleware('auth');
 // Master Data
+	// Setting Account
+Route::get('/profile/{id}','AccountController@index')->middleware('auth');
+Route::get('/editProfile/{id}','AccountController@edit')->middleware('auth');
+Route::post('/updateProfile/{id}','AccountController@update')->middleware('auth');
     // Data Op
 Route::get('/operator','OperatorController@index')->name('operator')->middleware('auth');
 Route::get('/operator_add','OperatorController@create')->name('tambah.data.op')->middleware('auth');

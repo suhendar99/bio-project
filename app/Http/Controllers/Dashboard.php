@@ -9,6 +9,7 @@ use DB;
 use App\Suhu;
 use App\Setting;
 use App\Monitoring;
+use Auth;
 
 class Dashboard extends Controller
 {

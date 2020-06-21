@@ -22,12 +22,10 @@
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-<<<<<<< HEAD
-=======
           <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
               Tambah Data 
           </a>
->>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered first">
@@ -61,6 +59,13 @@
                                 <td>{{ $o->nik }}</td>
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
+
+                                <td>
+                                    <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
+                                    <a href="/operator_delete/{{$o->id}}" class="btn btn-danger">Delete</a>
+                                </td>
+
+
                             </tr>
                             @endforeach
                         </tbody>

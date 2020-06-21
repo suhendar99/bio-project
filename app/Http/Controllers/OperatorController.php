@@ -26,22 +26,52 @@ class OperatorController extends Controller
 
     public function store(Request $req)
     {
-    	# code...
+    	$foto = 'IMG-'.time().'-'.$req->foto->getClientOriginalName();
+        $req->foto->move(public_path('foto'),$foto);
+
+        $operator =  new operator;
+        $operator->name = $req->name;
+        $operator->email = $req->email;
+        $operator->password = $req->password;
+        $operator->nik = $req->nik;
+        $operator->instansi = $req->instansi;
+        $operator->no_hp = $req->hp;
+        $operator->foto = $foto;
+        if ($operator->save()) {
+            return redirect('/operator');
+        }else {
+            return back();   
+        }
     }
 
     public function edit($id)
     {
-    	# code...
+        $data = Operator::findOrFail($id);
+        return view('Admin.Master.edit.op_edit',['data'=>$data]);
     }
 
     public function update(Request $req, $id)
     {
-    	# code...
+    	$foto = 'IMG-'.time().'-'.$req->foto->getClientOriginalName();
+        $req->foto->move(public_path('foto'),$foto);
+
+        $operator =  Operator::find($id);
+        $operator->name = $req->name;
+        $operator->email = $req->email;
+        $operator->password = $req->password;
+        $operator->nik = $req->nik;
+        $operator->instansi = $req->instansi;
+        $operator->no_hp = $req->hp;
+        $operator->foto = $foto;
+        $operator->save();
+        return redirect('/operator');
     }
 
     public function delete($id)
     {
-    	# code...
+        $data = Operator::findOrFail($id);
+        $data->delete();
+        return redirect()->back();
     }
 
 }

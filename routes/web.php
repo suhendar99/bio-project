@@ -22,6 +22,10 @@ Route::get('/room','monitoringController@room')->name('room.monitor');
     // Data Op
 Route::get('/operator','OperatorController@index')->name('operator');
 Route::get('/operator_add','OperatorController@create')->name('tambah.data.op');
+Route::post('/op_tambah','OperatorController@store')->name('tambah.op');
+Route::get('/operator_edit/{id}','OperatorController@edit')->name('edit.data.op');
+Route::put('/op_edit/{id}','OperatorController@update');
+Route::get('/operator_delete/{id}','OperatorController@delete');
     // Data Perangkat
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
     // Data Ruangan

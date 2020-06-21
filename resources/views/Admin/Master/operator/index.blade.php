@@ -52,8 +52,8 @@
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
                                 <td>
-                                    <a href="editOperator/{{$o->id}}" class="btn btn-primary">Edit</a>
-                                    <a href="deleteOperator/{{$o->id}}" class="btn btn-danger">Delete</a>
+                                    <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
+                                    <a href="/operator_delete/{{$o->id}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

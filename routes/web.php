@@ -29,7 +29,7 @@ Route::get('/operator_add','OperatorController@create')->name('tambah.data.op');
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
 
     // Data Ruangan
-Route::get('/data_ruang','RuanganController@index')->name('data.ruang');
+Route::resource('/data_ruang','RuanganController');
     // Data Satuan
 Route::get('/data_satuan','SatuanController@index')->name('data.satuan');
 // monitoring

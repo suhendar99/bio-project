@@ -88,7 +88,7 @@
                                             <a class="nav-link" href="{{ route('data.perangkat') }}">Data Perangkat</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('data.ruang') }}">Data Ruang</a>
+                                            <a class="nav-link" href="{{ route('data_ruang.index') }}">Data Ruang</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('data.satuan') }}">Data Satuan</a>

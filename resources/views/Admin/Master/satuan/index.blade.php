@@ -3,12 +3,12 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Data Ruang</h2>
+                <h2 class="pageheader-title">Data Satuan</h2>
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Ruang</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Satuan</li>
                         </ol>
                     </nav>
                 </div>
@@ -22,14 +22,14 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('data_ruang.create') }}" class="btn btn-primary">Tambah ruangan</a>
+                    <a href="{{ route('satuan.create') }}" class="btn btn-primary">Tambah Satuan</a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Foto</th>
-                                    <th>Nama Ruang</th>
+                                    <th>Parameter</th>
+                                    <th>Satuan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -38,12 +38,10 @@
                             @foreach( $data as $r)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $r->parameter}}</td>
+                                    <td>{{ $r->satuan }}</td>
                                     <td>
-                                        <img src="{{ $r->foto }}" alt="" srcset="" style="width:100px; height:100px">
-                                    </td>
-                                    <td>{{ $r->nama }}</td>
-                                    <td>
-                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('satuan.edit', $r->id) }}" class="btn btn-primary">Edit</a>
                                         <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
@@ -72,7 +70,7 @@
 <script>
      function deletes(id){
         const formDelete = document.getElementById('formDelete')
-        formDelete.action = '/data_ruang/'+id
+        formDelete.action = '/satuan/'+id
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",

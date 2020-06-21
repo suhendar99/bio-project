@@ -60,6 +60,10 @@
                                 <td>{{ $o->nik }}</td>
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
+                                <td>
+                                    <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
+                                    <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -72,4 +76,36 @@
     <!-- end basic table  -->
     <!-- ============================================================== -->
 </div>
+<form action="" id="formDelete" method="POST">
+    @csrf
+    @method('DELETE')
+
+</form>
+
+<script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+
+<script>
+     function deletes(id){
+        const formDelete = document.getElementById('formDelete')
+        formDelete.action = '/operator_delete/'+id
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                formDelete.submit();
+                Swal.fire(
+                'Deleted!',
+                'Operator berhasil di hapus',
+                'success'
+                )
+            }
+        })
+    }
+</script>            
 @endsection

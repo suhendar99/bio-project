@@ -119,6 +119,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('setting.laporan') }}">Pengaturan Laporan</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('setting.kirim.laporan') }}">Pengaturan Pengiriman Laporan</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

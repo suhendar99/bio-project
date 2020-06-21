@@ -21,21 +21,7 @@
     <!-- basic table  -->
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 0fca31439feafd262ba85ff93b724df719818601
         <div class="card">
-          <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
-              Tambah Data 
-          </a>
-<<<<<<< HEAD
-=======
-        <div class="card">          
->>>>>>> d1b6433a4eb6948840a1cb1553d11736ec509cfb
-=======
->>>>>>> 0fca31439feafd262ba85ff93b724df719818601
             <div class="card-body">
                 <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
                     Tambah Data 

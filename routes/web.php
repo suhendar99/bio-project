@@ -14,18 +14,27 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/log','Dashboard@login')->middleware('auth'); 
+
+Route::get('/log','Dashboard@log')->middleware('auth');
+
+Auth::routes();
+// Menu
 // Dashboard
 Route::get('/dashboard','Dashboard@index')->name('dashboard')->middleware('auth');
-Route::get('/room','monitoringController@room')->name('room.monitor')->middleware('auth');;
+Route::get('/room','monitoringController@room')->name('room.monitor')->middleware('auth');
 // Master Data
     // Data Op
 Route::get('/operator','OperatorController@index')->name('operator')->middleware('auth');
 Route::get('/operator_add','OperatorController@create')->name('tambah.data.op')->middleware('auth');
+Route::post('/op_tambah','OperatorController@store')->name('tambah.op')->middleware('auth');
+Route::get('/operator_edit/{id}','OperatorController@edit')->name('edit.data.op')->middleware('auth');
+Route::put('/op_edit/{id}','OperatorController@update')->middleware('auth');
+Route::get('/operator_delete/{id}','OperatorController@delete')->middleware('auth');
     // Data Perangkat
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat')->middleware('auth');
+
     // Data Ruangan
-Route::get('/data_ruang','RuanganController@index')->name('data.ruang')->middleware('auth');
+Route::resource('/data_ruang','RuanganController')->middleware('auth')->middleware('auth');
     // Data Satuan
 Route::get('/data_satuan','SatuanController@index')->name('data.satuan')->middleware('auth');
 // monitoring
@@ -38,6 +47,7 @@ Route::get('/set_monitoring','Dashboard@set_monitoring')->name('setting.monitori
 Route::get('/cetak_laporan','Dashboard@cetak_laporan')->name('cetak.laporan')->middleware('auth');
     // Pengaturan Laporan
 Route::get('/set_laporan','Dashboard@set_laporan')->name('setting.laporan')->middleware('auth');
+
     // Pengaturan Kirim Laporan
 Route::get('/set_kirim_laporan','Dashboard@set_kirim_laporan')->name('setting.kirim.laporan')->middleware('auth');
 // pengaturan

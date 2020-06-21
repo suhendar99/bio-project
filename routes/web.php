@@ -54,3 +54,9 @@ Route::get('/operatorDelete/{id}','OperatorController@delete')->name('operatorDe
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+
+// Route::get('satuan','SatuanController@index')->middleware('auth');;
+// Route::post('satuan','SatuanController@store')->name('satuan.store')->middleware('auth');;
+// Route::get('satuan/{id}/edit', 'SatuanController@edit')->name('satuan.edit')->middleware('auth');;
+// Route::post('satuan/update', 'SatuanController@update')->name('satuan.update')->middleware('auth');;
+// Route::get('satuan/{id}/delete', 'SatuanController@destroy')->name('satuan.delete')->middleware('auth');;

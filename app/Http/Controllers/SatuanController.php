@@ -10,11 +10,7 @@ class SatuanController extends Controller
     public function index()
     {
     	$data = Satuan::all();
-<<<<<<< HEAD
-    	return view('Admin.Master.datasatuan',['data' => $data]);
-=======
-    	return view('Admin.Master.datasatuan',['data' => $data] );
->>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
+    	return view('Admin.Setting.satuan',['data' => $data]);
     }
 
     public function store(Request $req)

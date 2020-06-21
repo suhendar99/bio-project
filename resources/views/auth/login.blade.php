@@ -24,7 +24,7 @@
                     <div class="row" style="margin: 30px;">
                         <div class="col-md-7 col-sm-0" style="padding: 20px;">
                             <center>
-                                <img src="{{ asset('svg/login.svg') }}" alt="" width="100%">
+                                <img src="{{ asset('svg/medicine.svg') }}" alt="" width="100%">
                             </center>
                         </div>
                         <div class="col-md-5 col-sm-12">

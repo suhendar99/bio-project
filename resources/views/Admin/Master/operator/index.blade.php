@@ -22,13 +22,20 @@
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0fca31439feafd262ba85ff93b724df719818601
         <div class="card">
           <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
               Tambah Data 
           </a>
+<<<<<<< HEAD
 =======
         <div class="card">          
 >>>>>>> d1b6433a4eb6948840a1cb1553d11736ec509cfb
+=======
+>>>>>>> 0fca31439feafd262ba85ff93b724df719818601
             <div class="card-body">
                 <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
                     Tambah Data 
@@ -67,19 +74,10 @@
                                 <td>{{ $o->nik }}</td>
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
-<<<<<<< HEAD
-=======
-
->>>>>>> 45bb24e2dd2ce9d93d3cf5ecdba7fc05fa46bcd5
                                 <td>
                                     <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
                                     <a href="/operator_delete/{{$o->id}}" class="btn btn-danger">Delete</a>
                                 </td>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 45bb24e2dd2ce9d93d3cf5ecdba7fc05fa46bcd5
                             </tr>
                             @endforeach
                         </tbody>

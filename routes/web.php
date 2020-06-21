@@ -28,10 +28,14 @@ Route::get('/operator_add','OperatorController@create')->name('tambah.data.op');
 Route::post('/op_tambah','OperatorController@store')->name('tambah.op');
 Route::get('/operator_edit/{id}','OperatorController@edit')->name('edit.data.op');
 Route::put('/op_edit/{id}','OperatorController@update');
-Route::get('/operator_delete/{id}','OperatorController@delete');
+Route::delete('/operator_delete/{id}','OperatorController@delete');
     // Data Perangkat
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
-
+Route::get('/tambah_per','OperatorController@create_per')->name('tambah.data.per');
+Route::post('/per_tambah','OperatorController@store_per')->name('tambah.per');
+Route::get('/edit_per/{id}','OperatorController@edit_per')->name('edit.data.per');
+Route::put('/per_edit/{id}','OperatorController@update_per')->name('edit.per');
+Route::delete('/per_delete/{id}','OperatorController@delete_per')->name('delete.per');
     // Data Ruangan
 Route::resource('/data_ruang','RuanganController');
     // Data Satuan

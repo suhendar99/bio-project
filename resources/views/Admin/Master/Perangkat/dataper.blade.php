@@ -23,6 +23,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-body">
+                                <a href="{{ route('tambah.data.per') }}" class="btn btn-primary col-2">Tambah Data</a>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered first">
                                         <thead>
@@ -32,6 +33,8 @@
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>
                                                 <th>Status</th>
+                                                <th>Tanggal Aktivasi</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -45,6 +48,11 @@
                                                 <td>{{ $p->latitude }}</td>
                                                 <td>{{ $p->longitude }}</td>
                                                 <td>{{ $p->status }}</td>
+                                                <td>{{ $p->tgl_aktivasi }}</td>
+                                                <td>
+                                                    <a href="/edit_per/{{ $p->id }}" class="btn btn-primary">Edit</a>
+                                                    <button onclick="deletes({{ $p->id }})" class="btn btn-danger">Delete</button>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -57,5 +65,36 @@
                     <!-- end basic table  -->
                     <!-- ============================================================== -->
                 </div>
-                </div>
+            </div>
+            <form action="" id="formDelete" method="POST">
+                @csrf
+                @method('DELETE')
+
+            </form>
+            <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+     function deletes(id){
+        const formDelete = document.getElementById('formDelete')
+        formDelete.action = '/per_delete/'+id
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                formDelete.submit();
+                Swal.fire(
+                'Deleted!',
+                'Operator berhasil di hapus',
+                'success'
+                )
+            }
+        })
+    }
+</script>
 @endsection

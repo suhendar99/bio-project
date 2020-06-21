@@ -8,6 +8,11 @@
             <div class="card">
                 <div class="card-body">
                     <a href="/operator" class="btn btn-primary col-1">Back</a>
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                        </div>                                        
+                    @endif
                     <form action="/op_edit/{{ $data->id }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
@@ -37,7 +42,12 @@
                         </div>
                         <div class="form-group">
                             <label class="col-form-label" for="customFile">Foto</label>
-                            <input type="file" class="form-control" value="{{ $data->foto }}" id="customFile" name="foto">
+                            <input type="file" class="form-control" value="{{ $data->foto }}" id="customFile" name="foto" required>
+                            @error('foto')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>

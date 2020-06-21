@@ -7,7 +7,9 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <a href="/operator" class="btn btn-primary col-2">Back</a>
+                    <form action="{{ route('tambah.op') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Nama Operator</label>
                             <input id="inputText3" type="text" class="form-control" placeholder="Nama Operator" name="name">
@@ -16,6 +18,10 @@
                             <label for="inputEmail">Email address</label>
                             <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control" name="email">
                         </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-form-label">Password *password default : 123456 </label>
+                                <input id="inputText3" type="password" class="form-control" placeholder="password" name="password" value="123456" readonly>
+                            </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">NIK</label>
                             <input id="inputText3" type="text" class="form-control" placeholder="NIK" name="nik">
@@ -25,16 +31,12 @@
                             <input id="inputText3" type="text" class="form-control" placeholder="Instansi" name="instansi">
                         </div>
                         <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Jabatan</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="Jabatan" name="jabatan">
-                        </div>
-                        <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Handphone</label>
                             <input id="inputText3" type="text" class="form-control" placeholder="Number Handphone" name="hp">
                         </div>
                         <div class="form-group">
                             <label class="col-form-label" for="customFile">Foto</label>
-                            <input type="file" class="form-control" id="customFile">
+                            <input type="file" class="form-control" id="customFile" name="foto">
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>

@@ -46,11 +46,7 @@
                                                 <td>{{ $p->longitude }}</td>
                                                 <td>{{ $p->status }}</td>
                                             </tr>
-<<<<<<< HEAD
                                             @endforeach
-=======
-                                        @endforeach
->>>>>>> 7a5bed8a655cdccc7284664be210aed2d6e450c7
                                         </tbody>
                                     </table>
                                 </div>

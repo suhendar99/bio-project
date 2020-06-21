@@ -60,19 +60,10 @@
                                 <td>{{ $o->nik }}</td>
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
-<<<<<<< HEAD
-=======
-
->>>>>>> 45bb24e2dd2ce9d93d3cf5ecdba7fc05fa46bcd5
                                 <td>
                                     <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
                                     <a href="/operator_delete/{{$o->id}}" class="btn btn-danger">Delete</a>
                                 </td>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 45bb24e2dd2ce9d93d3cf5ecdba7fc05fa46bcd5
                             </tr>
                             @endforeach
                         </tbody>

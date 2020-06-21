@@ -75,65 +75,92 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                                <a class="nav-link {{ Request::is('dashboard') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-user"></i>Data Master</a>
-                                <div id="submenu-2" class="collapse submenu" style="">
+                                <a class="nav-link 
+                                {{ Request::is('operator*') ? 'active' : false }}
+                                {{ Request::is('dataper*') ? 'active' : false }}
+                                {{ Request::is('data_ruang*') ? 'active' : false }}
+                                {{ Request::is('data_satuan*') ? 'active' : false }}
+                                " 
+                                href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-user"></i>Data Master</a>
+                                <div id="submenu-2" class="collapse submenu 
+                                {{ Request::is('operator*') ? 'show' : false }}
+                                {{ Request::is('dataper*') ? 'show' : false }}
+                                {{ Request::is('data_ruang*') ? 'show' : false }}
+                                {{ Request::is('data_satuan*') ? 'show' : false }}"
+                                >
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('operator') }}">Data Operator</a>
+                                            <a class="nav-link {{ Request::is('operator*') ? 'active' : false }}" href="{{ route('operator') }}">Data Operator</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('data.perangkat') }}">Data Perangkat</a>
+                                            <a class="nav-link {{ Request::is('dataper*') ? 'active' : false }}" href="{{ route('data.perangkat') }}">Data Perangkat</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('data_ruang.index') }}">Data Ruang</a>
+                                            <a class="nav-link {{ Request::is('data_ruang*') ? 'active' : false }}" href="{{ route('data_ruang.index') }}">Data Ruang</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('data.satuan') }}">Data Satuan</a>
+                                            <a class="nav-link {{ Request::is('data_satuan*') ? 'active' : false }}" href="{{ route('data.satuan') }}">Data Satuan</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#monitoring" aria-controls="monitoring"><i class="fas fa-fw fa-laptop"></i>Data Monitoring</a>
-                                <div id="monitoring" class="collapse submenu" style="">
+                                <a class="nav-link
+                                    {{ Request::is('monitoring*') ? 'active' : false }}
+                                    {{ Request::is('set_monitoring*') ? 'active' : false }}"
+                                href="#" data-toggle="collapse" aria-expanded="false" data-target="#monitoring" aria-controls="monitoring"><i class="fas fa-fw fa-laptop"></i>Data Monitoring</a>
+                                <div id="monitoring" class="collapse submenu
+                                    {{ Request::is('monitoring*') ? 'show' : false }}
+                                    {{ Request::is('set_monitoring*') ? 'show' : false }}"
+                                     style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="{{ route('monitoring') }}">Raw Data</a>
+                                            <a class="nav-link  {{ Request::is('monitoring*') ? 'active' : false }}" href="{{ route('monitoring') }}">Raw Data</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('setting.monitoring') }}">Pengaturan Monitoring</a>
+                                            <a class="nav-link {{ Request::is('set_monitoring*') ? 'active' : false }}" href="{{ route('setting.monitoring') }}">Pengaturan Monitoring</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#laporan" aria-controls="laporan"><i class=" fas fa-fw fa-book"></i>Laporan</a>
-                                <div id="laporan" class="collapse submenu" style="">
+                                <a class="nav-link
+                                   {{ Request::is('cetak_laporan*') ? 'active' : false }}
+                                 {{ Request::is('set_laporan*') ? 'active' : false }}
+                                 {{ Request::is('set_kirim_laporan*') ? 'active' : false }}" href="#" data-toggle="collapse" aria-expanded="false" data-target="#laporan" aria-controls="laporan"><i class=" fas fa-fw fa-book"></i>Laporan</a>
+                                <div id="laporan" class="collapse submenu
+                                {{ Request::is('cetak_laporan*') ? 'show' : false }}
+                                 {{ Request::is('set_laporan*') ? 'show' : false }}
+                                 {{ Request::is('set_kirim_laporan*') ? 'show' : false }}" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('cetak.laporan') }}">Cetak Laporan</a>
+                                            <a class="nav-link {{ Request::is('cetak_laporan*') ? 'active' : false }}" href="{{ route('cetak.laporan') }}">Cetak Laporan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('setting.laporan') }}">Pengaturan Laporan</a>
+                                            <a class="nav-link {{ Request::is('set_laporan*') ? 'active' : false }}" href="{{ route('setting.laporan') }}">Pengaturan Laporan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('setting.kirim.laporan') }}">Pengaturan Pengiriman Laporan</a>
+                                            <a class="nav-link {{ Request::is('set_kirim_laporan*') ? 'active' : false }}" href="{{ route('setting.kirim.laporan') }}">Pengaturan Pengiriman Laporan</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#setting" aria-controls="setting"><i class="fas fa-fw fa-cog"></i>Pengaturan</a>
-                                <div id="setting" class="collapse submenu" style="">
+                                <a class="nav-link
+                                  {{ Request::is('set_app*') ? 'active' : false }}
+                                  {{ Request::is('set_mqtt*') ? 'active' : false }}" href="#" data-toggle="collapse" aria-expanded="false" data-target="#setting" aria-controls="setting"><i class="fas fa-fw fa-cog"></i>Pengaturan</a>
+                                <div id="setting" class="collapse submenu
+                                  {{ Request::is('set_app*') ? 'show' : false }}
+                                  {{ Request::is('set_mqtt*') ? 'show' : false }}" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item ">
-                                            <a class="nav-link" href="{{ route('pengaturan.app') }}"  aria-controls="submenu-1">App</a>
+                                            <a class="nav-link {{ Request::is('set_app*') ? 'active' : false }}" href="{{ route('pengaturan.app') }}"  aria-controls="submenu-1">App</a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a class="nav-link" href="{{ route('pengaturan.mqtt') }}"  aria-controls="submenu-1">MQTT</a>
+                                            <a class="nav-link {{ Request::is('set_mqtt*') ? 'active' : false }}" href="{{ route('pengaturan.mqtt') }}"  aria-controls="submenu-1">MQTT</a>
                                         </li>
                                     </ul>
                                 </div>

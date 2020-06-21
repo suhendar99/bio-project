@@ -102,7 +102,7 @@
                                             <a class="nav-link {{ Request::is('data_ruang*') ? 'active' : false }}" href="{{ route('data_ruang.index') }}">Data Ruang</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link {{ Request::is('data_satuan*') ? 'active' : false }}" href="{{ route('data.satuan') }}">Data Satuan</a>
+                                            <a class="nav-link {{ Request::is('data_satuan*') ? 'active' : false }}" href="{{ route('satuan.index') }}">Data Satuan</a>
                                         </li>
                                     </ul>
                                 </div>

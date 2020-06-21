@@ -29,9 +29,9 @@ Route::get('/operator_delete/{id}','OperatorController@delete')->middleware('aut
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat')->middleware('auth');
 
     // Data Ruangan
-Route::resource('/data_ruang','RuanganController')->middleware('auth')->middleware('auth');
+Route::resource('/data_ruang','RuanganController')->middleware('auth');
     // Data Satuan
-Route::get('/data_satuan','SatuanController@index')->name('data.satuan')->middleware('auth');
+Route::resource('/satuan','SatuanController')->middleware('auth');
 // monitoring
     // raw data
 Route::get('/monitoring','monitoringController@index')->name('monitoring')->middleware('auth');
@@ -51,16 +51,6 @@ Route::get('/set_app','AppController@index')->name('pengaturan.app')->middleware
     // Pengaturan MQTT
 Route::get('/set_mqtt','Dashboard@set_mqtt')->name('pengaturan.mqtt')->middleware('auth');
 
-Route::get('/operatorEdit/{id}','OperatorController@edit')->name('operatorEdit/{id}')->middleware('auth');
-Route::post('/operatorUpdate/{id}','OperatorController@update')->name('operatorUpdate/{id}')->middleware('auth');
-Route::get('/operatorDelete/{id}','OperatorController@delete')->name('operatorDelete/{id}')->middleware('auth');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-
-// Route::get('satuan','SatuanController@index')->middleware('auth');;
-// Route::post('satuan','SatuanController@store')->name('satuan.store')->middleware('auth');;
-// Route::get('satuan/{id}/edit', 'SatuanController@edit')->name('satuan.edit')->middleware('auth');;
-// Route::post('satuan/update', 'SatuanController@update')->name('satuan.update')->middleware('auth');;
-// Route::get('satuan/{id}/delete', 'SatuanController@destroy')->name('satuan.delete')->middleware('auth');;

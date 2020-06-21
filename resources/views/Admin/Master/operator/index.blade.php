@@ -21,12 +21,11 @@
     <!-- basic table  -->
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-          <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
-              Tambah Data 
-          </a>
-
+        <div class="card">          
             <div class="card-body">
+                <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
+                    Tambah Data 
+                </a>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered first">
                         <thead>

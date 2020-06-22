@@ -17,7 +17,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Nama Operator</label>
-                            <input id="inputText3" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Operator" name="name" value="{{ old('nama') }}" required>
+                            <input id="inputText3" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Operator" name="name" value="{{ old('nama') }}">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputEmail">Email address</label>
-                            <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+                            <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                             </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">NIK</label>
-                            <input id="inputText3" type="text" class="form-control @error('nik') is-invalid @enderror" placeholder="NIK" name="nik" value="{{ old('nik') }}" required>
+                            <input id="inputText3" type="text" class="form-control @error('nik') is-invalid @enderror" placeholder="NIK" name="nik" value="{{ old('nik') }}">
                             @error('nik')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Instansi</label>
-                            <input id="inputText3" type="text" class="form-control @error('instansi') is-invalid @enderror" placeholder="Instansi" name="instansi" value="{{ old('instansi') }}" required>
+                            <input id="inputText3" type="text" class="form-control @error('instansi') is-invalid @enderror" placeholder="Instansi" name="instansi" value="{{ old('instansi') }}">
                             @error('instansi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Handphone</label>
-                            <input id="inputText3" type="text" class="form-control @error('hp') is-invalid @enderror" placeholder="Number Handphone" name="hp" value="{{ old('hp') }}" required>
+                            <input id="inputText3" type="text" class="form-control @error('hp') is-invalid @enderror" placeholder="Number Handphone" name="hp" value="{{ old('hp') }}">
                             @error('hp')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-form-label" for="customFile">Foto</label>
-                            <input type="file" class="form-control @error('foto') is-invalid @enderror" id="customFile" name="foto" required>
+                            <input type="file" class="form-control @error('foto') is-invalid @enderror" id="customFile" name="foto">
                             @error('foto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

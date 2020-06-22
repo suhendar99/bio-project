@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\operator;
 use App\Perangkat;
-use validator;
+use Validator;
 
 class OperatorController extends Controller
 {
@@ -31,6 +31,7 @@ class OperatorController extends Controller
         $this->validate($req,[
             'name' => 'required|min:2',
             'email' => 'required|email|unique:users',
+            'nik' => 'required|numeric',
             'password' => 'required|min:6',
             'foto' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048'
         ]);
@@ -60,22 +61,50 @@ class OperatorController extends Controller
 
     public function update(Request $req, $id)
     {
-        $this->validate($req,[
-            'foto' => 'required|file|mimes:jpg,jpeg,png,gif,svg|max:2048'
+        $v = Validator::make($req->all(), [             
+            'nama' => 'required|',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'nik' => 'required|numeric|unique:users,nik,'.$id,
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
-    	$foto = 'IMG-'.time().'-'.$req->foto->getClientOriginalName();
-        $req->foto->move(public_path('foto'),$foto);
 
-        $operator =  Operator::findOrFail($id);
-        $operator->name = $req->name;
-        $operator->email = $req->email;
-        $operator->password = Hash::make($req->password);
-        $operator->nik = $req->nik;
-        $operator->instansi = $req->instansi;
-        $operator->no_hp = $req->hp;
-        $operator->foto = $foto;
-        $operator->save();
-        return redirect()->back()->with('success','Data berhasil di edit');
+        if ($v->fails()) {
+            // dd($v->errors()->all());
+            return back()->withErrors($v)->withInput();
+        }else {
+            $operator = Operator::find($id);
+            
+            $operator->update([
+                'name' => $req->nama,
+                'email' => $req->email,
+                'password' => Hash::make($req->password),
+                'nik' => $req->nik,
+                'instansi' => $req->instansi,
+                'no_hp'=> $req->hp,
+            ]);
+
+            if($req->hasfile('foto'))
+            {                
+                $name = rand(). '.' . $req->foto->getClientOriginalExtension();           
+                $req->foto->move(public_path("foto"), $name);                                       
+                $foto = 'foto'.$name;
+                if(is_writable(public_path($operator->foto))) {                    
+                    unlink(public_path($operator->foto));
+                }     
+                $foto = 'foto'.$name;
+
+                $operator->update([
+                    'foto' => $foto,
+                ]);
+            }            
+            
+            //  LogUser::create([
+            //     'user_id' => Auth::user()->id,
+            //     'detail' => 'added new category  product : '.$request->name
+            // ]);
+            
+            return back()->with('success', 'Data berhasil di update');
+        }
     }
 
     public function delete($id)

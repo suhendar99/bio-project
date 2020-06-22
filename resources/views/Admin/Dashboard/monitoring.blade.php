@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-6">
                 <h4 class="text-white">Dari Tanggal </h4>
                     <select name="" id="" class="form-control bg-dark text-white">
@@ -175,25 +175,33 @@
                         <option value="">5</option>
                     </select>
             </div>
+        </div> -->
+    <div class="row" style="margin-top:15px; ">
+        <div class="col-3">
+            
         </div>
-    <div class="row" style="margin-top:15px;">
-        <div class="col-12">
+        <div class="col-2">
             <div class="row text-white">
-                <div class="col-2">
-                <input type="checkbox" name="suhu" id="" value="Suhu"> Suhu
-                </div>
+                <input type="checkbox" name="suhu" id="" value="suhu" checked>Suhu<br>
             </div>
+        </div>
+        <div class="col-2">
             <div class="row text-white">
-                <div class="col-2">
-                    <input type="checkbox" name="kelembapan" id="" value="kelembapan">Kelembapan<br>
-                </div>
+                <input type="checkbox" name="kelembapan" id="" value="kelembapan" checked>Kelembapan<br>
             </div>
+        </div>
+        <div class="col-2">
             <div class="row text-white">
-                <div class="col-2">
-                    <input type="checkbox" name="tekanan" id="" value="tekanan">Tekanan<br>
-                </div>
+                    <input type="checkbox" name="tekanan" id="" value="tekanan" checked>Tekanan<br>
             </div>
-            <div class="card col-12" id="chart"></div>
+        </div>
+        <div class="col-3">
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" id="chart" style="width: 100%"></div>
         </div>
     </div>
 </div>
@@ -259,7 +267,7 @@
     <style>
       
         #chart {
-      max-width: 650px;
+      max-width: 100%;
       margin: 35px auto;
     }
       

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Monitoring;
 use App\Mqtt;
+use App\Setapp;
 
 class MonitoringController extends Controller
 {
@@ -16,8 +17,9 @@ class MonitoringController extends Controller
         return view('Admin.Monitoring.raw',['data'=>$data,]);
     }
     public function room()
-    {
-        return view('Admin.Dashboard.monitoring');
+    {   
+        $data = Setapp::all();
+        return view('Admin.Dashboard.monitoring',compact('data'));
     }
 
     public function store(Request $req)

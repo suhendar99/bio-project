@@ -15,39 +15,59 @@
                     <form method="post" action="/updateProfile/{{$data->id}}" enctype="multipart/form-data">
                     @csrf
                     <center>
-                            <img src="{{asset('foto/'.$data->icon)}}" alt="placeholder+image" style="width: 200px;">
+                            <img src="{{asset('foto/'.$data->foto)}}" alt="placeholder+image" style="width: 200px;">
                     </center>
                     <div class="row">
                         <div class="col-6">
                             Foto
                         </div>
                         <div class="col-6">
-                            <input type="file" class="form-control" value="{{$data->foto}}" name="foto">
+                            <input type="file" class="form-control  @error('foto') is-invalid @enderror" value="{{$data->foto}}" name="foto" required>
                         </div>
+                        @error('foto')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             Nama
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->name}}" placeholder="Nama" name="name">
+                            <input type="text" class="form-control  @error('nama') is-invalid @enderror" value="{{$data->name}}" placeholder="Nama" name="name" required>
                         </div>
+                        @error('nama')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             NIK
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->nik}}" placeholder="NIK" name="nik">
+                            <input type="text" class="form-control  @error('nik') is-invalid @enderror" value="{{$data->nik}}" placeholder="NIK" name="nik" required>
                         </div>
+                        @error('nik')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             No HP
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->no_hp}}" placeholder="Nomor HP" name="no_hp">
+                            <input type="text" class="form-control @error('no_hp') is-invalid @enderror" value="{{$data->no_hp}}" placeholder="Nomor HP" name="no_hp" required>
                         </div>
+                        @error('no_hp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <input type="hidden" value="{{$data->level}}"  name="level">
                     <div class="row">
@@ -55,8 +75,13 @@
                             Email
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->email}}" placeholder="Email" name="email">
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{$data->email}}" placeholder="Email" name="email" required>
                         </div>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-10">

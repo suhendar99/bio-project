@@ -40,7 +40,7 @@
                                     <h2>BIOFARMA</h2>
                                     <span>Login to Start Monitoring</span>
                                     <div class="form-group" style="margin-top: 20px;">
-                                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" style="border-radius: 30px; height: 50px;">
+                                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" style="border-radius: 30px; height: 50px;" required>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" style="border-radius: 30px; height: 50px;">
+                                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" style="border-radius: 30px; height: 50px;" required>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -178,12 +178,9 @@
             </div>
         </div> -->
     <div class="row" style="margin-top:15px; ">
-        <div class="col-3">
-            
-        </div>
-        <div class="col-2">
+        <div class="col-2" style="margin-left: 20px;">
             <div class="row text-white">
-                <input type="checkbox" name="suhu" id="" value="suhu" checked>Suhu<br>
+                <input type="checkbox" name="suhu" id="" value="suhu" checked> Suhu<br>
             </div>
         </div>
         <div class="col-2">
@@ -195,9 +192,6 @@
             <div class="row text-white">
                     <input type="checkbox" name="tekanan" id="" value="tekanan" checked>Tekanan<br>
             </div>
-        </div>
-        <div class="col-3">
-            
         </div>
     </div>
     <div class="row">

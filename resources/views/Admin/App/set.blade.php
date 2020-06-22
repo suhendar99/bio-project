@@ -26,26 +26,41 @@
                             Nama
                         </div>
                         <div class="col-6">
-                            <input type="text" name="nama_apps" class="form-control"  placeholder="Nama Aplikasi" value="{{$data->nama_apps}}">
+                            <input type="text" name="nama_apps" class="form-control @error('nama_apps') is-invalid @enderror" required  placeholder="Nama Aplikasi" value="{{$data->nama_apps}}">
                         </div>
+                        @error('nama_apps')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             Overview
                         </div>
                         <div class="col-6">
-                            <textarea name="overview" class="form-control" id="exampleFormControlTextarea1" rows="3" value="{{$data->overview}}" placeholder="Overview Aplikasi">
+                            <textarea name="overview" class="form-control @error('overview') is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" value="{{$data->overview}}" required placeholder="Overview Aplikasi">
                                 
                             </textarea>
                         </div>
+                        @error('oveview')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             Icon Aplikasi
                         </div>
                         <div class="col-6">
-                            <input type="file" class="form-control" name="icon" value="{{$data->icon}}">
+                            <input type="file" class="form-control @error('icon') is-invalid @enderror" required name="icon" value="{{$data->icon}}">
                         </div>
+                        @error('icon')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                         <a href="/" class="btn btn-primary" style="margin-right: 370px;">Back</a>
                         <button type="submit" class="btn btn-primary" style="margin-left: 420px;"><i class="fa fa-edit"></i>Edit Profile</button>

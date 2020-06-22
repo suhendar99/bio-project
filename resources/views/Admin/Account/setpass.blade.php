@@ -27,7 +27,7 @@
                             Password
                         </div>
                         <div class="col-6">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"  required name="password">
                         </div>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -40,7 +40,7 @@
                             Password Confirmation
                         </div>
                         <div class="col-6">
-                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation">
+                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" required  name="password_confirmation">
                         </div>
                         @error('password_confirmation')
                             <span class="invalid-feedback" role="alert">

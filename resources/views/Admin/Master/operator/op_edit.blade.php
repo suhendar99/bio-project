@@ -18,7 +18,12 @@
                     {{ method_field('PUT') }}
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Nama Operator</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="Nama Operator" name="nama" value="{{ $data->name }}">
+                            <input id="inputText3" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Operator" name="nama" value="{{ $data->name }}">
+                            @error('nama')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputEmail">Email address</label>
@@ -31,7 +36,7 @@
                         </div>
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Password *password default : 123456</label>
-                                <input id="inputText3" type="password" class="form-control" placeholder="password" name="password"value="123456" readonly>
+                                <input id="inputText3" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="password" name="password"value="123456" readonly>
                             </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">NIK</label>
@@ -44,15 +49,25 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Instansi</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="Instansi" name="instansi"value="{{ $data->instansi }}">
+                            <input id="inputText3" type="text" class="form-control @error('instansi') is-invalid @enderror" placeholder="Instansi" name="instansi"value="{{ $data->instansi }}">
+                            @error('instansi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Handphone</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="Number Handphone" name="hp"value="{{ $data->no_hp }}">
+                            <input id="inputText3" type="text" class="form-control @error('hp') is-invalid @enderror" placeholder="Number Handphone" name="hp"value="{{ $data->no_hp }}">
+                            @error('hp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="col-form-label" for="customFile">Foto</label>
-                            <input type="file" class="form-control @error('aktivasi') is-invalid @enderror" value="{{ $data->foto }}" id="customFile" name="foto">
+                            <input type="file" class="form-control" value="{{ $data->foto }}" id="customFile" name="foto">
                             @error('foto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -58,7 +58,8 @@ Route::get('/set_kirim_laporan','Dashboard@set_kirim_laporan')->name('setting.ki
     // Pengaturan Aplikasi
 Route::get('/set_app','AppController@index')->name('pengaturan.app')->middleware('auth');
     // Pengaturan MQTT
-Route::get('/set_mqtt','Dashboard@set_mqtt')->name('pengaturan.mqtt')->middleware('auth');
+Route::get('/set_mqtt','MqttController@edit')->name('pengaturan.mqtt')->middleware('auth');
+Route::put('/set_mqtt','MqttController@update');
 
 Auth::routes();
 

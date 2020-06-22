@@ -9,23 +9,29 @@ class MqttController extends Controller
 {
     public function index()
     {
-    	$data = Mqtt::all();
-    	return view('Admin.Setting.mqtt.index', ['data'=>$data]);
+        # code...
     }
-
+    
     public function store(Request $req)
     {
-    	# code...
+        # code...
     }
-
+    
     public function edit($id)
     {
-    	# code...
+        $data = Mqtt::all();
+        return view('Admin.Pengaturan.index', ['data'=>$data]);
     }
 
     public function update(Request $req, $id)
     {
-    	# code...
+        $data = Mqtt::findOrFail($id);
+        $data->url_broker = $req->broker;
+        $data->usename = $req->username;
+        $data->password = $req->password;
+        $data->qos = $req->qos;
+        $data->keep_alive = $req->keep;
+        return redirect()->back()->with('success','Data Di Update');
     }
 
     public function delete($id)

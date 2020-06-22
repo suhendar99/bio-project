@@ -9,6 +9,7 @@ class MonitoringController extends Controller
 {
     public function index()
     {
+        // dd(Monitoring::all());
         $data = Monitoring::orderBy('created_at','desc')->paginate(10);
         return view('Admin.Monitoring.raw',['data'=>$data]);
     }

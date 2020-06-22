@@ -29,6 +29,7 @@ Route::post('/per_tambah','OperatorController@store_per')->name('tambah.per');
 Route::get('/edit_per/{id}','OperatorController@edit_per')->name('edit.data.per');
 Route::put('/per_edit/{id}','OperatorController@update_per')->name('edit.per');
 Route::delete('/per_delete/{id}','OperatorController@delete_per')->name('delete.per');
+  //Data Operator  
 Route::get('/operator','OperatorController@index')->name('operator')->middleware('auth');
 Route::get('/operator_add','OperatorController@create')->name('tambah.data.op')->middleware('auth');
 Route::post('/op_tambah','OperatorController@store')->name('tambah.op')->middleware('auth');

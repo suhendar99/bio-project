@@ -16,13 +16,12 @@ class AppController extends Controller
     public function index()
     {
         $data = Setapp::first();        
-        $mqtt = Mqtt::where('id',1)->first();
-        return view('Admin.App.set', ['data'=>$data]);
+        return view('Admin.App.set', ['data'=>$data,]);
     }
     public function test()
     {
         $data = Setapp::all();
-        return view('Admin.layout.app',['data'=>$data]);
+        return view('Admin.layout.app',['data'=>$data, 'mqtt'=>$mqtt]);
     }
 
     public function set_mqtt()

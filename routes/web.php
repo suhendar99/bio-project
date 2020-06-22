@@ -12,11 +12,11 @@
 */
 Auth::routes();
 
-Route::get('/room','monitoringController@room')->name('room.monitor');
+Route::get('/room','MonitoringController@room')->name('room.monitor');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/','Dashboard@index')->name('dashboard');
-    Route::get('/a','Dashboard@test');
+    Route::get('/a','AppController@test');
     // Master Data
         // Setting Account
     Route::get('/profile/{id}','AccountController@index');

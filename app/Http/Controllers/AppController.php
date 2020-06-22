@@ -15,8 +15,7 @@ class AppController extends Controller
      */
     public function index()
     {
-        $data = Setapp::find('1')->first();
-        // dd($data);
+        $data = Setapp::first();        
         return view('Admin.App.set', ['data'=>$data]);
     }
     public function test()

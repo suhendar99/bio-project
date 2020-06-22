@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Monitoring;
+use App\Mqtt;
 
 class MonitoringController extends Controller
 {
     public function index()
     {
-        // dd(Monitoring::all());
+
+        $mqtt = Mqtt::where('id',1)->first();
+        // dd($mqtt->topic);
         $data = Monitoring::orderBy('created_at','desc')->paginate(10);
-        return view('Admin.Monitoring.raw',['data'=>$data]);
+        return view('Admin.Monitoring.raw',['data'=>$data, 'mqtt'=>$mqtt]);
     }
     public function room()
     {

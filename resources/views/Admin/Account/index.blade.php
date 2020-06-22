@@ -7,48 +7,46 @@
             </div>
             <div class="card">
                 <div class="card-body">
+                    <center>
+                            <img src="{{asset('foto/'.$data->foto)}}" alt="placeholder+image" style="width: 200px;">
+                    </center>
                     <div class="row">
-                        <div class="col-12">
-                            <img src="{{asset('foto/'.$data->id)}}" alt="placeholder+image">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             Nama
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" readonly placeholder="{{$data->name}}">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             Email
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" readonly placeholder="{{$data->email}}">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             NIK
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" readonly placeholder="{{$data->nik}}">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             No HP
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" readonly placeholder="{{$data->no_hp}}">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             Level
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" readonly placeholder="{{$data->level}}">
                         </div>
                     </div>

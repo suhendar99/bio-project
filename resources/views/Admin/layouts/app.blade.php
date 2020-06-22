@@ -45,6 +45,7 @@
                                     <h5 class="mb-0 text-white nav-user-name">{{ Auth::user()->name }}</h5>
                                 </div>
                                 <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}"><i class="fas fa-cog mr-2"></i> My Profile </a>
+                                <a class="dropdown-item" href="/editPassword/{{ Auth::user()->id }}"><i class="fas fa-key mr-2"></i> Ganti Password </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <center><button class="btn btn-primary col-12"><i class="fas fa-power-off mr-2"></i>Logout</button></center>

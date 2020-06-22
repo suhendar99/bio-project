@@ -14,11 +14,9 @@
                 <div class="card-body">
                     <form method="post" action="/updateProfile/{{$data->id}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="{{asset('foto/'.$data->foto)}}" alt="placeholder+image" name="">
-                        </div>
-                    </div>
+                    <center>
+                            <img src="{{asset('foto/'.$data->icon)}}" alt="placeholder+image" style="width: 200px;">
+                    </center>
                     <div class="row">
                         <div class="col-6">
                             Foto
@@ -32,7 +30,7 @@
                             Nama
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->name}}" placeholder="{{$data->name}}" name="name">
+                            <input type="text" class="form-control" value="{{$data->name}}" placeholder="Nama" name="name">
                         </div>
                     </div>
                     <div class="row">
@@ -40,7 +38,7 @@
                             NIK
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->nik}}" placeholder="{{$data->nik}}" name="nik">
+                            <input type="text" class="form-control" value="{{$data->nik}}" placeholder="NIK" name="nik">
                         </div>
                     </div>
                     <div class="row">
@@ -48,7 +46,7 @@
                             No HP
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->no_hp}}" placeholder="{{$data->no_hp}}" name="no_hp">
+                            <input type="text" class="form-control" value="{{$data->no_hp}}" placeholder="Nomor HP" name="no_hp">
                         </div>
                     </div>
                     <input type="hidden" value="{{$data->level}}"  name="level">
@@ -57,20 +55,12 @@
                             Email
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control" value="{{$data->email}}" placeholder="{{$data->email}}" name="email">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            Password *default: 123456
-                        </div>
-                        <div class="col-6">
-                            <input type="password" class="form-control" name="password" value="123456" readonly>
+                            <input type="text" class="form-control" value="{{$data->email}}" placeholder="Email" name="email">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-10">
-                            <a href="/dashboard" class="btn btn-primary" >Back</a>
+                            <a href="/" class="btn btn-primary" >Back</a>
                         </div>
                         <div class="col-2">
                             <button type="submit" class="btn btn-primary" ><i class="fa fa-edit"></i>Simpan</button>

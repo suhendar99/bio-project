@@ -20,51 +20,51 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             Foto
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="file" class="form-control" value="{{$data->foto}}" name="foto">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             Nama
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" value="{{$data->name}}" placeholder="{{$data->name}}" name="name">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             NIK
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" value="{{$data->nik}}" placeholder="{{$data->nik}}" name="nik">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             No HP
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" value="{{$data->no_hp}}" placeholder="{{$data->no_hp}}" name="no_hp">
                         </div>
                     </div>
                     <input type="hidden" value="{{$data->level}}"  name="level">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             Email
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="text" class="form-control" value="{{$data->email}}" placeholder="{{$data->email}}" name="email">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-6">
                             Password *default: 123456
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="password" class="form-control" name="password" value="123456" readonly>
                         </div>
                     </div>

@@ -28,8 +28,8 @@ class AccountController extends Controller
             'name' 	=> 'max:25',            
             'foto' 	=> 'image|mimes:jpeg,png,jpg|max:2048',
             'no_hp' => 'numeric',
-            'nik'	=> 'numeric|unique:users,nik'.$id,
-            'email'	=> 'email|unique:users,email'.$id,
+            'nik'	=> 'numeric|unique:users,nik,'.$id,
+            'email'	=> 'email|unique:users,email,'.$id,
         ]);
 
         if ($v->fails()) {
@@ -56,7 +56,7 @@ class AccountController extends Controller
                 ]);
             }            
             // dd($data);
-            return redirect('/dashoard')->with('success', 'Profil berhasil di update');
+            return redirect('/')->with('success', 'Profil berhasil di update');
         }
     }
 }

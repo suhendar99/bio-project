@@ -78,7 +78,8 @@ class AppController extends Controller
     public function update(Request $req, $id)
     {
         $v = Validator::make($req->all(), [             
-            'nama_apps'  => 'max:25',            
+            'nama_apps'  => 'required|max:25',
+            'overview'   => 'required',       
             'icon'  => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 

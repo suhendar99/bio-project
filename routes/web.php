@@ -35,7 +35,7 @@ Route::get('/operator_add','OperatorController@create')->name('tambah.data.op')-
 Route::post('/op_tambah','OperatorController@store')->name('tambah.op')->middleware('auth');
 Route::get('/operator_edit/{id}','OperatorController@edit')->name('edit.data.op')->middleware('auth');
 Route::put('/op_edit/{id}','OperatorController@update')->middleware('auth');
-Route::get('/operator_delete/{id}','OperatorController@delete')->middleware('auth');
+Route::delete('/operator_delete/{id}','OperatorController@delete')->middleware('auth');
     // Data Perangkat
 Route::get('/dataper','OperatorController@dataper')->name('data.perangkat')->middleware('auth');
     // Data Ruangan

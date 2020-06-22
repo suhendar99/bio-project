@@ -28,6 +28,11 @@
                             </center>
                         </div>
                         <div class="col-md-5 col-sm-12">
+                            @if (session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>                                        
+                            @endif
                             <form method="post" action="{{ route('login') }}" >
                                 @csrf
                                 <center>

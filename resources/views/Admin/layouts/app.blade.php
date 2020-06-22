@@ -160,7 +160,7 @@
                                             <a class="nav-link {{ Request::is('set_app*') ? 'active' : false }}" href="{{ route('pengaturan.app') }}"  aria-controls="submenu-1">App</a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a class="nav-link {{ Request::is('set_mqtt*') ? 'active' : false }}" href="{{ route('pengaturan.mqtt') }}"  aria-controls="submenu-1">MQTT</a>
+                                            <a class="nav-link {{ Request::is('set_mqtt*') ? 'active' : false }}" href="{{ route('pengaturan.mqtt',1) }}"  aria-controls="submenu-1">MQTT</a>
                                         </li>
                                     </ul>
                                 </div>

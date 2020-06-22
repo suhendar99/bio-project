@@ -53,14 +53,16 @@ Route::middleware(['auth'])->group(function () {
         // Pengaturan Laporan
     Route::get('/set_laporan','Dashboard@set_laporan')->name('setting.laporan');
 
-        // Pengaturan Kirim Laporan
+    // Pengaturan Kirim Laporan
     Route::get('/set_kirim_laporan','Dashboard@set_kirim_laporan')->name('setting.kirim.laporan');
     // pengaturan
         // Pengaturan Aplikasi
     Route::get('/set_app','AppController@index')->name('pengaturan.app');
     Route::post('/updateApp/{id}','AppController@update');
         // Pengaturan MQTT
-    Route::get('/set_mqtt','Dashboard@set_mqtt')->name('pengaturan.mqtt');
+    Route::get('/set_mqtt/','MqttController@edit')->name('pengaturan.mqtt');
+    Route::put('/set_mqtt_update/{id}','MqttController@update')->name('edit.mqtt');
+
 
     Route::get('/home', 'HomeController@index')->name('home');
 });

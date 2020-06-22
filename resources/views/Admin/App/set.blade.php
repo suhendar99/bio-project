@@ -40,7 +40,22 @@
                                 
                             </div>
                         </div>
-                        
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            Nama Tab
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="text" name="tab" class="form-control @error('tab') is-invalid @enderror" required  placeholder="Nama Tab Aplikasi" value="{{$data->tab}}">
+                                @error('tab')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">

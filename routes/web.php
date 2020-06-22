@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
         // cetak laporan
     Route::get('/cetak_laporan','Dashboard@cetak_laporan')->name('cetak.laporan');
         // Pengaturan Laporan
-    Route::get('/set_laporan','Dashboard@set_laporan')->name('setting.laporan');
+    Route::get('/set_laporan','LaporanController@set_laporan')->name('setting.laporan');
 
     // Pengaturan Kirim Laporan
     Route::get('/set_kirim_laporan','Dashboard@set_kirim_laporan')->name('setting.kirim.laporan');

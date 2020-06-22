@@ -10,4 +10,9 @@ class Ruangan extends Model
     protected $fillable = [
     	'foto','nama'
     ];
+
+    public function Monitoring()
+    {
+        return $this->hasOne('App\Monitoring');
+    }
 }

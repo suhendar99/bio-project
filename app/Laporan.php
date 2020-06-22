@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Laporan extends Model
 {
     protected $table = 'setlaporan';
+    protected $primarykey ="id";
     protected $fillable = [
     	'header_img','icon','footer','id_operator'
     ];

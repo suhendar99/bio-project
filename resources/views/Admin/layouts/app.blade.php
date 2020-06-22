@@ -1,3 +1,6 @@
+@php
+    $mqtt = \App\Mqtt::where('id',1)->first();    
+@endphp
 <!doctype html>
 <html lang="en">
 <head>

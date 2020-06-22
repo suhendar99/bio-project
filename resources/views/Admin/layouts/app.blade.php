@@ -39,14 +39,13 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="#" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">Nama</h5>
-                                    <span class="status"></span><span class="ml-2">Achtive</span>
+                                    <h5 class="mb-0 text-white nav-user-name">{{ Auth::user()->name }}</h5>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting Account</a>
-                                <form id="logout-form" action="#" method="POST">
+                                <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}"><i class="fas fa-cog mr-2"></i> My Profile </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <center><button class="btn btn-primary col-12"><i class="fas fa-power-off mr-2"></i>Logout</button></center>
                                 </form>
@@ -102,7 +101,7 @@
                                             <a class="nav-link {{ Request::is('data_ruang*') ? 'active' : false }}" href="{{ route('data_ruang.index') }}">Data Ruang</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link {{ Request::is('data_satuan*') ? 'active' : false }}" href="{{ route('data.satuan') }}">Data Satuan</a>
+                                            <a class="nav-link {{ Request::is('data_satuan*') ? 'active' : false }}" href="{{ route('satuan.index') }}">Data Satuan</a>
                                         </li>
                                     </ul>
                                 </div>

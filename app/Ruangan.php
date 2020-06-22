@@ -10,4 +10,9 @@ class Ruangan extends Model
     protected $fillable = [
     	'foto','nama'
     ];
+
+    public function monitoring()
+    {
+    	return $this->hasOne('App\Monitoring')->orderBy('created_at', 'desc');
+    }
 }

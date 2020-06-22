@@ -260,8 +260,9 @@
     <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+    
           //area ini untuk topic yang ada di broker mqtt
           function onConnect()
           {

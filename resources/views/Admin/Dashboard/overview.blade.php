@@ -118,7 +118,7 @@
                         Suhu
                     </div>
                     <div class="col-4">
-                        : {{$d->monitoring->suhu}}
+                        : {{$d->monitoring->suhu}} 
                     </div>
                 </div>
                 <div class="row">

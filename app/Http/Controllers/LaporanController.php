@@ -10,15 +10,12 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $data = DB::table('setlaporan')
-        ->whereYear('created_at','')
-        ->get();
-        return view('Admin.Laporan.cetak');
+        // 
     }
     public function set_laporan()
     {
-        $data = Laporan::all();
-    	return view('Admin.Setting.laporan.index');
+        $laporan = Laporan::all();
+        return view('Admin.Laporan.PengaturanLaporan.index', compact('laporan'));
     }
 
     public function store(Request $req)

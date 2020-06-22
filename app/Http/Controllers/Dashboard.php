@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Charts\Chartline;
 use Lava;
 use DB;
-use App\Suhu;
+use App\Ruangan;
 use App\Setting;
 use App\Monitoring;
+use App\Satuan;
 use Auth;
-use App\Ruangan;
 
 class Dashboard extends Controller
 {

@@ -16,6 +16,7 @@ Route::get('/room','monitoringController@room')->name('room.monitor');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/','Dashboard@index')->name('dashboard');
+    Route::get('/a','Dashboard@test');
     // Master Data
         // Setting Account
     Route::get('/profile/{id}','AccountController@index');

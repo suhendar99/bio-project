@@ -19,6 +19,11 @@ class AppController extends Controller
         // dd($data);
         return view('Admin.App.set', ['data'=>$data]);
     }
+    public function test()
+    {
+        $data = Setapp::all();
+        return view('Admin.layout.app',['data'=>$data]);
+    }
 
     public function set_mqtt()
     {
@@ -81,6 +86,7 @@ class AppController extends Controller
             'nama_apps'  => 'required|max:25',
             'overview'   => 'required',       
             'icon'  => 'image|mimes:jpeg,png,jpg|max:2048',
+            'tab' => 'required|'
         ]);
 
         if ($v->fails()) {
@@ -91,6 +97,7 @@ class AppController extends Controller
             $data->update([
                 'nama_apps'  => $req->nama_apps,
                 'overview'   => $req->overview,
+                'tab' => $req->tab
             ]);
 
             if($req->hasfile('icon'))

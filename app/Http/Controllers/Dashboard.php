@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Charts\Chartline;
 use Lava;
 use DB;
-use App\Suhu;
+use App\Ruangan;
 use App\Setting;
 use App\Monitoring;
+use App\Satuan;
+use Auth;
 
 class Dashboard extends Controller
 {
@@ -25,7 +27,17 @@ class Dashboard extends Controller
         // return view('Admin.Dashboard.Dashboard', [ 'usersChart' => $usersChart ] );
         // return view('SA.Master.ukur');   
 
-        $data = Monitoring::latest()->get();
+        // $data = Monitoring::all()->get()
+        $data = Ruangan::all();
+        // dd($data->monitoring->suhu);
+        // dd($data->monitoring->tekanan);
+        // $suhu = DB::table('orders')->max('price');
+        $suhu1 = Monitoring::all();
+        // $user = DB::table('monitoring')->where('ruangan_id', '2')->first();
+        // $user = Monitoring::latest('ruangan_id',2);
+        // $data2 = Monitoring::where('ruangan_id', 2)->latest()->first();
+        // dd($user);
+        // dd($suhu1);
         return view('Admin.Dashboard.index',['data'=>$data]);
     }
 

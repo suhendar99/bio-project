@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Operator extends Model
 {
     protected $table = "users";
-    protected $primarykey = "id_user";
+    protected $primarykey = "id";
     protected $fillable = [
-        'name', 'email', 'password', 'nik', 'instansi', 'jabatan' ,'no_hp', 'foto', 'level'
+        'name', 'email', 'password', 'nik','no_hp', 'foto'
     ];
 }

@@ -2,15 +2,82 @@
 @section('content')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="page-header">
-                <h2 class="pageheader-title">Setting App</h2>
-                <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Setting App</li>
-                        </ol>
-                    </nav>
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>                                        
+            @endif
+            <div class="section-block" id="basicform">
+                <h3 class="section-title">Pengaturan Aplikasi</h3>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/updateApp/{{$data->id}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                    <div class="row">
+                        <div class="col-12">
+                            <center>
+                        @if($data->icon == "")
+                            <i class="fa fa-user fa-7x" style="margin-bottom: 20px;"></i>
+                        @else
+                            <img src="{{asset('foto/app/'.$data->icon)}}" alt="placeholder+image" style="width: 200px;">
+                        @endif
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            Nama
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="text" name="nama_apps" class="form-control @error('nama_apps') is-invalid @enderror" required  placeholder="Nama Aplikasi" value="{{$data->nama_apps}}">
+                                @error('nama_apps')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            Overview
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <textarea name="overview" class="form-control @error('overview') is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" required placeholder="Overview Aplikasi">{{$data->overview}}</textarea>
+                                @error('oveview')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            Icon Aplikasi
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="file" class="form-control @error('icon') is-invalid @enderror" name="icon" value="{{$data->icon}}">
+                                @error('icon')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                
+                            </div>
+                        </div>
+                    </div>
+                        <a href="/" class="btn btn-primary" style="margin-right: 370px;">Back</a>
+                        <button type="submit" class="btn btn-primary" style="margin-left: 420px;"><i class="fa fa-edit"></i>Edit Profile</button>
+                    </form>
                 </div>
             </div>
         </div>

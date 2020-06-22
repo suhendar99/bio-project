@@ -3,29 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Mqtt;
+use Validator;
 
 class MqttController extends Controller
 {
     public function index()
     {
-    	$data = Mqtt::all();
-    	return view('Admin.Setting.mqtt.index', ['data'=>$data]);
+        # code...
     }
-
+    
     public function store(Request $req)
     {
-    	# code...
+        # code...
     }
-
-    public function edit($id)
+    
+    public function edit()
     {
-    	# code...
+        $mqtt = Mqtt::where('id',1)->first();
+        return view('Admin.Pengaturan.index', ['mqtt'=>$mqtt]);
     }
 
     public function update(Request $req, $id)
     {
-    	# code...
+        $v = Validator::make($req->all(), [
+            'broker' => 'required|url',
+            'username' => 'required|',
+            'password' => 'required|',
+            'topic' => 'required|',
+            'qos' => 'required|',
+            'alive' => 'required'
+
+        ]);
+        if ($v->fails()) {
+            // dd($v->errors()->all());
+            return back()->withErrors($v)->withInput();
+        }else {
+            $mqtt = Mqtt::find($id);
+            
+            $mqtt->update([
+                'url_broker' => $req->broker,
+                'username' => $req->username,
+                'password' => $req->password,
+                'topic' => $req->topic,
+                'qos' => $req->qos, 
+                'keep_alive' => $req->alive,
+            ]);
+        }
+        return redirect()->back()->with('success','Data Di Update');
     }
 
     public function delete($id)

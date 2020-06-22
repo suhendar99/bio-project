@@ -23,6 +23,10 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-body">
+                <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
+                    Tambah Data 
+                </a>
+
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered first">
                         <thead>
@@ -30,9 +34,11 @@
                                 <th>No</th>
                                 <th>Photo</th>
                                 <th>Name</th>
+                                <th>E Mail</th>
                                 <th>NIK</th>
                                 <th>Instansi</th>
                                 <th>No Handphone</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,9 +56,14 @@
                                 </div>
                                 </td>
                                 <td>{{ $o->name }}</td>
+                                <td>{{ $o->email }}</td>
                                 <td>{{ $o->nik }}</td>
                                 <td>{{ $o->instansi }}</td>
                                 <td>{{ $o->no_hp }}</td>
+                                <td>
+                                    <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
+                                    <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -65,52 +76,36 @@
     <!-- end basic table  -->
     <!-- ============================================================== -->
 </div>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script type="text/javascript">
+<form action="" id="formDelete" method="POST">
+    @csrf
+    @method('DELETE')
 
-var options = {
-  chart: {
-    height: 280,
-    type: "radialBar",
-  },
-  series: [67],
-  colors: ["#20E647"],
-  plotOptions: {
-    radialBar: {
-      startAngle: -90,
-      endAngle: 90,
-      track: {
-        background: '#333',
-        startAngle: -90,
-        endAngle: 90,
-      },
-      dataLabels: {
-        name: {
-          show: false,
-        },
-        value: {
-          fontSize: "30px",
-          show: true
-        }
-      }
+</form>
+
+<script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+
+<script>
+     function deletes(id){
+        const formDelete = document.getElementById('formDelete')
+        formDelete.action = '/operator_delete/'+id
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                formDelete.submit();
+                Swal.fire(
+                'Deleted!',
+                'Operator berhasil di hapus',
+                'success'
+                )
+            }
+        })
     }
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shade: "dark",
-      type: "horizontal",
-      gradientToColors: ["#87D4F9"],
-      stops: [0, 100]
-    }
-  },
-  stroke: {
-    lineCap: "butt"
-  },
-  labels: ["Progress"]
-};
-
-new ApexCharts(document.querySelector("#gaugeChart"), options).render();
-
-</script>
+</script>            
 @endsection

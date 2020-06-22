@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
+use App\Setapp;
 
 class AppController extends Controller
 {
@@ -13,7 +15,9 @@ class AppController extends Controller
      */
     public function index()
     {
-        return view('Admin.App.set');
+        $data = Setapp::find('1')->first();
+        // dd($data);
+        return view('Admin.App.set', ['data'=>$data]);
     }
 
     public function set_mqtt()
@@ -71,9 +75,36 @@ class AppController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        $v = Validator::make($req->all(), [             
+            'nama_apps'  => 'required|max:25',
+            'overview'   => 'required',       
+            'icon'  => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $data = Setapp::find($id);
+            
+            $data->update([
+                'nama_apps'  => $req->nama_apps,
+                'overview'   => $req->overview,
+            ]);
+
+            if($req->hasfile('icon'))
+            {
+                $icon = 'IMG-'.time().'-'.$req->icon->getClientOriginalName();
+                $req->icon->move(public_path('foto/app'),$icon);
+
+                $data->update([
+                    'icon' => $icon,
+                ]);
+            }            
+            // dd($data);
+            return back()->with('success', 'Profil berhasil di update');
+        }
     }
 
     /**

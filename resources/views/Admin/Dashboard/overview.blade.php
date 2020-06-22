@@ -118,7 +118,7 @@
                         Suhu
                     </div>
                     <div class="col-4">
-                        : {{$d->monitoring->suhu}}
+                        {{-- : {{$d->monitoring->suhu}} --}}
                     </div>
                 </div>
                 <div class="row">
@@ -126,7 +126,7 @@
                         Kelembapan
                     </div>
                     <div class="col-4">
-                        : {{$d->monitoring->kelembapan}}
+                        {{-- : {{$d->monitoring->kelembapan}} --}}
                     </div>
                 </div>
                 <div class="row">
@@ -134,7 +134,7 @@
                         Tekanan
                     </div>
                     <div class="col-4">
-                        : {{$d->monitoring->tekanan}}
+                        {{-- : {{$d->monitoring->tekanan}} --}}
                     </div> 
                 </div>
             </div>

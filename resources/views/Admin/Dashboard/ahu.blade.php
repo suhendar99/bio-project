@@ -1,5 +1,5 @@
 <div class="row">
-    @foreach($ruangan as $r)
+    {{-- @foreach($ruangan as $r)
     <div class="col-md-4"  style="width:20rem;">
         <div class="card bg-dark">
             <div class="card-header bg-dark text-white">
@@ -12,5 +12,5 @@
             </div>
         </div>
     </div>
- @endforeach
+ @endforeach --}}
 </div>

@@ -74,7 +74,7 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Request::is('dashboard') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
+                                <a class="nav-link {{ Request::is('/') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link 
@@ -88,7 +88,7 @@
                                 {{ Request::is('operator*') ? 'show' : false }}
                                 {{ Request::is('dataper*') ? 'show' : false }}
                                 {{ Request::is('data_ruang*') ? 'show' : false }}
-                                {{ Request::is('data_satuan*') ? 'show' : false }}"
+                                {{ Request::is('satuan*') ? 'show' : false }}"
                                 >
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -101,7 +101,7 @@
                                             <a class="nav-link {{ Request::is('data_ruang*') ? 'active' : false }}" href="{{ route('data_ruang.index') }}">Data Ruang</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link {{ Request::is('data_satuan*') ? 'active' : false }}" href="{{ route('satuan.index') }}">Data Satuan</a>
+                                            <a class="nav-link {{ Request::is('satuan*') ? 'active' : false }}" href="{{ route('satuan.index') }}">Data Satuan</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -156,10 +156,10 @@
                                   {{ Request::is('set_mqtt*') ? 'show' : false }}" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item ">
-                                            <a class="nav-link {{ Request::is('set_app*') ? 'active' : false }}" href="{{ route('pengaturan.app') }}"  aria-controls="submenu-1">App</a>
+                                            <a class="nav-link {{ Request::is('set_app*') ? 'active' : false }}" href="{{ route('pengaturan.app') }}"  aria-controls="submenu-1">Pengaturan App</a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a class="nav-link {{ Request::is('set_mqtt*') ? 'active' : false }}" href="{{ route('pengaturan.mqtt') }}"  aria-controls="submenu-1">MQTT</a>
+                                            <a class="nav-link {{ Request::is('set_mqtt*') ? 'active' : false }}" href="{{ route('pengaturan.mqtt',1) }}"  aria-controls="submenu-1">Pengaturan MQTT Broker</a>
                                         </li>
                                     </ul>
                                 </div>

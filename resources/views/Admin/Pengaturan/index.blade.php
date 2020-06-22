@@ -1,67 +1,68 @@
-@extends('Admin.layout.app')
+@extends('Admin.layouts.app')
 @section('content')
-<div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="page-header">
-                <h2 class="pageheader-title">Pengaturan MQTT</h2>
-                <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Pengaturan MQTT</li>
-                            <li class="breadcrumb-item active" aria-current="page">Update</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
-        <!-- ============================================================== -->
-        <!-- basic table  -->
-        <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card">                            
+            <div class="section-block" id="basicform">
+                <h3 class="section-title">Edit Data MQTT</h3>
+            </div>
+            <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('data_ruang.index') }}" class="btn btn-primary">Back</a>
-                     @if (session()->has('success'))
+                    @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
                         </div>                                        
                     @endif
-                    <form action="{{ route('data_ruang.update', $ruangan->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+                    <form action="/set_mqtt_update/{{ $mqtt->id }}" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                         <div class="form-group">
-                            <label for="">Nama ruangan</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ $ruangan->nama }}" required  name="nama">
-
-                            @error('nama')
+                            <label for="inputText3" class="col-form-label">URL Broker</label>
+                            <input id="inputText3" type="url" class="form-control @error('broker') is-invalid @enderror" placeholder="URL Broker" name="broker" value="{{ $mqtt->url_broker }}">
+                            @error('broker')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Foto ruangan (Optional)</label>
-                            <input type="file" class="form-control  @error('foto') is-invalid @enderror" name="foto">
-
-                             @error('foto')
+                            <label for="inputText3" class="col-form-label">Username</label>
+                            <input id="inputText3" type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Usename" name="username" value="{{ $mqtt->username }}">
+                            @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>                                    
-                        <div class="form-group">                                        
-                            <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
-                    </form>                               
+                        <div class="form-group">
+                            <label for="inputText3" class="col-form-label">Password</label>
+                            <input id="inputText3" type="text" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ $mqtt->password }}">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-form-label">QOS</label>
+                            <select name="qos" id="" class="form-control @error('alive') is-invalid @enderror">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputText3" class="col-form-label">Keep Alive</label>
+                            <input id="inputText3" type="text" class="form-control @error('alive') is-invalid @enderror" placeholder="Keep Alive" name="alive" value="{{ $mqtt->keep_alive }}">
+                            @error('alive')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- end basic table  -->
-        <!-- ============================================================== -->
     </div>
-</div>
 @endsection

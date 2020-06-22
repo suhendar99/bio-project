@@ -25,13 +25,11 @@ class AccountController extends Controller
     public function update(Request $req, $id)
     {
     	$v = Validator::make($req->all(), [             
-            'name' 	=> 'required|',            
+            'name' 	=> 'max:25',            
             'foto' 	=> 'image|mimes:jpeg,png,jpg|max:2048',
-            'nik'	=> 'required',
-            'no_hp' => 'required|numeric',
-            'email'	=> 'required|email',
-            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'required'
+            'no_hp' => 'numeric',
+            'nik'	=> 'numeric|unique:users,nik,'.$id,
+            'email'	=> 'email|unique:users,email,'.$id,
         ]);
 
         if ($v->fails()) {
@@ -58,7 +56,7 @@ class AccountController extends Controller
                 ]);
             }            
             // dd($data);
-            return back()->with('success', 'Profil berhasil di update');
+            return redirect('/')->with('success', 'Profil berhasil di update');
         }
     }
 }

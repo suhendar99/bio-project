@@ -84,7 +84,7 @@ class AppController extends Controller
         $v = Validator::make($req->all(), [             
             'nama_apps'  => 'required|max:25',
             'overview'   => 'required',       
-            'icon'  => 'image|mimes:jpeg,png,jpg|max:2048',
+            'icon'  => 'image|mimes:jpeg,png,jpg|max:1024',
             'tab' => 'required|'
         ]);
 

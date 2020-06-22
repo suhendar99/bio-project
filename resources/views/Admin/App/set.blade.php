@@ -27,7 +27,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            Nama
+                            Nama Aplikasi
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -43,7 +43,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            Nama Tab
+                            Tab Browser
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            Overview
+                            Deskripsi Aplikasi
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -69,9 +69,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                
                             </div>
-                            
                         </div>
                     </div>
                     <div class="row">
@@ -86,7 +84,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                
+                                <span>*Icon Aplikasi(jpeg,jpg,png,maksimal 1 mb)</span>
                             </div>
                         </div>
                     </div>

@@ -18,8 +18,8 @@ class MonitoringController extends Controller
     }
     public function room()
     {   
-        $data = Setapp::all();
-        return view('Admin.Dashboard.monitoring',compact('data'));
+        $app = Setapp::where('id',1)->first();
+        return view('Admin.Dashboard.monitoring',compact('app'));
     }
 
     public function store(Request $req)

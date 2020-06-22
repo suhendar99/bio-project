@@ -23,11 +23,6 @@ class AppController extends Controller
         $data = Setapp::all();
         return view('Admin.layout.app',['data'=>$data, 'mqtt'=>$mqtt]);
     }
-    public function test2()
-    {
-        $data = Setapp::all();
-        return view('Admin.Dashboard.monitoring',['data'=>$data]);
-    }
 
     public function set_mqtt()
     {

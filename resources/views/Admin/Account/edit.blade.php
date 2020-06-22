@@ -15,59 +15,72 @@
                     <form method="post" action="/updateProfile/{{$data->id}}" enctype="multipart/form-data">
                     @csrf
                     <center>
+                        @if($data->foto == "")
+                            <i class="fa fa-user fa-7x" style="margin-bottom: 20px;"></i>
+                        @else
                             <img src="{{asset('foto/'.$data->foto)}}" alt="placeholder+image" style="width: 200px;">
+                        @endif
                     </center>
                     <div class="row">
                         <div class="col-6">
                             Foto
                         </div>
                         <div class="col-6">
-                            <input type="file" class="form-control  @error('foto') is-invalid @enderror" value="{{$data->foto}}" name="foto" required>
+                            <div class="form-group">
+                                <input type="file" class="form-control  @error('foto') is-invalid @enderror" value="{{$data->foto}}" name="foto" >
+                                @error('foto')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('foto')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             Nama
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control  @error('nama') is-invalid @enderror" value="{{$data->name}}" placeholder="Nama" name="name" required>
+                            <div class="form-group">
+                                <input type="text" class="form-control  @error('nama') is-invalid @enderror" value="{{$data->name}}" placeholder="Nama" name="name" required>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                
+                            </div>
                         </div>
-                        @error('nama')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             NIK
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control  @error('nik') is-invalid @enderror" value="{{$data->nik}}" placeholder="NIK" name="nik" required>
+                            <div class="form-group">
+                                <input type="text" class="form-control  @error('nik') is-invalid @enderror" value="{{$data->nik}}" placeholder="NIK" name="nik" required>
+                                @error('nik')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('nik')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             No HP
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control @error('no_hp') is-invalid @enderror" value="{{$data->no_hp}}" placeholder="Nomor HP" name="no_hp" required>
+                            <div class="form-group">
+                                <input type="text" class="form-control @error('no_hp') is-invalid @enderror" value="{{$data->no_hp}}" placeholder="Nomor HP" name="no_hp" required>
+                                @error('no_hp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('no_hp')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <input type="hidden" value="{{$data->level}}"  name="level">
                     <div class="row">
@@ -75,13 +88,15 @@
                             Email
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{$data->email}}" placeholder="Email" name="email" required>
+                            <div class="form-group">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{$data->email}}" placeholder="Email" name="email" required>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-10">

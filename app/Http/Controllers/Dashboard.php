@@ -11,7 +11,6 @@ use App\Setting;
 use App\Monitoring;
 use App\Satuan;
 use Auth;
-
 class Dashboard extends Controller
 {
     /**
@@ -21,24 +20,9 @@ class Dashboard extends Controller
      */
     public function index()
     {
-        // $usersChart = new Chartline;
-        // $usersChart->labels(['Jan', 'Feb', 'Mar']);
-        // $usersChart->dataset('Users by trimester', 'line', [10, 25, 13]);
-        // return view('Admin.Dashboard.Dashboard', [ 'usersChart' => $usersChart ] );
-        // return view('SA.Master.ukur');   
-
-        // $data = Monitoring::all()->get()
         $data = Ruangan::all();
-        // dd($data->monitoring->suhu);
-        // dd($data->monitoring->tekanan);
-        // $suhu = DB::table('orders')->max('price');
-        $suhu1 = Monitoring::all();
-        // $user = DB::table('monitoring')->where('ruangan_id', '2')->first();
-        // $user = Monitoring::latest('ruangan_id',2);
-        // $data2 = Monitoring::where('ruangan_id', 2)->latest()->first();
-        // dd($user);
-        // dd($suhu1);
-        return view('Admin.Dashboard.index',['data'=>$data]);
+        $suhu = Satuan::where('parameter','Suhu')->first();
+        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu]);
     }
 
     public function login()

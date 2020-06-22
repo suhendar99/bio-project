@@ -73,6 +73,6 @@ class SatuanController extends Controller
     {
     	$data = Satuan::find($id);
         $data->delete();
-        return back()->with('success', 'Data Satuan berhasil di hapus');
+        return redirect('/satuan')->with('success', 'Data Satuan berhasil di hapus');
     }
 }

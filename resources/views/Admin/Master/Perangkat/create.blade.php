@@ -17,7 +17,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Seri</label>
-                            <input id="inputText3" type="text" class="form-control @error('seri') is-invalid @enderror" placeholder="No Seri Perangkat" name="seri" value="{{ old('seri') }}" required>
+                            <input id="inputText3" type="text" class="form-control @error('seri') is-invalid @enderror" placeholder="No Seri Perangkat" name="seri" value="{{ old('seri') }}">
                             @error('seri')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputEmail">Latitude</label>
-                            <input id="inputText3" type="text" placeholder="Example 78.9879" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{ old('latitude') }}" required>
+                            <input id="inputText3" type="text" placeholder="Example 78.9879" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{ old('latitude') }}">
                             @error('latitude')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Longitude</label>
-                            <input id="inputText3" type="text" class="form-control @error('longitude') is-invalid @enderror" placeholder="Example -78.958" name="longitude" value="{{ old('longitude') }}" required>
+                            <input id="inputText3" type="text" class="form-control @error('longitude') is-invalid @enderror" placeholder="Example -78.958" name="longitude" value="{{ old('longitude') }}">
                             @error('longitude')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Tanggal Aktivasi</label>
-                            <input id="inputText3" type="date" class="form-control @error('aktivasi') is-invalid @enderror" placeholder="Tanggal Aktivasi Alat" name="aktivasi" value="{{ old('aktivasi') }}" required>
+                            <input id="inputText3" type="date" class="form-control @error('aktivasi') is-invalid @enderror" placeholder="Tanggal Aktivasi Alat" name="aktivasi" value="{{ old('aktivasi') }}">
                             @error('instansi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

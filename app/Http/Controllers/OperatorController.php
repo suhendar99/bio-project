@@ -148,6 +148,14 @@ class OperatorController extends Controller
     }
     public function update_per(Request $req, $id)
     {
+        $this->validate($req,[
+            'seri' => 'required|numeric:',
+            'latitude' => 'required|',
+            'longitude' => 'required|',
+            'aktivasi' => 'required|date',
+            'status' => 'required|'
+        ]);
+        
         $perangkat = Perangkat::findOrFail($id);
         $perangkat->no_seri = $req->seri;
         $perangkat->latitude = $req->latitude;

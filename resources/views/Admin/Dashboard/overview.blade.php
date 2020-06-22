@@ -15,6 +15,7 @@
                         Suhu
                     </div>
                     <div class="col-4">
+
                         {{-- : {{$d->monitoring->suhu}} --}}
                     </div>
                 </div>

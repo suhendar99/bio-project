@@ -18,11 +18,16 @@
                     {{ method_field('PUT') }}
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Nama Operator</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="Nama Operator" name="name" value="{{ $data->name }}">
+                            <input id="inputText3" type="text" class="form-control" placeholder="Nama Operator" name="nama" value="{{ $data->name }}">
                         </div>
                         <div class="form-group">
                             <label for="inputEmail">Email address</label>
-                            <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control" name="email"value="{{ $data->email }}">
+                            <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control @error('email') is-invalid @enderror" name="email"value="{{ $data->email }}">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Password *password default : 123456</label>
@@ -30,7 +35,12 @@
                             </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">NIK</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="NIK" name="nik"value="{{ $data->nik }}">
+                            <input id="inputText3" type="text" class="form-control @error('nik') is-invalid @enderror" placeholder="NIK" name="nik"value="{{ $data->nik }}">
+                            @error('nik')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Instansi</label>
@@ -42,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-form-label" for="customFile">Foto</label>
-                            <input type="file" class="form-control" value="{{ $data->foto }}" id="customFile" name="foto" required>
+                            <input type="file" class="form-control @error('aktivasi') is-invalid @enderror" value="{{ $data->foto }}" id="customFile" name="foto">
                             @error('foto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

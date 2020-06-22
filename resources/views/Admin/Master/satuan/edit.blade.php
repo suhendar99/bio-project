@@ -35,7 +35,7 @@
                             <input type="hidden" class="form-control @error('parameter') is-invalid @enderror" value="{{ $satuan->parameter }}" name="parameter">
                         <div class="form-group">
                             <label for="">Satuan</label>
-                            <input type="text" class="form-control  @error('satuan') is-invalid @enderror" name="satuan">
+                            <input type="text" class="form-control  @error('satuan') is-invalid @enderror" name="satuan" value="{{ $satuan->satuan }}">
                              @error('satuan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

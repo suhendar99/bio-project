@@ -51,7 +51,7 @@
                                 <td>
                                 <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                                     <a class="thumbnail" href="#">
-                                    <img class="img-thumbnail" src="{{ asset('foto/'.$o->foto) }}">
+                                    <img  src="{{ asset('foto/'.$o->foto) }}" keight="30px"width="30px">
                                     </a>
                                 </div>
                                 </td>

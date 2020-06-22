@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="col-form-label">QOS</label>
-                            <select name="qos" id="" class="form-control @error('alive') is-invalid @enderror">
+                            <select name="qos" id="" class="form-control">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -62,6 +62,7 @@
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Keep Alive</label>
                             <input id="inputText3" type="text" class="form-control @error('alive') is-invalid @enderror" placeholder="Keep Alive" name="alive" value="{{ $mqtt->keep_alive }}">
+                            <span>*Satuan Detik </span>
                             @error('alive')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

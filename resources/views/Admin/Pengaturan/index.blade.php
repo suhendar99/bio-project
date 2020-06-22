@@ -43,6 +43,15 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="inputText3" class="col-form-label">Topic</label>
+                            <input id="inputText3" type="text" class="form-control @error('topic') is-invalid @enderror" placeholder="Topic" name="topic" value="{{ $mqtt->topic }}">
+                            @error('topic')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="" class="col-form-label">QOS</label>
                             <select name="qos" id="" class="form-control @error('alive') is-invalid @enderror">
                                 <option value="0">0</option>

@@ -31,6 +31,7 @@ class MqttController extends Controller
             'broker' => 'required|url',
             'username' => 'required|',
             'password' => 'required|',
+            'topic' => 'required|',
             'qos' => 'required|',
             'alive' => 'required'
 
@@ -45,6 +46,7 @@ class MqttController extends Controller
                 'url_broker' => $req->broker,
                 'username' => $req->username,
                 'password' => $req->password,
+                'topic' => $req->topic,
                 'qos' => $req->qos, 
                 'keep_alive' => $req->alive,
             ]);

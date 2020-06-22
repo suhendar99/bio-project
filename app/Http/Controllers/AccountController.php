@@ -59,4 +59,36 @@ class AccountController extends Controller
             return redirect('/')->with('success', 'Profil berhasil di update');
         }
     }
+
+    public function editPass($id)
+    {
+    	$data = Operator::find($id);
+    	return view('Admin.Account.setpass',['data'=>$data]);
+    }
+
+    public function updatePass(Request $req, $id)
+    {
+    	$v = Validator::make($req->all(), [     
+            'password' => 'min:6',
+    		'password_confirmation' => 'required_with:password|same:password|min:6'
+        ]);
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $data = Operator::find($id);
+            
+            $data->update([
+                'name' 	=> $req->name,
+                'nik' 	=> $req->nik,
+                'no_hp'	=> $req->no_hp,
+                'level' => $req->level,
+                'email'	=> $req->email,
+                'password' => Hash::make($req->password),
+                'foto' => $req->foto,
+            ]);
+            // dd($data);
+            return back()->with('success', 'Profil berhasil di update');
+        }
+    }
 }

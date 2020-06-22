@@ -9,6 +9,6 @@ class Operator extends Model
     protected $table = "users";
     protected $primarykey = "id";
     protected $fillable = [
-        'name', 'email', 'password', 'nik', 'instansi', 'jabatan' ,'no_hp', 'foto'
+        'name', 'email', 'password', 'nik','no_hp', 'foto'
     ];
 }

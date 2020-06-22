@@ -9,6 +9,6 @@ class Setapp extends Model
 
     protected $table = 'setapps';
     protected $fillable = [
-    	'icon','nama_apps','overview'
-    ]
+    	'icon','nama_apps','overview',
+    ];
 }

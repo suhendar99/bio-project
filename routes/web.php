@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{id}','AccountController@index');
     Route::get('/editProfile/{id}','AccountController@edit');
     Route::post('/updateProfile/{id}','AccountController@update');
+    Route::get('/editPassword/{id}','AccountController@editPass');
+    Route::post('/updatePassword/{id}','AccountController@updatePass');
         // Data Perangkat
     Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
     Route::get('/tambah_per','OperatorController@create_per')->name('tambah.data.per');
@@ -56,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     // pengaturan
         // Pengaturan Aplikasi
     Route::get('/set_app','AppController@index')->name('pengaturan.app');
+    Route::post('/updateApp/{id}','AppController@update');
         // Pengaturan MQTT
     Route::get('/set_mqtt','Dashboard@set_mqtt')->name('pengaturan.mqtt');
 

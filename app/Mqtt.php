@@ -9,6 +9,6 @@ class Mqtt extends Model
     protected $table = 'setmqtts';
     protected $primarykey = "id";
     protected $fillable = [
-    	'keep_alive','password','qos','url_broker','username'
+    	'keep_alive','password','qos','url_broker','username','topic'
     ];
 }

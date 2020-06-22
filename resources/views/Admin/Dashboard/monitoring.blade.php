@@ -1,3 +1,15 @@
+@php
+    $mqtt = \App\Mqtt::where('id',1)->first();
+    $app = \App\Setapp::where('id',1)->first();
+    $monitoring = \App\Monitoring::orderBy('id_monitoring', 'desc')->limit(10)->get();
+@endphp
+
+ <?php
+        $topic = $mqtt->topic;
+        $username = $mqtt->username;
+        $password = $mqtt->password;
+        $url_broker = $mqtt->url_broker;
+    ?>
 <!doctype html>
 <html lang="en">
  
@@ -180,17 +192,17 @@
     <div class="row" style="margin-top:15px; ">
         <div class="col-2" style="margin-left: 20px;">
             <div class="row text-white">
-                <input type="checkbox" name="suhu" id="" value="suhu" checked> Suhu<br>
+                <input type="checkbox" name="suhu" id="suhu" value="suhu" checked> Suhu<br>
             </div>
         </div>
         <div class="col-2">
             <div class="row text-white">
-                <input type="checkbox" name="kelembapan" id="" value="kelembapan" checked>Kelembapan<br>
+                <input type="checkbox" name="kelembapan" id="kelembapan" value="kelembapan" checked>Kelembapan<br>
             </div>
         </div>
         <div class="col-2">
             <div class="row text-white">
-                    <input type="checkbox" name="tekanan" id="" value="tekanan" checked>Tekanan<br>
+                    <input type="checkbox" name="tekanan" id="tekanan" value="tekanan" checked>Tekanan<br>
             </div>
         </div>
     </div>
@@ -281,6 +293,7 @@
         document.write(
           '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
         )
+
     </script>
 
     
@@ -288,61 +301,56 @@
     
 
     <script>
-  var lastDate = 0;
-  var data = []
-  var TICKINTERVAL = 86400000
-  let XAXISRANGE = 777600000
-  function getDayWiseTimeSeries(baseval, count, yrange) {
-    var i = 0;
-    while (i < count) {
-      var x = baseval;
-      var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+        let monitoring = '@json($monitoring)'
+        console.log(JSON.parse(monitoring));
+          
+  var suhu = []
+  var kelembapan = []
+  var tekanan = []
   
-      data.push({
-        x, y
-      });
-      lastDate = baseval
-      baseval += TICKINTERVAL;
-      i++;
-    }
-  }
-  
-  getDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 10, {
-    min: 10,
-    max: 90
-  })
-  
-  function getNewSeries(baseval, yrange) {
-    var newDate = baseval + TICKINTERVAL;
-    lastDate = newDate
-  
-    for(var i = 0; i< data.length - 10; i++) {
-      // IMPORTANT
-      // we reset the x and y of the data which is out of drawing area
-      // to prevent memory leaks
-      data[i].x = newDate - XAXISRANGE - TICKINTERVAL
-      data[i].y = 0
-    }
-  
-    data.push({
-      x: newDate,
-      y: Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
-    })
-  }
-  
-  function resetData(){
-    // Alternatively, you can also reset the data at certain intervals to prevent creating a huge series 
-    data = data.slice(data.length - 10, data.length);
-  }
-  </script>
- 
+    let dates = 0
+    const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let formatted_date = ""
+    let monitor = JSON.parse(monitoring)
+    monitor.forEach(element => {
+        dates = new Date(element.date+' '+element.time)
+        suhu.push({
+          x: element.time,
+          y: element.suhu
+        })
+        tekanan.push({
+          x: element.time,
+          y: element.tekanan
+        })
+        kelembapan.push({
+          x: element.time,
+          y: element.kelembapan
+        })
+        
+    });
 
-    <script>
-      
+  
+  </script>            
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
+    <script type="text/javascript">
+         console.log(suhu);
+        
         var options = {
-          series: [{
-          data: data.slice()
-        }],
+          
+          series: [
+            {
+                data: suhu,
+                name: "Suhu"
+            },
+            {
+                data: tekanan,
+                name: "Tekanan"
+            },
+            {
+                data: kelembapan,
+                name: "Kelembapan"
+            }
+        ],
           chart: {
           id: 'realtime',
           height: 350,
@@ -362,27 +370,25 @@
           }
         },
         dataLabels: {
-          enabled: false
+          enabled: true
         },
         stroke: {
           curve: 'smooth'
         },
         title: {
-          text: 'Dynamic Updating Chart',
+          text: 'Monitoring',
           align: 'left'
         },
         markers: {
           size: 0
         },
         xaxis: {
-          type: 'datetime',
-          range: XAXISRANGE,
         },
         yaxis: {
           max: 100
         },
         legend: {
-          show: false
+          show: true
         },
         };
 
@@ -390,18 +396,212 @@
         chart.render();
       
       
-        window.setInterval(function () {
-        getNewSeries(lastDate, {
-          min: 10,
-          max: 90
-        })
+    //     window.setInterval(function () {
+    //     getNewSeries(lastDate, {
+    //       min: 10,
+    //       max: 90
+    //     })
       
-        chart.updateSeries([{
-          data: data
-        }])
-      }, 1000)
+    //     chart.updateSeries([{
+    //       data: data
+    //     }])
+    //   }, 1000)
+      let lalstsuhu = suhu 
+      let lastekanan = tekanan 
+      let lastkelembapan = kelembapan 
+      
+      $('#suhu').on('change', function(e) {
+          if (this.checked) {
+              suhu = lastsuhu                        
+            }else{
+                lastsuhu = suhu
+                suhu = []
+            }
+            console.log(lastsuhu);
+
+         chart.updateSeries([
+            {
+                data: suhu
+            },
+            {
+                data: tekanan
+            },
+            {
+                data: kelembapan
+            }
+        ])
+    })
+
+      $('#tekanan').on('change', function(e) {
+        if (this.checked) {
+            tekanan = lastekanan                        
+        }else{
+            lastekanan = tekanan
+            tekanan = []
+        }
+
+         chart.updateSeries([
+            {
+                data: suhu
+            },
+            {
+                data: tekanan
+            },
+            {
+                data: kelembapan
+            }
+        ])
+    })
+
+      $('#kelembapan').on('change', function(e) {
+        if (this.checked) {
+            kelembapan = lastkelembapan                        
+        }else{
+            lastkelembapan = kelembapan
+            kelembapan = []
+        }
+
+       
+
+         chart.updateSeries([
+            {
+                data: suhu
+            },
+            {
+                data: tekanan
+            },
+            {
+                data: kelembapan
+            }
+        ])
+    })
+      //area ini untuk topic yang ada di broker mqtt
+      function onConnect()
+      {
+        // Fetch the MQTT topic from the form        
+        console.log('koneksi_berhasil');
+        client.subscribe('{{ $topic }}');
+      }
+      
+      function onFailure()
+      {
+          console.log('KONEKSI_GAGAL!!!!!')
+      }
+
+      function onConnectionLost(responseObject) {
+          console.log(responseObject)
+      }
+
+      function onMessageArrived(message) {
+         
+         var data = JSON.parse(message.payloadString);
+        console.log(data);
+        
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        
+
+        suhu.splice(0,1)
+        tekanan.splice(0,1)
+        kelembapan.splice(0,1)
+        // lastsuhu.splice(0,1)
+
+        suhu.push({
+          x: time,
+          y: data.suhu
+        })
+        tekanan.push({
+          x: time,
+          y: data.tekanan
+        })
+        kelembapan.push({
+          x: time,
+          y: data.kelembapan
+        })
+
+        // lastsuhu.push({
+        //   x: time,
+        //   y: data.suhu
+        // })
+
+        //  if($('#suhu').prop('checked')){
+        //     suhu = lastsuhu
+        //     console.log($('#suhu').prop('checked'));
+            
+        // }else{            
+        //     suhu = []
+        //     console.log($('#suhu').prop('checked'));
+
+        // }
+
+        // console.log(lastsuhu);
+        
+
+         chart.updateSeries([
+            {
+                data: suhu
+            },
+            {
+                data: tekanan
+            },
+            {
+                data: kelembapan
+            }
+        ])
+
+        
+          
+         //console.log('BLOK MQTT');
+       
+         insert_data(data);
+         // console.log(html);
+      }
+      
+      function insert_data(data) {
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        let url = "{{ url('api/monitoringStore') }}";
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+          url:url,
+          method:'POST',
+          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id},
+          dataType:'JSON',
+          success:function(){
+            console.log('BERHASILLL');
+          },
+          error : function(e) {
+            console.log(e)
+          }
+        });
+      }
+
+      const url = "{{ $url_broker }}"
+      var clientId = "ws" + Math.random();
+      // Create a client instance
+      var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 32472, clientId);
+      
+      // set callback handlers
+      client.onConnectionLost = onConnectionLost;
+      client.onMessageArrived = onMessageArrived;
+      
+      // connect the client
+      client.connect({
+        useSSL: true,
+        userName: '{{ $username }}',
+        password: '{{ $password }}',
+        onSuccess: onConnect,
+        onFailure: onFailure
+      });
       
     </script>
+
 </body>
  
 </html>

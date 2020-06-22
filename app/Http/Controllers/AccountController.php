@@ -25,8 +25,8 @@ class AccountController extends Controller
     public function update(Request $req, $id)
     {
     	$v = Validator::make($req->all(), [             
-            'name' 	=> 'required|max:25',            
-            'foto' 	=> 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'name' 	=> 'required|',            
+            'foto' 	=> 'image|mimes:jpeg,png,jpg|max:2048',
             'no_hp' => 'required|numeric',
             'nik'	=> 'required|numeric|unique:users,nik,'.$id,
             'email'	=> 'required|email|unique:users,email,'.$id,
@@ -43,7 +43,6 @@ class AccountController extends Controller
                 'no_hp'	=> $req->no_hp,
                 'level' => $req->level,
                 'email'	=> $req->email,
-                'password' => Hash::make($req->password),
             ]);
 
             if($req->hasfile('foto'))

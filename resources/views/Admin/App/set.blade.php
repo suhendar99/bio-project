@@ -17,7 +17,11 @@
                     <div class="row">
                         <div class="col-12">
                             <center>
-                                    <img src="{{asset('foto/app/'.$data->icon)}}" alt="placeholder+image" style="align-items: center; width: 250px;">
+                        @if($data->icon == "")
+                            <i class="fa fa-user fa-7x" style="margin-bottom: 20px;"></i>
+                        @else
+                            <img src="{{asset('foto/app/'.$data->icon)}}" alt="placeholder+image" style="width: 200px;">
+                        @endif
                             </center>
                         </div>
                     </div>
@@ -26,41 +30,50 @@
                             Nama
                         </div>
                         <div class="col-6">
-                            <input type="text" name="nama_apps" class="form-control @error('nama_apps') is-invalid @enderror" required  placeholder="Nama Aplikasi" value="{{$data->nama_apps}}">
+                            <div class="form-group">
+                                <input type="text" name="nama_apps" class="form-control @error('nama_apps') is-invalid @enderror" required  placeholder="Nama Aplikasi" value="{{$data->nama_apps}}">
+                                @error('nama_apps')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                
+                            </div>
                         </div>
-                        @error('nama_apps')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        
                     </div>
                     <div class="row">
                         <div class="col-6">
                             Overview
                         </div>
                         <div class="col-6">
-                            <textarea name="overview" class="form-control @error('overview') is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" value="{{$data->overview}}" required placeholder="Overview Aplikasi">
+                            <div class="form-group">
+                                <textarea name="overview" class="form-control @error('overview') is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" required placeholder="Overview Aplikasi">{{$data->overview}}</textarea>
+                                @error('oveview')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 
-                            </textarea>
+                            </div>
+                            
                         </div>
-                        @error('oveview')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             Icon Aplikasi
                         </div>
                         <div class="col-6">
-                            <input type="file" class="form-control @error('icon') is-invalid @enderror" required name="icon" value="{{$data->icon}}">
+                            <div class="form-group">
+                                <input type="file" class="form-control @error('icon') is-invalid @enderror" name="icon" value="{{$data->icon}}">
+                                @error('icon')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                
+                            </div>
                         </div>
-                        @error('icon')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                         <a href="/" class="btn btn-primary" style="margin-right: 370px;">Back</a>
                         <button type="submit" class="btn btn-primary" style="margin-left: 420px;"><i class="fa fa-edit"></i>Edit Profile</button>

@@ -15,7 +15,12 @@
                     <form method="post" action="/updatePassword/{{$data->id}}" enctype="multipart/form-data">
                     @csrf
                     <center>
+                        @if($data->foto == "")
+                            <i class="fa fa-user fa-7x" style="margin-bottom: 20px;"></i>
+                        @else
                             <img src="{{asset('foto/'.$data->foto)}}" alt="placeholder+image" style="width: 200px;">
+                        @endif
+                            
                     </center>
                     <input type="hidden" name="name" value="{{$data->name}}">
                     <input type="hidden" name="nik" value="{{$data->nik}}">
@@ -27,26 +32,30 @@
                             Password
                         </div>
                         <div class="col-6">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"  required name="password">
+                            <div class="form-group">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"  required name="password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
                             Password Confirmation
                         </div>
                         <div class="col-6">
-                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" required  name="password_confirmation">
+                            <div class="form-group">
+                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" required  name="password_confirmation">
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('password_confirmation')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-10">

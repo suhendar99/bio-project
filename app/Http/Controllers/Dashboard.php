@@ -26,10 +26,48 @@ class Dashboard extends Controller
         // $usersChart->dataset('Users by trimester', 'line', [10, 25, 13]);
         // return view('Admin.Dashboard.Dashboard', [ 'usersChart' => $usersChart ] );
         // return view('SA.Master.ukur');   
-        $ruangan = Ruangan::all();
-        $satuan = Satuan::all();
-        $data = Monitoring::latest()->get();
-        return view('Admin.Dashboard.index',['data'=>$data,'ruangan'=>$ruangan,'satuan'=>$satuan]);
+
+        // $data = Monitoring::all()->get()
+        $data = Ruangan::all();
+        // dd($data->monitoring->suhu);
+        // dd($data->monitoring->tekanan);
+        // $suhu = DB::table('orders')->max('price');
+        $suhu1 = Monitoring::all();
+        // $user = DB::table('monitoring')->where('ruangan_id', '2')->first();
+        // $user = Monitoring::latest('ruangan_id',2);
+        // $data2 = Monitoring::where('ruangan_id', 2)->latest()->first();
+        // dd($user);
+        // dd($suhu1);
+        return view('Admin.Dashboard.index',['data'=>$data]);
+    }
+
+    public function login()
+    {
+        return view('login');
+    }
+    public function raw()
+    {
+        return view('Admin.Monitoring.raw');
+    }
+    public function set_monitoring()
+    {
+        return view('Admin.Monitoring.set');
+    }
+    public function cetak_laporan()
+    {
+        return view('Admin.Laporan.cetak');
+    }
+    public function set_laporan()
+    {
+        return view('Admin.Laporan.set');
+    }
+    public function set_app()
+    {
+        return view('Admin.App.set');
+    }
+    public function set_mqtt()
+    {
+        return view('Admin.App.set_mqtt');
     }
     
     public function ukur(Request $request)

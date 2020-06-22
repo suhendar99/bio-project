@@ -11,8 +11,8 @@ class Ruangan extends Model
     	'foto','nama'
     ];
 
-    public function Monitoring()
+    public function monitoring()
     {
-        return $this->hasOne('App\Monitoring');
+    	return $this->hasOne('App\Monitoring')->orderBy('created_at', 'desc');
     }
 }

@@ -8,7 +8,11 @@
             <div class="card">
                 <div class="card-body">
                     <center>
+                        @if($data->foto == "")
+                            <i class="fa fa-user fa-7x" style="margin-bottom: 20px;"></i>
+                        @else
                             <img src="{{asset('foto/'.$data->foto)}}" alt="placeholder+image" style="width: 200px;">
+                        @endif
                     </center>
                     <div class="row">
                         <div class="col-6">

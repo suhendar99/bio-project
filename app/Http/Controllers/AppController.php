@@ -17,7 +17,7 @@ class AppController extends Controller
     {
         $data = Setapp::first();        
         $mqtt = Mqtt::where('id',1)->first();
-        return view('Admin.App.set', ['data'=>$data]);
+        return view('Admin.App.set', ['data'=>$data,  'mqtt'=>$mqtt]);
     }
     public function test()
     {

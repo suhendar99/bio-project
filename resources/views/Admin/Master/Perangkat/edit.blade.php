@@ -18,23 +18,48 @@
                     {{ method_field('PUT') }}
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Seri</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="No Seri Perangkat" name="seri" value="{{ $perangkat->no_seri }}">
+                            <input id="inputText3" type="text" class="form-control @error('seri') is-invalid @enderror" placeholder="No Seri Perangkat" name="seri" value="{{ $perangkat->no_seri }}">
+                            @error('seri')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Latitude</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="Latitude" name="latitude" value="{{ $perangkat->latitude }}">
+                            <input id="inputText3" type="text" class="form-control @error('latitude') is-invalid @enderror" placeholder="Latitude" name="latitude" value="{{ $perangkat->latitude }}">
+                            @error('latitude')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Longitude</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="longitude" name="longitude"value="{{ $perangkat->longitude }}">
+                            <input id="inputText3" type="text" class="form-control @error('longitude') is-invalid @enderror" placeholder="longitude" name="longitude"value="{{ $perangkat->longitude }}">
+                            @error('longitude')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Tanggal Aktivasi</label>
-                            <input id="inputText3" type="date" class="form-control" placeholder="Tanggal Aktivasi" name="aktivasi"value="{{ $perangkat->tgl_aktivasi }}">
+                            <input id="inputText3" type="date" class="form-control @error('aktivasi') is-invalid @enderror" placeholder="Tanggal Aktivasi" name="aktivasi"value="{{ $perangkat->tgl_aktivasi }}">
+                            @error('instansi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Status</label>
                             <input id="inputText3" type="text" class="form-control" placeholder="Status" name="status"value="{{ $perangkat->status }}">
+                            @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>

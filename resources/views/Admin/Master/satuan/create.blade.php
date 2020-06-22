@@ -33,7 +33,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="">Parameter</label>
-                            <input type="text" class="form-control @error('parameter') is-invalid @enderror" value="{{ old('parameter') }}" required  name="parameter">
+                            <input type="text" class="form-control @error('parameter') is-invalid @enderror" value="{{ old('parameter') }}" name="parameter">
 
                             @error('parameter')
                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Satuan</label>
-                            <input type="text" class="form-control  @error('satuan') is-invalid @enderror"  required  name="satuan">
+                            <input type="text" class="form-control  @error('satuan') is-invalid @enderror"  name="satuan">
 
                              @error('satuan')
                                 <span class="invalid-feedback" role="alert">
@@ -52,7 +52,7 @@
                             @enderror
                         </div>                                    
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>                               
                 </div>

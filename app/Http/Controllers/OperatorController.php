@@ -29,11 +29,13 @@ class OperatorController extends Controller
     public function store(Request $req)
     {
         $this->validate($req,[
-            'name' => 'required|min:2',
+            'nama' => 'required|min:2',
             'email' => 'required|email|unique:users',
             'nik' => 'required|numeric',
             'password' => 'required|min:6',
-            'foto' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048'
+            'instansi' => 'required|',
+            'hp' => 'required|',
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
     	$foto = 'IMG-'.time().'-'.$req->foto->getClientOriginalName();
         $req->foto->move(public_path('foto'),$foto);
@@ -65,7 +67,10 @@ class OperatorController extends Controller
             'nama' => 'required|',
             'email' => 'required|email|unique:users,email,'.$id,
             'nik' => 'required|numeric|unique:users,nik,'.$id,
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'password' => 'required|min:6',
+            'instansi' => 'required|',
+            'hp' => 'required|',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         if ($v->fails()) {
@@ -143,6 +148,14 @@ class OperatorController extends Controller
     }
     public function update_per(Request $req, $id)
     {
+        $this->validate($req,[
+            'seri' => 'required|numeric:',
+            'latitude' => 'required|',
+            'longitude' => 'required|',
+            'aktivasi' => 'required|date',
+            'status' => 'required|'
+        ]);
+        
         $perangkat = Perangkat::findOrFail($id);
         $perangkat->no_seri = $req->seri;
         $perangkat->latitude = $req->latitude;

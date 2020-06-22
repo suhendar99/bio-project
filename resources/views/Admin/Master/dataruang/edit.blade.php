@@ -34,7 +34,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="">Nama ruangan</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ $ruangan->nama }}" required  name="nama">
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ $ruangan->nama }}"  name="nama">
 
                             @error('nama')
                                 <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
                             @enderror
                         </div>                                    
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>                               
                 </div>

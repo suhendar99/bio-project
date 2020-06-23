@@ -211,7 +211,7 @@ class LaporanController extends Controller
     public function aksi_edit(Request $req, $id)
     {
         $v = Validator::make($req->all(), [
-            'email' => 'required|email|unique:set_kirims, email,'.$id,
+            'email' => 'required|email|unique:set_kirims,email,'.$id,
             'hp' => 'required|',
             'date' => 'required|date',
             'time' => 'required|',
@@ -221,7 +221,7 @@ class LaporanController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
             
-            $operator = Operator::find($id);
+            $operator = SetKirim::find($id);
 
             $operator->update([
                 'email' => $req->email,

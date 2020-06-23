@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Operator;
 use App\Monitoring;
 use App\Satuan;
 use App\Ruangan;
 use App\Mqtt;
 use App\Setapp;
 use Validator;
+use Mail;
 
 class MonitoringController extends Controller
 {
     public function index()
     {
-
         // dd($mqtt->topic);
         $data = Monitoring::orderBy('created_at','desc')->paginate(10);
         return view('Admin.Monitoring.raw',['data'=>$data,]);
-
     }
+
+
     public function room()
     {   
         $app = Setapp::where('id',1)->first();
@@ -40,6 +42,38 @@ class MonitoringController extends Controller
     	$data->perangkat_id = $req->perangkat_id;
     	$data->ruangan_id = $req->ruangan_id;
     	$data->save();
+
+        $suhu = Satuan::where('parameter','Suhu')->first();
+        $smax = $suhu->max;
+        $smin = $suhu->min;
+
+        $kelembapan = Satuan::where('parameter','Kelembapan')->first();
+        $kmax = $kelembapan->max;
+        $kmin = $kelembapan->min;
+
+        $tekanan = Satuan::where('parameter','Tekanan')->first();
+        $tmax = $tekanan->max;
+        $tmin = $tekanan->min; 
+
+
+        if ($data->alarm == 1) {
+            $user = Operator::all();
+            $subject = 'Alert!!!';
+            $data = array('email' => $user->email, 'subject' => $subject);
+            Mail::send('Admin.Monitoring.mail', $data, function ($message) use ($data) {
+            $message->from('biofarma@gmail.com', 'BIOFARMA');
+            $message->to($data['email']);
+            $message->subject($data['subject']); 
+            });
+        }
+
+        if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
+            Mail::raw('Alert!!! Something Wrong on The Rooms', ['user' => $user], function($mail) use($user) {
+                $mail->from('biofarma@gmail.com', 'BIOFARMA');
+                $mail->to($user->email, $user->name);
+            });
+        }
+
     }
 
     public function set_monitoring()

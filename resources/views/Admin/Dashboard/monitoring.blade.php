@@ -2,7 +2,12 @@
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
 
-    $monitoring = \App\Monitoring::orderBy('id_monitoring', 'desc')->limit(10)->get();
+    $suhu = \App\Satuan::where('id',2)->first();
+    $kelembapan = \App\Satuan::where('id',3)->first();
+    $tekanan = \App\Satuan::where('id',4)->first();
+
+    $mon = \App\Monitoring::orderBy('id_monitoring', 'desc')->limit(10)->get();
+    $monitoring = $mon->orderBy('id_monitoring','asc')->get();
 @endphp
 
  <?php
@@ -82,7 +87,7 @@
                                 <div class="col-12">
                                     <center>Max</center>
                                     <div class="card bg-danger">
-                                        <center>50 C</center>
+                                        <center>{{$suhu->max}} C</center>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +95,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>50 C</center>
+                                        <center>{{$suhu->min}} C</center>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +121,7 @@
                                 <div class="col-12">
                                     <center>Max</center>
                                     <div class="card bg-danger">
-                                        <center>50 %</center>
+                                        <center>{{$kelembapan->max}} %</center>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +129,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>50 %</center>
+                                        <center>{{$kelembapan->max}} %</center>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +155,7 @@
                                 <div class="col-12">
                                     <center>Max</center>
                                     <div class="card bg-danger">
-                                        <center>50 Pa</center>
+                                        <center>{{$tekanan->max}} Pa</center>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +163,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>50 Pa</center>
+                                        <center>{{$tekanan->max}} Pa</center>
                                     </div>
                                 </div>
                             </div>

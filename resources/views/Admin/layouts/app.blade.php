@@ -294,6 +294,9 @@
         raw += '<td>' + data.alarm + '</td>';
         raw += '</tr>';
         $('#monitorTable tbody').prepend(raw);
+
+        var over = data.suhu;
+        $('#suhuRoom').text(over);
           
           
          //console.log('BLOK MQTT');

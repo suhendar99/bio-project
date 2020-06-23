@@ -1,4 +1,3 @@
-
 <div class="row">
 
 @foreach($data as $d)
@@ -14,9 +13,8 @@
                     <div class="col-8">
                         Suhu
                     </div>
-                    <div class="col-4">
-                        
-                        : {{$d->monitoring? $d->monitoring->suhu:"0"}}
+                    <div class="col-4" id="suhuRoom">
+                        : {{$d->monitoring? $d->monitoring->suhu:"0"}} 
                     </div>
                 </div>
                 <div class="row">
@@ -43,7 +41,6 @@
             </div>
         </div>
     </div>
+<!-- $ruangan->monitoring->suhu()->id; -->
 @endforeach
 </div>
-
-<!-- $ruangan->monitoring->suhu()->id; -->

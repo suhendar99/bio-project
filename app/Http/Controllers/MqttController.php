@@ -33,7 +33,7 @@ class MqttController extends Controller
             'password' => 'required|',
             'topic' => 'required|',
             'qos' => 'required|',
-            'alive' => 'required'
+            'alive' => 'required|numeric'
 
         ]);
         if ($v->fails()) {

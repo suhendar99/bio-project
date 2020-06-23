@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Data Operator</h2>
+                <h2 class="pageheader-title">Setting Monitoring</h2>
                 <div class="page-breadcrumb">
                 </div>
             </div>
@@ -14,7 +14,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
+                    <a href="{{ route('tambah.set.monitor') }}" class="btn btn-primary">
                         Tambah Data 
                     </a>
                     <div class="table-responsive">
@@ -22,12 +22,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Photo</th>
-                                    <th>Name</th>
-                                    <th>E Mail</th>
-                                    <th>NIK</th>
-                                    <th>Instansi</th>
-                                    <th>No Handphone</th>
+                                    <th>Nama Ruangan</th>
+                                    <th>Parameter</th>
+                                    <th>Max</th>
+                                    <th>Min</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -35,24 +33,16 @@
                                 <?php
                                 $no = 1;
                                 ?>
-                                @foreach($data as $o)
+                                @foreach($monitor as $o)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $o->ruangan->nama }}</td>
+                                    <td>{{ $o->parameter }}</td>
+                                    <td>{{ $o->max }}</td>
+                                    <td>{{ $o->min }}</td>
                                     <td>
-                                    @if($o->foto == "")
-                                        <i class="fa fa-user fa-5x" style="margin-bottom: 20px;"></i>
-                                    @else
-                                    <img  src="{{ asset('foto/'.$o->foto) }}" keight="70px"width="70px">
-                                    @endif
-                                    </td>
-                                    <td>{{ $o->name }}</td>
-                                    <td>{{ $o->email }}</td>
-                                    <td>{{ $o->nik }}</td>
-                                    <td>{{ $o->instansi }}</td>
-                                    <td>{{ $o->no_hp }}</td>
-                                    <td>
-                                        <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
-                                        <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button>
+                                        <a href="/set_edit_monitor/{{ $o->id }}" class="btn btn-primary">Edit</a>
+                                        <!-- <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button> -->
                                     </td>
                                 </tr>
                                 @endforeach
@@ -75,7 +65,7 @@
     <script>
         function deletes(id){
             const formDelete = document.getElementById('formDelete')
-            formDelete.action = '/operator_delete/'+id
+            formDelete.action = '/delete_monitor/'+id
             Swal.fire({
             title: 'Are you sure ?',
             text: "You won't be able to revert this!",
@@ -89,7 +79,7 @@
                     formDelete.submit();
                     Swal.fire(
                     'Deleted!',
-                    'Operator berhasil di hapus',
+                    'Data berhasil di hapus',
                     'success'
                     )
                 }

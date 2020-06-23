@@ -15,8 +15,8 @@
                         Suhu
                     </div>
                     <div class="col-4">
-
-                        : {{$d->monitoring->suhu}}
+                        
+                        : {{$d->monitoring? $d->monitoring->suhu:"0"}}
                     </div>
                 </div>
                 <div class="row">
@@ -24,7 +24,7 @@
                         Kelembapan
                     </div>
                     <div class="col-4">
-                        : {{$d->monitoring->kelembapan}}
+                        : {{$d->monitoring? $d->monitoring->kelembapan:"0"}}
                     </div>
                 </div>
                 <div class="row">
@@ -32,7 +32,7 @@
                         Tekanan
                     </div>
                     <div class="col-4">
-                        : {{$d->monitoring->tekanan}}
+                        : {{$d->monitoring? $d->monitoring->tekanan:"0"}}
                     </div> 
                 </div>
             </div>

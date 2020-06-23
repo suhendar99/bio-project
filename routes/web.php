@@ -47,7 +47,13 @@ Route::middleware(['auth'])->group(function () {
         // raw data
     Route::get('/monitoring','monitoringController@index')->name('monitoring');
         // pengaturan Monitoring
-    Route::get('/set_monitoring','Dashboard@set_monitoring')->name('setting.monitoring');
+    Route::get('/set_monitoring','MonitoringController@set_monitoring')->name('setting.monitoring');
+    Route::get('/set_add_monitor','MonitoringController@add_monitor')->name('tambah.set.monitor');
+    Route::post('/add_monitor','MonitoringController@add_aksi')->name('tambah.monitor');
+    Route::get('/set_edit_monitor/{id}','MonitoringController@edit');
+    Route::put('/edit_monitor/{id}','MonitoringController@update');
+    Route::delete('/delete_monitor/{id}','MonitoringController@delete');
+
     // laporan
         // cetak laporan
     Route::get('/cetak_laporan','LaporanController@cetak_laporan')->name('cetak.laporan');

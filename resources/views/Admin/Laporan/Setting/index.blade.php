@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="file" name="icon" class="form-control @error('icon') is-invalid @enderror">
+                                    <input type="text" name="icon" class="form-control @error('icon') is-invalid @enderror">
                                     @error('icon')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" name="header_img" class="form-control @error('header_img') is-invalid @enderror"  placeholder="Header laporan" value="{{$data->header_img}}">
+                                    <input type="text" name="header_img" class="form-control @error('header_img') is-invalid @enderror"  placeholder="Header laporan" value="{{$data->header_img}}"  required>
                                     @error('header_img')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" name="footer" class="form-control @error('footer') is-invalid @enderror" placeholder="Footer" value="{{$data->footer}}">
+                                    <input type="text" name="footer" class="form-control @error('footer') is-invalid @enderror" placeholder="Footer" value="{{$data->footer}}" required>
                                     @error('footer')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

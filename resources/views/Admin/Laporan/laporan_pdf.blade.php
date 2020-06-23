@@ -11,6 +11,9 @@
 	$tmax = $data->max('tekanan');
 	$tmin = $data->min('tekanan'); 
 	$tavg = $data->avg('tekanan');
+
+	$date = date("d M Y");
+
 @endphp
 
 <!DOCTYPE html>
@@ -30,9 +33,13 @@
 		}
 	</style>
 	<div class="row" style="margin-bottom: 50px;">
-		<div class="col-8">
+		<div class="col-4 border-right">
+			<img src="{{$set->icon}}" style="float: left;" width="100%" alt="placeholder+image">
 		</div>
-		<div class="col-4">
+		<div class="col-8" >
+			<h3 style="text-align: center; margin-top: 50px;">
+				{{$set->header_img}}
+			</h3> 
 		</div>
 	</div>
 	<center>
@@ -106,11 +113,13 @@
 		</table>
 	</div>
 	
-	<div class="row">
-		<div class="col-10">
+	<div class="row" style="margin-bottom: 50px;">
+		<div class="col-8">
 			
 		</div>
-		<div class="col-2">
+		<div class="col-4">
+			{{$set->footer}},  {{$date}}<br>
+			{{Auth::user()->name}}
 		</div>
 	</div>
 		

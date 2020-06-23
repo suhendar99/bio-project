@@ -57,23 +57,23 @@ class MonitoringController extends Controller
         $tmin = $tekanan->min; 
 
 
-        if ($data->alarm == 1) {
-            $user = Operator::all();
-            $subject = 'Alert!!!';
-            $data = array('email' => $user->email, 'subject' => $subject);
-            Mail::send('Admin.Monitoring.mail', $data, function ($message) use ($data) {
-            $message->from('biofarma@gmail.com', 'BIOFARMA');
-            $message->to($data['email']);
-            $message->subject($data['subject']); 
-            });
-        }
+        // if ($data->alarm == 1) {
+        //     $user = Operator::all();
+        //     $subject = 'Alert!!!';
+        //     $data = array('email' => $user->email, 'subject' => $subject);
+        //     Mail::send('Admin.Monitoring.mail', $data, function ($message) use ($data) {
+        //     $message->from('biofarma@gmail.com', 'BIOFARMA');
+        //     $message->to($data['email']);
+        //     $message->subject($data['subject']); 
+        //     });
+        // }
 
-        if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
-            Mail::raw('Alert!!! Something Wrong on The Rooms', function($mail) {
-                $mail->from('biofarma@gmail.com', 'BIOFARMA');
-                $mail->to($user->email, $user->name);
-            });
-        }
+        // if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
+        //     Mail::raw('Alert!!! Something Wrong on The Rooms', function($mail) {
+        //         $mail->from('biofarma@gmail.com', 'BIOFARMA');
+        //         $mail->to($user->email, $user->name);
+        //     });
+        // }
 
     }
 

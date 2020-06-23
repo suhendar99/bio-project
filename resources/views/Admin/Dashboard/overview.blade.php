@@ -10,10 +10,10 @@
             </div>
             <div class="card-body bg-dark text-white rounded">
                 <div class="row">
-                    <div class="col-8 border-right">
+                    <div class="col-7 border-right">
                         {{$suhu->parameter}}
                     </div>
-                    <div class="col-2" id="suhuRoom">
+                    <div class="col-3" id="suhuRoom">
                          {{$d->monitoring? $d->monitoring->suhu:"0"}} 
                     </div>
                     <div class="col-2">
@@ -21,10 +21,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8 border-right">
+                    <div class="col-7 border-right">
                         {{$kelembapan->parameter}}
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                          {{$d->monitoring? $d->monitoring->kelembapan:"0"}}
                     </div>
                     <div class="col-2">
@@ -32,10 +32,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8 border-right">
+                    <div class="col-7 border-right">
                         {{$tekanan->parameter}}
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                          {{$d->monitoring? $d->monitoring->tekanan:"0"}}
                     </div> 
                     <div class="col-2">

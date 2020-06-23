@@ -295,9 +295,27 @@
         raw += '</tr>';
         $('#monitorTable tbody').prepend(raw);
 
+<<<<<<< HEAD
         var over = data.suhu;
         $('#suhuRoom').text(over);
           
+=======
+        if (data.alarm == 1 ) {
+            var alarm = '<div class="cd-timeline__block js-cd-block">' ;
+            alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
+            alarm += '<img src="{{ asset('svg/alarm.svg') }}" alt="Movie" width="40px" height="40px">';
+            alarm += '</div>';
+            alarm += '<div class="cd-timeline__content js-cd-content">';
+            alarm += '<h3>Alarm 1</h3>';
+            alarm += '<p>Alarm ON :' + time + '</p>';
+            alarm += '<span class="cd-timeline__date">' + date + '</span>';
+            alarm += '</div>';
+            alarm += '</div>';
+
+            $('#alarmReal').prepend(alarm);
+        }
+        
+>>>>>>> 0c771ade0287a851e9169a0f3fdf42ca26607ec4
           
          //console.log('BLOK MQTT');
        

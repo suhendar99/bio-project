@@ -23,8 +23,10 @@ class Dashboard extends Controller
     public function index()
     {
         $data = Ruangan::all();
+        $alarm = Monitoring::where('alarm',1)->latest()->limit(10)->get();
+        // dd($alarm);
         $suhu = Satuan::where('parameter','Suhu')->first();
-        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu]);
+        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu, 'alarm'=>$alarm]);
     }
 
     public function login()

@@ -66,7 +66,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/updateSetlaporan/{id}','LaporanController@update')->name('update.setlaporan');
 
     // Pengaturan Kirim Laporan
-    Route::get('/set_kirim_laporan','Dashboard@set_kirim_laporan')->name('setting.kirim.laporan');
+    Route::get('/set_kirim_laporan','LaporanController@set_kirim')->name('setting.kirim.laporan');
+    Route::get('/add_kirim','LaporanController@add_kirim')->name('add.kirim');
+    Route::post('/aksi_add','LaporanController@aksi_add')->name('aksi.add');
+    Route::get('/edit_kirim/{id}','LaporanController@edit_kirim')->name('edit.kirim');
+    Route::put('/aksi_edit/{id}','LaporanController@aksi_edit')->name('aksi.edit');
+    Route::delete('/delete_kirim/{id}','LaporanController@delete')->name('delete');
     // pengaturan
         // Pengaturan Aplikasi
     Route::get('/set_app','AppController@index')->name('pengaturan.app');

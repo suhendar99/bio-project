@@ -1,6 +1,7 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
+
     $monitoring = \App\Monitoring::orderBy('id_monitoring', 'desc')->limit(10)->get();
 @endphp
 
@@ -373,7 +374,7 @@
           enabled: true
         },
         stroke: {
-          curve: 'smooth'
+          curve: 'straight'
         },
         title: {
           text: 'Monitoring',
@@ -385,7 +386,7 @@
         xaxis: {
         },
         yaxis: {
-          max: 100
+          max: 200
         },
         legend: {
           show: true

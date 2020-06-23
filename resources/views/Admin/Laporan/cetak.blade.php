@@ -29,18 +29,21 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="input-select">Select Date</label>
-                                                <select class="form-control" id="input-select">
-                                                    <option>Choose Example</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="input-select">Select Date end</label>
-                                                <select class="form-control" id="input-select">
-                                                    <option>Choose Example</option>
-                                                </select>
+                                        <form action="/downloadLaporan" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="input-select">Tanggal Awal</label>
+                                                        <input type="date" name="awal" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="input-select">Tanggal Akhir</label>
+                                                        <input type="date" name="akhir" class="form-control">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <button class="btn btn-primary" type="submit">Create PDF</button>
                                         </form>

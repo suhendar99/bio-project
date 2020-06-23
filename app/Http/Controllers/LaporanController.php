@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Laporan;
+use App\Monitoring;
+use PDF;
+use Validator;
 
 class LaporanController extends Controller
 {
@@ -12,15 +15,79 @@ class LaporanController extends Controller
     {
         // 
     }
-    public function set_laporan()
+
+    public function cetak_laporan()
     {
-        $laporan = Laporan::all();
-        return view('Admin.Laporan.PengaturanLaporan.index', compact('laporan'));
+        return view('Admin.Laporan.cetak');
+    }
+    public function downloadLaporan(Request $req)
+    {
+        $awal = $req->awal;
+        $akhir = $req->akhir;
+        $set = Laporan::find(1)->first();
+        $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        // dd([$data, $req->all()]);
+        
+        $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+        // set_time_limit(300);
+        return $pdf->download('Monitoring-Report-'.$req->akhir.'-'.time());
+        // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
     }
 
-    public function store(Request $req)
+    public function set_laporan()
     {
-    	# code...
+        $data = Laporan::where('id',1)->first();
+        return view('Admin.Laporan.Setting.index', ['data'=>$data]);
+    }
+
+    public function store(Request $request)
+    {
+    	$v = Validator::make($request->all(), [             
+            'header_img' => 'required|',            
+            'icon' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'footer' => 'required|'
+        ]);
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            
+
+            if($request->hasfile('header_img'))
+            {                
+                $name = rand(). '.' . $request->header_img->getClientOriginalExtension();           
+                $request->header_img->move(public_path("foto/laporan/set"), $name);                                       
+                $header_img = 'foto/laporan/set'.$name;
+            }
+
+            if($request->hasfile('icon'))
+            {                
+                $name = rand(). '.' . $request->icon->getClientOriginalExtension();           
+                $request->icon->move(public_path("foto/laporan/set"), $name);                                       
+                $icon = 'foto/laporan/set'.$name;
+            }
+
+            if($request->hasfile('footer'))
+            {                
+                $name = rand(). '.' . $request->footer->getClientOriginalExtension();           
+                $request->footer->move(public_path("foto/laporan/set"), $name);                                       
+                $footer = 'foto/laporan/set'.$name;
+            }
+
+            $employee = Laporan::create([
+                'header_img' => $header_img,
+                'icon' => $icon,
+                'footer' => $footer,
+            ]);
+
+            
+            //  LogUser::create([
+            //     'user_id' => Auth::user()->id,
+            //     'detail' => 'added new category  product : '.$request->name
+            // ]);
+            
+            return back()->with('success', 'Setting Laporan berhasil ditambahkan');
+        }
     }
 
     public function edit($id)
@@ -28,9 +95,65 @@ class LaporanController extends Controller
     	# code...
     }
 
-    public function update(Request $req, $id)
+    public function update(Request $request, $id)
     {
-    	# code...
+        // dd($request->all());
+    	$v = Validator::make($request->all(), [             
+            'header_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',            
+            'icon' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'footer' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $setlaporan = Laporan::find($id);
+
+            if($request->hasfile('header_img'))
+            {                
+                $name = rand(). '-HEADER-' . $request->header_img->getClientOriginalExtension();           
+                $request->header_img->move(public_path("foto/laporan/set"), $name);                                       
+                $header_img = 'foto/laporan/set/'.$name;
+                if(is_writable(public_path($setlaporan->header_img))) {                    
+                    unlink(public_path($setlaporan->header_img));
+                }     
+                $header_img = 'foto/laporan/set/'.$name;
+
+                $setlaporan->update([
+                    'header_img' => $header_img,
+                ]);
+            }            
+            if($request->hasfile('icon'))
+            {                
+                $name = rand(). '-ICON-' . $request->icon->getClientOriginalExtension();           
+                $request->icon->move(public_path("foto/laporan/set"), $name);                                       
+                $icon = 'foto/laporan/set/'.$name;
+                if(is_writable(public_path($setlaporan->icon))) {                    
+                    unlink(public_path($setlaporan->icon));
+                }     
+                $icon = 'foto/laporan/set/'.$name;
+
+                $setlaporan->update([
+                    'icon' => $icon,
+                ]);
+            }
+            if($request->hasfile('footer'))
+            {                
+                $name = rand(). '-FOOTER-' . $request->footer->getClientOriginalExtension();           
+                $request->footer->move(public_path("foto/laporan/set"), $name);                                       
+                $footer = 'foto/laporan/set/'.$name;
+                if(is_writable(public_path($setlaporan->footer))) {                    
+                    unlink(public_path($setlaporan->footer));
+                }     
+                $footer = 'foto/laporan/set/'.$name;
+
+                $setlaporan->update([
+                    'footer' => $footer,
+                ]);
+            }
+            
+            return back()->with('success', 'Setting Laporan berhasil di update');
+        }
     }
 
     public function delete($id)

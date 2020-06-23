@@ -7,10 +7,12 @@ use App\Charts\Chartline;
 use Lava;
 use DB;
 use App\Ruangan;
+use App\Perangkat;
 use App\Setting;
 use App\Monitoring;
 use App\Satuan;
 use Auth;
+use PDF;
 class Dashboard extends Controller
 {
     /**
@@ -36,14 +38,6 @@ class Dashboard extends Controller
     public function set_monitoring()
     {
         return view('Admin.Monitoring.set');
-    }
-    public function cetak_laporan()
-    {
-        return view('Admin.Laporan.cetak');
-    }
-    public function set_laporan()
-    {
-        return view('Admin.Laporan.set');
     }
     public function set_app()
     {

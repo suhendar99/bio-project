@@ -18,7 +18,7 @@ class MonitoringController extends Controller
     public function index()
     {
         // dd($mqtt->topic);
-        $data = Monitoring::orderBy('created_at','desc')->paginate(10);
+        $data = Monitoring::orderBy('created_at','desc')->limit(10)->get();
         return view('Admin.Monitoring.raw',['data'=>$data,]);
     }
 

@@ -12,6 +12,7 @@ use App\Setapp;
 use Validator;
 use Mail;
 
+
 class MonitoringController extends Controller
 {
     public function index()
@@ -68,7 +69,7 @@ class MonitoringController extends Controller
         }
 
         if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
-            Mail::raw('Alert!!! Something Wrong on The Rooms', ['user' => $user], function($mail) use($user) {
+            Mail::raw('Alert!!! Something Wrong on The Rooms', function($mail) {
                 $mail->from('biofarma@gmail.com', 'BIOFARMA');
                 $mail->to($user->email, $user->name);
             });

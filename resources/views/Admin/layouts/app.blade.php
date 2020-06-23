@@ -295,6 +295,11 @@
         raw += '</tr>';
         $('#monitorTable tbody').prepend(raw);
 
+<<<<<<< HEAD
+        var over = data.suhu;
+        $('#suhuRoom').text(over);
+          
+=======
         if (data.alarm == 1 ) {
             var alarm = '<div class="cd-timeline__block js-cd-block">' ;
             alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
@@ -310,6 +315,7 @@
             $('#alarmReal').prepend(alarm);
         }
         
+>>>>>>> 0c771ade0287a851e9169a0f3fdf42ca26607ec4
           
          //console.log('BLOK MQTT');
        

@@ -28,10 +28,13 @@ class LaporanController extends Controller
         $set = Laporan::find(1)->first();
         $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // dd([$data, $req->all()]);
+
+
+        // dd($count,$suhumax);
         
         $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
         // set_time_limit(300);
-        return $pdf->download('Monitoring-Report-'.$req->akhir.'-'.time());
+        return $pdf->download('Monitoring-Report-'.$req->akhir);
         // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
     }
 

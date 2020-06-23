@@ -1,3 +1,18 @@
+@php
+	$count = $data->count();
+	$smax = $data->max('suhu');
+	$smin = $data->min('suhu');
+	$savg = $data->avg('suhu');
+
+	$kmax = $data->max('kelembapan');
+	$kmin = $data->min('kelembapan');
+	$kavg = $data->avg('kelembapan');
+
+	$tmax = $data->max('tekanan');
+	$tmin = $data->min('tekanan'); 
+	$tavg = $data->avg('tekanan');
+@endphp
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +22,11 @@
 <body>
 	<div class="container">
 	<style type="text/css">
-		table tr td,
+		table tr td{
+			text-align: center;
+		},
 		table tr th{
-			font-size: 9pt;
+			text-align: center;
 		}
 	</style>
 	<div class="row" style="margin-bottom: 50px;">
@@ -52,6 +69,39 @@
 					<td>{{$p->perangkat->no_seri}}</td>
 				</tr>
 				@endforeach
+			</tbody>
+		</table>
+	</div>
+
+	<div class="row">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Jumlah Baris</th>
+					<th>Suhu Tertinggi</th>
+					<th>Suhu Terendah</th>
+					<th>Suhu Rata Rata</th>
+					<th>Kelembapan Tertinggi</th>
+					<th>Kelembapan Terendah</th>
+					<th>Kelembapan Rata Rata</th>
+					<th>Tekanan Tertinggi</th>
+					<th>Tekanan Terendah</th>
+					<th>Tekanan Rata Rata</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{$count}}</td>
+					<td>{{$smin}}</td>
+					<td>{{$smax}}</td>
+					<td>{{$savg}}</td>
+					<td>{{$kmin}}</td>
+					<td>{{$kmax}}</td>
+					<td>{{$kavg}}</td>
+					<td>{{$tmin}}</td>
+					<td>{{$tmax}}</td>
+					<td>{{$tavg}}</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

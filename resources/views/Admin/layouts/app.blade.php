@@ -294,7 +294,22 @@
         raw += '<td>' + data.alarm + '</td>';
         raw += '</tr>';
         $('#monitorTable tbody').prepend(raw);
-          
+
+        if (data.alarm == 1 ) {
+            var alarm = '<div class="cd-timeline__block js-cd-block">' ;
+            alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
+            alarm += '<img src="{{ asset('svg/alarm.svg') }}" alt="Movie" width="40px" height="40px">';
+            alarm += '</div>';
+            alarm += '<div class="cd-timeline__content js-cd-content">';
+            alarm += '<h3>Alarm 1</h3>';
+            alarm += '<p>Alarm ON :' + time + '</p>';
+            alarm += '<span class="cd-timeline__date">' + date + '</span>';
+            alarm += '</div>';
+            alarm += '</div>';
+
+            $('#alarmReal').prepend(alarm);
+        }
+        
           
          //console.log('BLOK MQTT');
        

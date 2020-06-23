@@ -7,7 +7,7 @@
     $tekanan = \App\Satuan::where('id',4)->first();
 
     $mon = \App\Monitoring::orderBy('id_monitoring', 'desc')->limit(10)->get();
-    $monitoring = $mon->orderBy('id_monitoring','asc')->get();
+    $monitoring = $mon->sort();
 @endphp
 
  <?php

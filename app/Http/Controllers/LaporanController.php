@@ -103,9 +103,9 @@ class LaporanController extends Controller
     {
         // dd($request->all());
     	$v = Validator::make($request->all(), [             
-            'header_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',            
-            'icon' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'footer' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'header_img' => 'required|',            
+            'icon' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'footer' => 'required|',
         ]);
 
         if ($v->fails()) {
@@ -113,23 +113,9 @@ class LaporanController extends Controller
         }else {
             $setlaporan = Laporan::find($id);
 
-            if($request->hasfile('header_img'))
-            {                
-                $name = rand(). '-HEADER-' . $request->header_img->getClientOriginalExtension();           
-                $request->header_img->move(public_path("foto/laporan/set"), $name);                                       
-                $header_img = 'foto/laporan/set/'.$name;
-                if(is_writable(public_path($setlaporan->header_img))) {                    
-                    unlink(public_path($setlaporan->header_img));
-                }     
-                $header_img = 'foto/laporan/set/'.$name;
-
-                $setlaporan->update([
-                    'header_img' => $header_img,
-                ]);
-            }            
             if($request->hasfile('icon'))
             {                
-                $name = rand(). '-ICON-' . $request->icon->getClientOriginalExtension();           
+                $name = rand(). '-HEADER-' . $request->icon->getClientOriginalExtension();           
                 $request->icon->move(public_path("foto/laporan/set"), $name);                                       
                 $icon = 'foto/laporan/set/'.$name;
                 if(is_writable(public_path($setlaporan->icon))) {                    
@@ -140,22 +126,7 @@ class LaporanController extends Controller
                 $setlaporan->update([
                     'icon' => $icon,
                 ]);
-            }
-            if($request->hasfile('footer'))
-            {                
-                $name = rand(). '-FOOTER-' . $request->footer->getClientOriginalExtension();           
-                $request->footer->move(public_path("foto/laporan/set"), $name);                                       
-                $footer = 'foto/laporan/set/'.$name;
-                if(is_writable(public_path($setlaporan->footer))) {                    
-                    unlink(public_path($setlaporan->footer));
-                }     
-                $footer = 'foto/laporan/set/'.$name;
-
-                $setlaporan->update([
-                    'footer' => $footer,
-                ]);
-            }
-            
+            } 
             return back()->with('success', 'Setting Laporan berhasil di update');
         }
     }

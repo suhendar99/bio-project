@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Laporan;
 use App\Monitoring;
+use App\SetKirim;
 use PDF;
 use Validator;
 
@@ -158,6 +159,83 @@ class LaporanController extends Controller
 
     public function delete($id)
     {
-    	# code...
+        $data = SetKirim::findOrFail($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function set_kirim()
+    {
+        $setkirim = SetKirim::all();
+        return view('Admin.Laporan.Setting_kirim.index',compact('setkirim'));
+    }
+    public function add_kirim()
+    {
+        $setkirim = SetKirim::all();
+        return view('Admin.Laporan.Setting_kirim.create',compact('setkirim'));   
+    }
+    public function aksi_add(Request $req)
+    {
+        $v = Validator::make($req->all(), [
+            'email' => 'required|email|unique:set_kirims',
+            'hp' => 'required|',
+            'date' => 'required|date',
+            'time' => 'required|',
+        ]);
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            
+            $employee = SetKirim::create([
+                'email' => $req->email,
+                'hp' => $req->hp,
+                'date' => $req->date,
+                'time' => $req->time,
+            ]);
+
+            
+            //  LogUser::create([
+            //     'user_id' => Auth::user()->id,
+            //     'detail' => 'added new category  product : '.$request->name
+            // ]);
+            
+            return back()->with('success', 'Data berhasil ditambahkan');
+        }
+    }
+    public function edit_kirim($id)
+    {
+        $setkirim = SetKirim::findOrFail($id);
+        return view('Admin.Laporan.Setting_kirim.edit',compact('setkirim'));
+    }
+    public function aksi_edit(Request $req, $id)
+    {
+        $v = Validator::make($req->all(), [
+            'email' => 'required|email|unique:set_kirims,email,'.$id,
+            'hp' => 'required|',
+            'date' => 'required|date',
+            'time' => 'required|',
+        ]);
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            
+            $operator = SetKirim::find($id);
+
+            $operator->update([
+                'email' => $req->email,
+                'hp' => $req->hp,
+                'date' => $req->date,
+                'time' => $req->time,
+            ]);
+
+            //  LogUser::create([
+            //     'user_id' => Auth::user()->id,
+            //     'detail' => 'added new category  product : '.$request->name
+            // ]);
+            
+            return back()->with('success', 'Data berhasil ditambahkan');
+        }        
     }
 }

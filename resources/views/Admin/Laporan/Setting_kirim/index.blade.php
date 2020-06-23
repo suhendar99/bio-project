@@ -14,28 +14,30 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('data_ruang.create') }}" class="btn btn-primary">Tambah ruangan</a>
+                    <a href="{{ route('add.kirim') }}" class="btn btn-primary">Tambah ruangan</a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Foto</th>
-                                    <th>Nama Ruang</th>
+                                    <th>E Mail</th>
+                                    <th>No Hp</th>
+                                    <th>Tanggal</th>
+                                    <th>Waktu</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php $no = 1; ?>
-                            @foreach( $data as $r)
+                            @foreach( $setkirim as $r)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $r->email }}</td>
+                                    <td>{{ $r->hp }}</td>
+                                    <td>{{ $r->date }}</td>
+                                    <td>{{ $r->time }}</td>
                                     <td>
-                                        <img src="{{ $r->foto }}" alt="" srcset="" style="width:100px; height:100px">
-                                    </td>
-                                    <td>{{ $r->nama }}</td>
-                                    <td>
-                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="/aksi_edit/{{ $r->id }}" class="btn btn-primary">Edit</a>
                                         <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
@@ -61,7 +63,7 @@
 <script>
      function deletes(id){
         const formDelete = document.getElementById('formDelete')
-        formDelete.action = '/data_ruang/'+id
+        formDelete.action = '/delete_kirim/'+id
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -75,7 +77,7 @@
                 formDelete.submit();
                 Swal.fire(
                 'Deleted!',
-                'Data berhasil di hapus',
+                'Ruangan berhasil di hapus',
                 'success'
                 )
             }

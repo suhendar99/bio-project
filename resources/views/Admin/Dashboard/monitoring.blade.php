@@ -2,7 +2,7 @@
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
 
-    $monitoring = \App\Monitoring::orderBy('id_monitoring', 'desc')->limit(10)->get();
+    $monitoring = \App\Monitoring::orderBy('id_monitoring', 'asc')->limit(10)->get();
 @endphp
 
  <?php

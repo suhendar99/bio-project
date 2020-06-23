@@ -1,6 +1,7 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
+
     $suhu = \App\Satuan::where('id',2)->first();
     $kelembapan = \App\Satuan::where('id',3)->first();
     $tekanan = \App\Satuan::where('id',4)->first();
@@ -126,7 +127,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$kelembapan->max}} %</center>
+                                        <center>{{$kelembapan->min}} %</center>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +161,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$tekanan->max}} Pa</center>
+                                        <center>{{$tekanan->min}} Pa</center>
                                     </div>
                                 </div>
                             </div>
@@ -376,7 +377,7 @@
           enabled: true
         },
         stroke: {
-          curve: 'straight'
+          curve: 'smooth'
         },
         title: {
           text: 'Monitoring',

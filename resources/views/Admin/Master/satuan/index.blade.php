@@ -83,7 +83,7 @@
                 formDelete.submit();
                 Swal.fire(
                 'Deleted!',
-                'Operator berhasil di hapus',
+                'Satuan berhasil di hapus',
                 'success'
                 )
             }

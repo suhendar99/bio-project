@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Monitoring;
+use App\Satuan;
+use App\Ruangan;
 use App\Mqtt;
 use App\Setapp;
+use Validator;
 
 class MonitoringController extends Controller
 {
@@ -39,18 +42,94 @@ class MonitoringController extends Controller
     	$data->save();
     }
 
+    public function set_monitoring()
+    {
+        $monitor = Satuan::all();
+        return view('Admin.Monitoring.Setmonitor.set', compact('monitor'));
+    }
+    public function add_monitor()
+    {
+        $ruangan = Ruangan::all();
+        return view('Admin.Monitoring.Setmonitor.create', compact('ruangan'));
+    }
+    public function add_aksi(Request $req)
+    {
+        $v = Validator::make($req->all(), [             
+            'nama' => 'required|',
+            'parameter' => 'required|',
+            'satuan' => 'required|',
+            'max' => 'required|numeric',
+            'min' => 'required|numeric'
+        ]);
+
+        if ($v->fails()) {
+            // dd($v->errors()->all());
+            return back()->withErrors($v)->withInput();
+        }else {
+
+            $employee = Satuan::create([
+                'id_ruangan' => $req->nama,
+                'parameter' => $req->parameter,
+                'satuan' => $req->satuan,
+                'max' => $req->max,
+                'min' => $req->min
+            ]);
+
+            
+            //  LogUser::create([
+            //     'user_id' => Auth::user()->id,
+            //     'detail' => 'added new category  product : '.$request->name
+            // ]);
+            
+            return back()->with('success', 'Ruangan berhasil ditambahkan');
+        }
+    }
+
+
     public function edit($id)
     {
-    	# code...
+        $satuan = Satuan::findOrFail($id);
+    	$ruangan = Ruangan::all();
+        return view('Admin.Monitoring.Setmonitor.edit', compact('ruangan','satuan'));
     }
 
     public function update(Request $req, $id)
     {
-    	# code...
+    	$v = Validator::make($req->all(), [             
+            'nama' => 'required|',
+            'parameter' => 'required|',
+            'satuan' => 'required|',
+            'max' => 'required|numeric',
+            'min' => 'required|numeric'
+        ]);
+
+        if ($v->fails()) {
+            // dd($v->errors()->all());
+            return back()->withErrors($v)->withInput();
+        }else {
+            $operator = Satuan::find($id);
+            
+            $operator->update([
+                'id_ruangan' => $req->nama,
+                'parameter' => $req->parameter,
+                'satuan' => $req->satuan,
+                'max' => $req->max,
+                'min' => $req->min
+            ]);
+            
+            //  LogUser::create([
+            //     'user_id' => Auth::user()->id,
+            //     'detail' => 'added new category  product : '.$request->name
+            // ]);
+            
+            return back()->with('success', 'Data berhasil di update');
+        }
     }
 
     public function delete($id)
     {
-    	# code...
+        $satuan = Satuan::findOrFail($id);
+        $satuan->delete();
+        return redirect()->back();
     }
 }

@@ -43,4 +43,7 @@
     </div>
 <!-- $ruangan->monitoring->suhu()->id; -->
 @endforeach
+<div class="col-4">
+    <div id="calendar" ></div>
+</div>
 </div>

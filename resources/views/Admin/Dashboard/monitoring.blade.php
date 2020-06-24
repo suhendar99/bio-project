@@ -1,6 +1,7 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
+
     $suhu = \App\Satuan::where('id',2 )->first();
     $kelembapan = \App\Satuan::where('id',3)->first();
     $tekanan = \App\Satuan::where('id',4)->first();
@@ -45,12 +46,13 @@
     <title>{{ $app->nama_apps }}</title>
     <link href="{{ asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
 <style>
   
     #chart {
-  max-width: 1500px;
-  margin: 35px auto;
-}
+      max-width: 1500px;
+      margin: 35px auto;
+    }
   
 </style>
 
@@ -81,13 +83,21 @@
             <div class="col-xl-4 col-md-12"  style="width:20rem;">
                 <div class="card bg-dark">
                     <div class="card-header bg-dark text-white">
-                        Suhu
+                        <div class="row">
+                            <div class="col-6 border-right">
+                                Suhu
+                            </div>
+                            <div class="col-6">
+                                Set Point
+                            </div>
+                        </div>
                     </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <img src="{{ asset('svg/suhu.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
+                                <!-- <img src="{{ asset('svg/suhu.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
+                                <div id="chart_div" style="width: 100%;"></div>
                             </center>
                         </div>
                         <div class="col-6">
@@ -115,13 +125,21 @@
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
                 <div class="card-header bg-dark text-white">
-                    Kelembaban
+                    <div class="row">
+                        <div class="col-6 border-right">
+                            Kelembapan 
+                        </div>
+                        <div class="col-6">
+                            Set Point
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <img src="{{ asset('svg/kelembaban.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
+                                <!-- <img src="{{ asset('svg/kelembaban.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
+                                <div id="chart_div2" style="width: 100%;"></div>
                             </center>
                         </div>
                         <div class="col-6">
@@ -137,7 +155,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$kelembapan->max}} %</center>
+                                        <center>{{$kelembapan->min}} %</center>
                                     </div>
                                 </div>
                             </div>
@@ -149,13 +167,21 @@
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
                 <div class="card-header bg-dark text-white">
-                    Tekanan
+                    <div class="row">
+                        <div class="col-6 border-right">
+                            Tekanan 
+                        </div>
+                        <div class="col-6">
+                            Set Point
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <img src="{{ asset('svg/tekanan.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
+                                <!-- <img src="{{ asset('svg/tekanan.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
+                                <div id="chart_div3" style="width: 100%;"></div>
                             </center>
                         </div>
                         <div class="col-6">
@@ -171,7 +197,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$tekanan->max}} Pa</center>
+                                        <center>{{$tekanan->min}} Pa</center>
                                     </div>
                                 </div>
                             </div>
@@ -387,7 +413,7 @@
           enabled: true
         },
         stroke: {
-          curve: 'straight'
+          curve: 'smooth'
         },
         title: {
           text: 'Monitoring',
@@ -665,7 +691,6 @@
       });
       
     </script>
-
 <script type="text/javascript">
       google.charts.load('current', {'packages':['gauge']});
       google.charts.setOnLoadCallback(drawChart);
@@ -674,7 +699,7 @@
 
         var data1 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Suhu', 0],
+          ['', 0],
         ]);
 
         var options1 = {
@@ -690,7 +715,7 @@
 
         var data2 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Kelembapan', 0],
+          ['', 0],
         ]);
 
         var options2 = {
@@ -706,7 +731,7 @@
 
         var data3 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Tekanan', 0],
+          ['', 0],
         ]);
 
         var options3 = {

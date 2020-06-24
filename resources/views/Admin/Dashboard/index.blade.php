@@ -25,7 +25,7 @@
                             @include('Admin.Dashboard.overview')
                             </div>
                             <div class="tab-pane fade" id="profile-justify" role="tabpanel" aria-labelledby="profile-tab-justify">
-                                @include('Admin.Dashboard.ahu')
+                            @include('Admin.Dashboard.ahu')
                             </div>
                             <div class="tab-pane fade" id="contact-justify" role="tabpanel" aria-labelledby="contact-tab-justify">
                             @include('Admin.Dashboard.alarm')

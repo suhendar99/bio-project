@@ -23,11 +23,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('concept/assets/vendor/datatables/css/buttons.bootstrap4.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('concept/assets/vendor/datatables/css/select.bootstrap4.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('concept/assets/vendor/datatables/css/fixedHeader.bootstrap4.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.print.css">
     <title>{{ $app->tab }}</title>
     <script src="{{ asset('concept/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 </head>
 
-<body>
+<body style="height:500px;">
     <!-- ============================================================== -->
     <!-- main wrapper -->
     <!-- ============================================================== -->
@@ -258,6 +260,15 @@
     <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" ="anonymous"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
+    <script>
+        $('#calendar').fullCalendar({
+        weekends: true,
+        });
+    </script>
+
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
 
@@ -275,6 +286,7 @@
       function onConnectionLost(responseObject) {
           console.log(responseObject)
       }
+      
       function onMessageArrived(message) {
          
          var data = JSON.parse(message.payloadString);

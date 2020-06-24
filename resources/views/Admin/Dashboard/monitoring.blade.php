@@ -1,7 +1,6 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
-
     $suhu = \App\Satuan::where('id',2 )->first();
     $kelembapan = \App\Satuan::where('id',3)->first();
     $tekanan = \App\Satuan::where('id',4)->first();
@@ -46,13 +45,12 @@
     <title>{{ $app->nama_apps }}</title>
     <link href="{{ asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   
 <style>
   
     #chart {
-      max-width: 1500px;
-      margin: 35px auto;
-    }
+  max-width: 1500px;
+  margin: 35px auto;
+}
   
 </style>
 
@@ -83,21 +81,13 @@
             <div class="col-xl-4 col-md-12"  style="width:20rem;">
                 <div class="card bg-dark">
                     <div class="card-header bg-dark text-white">
-                        <div class="row">
-                            <div class="col-6 border-right">
-                                Suhu
-                            </div>
-                            <div class="col-6">
-                                Set Point
-                            </div>
-                        </div>
+                        Suhu
                     </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <!-- <img src="{{ asset('svg/suhu.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
-                                <div id="chart_div" style="width: 100%;"></div>
+                                <img src="{{ asset('svg/suhu.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
                             </center>
                         </div>
                         <div class="col-6">
@@ -125,21 +115,13 @@
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
                 <div class="card-header bg-dark text-white">
-                    <div class="row">
-                        <div class="col-6 border-right">
-                            Kelembapan 
-                        </div>
-                        <div class="col-6">
-                            Set Point
-                        </div>
-                    </div>
+                    Kelembaban
                 </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <!-- <img src="{{ asset('svg/kelembaban.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
-                                <div id="chart_div2" style="width: 100%;"></div>
+                                <img src="{{ asset('svg/kelembaban.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
                             </center>
                         </div>
                         <div class="col-6">
@@ -155,7 +137,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$kelembapan->min}} %</center>
+                                        <center>{{$kelembapan->max}} %</center>
                                     </div>
                                 </div>
                             </div>
@@ -167,21 +149,13 @@
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
                 <div class="card-header bg-dark text-white">
-                    <div class="row">
-                        <div class="col-6 border-right">
-                            Tekanan 
-                        </div>
-                        <div class="col-6">
-                            Set Point
-                        </div>
-                    </div>
+                    Tekanan
                 </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <!-- <img src="{{ asset('svg/tekanan.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
-                                <div id="chart_div3" style="width: 100%;"></div>
+                                <img src="{{ asset('svg/tekanan.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
                             </center>
                         </div>
                         <div class="col-6">
@@ -197,7 +171,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$tekanan->min}} Pa</center>
+                                        <center>{{$tekanan->max}} Pa</center>
                                     </div>
                                 </div>
                             </div>
@@ -413,7 +387,7 @@
           enabled: true
         },
         stroke: {
-          curve: 'smooth'
+          curve: 'straight'
         },
         title: {
           text: 'Monitoring',
@@ -691,6 +665,7 @@
       });
       
     </script>
+
 <script type="text/javascript">
       google.charts.load('current', {'packages':['gauge']});
       google.charts.setOnLoadCallback(drawChart);

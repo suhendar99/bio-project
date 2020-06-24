@@ -1,6 +1,7 @@
 @extends('Admin.layouts.app')
 
 @section('content')
+
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="ecommerce-widget">
@@ -25,7 +26,7 @@
                             @include('Admin.Dashboard.overview')
                             </div>
                             <div class="tab-pane fade" id="profile-justify" role="tabpanel" aria-labelledby="profile-tab-justify">
-                                @include('Admin.Dashboard.ahu')
+                            @include('Admin.Dashboard.ahu')
                             </div>
                             <div class="tab-pane fade" id="contact-justify" role="tabpanel" aria-labelledby="contact-tab-justify">
                             @include('Admin.Dashboard.alarm')

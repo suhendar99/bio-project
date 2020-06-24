@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center bg-dark">
-                <a href="{{ route('room.monitor') }}" class="btn btn-primary col-md-9 btn-sm" style="margin-bottom:12px;">
+                <a href="/room/{{$d->id}}" class="btn btn-primary col-md-9 btn-sm" style="margin-bottom:12px;">
                     Monitoring
                 </a>
             </div>

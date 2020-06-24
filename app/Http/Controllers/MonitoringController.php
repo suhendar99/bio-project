@@ -23,10 +23,12 @@ class MonitoringController extends Controller
     }
 
 
-    public function room()
+    public function room($id)
     {   
+        // dd($id);
+        $id = $id;
         $app = Setapp::where('id',1)->first();
-        return view('Admin.Dashboard.monitoring',compact('app'));
+        return view('Admin.Dashboard.monitoring',compact('app','id'));
     }
 
     public function store(Request $req)

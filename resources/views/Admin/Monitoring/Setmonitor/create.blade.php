@@ -65,7 +65,7 @@
                             @enderror
                         </div>
                         @if (session()->has('maxmin'))
-                            <div class="alert">
+                            <div class="alert alert-failed">
                                 {{ session()->get('maxmin') }}
                             </div>                                        
                         @endif

@@ -71,34 +71,44 @@ class MonitoringController extends Controller
             $log->keterangan = $req->suhu.'C lebih tinggi dari '.$smax.'C';
             $log->monitoring_id = $data->id;
             $log->save();
-        }else if($req->suhu < $smin){
+        }
+
+        if($req->suhu < $smin){
             $log = new Log_alert;
             $log->status = 'Low presure';
             $log->keterangan = $req->suhu.'C lebih tinggi dari '.$smin.'C';
             $log->monitoring_id = $data->id;
             $log->save();
 
-        }else if($req->kelembapan > $kmax){
+        }
+
+        if($req->kelembapan > $kmax){
             $log = new Log_alert;
             $log->status = 'Hight presure';
             $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$smax.'%';
             $log->monitoring_id = $data->id;
             $log->save();
 
-        }else if($req->kelembapan < $kmin){
+        }
+
+        if($req->kelembapan < $kmin){
             $log = new Log_alert;
             $log->status = 'Low presure';
             $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$smin.'%';
             $log->monitoring_id = $data->id;
             $log->save();
-        }else if($req->tekanan > $tmax){
+        }
+
+        if($req->tekanan > $tmax){
             $log = new Log_alert;
             $log->status = 'Hight presure';
             $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$smax.'Pa';
             $log->monitoring_id = $data->id;
             $log->save();
 
-        }else if($req->tekanan < $tmin){
+        }
+
+        if($req->tekanan < $tmin){
             $log = new Log_alert;
             $log->status = 'Low presure';
             $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$smin.'Pa';

@@ -15,7 +15,7 @@
         $username = $mqtt->username;
         $password = $mqtt->password;
         $url_broker = $mqtt->url_broker;
-    ?>
+?>
 <!doctype html>
 <html lang="en">
  

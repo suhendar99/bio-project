@@ -30,18 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $d)
-                            <tr>
-                                <td>{{ $d->date}}</td>
-                                <td>{{ $d->time}}</td>
-                                <td>{{ $d->perangkat_id}}</td>
-                                <td>{{ $d->ruangan_id}}</td>
-                                <td>{{ $d->suhu }}</td>
-                                <td>{{ $d->tekanan }}</td>
-                                <td>{{ $d->kelembapan }}</td>
-                                <td>{{ $d->alarm}}</td>
-                            </tr>
-                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -53,3 +42,11 @@
     <!-- ============================================================== -->
 </div>
 @endsection
+@push('script')
+ <script>
+    $.get("{{ route('monitoring.data') }}", function(data){
+    data_monitoring=data;
+    console.log(data_monitoring)
+    });
+ </script>
+@endpush

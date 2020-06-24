@@ -23,6 +23,12 @@ class MonitoringController extends Controller
         return view('Admin.Monitoring.raw',['data'=>$data,]);
     }
 
+    public function data()
+    {
+        $data = Monitoring::orderBy('created_at','desc')->limit(9)->get();
+        return response()->json($data);
+    }
+
 
     public function room($id)
     {   

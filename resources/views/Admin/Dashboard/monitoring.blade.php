@@ -5,7 +5,7 @@
     $suhu = \App\Satuan::where('parameter','suhu' )->first();
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->limit(10)->get();
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();
     $countmon = $monitoring->count();
 
 @endphp
@@ -330,7 +330,7 @@
 
     <script>
         let monitoring = '@json($monitoring)'
-        console.log(JSON.parse(monitoring));
+        
           
   var suhu = []
   var kelembapan = []
@@ -338,8 +338,12 @@
   
     let dates = 0
     const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let formatted_date = ""
-    let monitor = JSON.parse(monitoring)
+    let formatted_date = "";
+    let newMonitor = JSON.parse(monitoring).sort((a,b)=>{
+      return a.time.localeCompare(b.time);
+    });
+    console.log(newMonitor);
+    let monitor = newMonitor
     monitor.forEach(element => {
         dates = new Date(element.date+' '+element.time)
         suhu.push({

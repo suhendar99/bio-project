@@ -57,8 +57,8 @@ class OperatorController extends Controller
 
     public function edit($id)
     {
-        $data = Operator::findOrFail($id);
-        return view('Admin.Master.operator.op_edit',['data'=>$data]);
+        $operator = Operator::findOrFail($id);
+        return view('Admin.Master.operator.op_edit',['operator'=>$operator]);
     }
 
     public function update(Request $req, $id)
@@ -70,7 +70,7 @@ class OperatorController extends Controller
             'password' => 'required|min:6',
             'instansi' => 'required|',
             'hp' => 'required|',
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         if ($v->fails()) {
@@ -90,13 +90,13 @@ class OperatorController extends Controller
 
             if($req->hasfile('foto'))
             {                
-                $name = rand(). '.' . $req->foto->getClientOriginalExtension();           
-                $req->foto->move(public_path("foto"), $name);                                       
-                $foto = 'foto'.$name;
-                if(is_writable(public_path($operator->foto))) {                    
+                $img = rand(). '.' . $req->foto->getClientOriginalExtension();           
+                $req->foto->move(public_path("foto"), $img);                                       
+                $foto = 'foto'.$img;
+                if(is_writable(public_path($operator->foto))) {
                     unlink(public_path($operator->foto));
                 }     
-                $foto = 'foto'.$name;
+                $foto = 'foto'.$img;
 
                 $operator->update([
                     'foto' => $foto,

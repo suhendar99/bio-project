@@ -1,4 +1,4 @@
-<div class="row">
+ <div class="row">
 
 @foreach($data as $d)
     <div class="col-xl-4 col-md-12"  style="width:20rem;">
@@ -10,36 +10,41 @@
             </div>
             <div class="card-body bg-dark text-white rounded">
                 <div class="row">
-                    <div class="col-7 border-right">
-                        {{$suhu->parameter}}
+                    <div class="col-6 border-right">
+                       <center>CVC</center> 
                     </div>
-                    <div class="col-3" id="suhuRoom">
-                         {{$d->monitoring? $d->monitoring->suhu:"0"}} 
-                    </div>
-                    <div class="col-2">
-                        {{$suhu->satuan}}
+                    <div class="col-6">
+                       <center>VVC</center> 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-7 border-right">
-                        {{$kelembapan->parameter}}
+                    <div class="col-6 border-right">
+                        <center> {{$d->monitoring? $d->monitoring->suhu:"0"}} {{$suhu->satuan}}
+                        </center>
                     </div>
-                    <div class="col-3">
-                         {{$d->monitoring? $d->monitoring->kelembapan:"0"}}
-                    </div>
-                    <div class="col-2">
-                        {{$kelembapan->satuan}}
+                    <div class="col-6" id="suhuRoom">
+                        <center> {{$d->monitoring? $d->monitoring->suhu:"0"}} {{$suhu->satuan}}
+                        </center>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-7 border-right">
-                        {{$tekanan->parameter}}
+                    <div class="col-6 border-right">
+                        <center> {{$d->monitoring? $d->monitoring->kelembapan:"0"}} {{$kelembapan->satuan}}
+                        </center>
                     </div>
-                    <div class="col-3">
-                         {{$d->monitoring? $d->monitoring->tekanan:"0"}}
-                    </div> 
-                    <div class="col-2">
-                        {{$tekanan->satuan}}
+                    <div class="col-6" id="suhuRoom">
+                         <center> {{$d->monitoring? $d->monitoring->kelembapan:"0"}} {{$kelembapan->satuan}}
+                        </center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 border-right">
+                        <center> {{$d->monitoring? $d->monitoring->tekanan:"0"}} {{$tekanan->satuan}}
+                        </center>
+                    </div>
+                    <div class="col-6" id="suhuRoom">
+                        <center> {{$d->monitoring? $d->monitoring->tekanan:"0"}} {{$tekanan->satuan}}
+                        </center>
                     </div>
                 </div>
             </div>

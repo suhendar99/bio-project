@@ -297,17 +297,23 @@
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 
-        var raw = '<tr id="'+data.id+'">';
-        raw += '<td>' + date + '</td>';
-        raw += '<td>' + time + '</td>';
-        raw += '<td>' + data.perangkat_id + '</td>';
-        raw += '<td>' + data.ruangan_id + '</td>';
-        raw += '<td>' + data.suhu + '</td>';
-        raw += '<td>' + data.tekanan + '</td>';
-        raw += '<td>' + data.kelembapan + '</td>';
-        raw += '<td>' + data.alarm + '</td>';
-        raw += '</tr>';
-        $('#monitorTable tbody').prepend(raw);
+        if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
+            var raw = '<tr id="'+data.id+'">';
+            raw += '<td>' + date + '</td>';
+            raw += '<td>' + time + '</td>';
+            raw += '<td>' + data.perangkat_id + '</td>';
+            raw += '<td>' + data.ruangan_id + '</td>';
+            raw += '<td>' + data.suhu + '</td>';
+            raw += '<td>' + data.tekanan + '</td>';
+            raw += '<td>' + data.kelembapan + '</td>';
+            raw += '<td>' + data.alarm + '</td>';
+            raw += '</tr>';
+
+            $('#monitorTable tbody').prepend(raw);
+        } else {
+            alert('Cek Payload Alat Anda');
+        }
+        
 
         var over = data.suhu;
         $('#suhuRoom').text(over);

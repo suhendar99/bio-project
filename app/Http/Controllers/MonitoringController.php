@@ -100,16 +100,19 @@ class MonitoringController extends Controller
             $log->save();
         }
 
-        // if ($data->alarm == 1) {
-        //     $user = Operator::all();
-        //     $subject = 'Alert!!!';
-        //     $data = array('email' => $user->email, 'subject' => $subject);
-        //     Mail::send('Admin.Monitoring.mail', $data, function ($message) use ($data) {
-        //     $message->from('biofarma@gmail.com', 'BIOFARMA');
-        //     $message->to($data['email']);
-        //     $message->subject($data['subject']); 
-        //     });
-        // }
+        dd($data->alarm);
+        if ($data->alarm == 1) {
+            $send = Mail::raw([], function($message) {
+                $message->from('biofarma@bio.com', 'Company name');
+                $message->to('aguspadilah30@gmail.com');
+                $message->subject('Bahaya!!! Alarm Biofarma Lab Menyala!!!');
+                $message->setBody( '<html><h1>Cek Disini</h1><p>Go get it now !</p></html>', 'text/html' );
+                $message->addPart("5% off its awesome\n\nGo get it now!", 'text/plain');
+            });
+
+            dd($send);
+
+        }
 
         // if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
         //     Mail::raw('Alert!!! Something Wrong on The Rooms', function($mail) {

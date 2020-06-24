@@ -32,6 +32,22 @@ class MonitoringController extends Controller
         return view('Admin.Dashboard.monitoring',compact('app','id'));
     }
 
+    public function sendmail(Request $request)
+    {
+        try{
+            Mail::send('email', ['nama' => $request->nama, 'pesan' => $request->pesan], function ($message) use ($request)
+            {
+                $message->subject($request->judul);
+                $message->from('biofarma@kiddy.com', 'Kiddy');
+                $message->to($request->email);
+            });
+            return back()->with('alert-success','Berhasil Kirim Email');
+        }
+        catch (Exception $e){
+            return response (['status' => false,'errors' => $e->getMessage()]);
+        }
+    }
+
     public function store(Request $req)
     {
     	# code...

@@ -305,7 +305,7 @@
         raw += '<td>' + data.kelembapan + '</td>';
         raw += '<td>' + data.alarm + '</td>';
         raw += '</tr>';
-        $('#monitorTable tbody').append(raw);
+        $('#monitorTable tbody').prepend(raw);
 
         var over = data.suhu;
         $('#suhuRoom').text(over);

@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Monitoring extends Model
 {
-    use LogsActivity;
     protected $table = "monitoring";
     protected $primarykey = "id_monitoring";
     protected $fillable = [
@@ -32,6 +30,6 @@ class Monitoring extends Model
     public function alarm()
     {
         // hasMany(RelatedModel, foreignKeyOnRelatedModel = monitoring_id, localKey = id)
-        return $this->hasMany('App\Log', 'monitoring_id', 'id');
+        return $this->hasMany('App\Log_alerts', 'monitoring_id', 'id');
     }
 }

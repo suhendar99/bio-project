@@ -699,7 +699,7 @@
 
         var data1 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Suhu', 0],
+          ['', 0],
         ]);
 
         var options1 = {
@@ -715,7 +715,7 @@
 
         var data2 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Kelembapan', 0],
+          ['', 0],
         ]);
 
         var options2 = {
@@ -731,7 +731,7 @@
 
         var data3 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Tekanan', 0],
+          ['', 0],
         ]);
 
         var options3 = {

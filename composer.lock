@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "content-hash": "3a5500d1005001e55ece89e02eb8fb80",
+
     "packages": [
         {
             "name": "anahkiasen/underscore-php",

@@ -1,11 +1,22 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
-    $suhu = \App\Satuan::where('id',2)->first();
+    $suhu = \App\Satuan::where('id',2 )->first();
     $kelembapan = \App\Satuan::where('id',3)->first();
     $tekanan = \App\Satuan::where('id',4)->first();
-    $monitoring = \App\Monitoring::orderBy('id_monitoring', 'asc')->limit(10)->get();
+    $monitor = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->limit(10)->get();
+    $countmon = $monitor->count();
+
 @endphp
+@if($countmon <= 10 )
+  @php
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->limit(10)->get();
+  @endphp
+@elseif($countmon >= 10)
+  @php
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->get();
+  @endphp
+@endif
 
  <?php
         $topic = $mqtt->topic;
@@ -22,18 +33,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" type="image/png" href="{{ asset('foto/app/'.$app->icon) }}">
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/libs/css/style.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <link rel="stylesheet" href="assets/vendor/charts/chartist-bundle/chartist.css">
-    <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+	<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link href="{{ asset('assets/vendor/fonts/circular-std/style.css" rel="stylesheet') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/charts/chartist-bundle/chartist.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/charts/morris-bundle/morris.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/charts/c3charts/c3.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/flag-icon-css/flag-icon.min.css') }}">
     <title>{{ $app->nama_apps }}</title>
-    <link href="{{ Asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
-
+    <link href="{{ asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <style>
   
     #chart {
@@ -220,24 +231,24 @@
     <!-- end navbar -->
     <!-- ============================================================== -->
     <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
     <!-- bootstap bundle js -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <!-- slimscroll js -->
-    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="{{ asset('assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
     <!-- main js -->
-    <script src="assets/libs/js/main-js.js"></script>
+    <script src="{{ asset('assets/libs/js/main-js.js') }}"></script>
     <!-- chart chartist js -->
     <!-- <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script> -->
     <!-- sparkline js -->
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <script src="{{ asset('assets/vendor/charts/sparkline/jquery.sparkline.js') }}"></script>
     <!-- morris js -->
     <!-- <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
     <script src="assets/vendor/charts/morris-bundle/morris.js"></script> -->
     <!-- chart c3 js -->
-    <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <script src="{{ asset('assets/vendor/charts/c3charts/c3.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
 	<!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script> -->
 	
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -510,6 +521,7 @@
         kelembapan.splice(0,1)
         // lastsuhu.splice(0,1)
 
+        if (data.ruangan_id == {{$id}}) {
         suhu.push({
           x: time,
           y: data.suhu
@@ -523,24 +535,6 @@
           y: data.kelembapan
         })
 
-        // lastsuhu.push({
-        //   x: time,
-        //   y: data.suhu
-        // })
-
-        //  if($('#suhu').prop('checked')){
-        //     suhu = lastsuhu
-        //     console.log($('#suhu').prop('checked'));
-            
-        // }else{            
-        //     suhu = []
-        //     console.log($('#suhu').prop('checked'));
-
-        // }
-
-        // console.log(lastsuhu);
-        
-
          chart.updateSeries([
             {
                 data: suhu
@@ -553,7 +547,74 @@
             }
         ])
 
-        
+        var data1 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Suhu', 80],
+        ]);
+
+        var options1 = {
+          animation:{
+            duration: 400,
+          },
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5
+        };
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Kelembapan', 80],
+        ]);
+
+        var options2 = {          
+          animation:{
+            duration: 400,
+          },
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5
+        };
+
+        var data3 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Tekanan', 80],
+        ]);
+
+        var options3 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 400,
+            easing: 'out'
+          },
+        };
+
+        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+
+          try {
+            data1.setValue(0,1,data.suhu);
+            chart1.draw(data1, options1)
+            ;
+            data2.setValue(0,1,data.kelembapan);
+            chart2.draw(data2, options2);
+
+            data3.setValue(0,1,data.tekanan);
+            chart3.draw(data3, options3);
+
+          } catch(e) {
+              // statements
+              console.log(e);
+          }
+        }
           
          //console.log('BLOK MQTT');
        
@@ -603,6 +664,70 @@
         onFailure: onFailure
       });
       
+    </script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data1 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Suhu', 0],
+        ]);
+
+        var options1 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 4000,
+          },
+        };
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Kelembapan', 0],
+        ]);
+
+        var options2 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 4000,
+          },
+        };
+
+        var data3 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Tekanan', 0],
+        ]);
+
+        var options3 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 4000,
+          },
+        };
+
+        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+        chart1.draw(data1, options1);
+        chart2.draw(data2, options2);
+        chart3.draw(data3, options3);
+
+      }
     </script>
 
 </body>

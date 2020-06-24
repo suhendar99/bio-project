@@ -23,10 +23,12 @@ class MonitoringController extends Controller
     }
 
 
-    public function room()
+    public function room($id)
     {   
+        // dd($id);
+        $id = $id;
         $app = Setapp::where('id',1)->first();
-        return view('Admin.Dashboard.monitoring',compact('app'));
+        return view('Admin.Dashboard.monitoring',compact('app','id'));
     }
 
     public function store(Request $req)
@@ -102,6 +104,10 @@ class MonitoringController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
 
+            if ($req->max <= $req->min) {
+                return redirect()->back()->with('maxmin', 'Max tidak bisa lebih kecil dari Min!');
+            }
+
             $employee = Satuan::create([
                 'id_ruangan' => $req->nama,
                 'parameter' => $req->parameter,
@@ -109,6 +115,8 @@ class MonitoringController extends Controller
                 'max' => $req->max,
                 'min' => $req->min
             ]);
+
+
 
             
             //  LogUser::create([
@@ -142,6 +150,10 @@ class MonitoringController extends Controller
             // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
+            if ($req->max <= $req->min) {
+                return redirect()->back()->with('maxmin', 'Max tidak bisa lebih kecil dari Min!');
+            }
+            
             $operator = Satuan::find($id);
             
             $operator->update([

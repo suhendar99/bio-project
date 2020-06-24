@@ -64,6 +64,11 @@
                                 </span>
                             @enderror
                         </div>
+                        @if (session()->has('maxmin'))
+                            <div class="alert alert-failed">
+                                {{ session()->get('maxmin') }}
+                            </div>                                        
+                        @endif
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Min</label>
                             <input id="inputText3" type="text" class="form-control @error('min') is-invalid @enderror" placeholder="Min" name="min" value="{{ old('min') }}">

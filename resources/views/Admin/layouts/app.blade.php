@@ -23,11 +23,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('concept/assets/vendor/datatables/css/buttons.bootstrap4.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('concept/assets/vendor/datatables/css/select.bootstrap4.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('concept/assets/vendor/datatables/css/fixedHeader.bootstrap4.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.print.css">
     <title>{{ $app->tab }}</title>
     <script src="{{ asset('concept/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 </head>
 
-<body>
+<body style="height:500px;">
     <!-- ============================================================== -->
     <!-- main wrapper -->
     <!-- ============================================================== -->
@@ -85,9 +87,15 @@
                             <li class="nav-divider">
                                 Menu
                             </li>
+                            @if(Auth::user()->level == 'Admin')
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Request::is('/') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard Admin</a>
+                            </li>
+                            @else
                             <li class="nav-item ">
                                 <a class="nav-link {{ Request::is('/') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link 
                                 {{ Request::is('operator*') ? 'active' : false }}
@@ -168,10 +176,10 @@
                                   {{ Request::is('set_mqtt*') ? 'show' : false }}" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item ">
-                                            <a class="nav-link {{ Request::is('set_app*') ? 'active' : false }}" href="{{ route('pengaturan.app') }}"  aria-controls="submenu-1">App</a>
+                                            <a class="nav-link {{ Request::is('set_app*') ? 'active' : false }}" href="{{ route('pengaturan.app') }}"  aria-controls="submenu-1">Aplikasi</a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a class="nav-link {{ Request::is('set_mqtt*') ? 'active' : false }}" href="{{ route('pengaturan.mqtt',1) }}"  aria-controls="submenu-1">MQTT</a>
+                                            <a class="nav-link {{ Request::is('set_mqtt*') ? 'active' : false }}" href="{{ route('pengaturan.mqtt',1) }}"  aria-controls="submenu-1">MQTT Broker</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -258,6 +266,15 @@
     <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" ="anonymous"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
+    <script>
+        $('#calendar').fullCalendar({
+        weekends: true,
+        });
+    </script>
+
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
 
@@ -275,6 +292,7 @@
       function onConnectionLost(responseObject) {
           console.log(responseObject)
       }
+      
       function onMessageArrived(message) {
          
          var data = JSON.parse(message.payloadString);
@@ -293,7 +311,7 @@
         raw += '<td>' + data.kelembapan + '</td>';
         raw += '<td>' + data.alarm + '</td>';
         raw += '</tr>';
-        $('#monitorTable tbody').prepend(raw);
+        $('#monitorTable tbody').append(raw);
 
         var over = data.suhu;
         $('#suhuRoom').text(over);
@@ -311,6 +329,8 @@
             alarm += '</div>';
 
             $('#alarmReal').prepend(alarm);
+        } else {
+            
         }
         
           

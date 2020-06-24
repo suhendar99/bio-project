@@ -31,9 +31,9 @@
                         <div class="form-group">
                             <label for="inputEmail">Parameter</label>
                             <select name="parameter" id="" class="form-control @error('parameter') is-invalid @enderror">
-                                <option value="Suhu">Suhu</option>
-                                <option value="Kelembapan">Kelembapan</option>
-                                <option value="Tekanan">Tekanan</option>
+                                <option value="suhu">Suhu (C)</option>
+                                <option value="kelembapan">Kelembapan (%)</option>
+                                <option value="tekanan">Tekanan (Pa)</option>
                             </select>
                             @error('parameter')
                                 <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="inputEmail">Satuan</label>
                             <select name="satuan" id=""class="form-control @error('satuan') is-invalid @enderror">
                                 <option value="C">C</option>
@@ -54,7 +54,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="inputEmail">Max</label>
                             <input id="inputText3" type="text" class="form-control @error('max') is-invalid @enderror" name="max" placeholder="Max" value="{{ old('max') }}">

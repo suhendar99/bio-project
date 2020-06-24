@@ -21,6 +21,10 @@ class Dashboard extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function test()
+    {
+        return view('Admin.Dashboard.log');
+    }
     public function index()
     {
         $data = Ruangan::all();

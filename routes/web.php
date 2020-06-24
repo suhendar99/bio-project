@@ -13,6 +13,9 @@
 Auth::routes();
 
 
+Route::get('/sendmail', 'MonitoringController@sendmail');
+
+Route::get('/test','Dashboard@test');
 Route::middleware(['auth'])->group(function () {
 	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');
     Route::get('/','Dashboard@index')->name('dashboard');

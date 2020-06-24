@@ -12,9 +12,9 @@
 */
 Auth::routes();
 
-Route::get('/room','MonitoringController@room')->name('room.monitor');
 
 Route::middleware(['auth'])->group(function () {
+	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');
     Route::get('/','Dashboard@index')->name('dashboard');
     Route::get('/a','AppController@test');
     // Master Data

@@ -1,42 +1,53 @@
 <div class="row">
-    @foreach($data as $d)
-        <div class="col-xl-4 col-md-12"  style="width:20rem;">
+
+@foreach($data as $d)
+    <div class="col-xl-4 col-md-12"  style="width:20rem;">
         <div class="card bg-dark">
             <div class="card-header bg-dark text-white">
-                <h4 style="color: white;">
+                <h3 style="color: white;">
                     <center>{{$d->nama}}</center>
-                </h4>
+                </h3>
             </div>
             <div class="card-body bg-dark text-white rounded">
                 <div class="row">
-                    <div class="col-8">
-                        Suhu
+                    <div class="col-7 border-right">
+                        {{$suhu->parameter}}
                     </div>
-                    <div class="col-4" id="suhuRoom">
-                        : {{$d->monitoring? $d->monitoring->suhu:"0"}} 
+                    <div class="col-3" id="suhuRoom">
+                         {{$d->monitoring? $d->monitoring->suhu:"0"}} 
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-8">
-                        Kelembapan
-                    </div>
-                    <div class="col-4">
-                        : {{$d->monitoring? $d->monitoring->kelembapan:"0"}}
+                    <div class="col-2">
+                        {{$suhu->satuan}}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
-                        Tekanan
+                    <div class="col-7 border-right">
+                        {{$kelembapan->parameter}}
                     </div>
-                    <div class="col-4">
-                        : {{$d->monitoring? $d->monitoring->tekanan:"0"}}
+                    <div class="col-3">
+                         {{$d->monitoring? $d->monitoring->kelembapan:"0"}}
+                    </div>
+                    <div class="col-2">
+                        {{$kelembapan->satuan}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 border-right">
+                        {{$tekanan->parameter}}
+                    </div>
+                    <div class="col-3">
+                         {{$d->monitoring? $d->monitoring->tekanan:"0"}}
                     </div> 
+                    <div class="col-2">
+                        {{$tekanan->satuan}}
+                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center bg-dark">
+                
             </div>
         </div>
     </div>
- @endforeach
-
+<!-- $ruangan->monitoring->suhu()->id; -->
+@endforeach
 </div>

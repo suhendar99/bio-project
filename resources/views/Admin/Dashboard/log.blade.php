@@ -1,22 +1,20 @@
-@extends('Admin.layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+</head>
+<body>
+  <button onclick="functionUnshift()">Tes</button>
+  <p id="test"></p>
+  <script>
+    var angka = [1,2,3,4,5];
 
-@section('content')
 
-<div class="row">
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="ecommerce-widget">
-      <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
-          <div class="card">
-            <div class="card-header">
-              <h4>Log Aktivitas Pengguna</h4>
-            </div>
-            <div class="card-body">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-@endsection
+    console.log(angka);
+    console.log(angka.unshift(10));
+    console.log(angka);
+    console.log(angka.pop());
+    console.log(angka);
+  </script>
+</body>
+</html>

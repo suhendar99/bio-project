@@ -35,13 +35,23 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="input-select">Tanggal Awal</label>
-                                                        <input type="date" name="awal" class="form-control">
+                                                        <input type="date" name="awal" class="form-control  @error('awal') is-invalid @enderror">
+                                                        @error('awal')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="input-select">Tanggal Akhir</label>
-                                                        <input type="date" name="akhir" class="form-control">
+                                                        <input type="date" name="akhir" class="form-control @error('akhir') is-invalid @enderror">
+                                                        @error('akhir')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>

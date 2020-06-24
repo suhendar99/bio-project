@@ -175,6 +175,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -228,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

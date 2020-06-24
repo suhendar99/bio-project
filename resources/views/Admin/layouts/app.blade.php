@@ -87,9 +87,15 @@
                             <li class="nav-divider">
                                 Menu
                             </li>
+                            @if(Auth::user()->level == 'Admin')
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Request::is('/') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard Admin</a>
+                            </li>
+                            @else
                             <li class="nav-item ">
                                 <a class="nav-link {{ Request::is('/') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link 
                                 {{ Request::is('operator*') ? 'active' : false }}

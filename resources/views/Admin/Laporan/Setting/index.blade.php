@@ -22,43 +22,15 @@
                             Icon laporan
                         </div>
                         <div class="col-6">
-                            <img src="{{asset($data->icon)}}" alt="placeholder+image" style="width:50%">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            Header Laporan
-                        </div>
-                        <div class="col-6">
-                            <img src="{{asset($data->header_img)}}" alt="placeholder+image" style="width:50%">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            Footer Laporan
-                        </div>
-                        <div class="col-6">
-                            <img src="{{asset($data->footer)}}" alt="placeholder+image" style="width:50%">
+                            @if($data->icon == "")
+                                <i class="fa fa-picture-o" style="margin-bottom: 20px;"></i>
+                            @else
+                                <img src="{{asset($data->icon)}}" alt="placeholder+image" style="width:50%">
+                            @endif
                         </div>
                     </div>
                     <form action="/updateSetlaporan/{{$data->id}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
-                            <div class="col-6">
-                                Header Laporan
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input type="file" name="header_img" class="form-control @error('header_img') is-invalid @enderror" >
-                                    @error('header_img')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                    
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-6">
                                 Icon Laporan
@@ -77,11 +49,27 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
+                                Header Laporan
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <input type="text" name="header_img" class="form-control @error('header_img') is-invalid @enderror"  placeholder="Header laporan" value="{{$data->header_img}}" >
+                                    @error('header_img')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
                                 Footer Laporan
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="file" name="footer" class="form-control @error('footer') is-invalid @enderror">
+                                    <input type="text" name="footer" class="form-control @error('footer') is-invalid @enderror" placeholder="Footer" value="{{$data->footer}}">
                                     @error('footer')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

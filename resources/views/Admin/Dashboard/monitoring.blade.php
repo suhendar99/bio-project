@@ -1,6 +1,7 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
+
     $suhu = \App\Satuan::where('id',2)->first();
     $kelembapan = \App\Satuan::where('id',3)->first();
     $tekanan = \App\Satuan::where('id',4)->first();
@@ -33,13 +34,14 @@
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <title>{{ $app->nama_apps }}</title>
     <link href="{{ Asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
 <style>
   
     #chart {
-  max-width: 1500px;
-  margin: 35px auto;
-}
+      max-width: 1500px;
+      margin: 35px auto;
+    }
   
 </style>
 
@@ -70,13 +72,21 @@
             <div class="col-xl-4 col-md-12"  style="width:20rem;">
                 <div class="card bg-dark">
                     <div class="card-header bg-dark text-white">
-                        Suhu
+                        <div class="row">
+                            <div class="col-6 border-right">
+                                Suhu
+                            </div>
+                            <div class="col-6">
+                                Set Point
+                            </div>
+                        </div>
                     </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <img src="{{ asset('svg/suhu.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
+                                <!-- <img src="{{ asset('svg/suhu.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
+                                <div id="chart_div" style="width: 100%;"></div>
                             </center>
                         </div>
                         <div class="col-6">
@@ -104,13 +114,21 @@
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
                 <div class="card-header bg-dark text-white">
-                    Kelembaban
+                    <div class="row">
+                        <div class="col-6 border-right">
+                            Kelembapan 
+                        </div>
+                        <div class="col-6">
+                            Set Point
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <img src="{{ asset('svg/kelembaban.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
+                                <!-- <img src="{{ asset('svg/kelembaban.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
+                                <div id="chart_div2" style="width: 100%;"></div>
                             </center>
                         </div>
                         <div class="col-6">
@@ -126,7 +144,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$kelembapan->max}} %</center>
+                                        <center>{{$kelembapan->min}} %</center>
                                     </div>
                                 </div>
                             </div>
@@ -138,13 +156,21 @@
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
                 <div class="card-header bg-dark text-white">
-                    Tekanan
+                    <div class="row">
+                        <div class="col-6 border-right">
+                            Tekanan 
+                        </div>
+                        <div class="col-6">
+                            Set Point
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
-                                <img src="{{ asset('svg/tekanan.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;">
+                                <!-- <img src="{{ asset('svg/tekanan.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
+                                <div id="chart_div3" style="width: 100%;"></div>
                             </center>
                         </div>
                         <div class="col-6">
@@ -160,7 +186,7 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$tekanan->max}} Pa</center>
+                                        <center>{{$tekanan->min}} Pa</center>
                                     </div>
                                 </div>
                             </div>
@@ -376,7 +402,7 @@
           enabled: true
         },
         stroke: {
-          curve: 'straight'
+          curve: 'smooth'
         },
         title: {
           text: 'Monitoring',
@@ -553,7 +579,73 @@
             }
         ])
 
-        
+        var data1 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Suhu', 80],
+        ]);
+
+        var options1 = {
+          animation:{
+            duration: 400,
+          },
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5
+        };
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Kelembapan', 80],
+        ]);
+
+        var options2 = {          
+          animation:{
+            duration: 400,
+          },
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5
+        };
+
+        var data3 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Tekanan', 80],
+        ]);
+
+        var options3 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 400,
+            easing: 'out'
+          },
+        };
+
+        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+
+        try {
+            data1.setValue(0,1,data.suhu);
+            chart1.draw(data1, options1)
+            ;
+            data2.setValue(0,1,data.kelembapan);
+            chart2.draw(data2, options2);
+
+            data3.setValue(0,1,data.tekanan);
+            chart3.draw(data3, options3);
+
+        } catch(e) {
+            // statements
+            console.log(e);
+        }
           
          //console.log('BLOK MQTT');
        
@@ -603,6 +695,69 @@
         onFailure: onFailure
       });
       
+    </script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data1 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Suhu', 80],
+        ]);
+
+        var options1 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 4000,
+          },
+        };
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Kelembapan', 80],
+        ]);
+
+        var options2 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 4000,
+          },
+        };
+
+        var data3 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Tekanan', 80],
+        ]);
+
+        var options3 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 4000,
+          },
+        };
+
+        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+        chart1.draw(data1, options1);
+        chart2.draw(data2, options2);
+        chart3.draw(data3, options3);
+
+      }
     </script>
 
 </body>

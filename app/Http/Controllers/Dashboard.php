@@ -26,7 +26,11 @@ class Dashboard extends Controller
         $alarm = Monitoring::where('alarm',1)->latest()->limit(10)->get();          
         // dd($alarm);
         $suhu = Satuan::where('parameter','Suhu')->first();
-        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu, 'alarm'=>$alarm]);
+        // dd($suhu->parameter);
+        $kelembapan = Satuan::where('parameter','Kelembapan')->first();
+        $tekanan = Satuan::where('parameter','Tekanan')->first();
+        $suhu = Satuan::where('parameter','Suhu')->first();
+        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu, 'alarm'=>$alarm, 'suhu'=>$suhu, 'kelembapan'=>$kelembapan,'tekanan'=>$tekanan]);
     }
 
     public function login()

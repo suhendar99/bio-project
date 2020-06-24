@@ -148,6 +148,10 @@ class MonitoringController extends Controller
             // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
+            if ($req->max <= $req->min) {
+                return redirect()->back()->with('maxmin', 'Max tidak bisa lebih kecil dari Min!');
+            }
+            
             $operator = Satuan::find($id);
             
             $operator->update([

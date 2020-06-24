@@ -151,7 +151,6 @@ class MonitoringController extends Controller
         $v = Validator::make($req->all(), [             
             'nama' => 'required|',
             'parameter' => 'required|',
-            'satuan' => 'required|',
             'max' => 'required|numeric',
             'min' => 'required|numeric'
         ]);
@@ -164,11 +163,17 @@ class MonitoringController extends Controller
             if ($req->max <= $req->min) {
                 return redirect()->back()->with('maxmin', 'Max tidak bisa lebih kecil dari Min!');
             }
-
+            if ($req->parameter == 'suhu') {
+                $satuan = 'C';
+            }elseif ($req->parameter == 'kelembapan') {
+                $satuan = '%';
+            }elseif ($req->parameter == 'tekanan') {
+                $satuan = 'Pa';
+            }
             $employee = Satuan::create([
                 'id_ruangan' => $req->nama,
                 'parameter' => $req->parameter,
-                'satuan' => $req->satuan,
+                'satuan' => $satuan,
                 'max' => $req->max,
                 'min' => $req->min
             ]);

@@ -26,11 +26,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/updatePassword/{id}','AccountController@updatePass');
         // Data Perangkat
     Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
-    Route::get('/tambah_per','OperatorController@create_per')->name('tambah.data.per');
-    Route::post('/per_tambah','OperatorController@store_per')->name('tambah.per');
-    Route::get('/edit_per/{id}','OperatorController@edit_per')->name('edit.data.per');
-    Route::put('/per_edit/{id}','OperatorController@update_per')->name('edit.per');
-    Route::delete('/per_delete/{id}','OperatorController@delete_per')->name('delete.per');
+    Route::get('/tambah_per','OperatorController@create_per')->middleware('admin')->name('tambah.data.per');
+    Route::post('/per_tambah','OperatorController@store_per')->middleware('admin')->name('tambah.per');
+    Route::get('/edit_per/{id}','OperatorController@edit_per')->middleware('admin')->name('edit.data.per');
+    Route::put('/per_edit/{id}','OperatorController@update_per')->middleware('admin')->name('edit.per');
+    Route::delete('/per_delete/{id}','OperatorController@delete_per')->middleware('admin')->name('delete.per');
     Route::get('/operator','OperatorController@index')->name('operator');
     Route::get('/operator_add','OperatorController@create')->name('tambah.data.op');
     Route::post('/op_tambah','OperatorController@store')->name('tambah.op');

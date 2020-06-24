@@ -9,6 +9,7 @@ use App\Satuan;
 use App\Ruangan;
 use App\Mqtt;
 use App\Setapp;
+use App\Log;
 use Validator;
 use Mail;
 
@@ -56,6 +57,46 @@ class MonitoringController extends Controller
         $tmax = $tekanan->max;
         $tmin = $tekanan->min; 
 
+        if ($req->suhu > $smax) {
+            $log = new Log;
+            $log->status = 'Hight presure';
+            $log->keterangan = $req->suhu.' lebih tinggi dari '.$smax;
+            $log->monitoring_id = $req->id_monitoring;
+            $log->save();
+        }else if($req->suhu < $smin){
+            $log = new Log;
+            $log->status = 'Low presure';
+            $log->keterangan = $req->suhu.' lebih tinggi dari '.$smin;
+            $log->monitoring_id = $req->id_monitoring;
+            $log->save();
+
+        }else if($req->kelembapan > $kmax){
+            $log = new Log;
+            $log->status = 'Hight presure';
+            $log->keterangan = $req->kelembapan.' lebih tinggi dari '.$smax;
+            $log->monitoring_id = $req->id_monitoring;
+            $log->save();
+
+        }else if($req->kelembapan < $kmin){
+            $log = new Log;
+            $log->status = 'Low presure';
+            $log->keterangan = $req->kelembapan.' lebih tinggi dari '.$smin;
+            $log->monitoring_id = $req->id_monitoring;
+            $log->save();
+        }else if($req->tekanan > $tmax){
+            $log = new Log;
+            $log->status = 'Hight presure';
+            $log->keterangan = $req->tekanan.' lebih tinggi dari '.$smax;
+            $log->monitoring_id = $req->id_monitoring;
+            $log->save();
+
+        }else if($req->tekanan < $tmin){
+            $log = new Log;
+            $log->status = 'Low presure';
+            $log->keterangan = $req->tekanan.' lebih tinggi dari '.$smin;
+            $log->monitoring_id = $req->id_monitoring;
+            $log->save();
+        }
 
         // if ($data->alarm == 1) {
         //     $user = Operator::all();
@@ -151,7 +192,7 @@ class MonitoringController extends Controller
             if ($req->max <= $req->min) {
                 return redirect()->back()->with('maxmin', 'Max tidak bisa lebih kecil dari Min!');
             }
-            
+
             $operator = Satuan::find($id);
             
             $operator->update([

@@ -14,6 +14,7 @@
                                 <div class="cd-timeline__content js-cd-content">
                                     <h3>Alarm 1</h3>
                                     <p>Alarm ON : {{ $a->time }}</p>
+                                    <p>Cause : {{ $a->time }}</p>
                                     <span class="cd-timeline__date">{{ $a->date }}</span>
                                 </div>
                                 <!-- cd-timeline__content -->

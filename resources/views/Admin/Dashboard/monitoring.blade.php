@@ -2,22 +2,13 @@
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
 
-    $suhu = \App\Satuan::where('id',2 )->first();
-    $kelembapan = \App\Satuan::where('id',3)->first();
-    $tekanan = \App\Satuan::where('id',4)->first();
-    $monitor = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->limit(10)->get();
-    $countmon = $monitor->count();
+    $suhu = \App\Satuan::where('parameter','suhu' )->first();
+    $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
+    $tekanan = \App\Satuan::where('parameter','tekanan')->first();
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->limit(10)->get();
+    $countmon = $monitoring->count();
 
 @endphp
-@if($countmon <= 10 )
-  @php
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->limit(10)->get();
-  @endphp
-@elseif($countmon >= 10)
-  @php
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('id_monitoring', 'asc')->get();
-  @endphp
-@endif
 
  <?php
         $topic = $mqtt->topic;
@@ -58,9 +49,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-
-<script>
-</script>
 </head>
 
 <body class="bg-dark">
@@ -575,7 +563,7 @@
 
         var data1 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Suhu', 80],
+          ['', 80],
         ]);
 
         var options1 = {
@@ -591,7 +579,7 @@
 
         var data2 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Kelembapan', 80],
+          ['', 80],
         ]);
 
         var options2 = {          
@@ -607,7 +595,7 @@
 
         var data3 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Tekanan', 80],
+          ['', 80],
         ]);
 
         var options3 = {

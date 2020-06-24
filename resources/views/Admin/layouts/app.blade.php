@@ -161,6 +161,7 @@
                                     </ul>
                                 </div>
                             </li>
+                            @if(Auth::user()->level == "Admin")
                             <li class="nav-item">
                                 <a class="nav-link
                                   {{ Request::is('set_app*') ? 'active' : false }}
@@ -178,6 +179,7 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </nav>
@@ -357,6 +359,7 @@
           }
         });
       }
+
       const url = "{{ $url_broker }}"
       var clientId = "ws" + Math.random();
       // Create a client instance

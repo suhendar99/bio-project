@@ -14,9 +14,11 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
                 <div class="card-body">
+                    @if(Auth::user()->level == "Admin")
                     <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
                         Tambah Data 
                     </a>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
@@ -28,7 +30,9 @@
                                     <th>NIK</th>
                                     <th>Instansi</th>
                                     <th>No Handphone</th>
+                                    @if(Auth::user()->level == "Admin")
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,10 +54,12 @@
                                     <td>{{ $o->nik }}</td>
                                     <td>{{ $o->instansi }}</td>
                                     <td>{{ $o->no_hp }}</td>
+                                    @if(Auth::user()->level == "Admin")
                                     <td>
                                         <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
                                         <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

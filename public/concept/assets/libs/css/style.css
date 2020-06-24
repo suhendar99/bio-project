@@ -1944,11 +1944,10 @@ Container / Wrapper
     position: relative;
     left: 0;
     margin-left: 264px;
-    min-height: 870px !important;
 }
 
 .dashboard-content {
-    padding: 30px 30px 60px 30px;
+    padding: 30px 30px 5px 30px;
 }
 
 

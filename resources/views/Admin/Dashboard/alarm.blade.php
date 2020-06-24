@@ -14,7 +14,8 @@
                                 <div class="cd-timeline__content js-cd-content">
                                     <h3>Alarm 1</h3>
                                     <p>Alarm ON : {{ $a->time }}</p>
-                                    <p>Status : {{ \App\Log_alert::where('monitoring_id', $a->id_monitoring)->first() }}</p>
+                                    <p>Status : {{ \App\Log_alert::where('monitoring_id', $a->id_monitoring)->first()->status }}</p>
+                                    <p>Keterangan : {{ \App\Log_alert::where('monitoring_id', $a->id_monitoring)->first()->keterangan }}</p>
                                     <span class="cd-timeline__date">{{ $a->date }}</span>
                                 </div>
                                 <!-- cd-timeline__content -->

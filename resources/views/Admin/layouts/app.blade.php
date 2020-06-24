@@ -27,9 +27,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.print.css">
     <title>{{ $app->tab }}</title>
     <script src="{{ asset('concept/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
+    <style>
+        .dashboard-wrapper {
+    min-height: none !important;
+}
+    </style>
 </head>
 
-<body style="height:500px;">
+
+<body>
     <!-- ============================================================== -->
     <!-- main wrapper -->
     <!-- ============================================================== -->
@@ -273,13 +279,31 @@
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
-
+    var data_monitoring;
+    
+    const rew =()=>{
+        var html='';
+        data_monitoring.forEach(row => {
+            html+=`<tr>
+                <td>${row.date}</td>
+                <td>${row.time}</td>
+                <td>${row.perangkat_id}</td>
+                <td>${row.ruangan_id}</td>
+                <td>${row.suhu}</td>
+                <td>${row.kelembapan}</td>
+                <td>${row.tekanan}</td>
+                <td>${row.alarm}</td>
+            </tr>`;
+        }); 
+        $('tbody').html(html);
+    }
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()
       {
         // Fetch the MQTT topic from the form        
         console.log('koneksi_berhasil');
         client.subscribe('{{ $topic }}');
+        rew();
       }
       function onFailure()
       {
@@ -291,8 +315,6 @@
       
       function onMessageArrived(message) {
          
-         var data = JSON.parse(message.payloadString);
-
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
@@ -313,7 +335,27 @@
         } else {
             alert('Cek Payload Alat Anda');
         }
-        
+
+         var data = JSON.parse(message.payloadString);
+         data.date=date;
+         data.time=time;
+         data_monitoring.unshift(data);
+         data_monitoring.pop();
+         console.log(data_monitoring);
+        //  raw();
+        rew();
+
+        // var raw = '<tr id="'+data.id+'">';
+        // raw += '<td>' + date + '</td>';
+        // raw += '<td>' + time + '</td>';
+        // raw += '<td>' + data.perangkat_id + '</td>';
+        // raw += '<td>' + data.ruangan_id + '</td>';
+        // raw += '<td>' + data.suhu + '</td>';
+        // raw += '<td>' + data.tekanan + '</td>';
+        // raw += '<td>' + data.kelembapan + '</td>';
+        // raw += '<td>' + data.alarm + '</td>';
+        // raw += '</tr>';
+        // $('#monitorTable tbody').prepend(raw);
 
         var over = data.suhu;
         $('#suhuRoom').text(over);
@@ -366,6 +408,10 @@
         });
       }
 
+      const settingParameter = ()=>{
+          
+      }
+
       const url = "{{ $url_broker }}"
       var clientId = "ws" + Math.random();
       // Create a client instance
@@ -384,6 +430,7 @@
         onFailure: onFailure
       });
 </script>
+@stack('script')
 </body>
  
 </html>

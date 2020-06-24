@@ -23,6 +23,7 @@ class LaporanController extends Controller
     }
     public function downloadLaporan(Request $req)
     {
+        set_time_limit(99999);
         $v = Validator::make($req->all(), [             
             'awal' => 'required|date',            
             'akhir' => 'required|date',

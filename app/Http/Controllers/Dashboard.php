@@ -11,6 +11,7 @@ use App\Perangkat;
 use App\Setting;
 use App\Monitoring;
 use App\Satuan;
+use App\Log_alert;
 use Auth;
 use PDF;
 class Dashboard extends Controller
@@ -23,7 +24,7 @@ class Dashboard extends Controller
     public function index()
     {
         $data = Ruangan::all();
-        $alarm = Monitoring::where('alarm',1)->latest()->limit(10)->get();          
+        $alarm = Monitoring::where('alarm',1)->latest()->limit(10)->get();
         // dd($alarm);
         $suhu = Satuan::where('parameter','Suhu')->first();
         // dd($suhu->parameter);

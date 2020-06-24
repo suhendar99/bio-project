@@ -42,7 +42,7 @@
                                     <td>{{ $r->satuan }}</td>
                                     <td>
                                         <a href="{{ route('satuan.edit', $r->id) }}" class="btn btn-primary">Edit</a>
-                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
+                                        <!-- <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button> -->
                                     </td>
                                 </tr>
                                 @endforeach

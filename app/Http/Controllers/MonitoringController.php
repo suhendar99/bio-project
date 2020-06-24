@@ -102,6 +102,10 @@ class MonitoringController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
 
+            if ($req->max <= $req->min) {
+                return redirect()->back()->with('maxmin', 'Max tidak bisa lebih kecil dari Min!');
+            }
+
             $employee = Satuan::create([
                 'id_ruangan' => $req->nama,
                 'parameter' => $req->parameter,
@@ -109,6 +113,8 @@ class MonitoringController extends Controller
                 'max' => $req->max,
                 'min' => $req->min
             ]);
+
+
 
             
             //  LogUser::create([

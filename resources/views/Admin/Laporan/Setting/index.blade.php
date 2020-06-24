@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" name="header_img" class="form-control @error('header_img') is-invalid @enderror"  placeholder="Header laporan" value="{{$data->header_img}}">
+                                    <input type="text" name="header_img" class="form-control @error('header_img') is-invalid @enderror"  placeholder="Header laporan" value="{{$data->header_img}}" >
                                     @error('header_img')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

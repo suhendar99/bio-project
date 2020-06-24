@@ -23,19 +23,31 @@ class LaporanController extends Controller
     }
     public function downloadLaporan(Request $req)
     {
+        $v = Validator::make($req->all(), [             
+            'awal' => 'required|date',            
+            'akhir' => 'required|date',
+        ]);
         $awal = $req->awal;
         $akhir = $req->akhir;
         $set = Laporan::find(1)->first();
         $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // dd([$data, $req->all()]);
 
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            
 
-        // dd($count,$suhumax);
+            // dd($count,$suhumax);
         
-        $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
-        // set_time_limit(300);
-        return $pdf->download('Monitoring-Report-'.$req->akhir);
-        // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            // set_time_limit(300);
+            return $pdf->stream('Monitoring-Report-'.$req->akhir);
+            // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            
+            return back()->with('success', 'Ruangan berhasil ditambahkan');
+        }
+        
     }
 
     public function set_laporan()
@@ -57,25 +69,11 @@ class LaporanController extends Controller
         }else {
             
 
-            if($request->hasfile('header_img'))
-            {                
-                $name = rand(). '.' . $request->header_img->getClientOriginalExtension();           
-                $request->header_img->move(public_path("foto/laporan/set"), $name);                                       
-                $header_img = 'foto/laporan/set'.$name;
-            }
-
-            if($request->hasfile('icon'))
+            if($request->has('icon'))
             {                
                 $name = rand(). '.' . $request->icon->getClientOriginalExtension();           
                 $request->icon->move(public_path("foto/laporan/set"), $name);                                       
                 $icon = 'foto/laporan/set'.$name;
-            }
-
-            if($request->hasfile('footer'))
-            {                
-                $name = rand(). '.' . $request->footer->getClientOriginalExtension();           
-                $request->footer->move(public_path("foto/laporan/set"), $name);                                       
-                $footer = 'foto/laporan/set'.$name;
             }
 
             $employee = Laporan::create([
@@ -112,6 +110,10 @@ class LaporanController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
             $setlaporan = Laporan::find($id);
+            $setlaporan->update([
+                'header_img' => $request->header_img,
+                'footer' => $request->footer,
+            ]);
 
             if($request->hasfile('icon'))
             {                

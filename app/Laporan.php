@@ -8,9 +8,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Laporan extends Model
 {
 	use LogsActivity;
+
     protected $table = 'setlaporan';
     protected $primarykey ="id";
+
     protected $fillable = [
+    	'header_img','icon','footer','id_operator'
+    ];
+    protected static $logAttribute = [
     	'header_img','icon','footer','id_operator'
     ];
 }

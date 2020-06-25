@@ -7,7 +7,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/set_kirim_laporan" class="btn btn-primary col-1">Back</a>
+                    <a href="/set_kirim_laporan" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -16,43 +16,40 @@
                     <form action="/aksi_edit/{{ $setkirim->id }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
+                    <div class="form-group">
+                            <label for="inputEmail">Email Operator</label>
+                            <select class="form-control" name="email">
+                                @foreach($operator as $i)
+                                    <option value="{{ $i->id }}" <?php if($i->email == $setkirim->operator->email){ echo "selected"; }  ?> >{{ $i->email }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
-                            <label for="inputEmail">Email address</label>
-                            <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control @error('email') is-invalid @enderror" name="email"value="{{ $setkirim->email }}">
-                            @error('email')
+                            <label for="inputText3" class="col-form-label">Type Pengiriman</label>
+                            <select name="status" id="" class="form-control" >
+                                <option value="Email" <?php if($setkirim->status_kirim == 'Email'){ echo "selected"; }  ?>>Email</option>
+                                <option value="Telegram" <?php if($setkirim->status_kirim == 'Telegram'){ echo "selected"; }  ?>>Telegram</option>
+                            </select>
+                            @error('status')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputText3" class="col-form-label">No Handphone</label>
-                            <input id="inputText3" type="text" class="form-control @error('hp') is-invalid @enderror" placeholder="Number Handphone" name="hp"value="{{ $setkirim->hp }}">
-                            @error('hp')
+                            <label for="inputText3" class="col-form-label">Waktu Pengiriman</label>
+                            <select name="waktu" id="" class="form-control">
+                                <option value="daily"<?php if($setkirim->waktu_kirim == 'daily'){ echo "selected"; }  ?>>Daily</option>
+                                <option value="weekly"<?php if($setkirim->waktu_kirim == 'weekly'){ echo "selected"; }  ?>>Weekly</option>
+                                <option value="mounthly"<?php if($setkirim->waktu_kirim == 'mountly'){ echo "selected"; }  ?>>Mounthly</option>
+                            </select>
+                            @error('waktu')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Tanggal</label>
-                            <input id="inputText3" type="date" class="form-control @error('date') is-invalid @enderror" placeholder="Waktu" name="date"value="{{ $setkirim->date }}">
-                            @error('date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Waktu</label>
-                            <input id="inputText3" type="time" class="form-control @error('time') is-invalid @enderror" placeholder="Waktu" name="time" value="{{ $setkirim->time }}">
-                            @error('time')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-redo"></i> Edit</button>
                     </form>
                 </div>
             </div>

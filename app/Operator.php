@@ -13,4 +13,9 @@ class Operator extends Model
     protected $fillable = [
         'name', 'email', 'password', 'nik','no_hp', 'foto'
     ];
+
+    public function setkirim()
+    {
+        return $this->hasMany('App\SetKirim','id_operator','id');
+    }
 }

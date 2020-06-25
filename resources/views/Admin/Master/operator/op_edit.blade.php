@@ -7,7 +7,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/operator" class="btn btn-primary col-1">Back</a>
+                    <a href="/operator" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -26,7 +26,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail">Email address</label>
+                            <label for="inputEmail">E-mail</label>
                             <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control @error('email') is-invalid @enderror" name="email"value="{{ $operator->email }}">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -42,15 +42,6 @@
                             <label for="inputText3" class="col-form-label">NIK</label>
                             <input id="inputText3" type="text" class="form-control @error('nik') is-invalid @enderror" placeholder="NIK" name="nik"value="{{ $operator->nik }}">
                             @error('nik')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Instansi</label>
-                            <input id="inputText3" type="text" class="form-control @error('instansi') is-invalid @enderror" placeholder="Instansi" name="instansi" value="{{ $operator->instansi }}">
-                            @error('instansi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -74,7 +65,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-redo"></i> Edit </button>
                     </form>
                 </div>
             </div>

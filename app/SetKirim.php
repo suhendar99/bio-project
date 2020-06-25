@@ -9,7 +9,14 @@ class SetKirim extends Model
 {
 	use LogsActivity;
     protected $table="set_kirims";
+    protected $primarykey = "id";
     protected $fillable = [
-        'email','hp','date','time'
+        'id_operator','status_kirim','waktu_kirim'
     ];  
+
+    public function Operator()
+    {
+        return $this->belongsTo('App\Operator','id_operator','id');
+    }
+
 }

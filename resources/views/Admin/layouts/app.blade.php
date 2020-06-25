@@ -279,7 +279,7 @@
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
-    var data_monitoring;
+    var data_monitoring ;
     
     const rew =()=>{
         var html='';
@@ -306,7 +306,7 @@
         // Fetch the MQTT topic from the form        
         console.log('koneksi_berhasil');
         client.subscribe('{{ $topic }}');
-        rew();
+        // rew();
       }
       function onFailure()
       {
@@ -317,9 +317,10 @@
       }
       
       function onMessageArrived(message) {
-         
+
+        // console.log(message.payloadString);         
         var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var date = today.getFullYear()+'-'+("0" + today.getDate()).slice(-2)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 
         // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
@@ -339,13 +340,13 @@
         //     alert('Cek Payload Alat Anda');
         // }
 
-         var data = JSON.parse(message.payloadString);
+         var data = JSON.parse(message.payloadString + "");
          data.date=date;
          data.time=time;
          data_monitoring.unshift(data);
          data_monitoring.pop();
-         console.log(data_monitoring);
-        //  raw();
+        //  console.log(data_monitoring);
+        // //  raw();
         rew();
 
         // var raw = '<tr id="'+data.id+'">';

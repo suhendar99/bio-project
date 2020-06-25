@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Telegram\Bot\FileUpload\InputFile;
  
 class TelegramBotController extends Controller
 {
@@ -31,7 +32,7 @@ class TelegramBotController extends Controller
         
          Telegram::sendDocument([
             'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
-             'document' => 'C:\laragon\www\bio-project\public\report\sample.pdf',
+             'document' => InputFile::create('report/sample.pdf'),
              'caption' => 'This is a document',
         ]);
         

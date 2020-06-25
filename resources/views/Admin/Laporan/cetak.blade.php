@@ -71,7 +71,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Create PDF</button>
+                                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
                                         </form>
                                     </div>
                                 </div>

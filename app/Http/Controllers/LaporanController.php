@@ -155,7 +155,7 @@ class LaporanController extends Controller
     public function set_kirim()
     {
         $setkirim = SetKirim::all();
-        return view('Admin.Laporan.Setting_kirim.index',compact('setkirim'));
+        return view('Admin.Laporan.tab_set_kirim',compact('setkirim'));
     }
     public function add_kirim()
     {
@@ -165,13 +165,13 @@ class LaporanController extends Controller
     public function aksi_add(Request $req)
     {
         $v = Validator::make($req->all(), [
-            'email' => 'required|',
+            'email' => 'required|unique:set_kirims,id_operator',
             'status' => 'required|',
             'waktu' => 'required|'
         ]);
 
         if ($v->fails()) {
-            dd($v->errors()->all());
+            // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
             
@@ -200,7 +200,7 @@ class LaporanController extends Controller
     public function aksi_edit(Request $req, $id)
     {
         $v = Validator::make($req->all(), [
-            'email' => 'required|',
+            'email' => 'required|unique:set_kirims,id_operator,'.$id,
             'status' => 'required|',
             'waktu' => 'required|'
         ]);

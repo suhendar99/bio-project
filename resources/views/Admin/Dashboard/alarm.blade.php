@@ -12,7 +12,7 @@
                                 </div>
                                 <!-- cd-timeline__img -->
                                 <div class="cd-timeline__content js-cd-content">
-                                    <h3>Alarm 1</h3>
+                                    <h3>Alarm</h3>
                                     <p>Alarm ON : {{ $a->time }}</p>
                                     @foreach($a->alert as $q)
                                     @if($q->time == $a->time)

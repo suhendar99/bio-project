@@ -17,11 +17,16 @@
                         @csrf
                         <div class="form-group">
                             <label for="inputEmail">Email Tujuan</label>
-                            <select class="form-control" name="email">
+                            <select class="form-control @error('email') is-invalid @enderror" name="email">
                                 @foreach($operator as $i)
                                     <option value="{{ $i->id }}">{{ $i->email }}</option>
                                 @endforeach
                             </select>
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">frekuensi Pengiriman</label>
@@ -38,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Waktu Pengiriman</label>
-                            <input type="time" name="waktu" id="" class="form-control" value="{{ old('waktu') }}">
+                            <input type="time" name="waktu" id="" class="form-control @error('waktu') is-invalid @enderror" value="{{ old('waktu') }}">
                             @error('waktu')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

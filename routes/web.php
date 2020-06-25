@@ -13,7 +13,7 @@
 Auth::routes();
 
 
-Route::get('/sendmail', 'MonitoringController@sendmail');
+Route::get('/sendEmail', 'MonitoringController@sendEmail');
 
 Route::get('/test','Dashboard@test');
 Route::middleware(['auth'])->group(function () {

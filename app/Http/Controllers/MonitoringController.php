@@ -142,7 +142,7 @@ class MonitoringController extends Controller
             $log->save();
         }
 
-        dd($data->alarm);
+        // dd($data->alarm);
         if ($data->alarm == 1) {
             $send = Mail::raw([], function($message) {
                 $message->from('biofarma@bio.com', 'Company name');
@@ -152,16 +152,13 @@ class MonitoringController extends Controller
                 $message->addPart("5% off its awesome\n\nGo get it now!", 'text/plain');
             });
 
-            dd($send);
+            // dd($send);
 
         }
 
-        // if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
-        //     Mail::raw('Alert!!! Something Wrong on The Rooms', function($mail) {
-        //         $mail->from('biofarma@gmail.com', 'BIOFARMA');
-        //         $mail->to($user->email, $user->name);
-        //     });
-        // }
+        if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
+            Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
+        }
 
     }
 

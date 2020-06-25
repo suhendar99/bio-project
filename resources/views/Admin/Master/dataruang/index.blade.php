@@ -40,8 +40,8 @@
                                     <td>{{ $r->nama }}</td>
                                     @if(Auth::user()->level == "Admin")
                                     <td>
-                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary">Edit</a>
-                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
+                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                     </td>
                                     @endif
                                 </tr>

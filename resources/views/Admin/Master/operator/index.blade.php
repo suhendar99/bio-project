@@ -16,7 +16,7 @@
                 <div class="card-body">
                     @if(Auth::user()->level == "Admin")
                     <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
-                        Tambah Data 
+                        <i class="fas fa-user-plus"></i> Tambah Data 
                     </a>
                     @endif
                     <div class="table-responsive">
@@ -28,7 +28,6 @@
                                     <th>Name</th>
                                     <th>E Mail</th>
                                     <th>NIK</th>
-                                    <th>Instansi</th>
                                     <th>No Handphone</th>
                                     @if(Auth::user()->level == "Admin")
                                     <th>Action</th>
@@ -53,12 +52,11 @@
                                     <td>{{ $o->name }}</td>
                                     <td>{{ $o->email }}</td>
                                     <td>{{ $o->nik }}</td>
-                                    <td>{{ $o->instansi }}</td>
                                     <td>{{ $o->no_hp }}</td>
                                     @if(Auth::user()->level == "Admin")
                                     <td>
-                                        <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
-                                        <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button>
+                                        <a href="/operator_edit/{{$o->id}}" class="btn btn-primary"><i class=" fas fa-edit"></i> Edit</a>
+                                        <button onclick="deletes({{ $o->id }})" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
                                     </td>
                                     @endif
                                 </tr>

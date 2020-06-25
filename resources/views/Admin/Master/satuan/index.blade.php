@@ -46,7 +46,7 @@
                                     <td>{{ $r->satuan }}</td>
                                     @if(Auth::user()->level == "Admin")
                                     <td>
-                                        <a href="{{ route('satuan.edit', $r->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('satuan.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
                                         <!-- <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button> -->
                                     </td>
                                     @endif

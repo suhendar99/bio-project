@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/edit_monitor/{id}','MonitoringController@update')->middleware('admin');
     Route::delete('/delete_monitor/{id}','MonitoringController@delete')->middleware('admin');
 
+
+
     // laporan
         // cetak laporan
     Route::get('/cetak_laporan','LaporanController@cetak_laporan')->name('cetak.laporan');

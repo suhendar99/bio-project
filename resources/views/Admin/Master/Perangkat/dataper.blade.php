@@ -6,12 +6,7 @@
                         <div class="page-header">
                             <h2 class="pageheader-title">Data Perangkat</h2>
                             <div class="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Data Perangkat</li>
-                                    </ol>
-                                </nav>
+                                
                             </div>
                         </div>
                     </div>
@@ -55,8 +50,8 @@
                                                 <td>{{ $p->tgl_aktivasi }}</td>
                                                 @if(Auth::user()->level == 'Admin')
                                                 <td>
-                                                    <a href="/edit_per/{{ $p->id }}" class="btn btn-primary">Edit</a>
-                                                    <button onclick="deletes({{ $p->id }})" class="btn btn-danger">Delete</button>
+                                                    <a href="/edit_per/{{ $p->id }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                                    <button onclick="deletes({{ $p->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                                 </td>
                                                 @endif
                                             </tr>

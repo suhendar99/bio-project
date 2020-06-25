@@ -3,12 +3,12 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Data Satuan</h2>
+                <h2 class="pageheader-title">Data Aktivasi Perangkat</h2>
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Data Satuan</li>
+                            <li class="breadcrumb-item" aria-current="page">Data Aktivasi Perangkat</li>
                             <li class="breadcrumb-item active" aria-current="page">Create</li>
                         </ol>
                     </nav>
@@ -23,36 +23,49 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('satuan.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
-                     @if (session()->has('success'))
+                    <a href="{{ route('aktivasiper.index') }}" class="btn btn-primary">Back</a>
+                    @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
                         </div>                                        
                     @endif
-                    <form action="{{ route('satuan.store') }}" method="POST" enctype="multipart/form-data">
+                    @if (session()->has('failed'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('failed') }}
+                        </div>                                        
+                    @endif
+                    <form action="{{ route('aktivasiper.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="">Parameter</label>
-                            <input type="text" class="form-control @error('parameter') is-invalid @enderror" value="{{ old('parameter') }}" name="parameter">
-
-                            @error('parameter')
+                            <label for="">Nomor Seri Perangkat</label>
+                            <select class="form-control @error('id_perangkat') is-invalid @enderror" name="id_perangkat">
+                                <option value="">Pilih No Seri Perangkat</option>
+                                @foreach($perangkat as $p)
+                                <option value="{{$p->id}}">{{$p->no_seri}}</option>
+                                @endforeach
+                            </select>
+                            @error('id_perangkat')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Satuan</label>
-                            <input type="text" class="form-control  @error('satuan') is-invalid @enderror"  name="satuan">
-
-                             @error('satuan')
+                            <label for="">Nama Ruangan</label>
+                            <select class="form-control @error('id_ruangan') is-invalid @enderror" name="id_ruangan">
+                                <option value="">Pilih Ruangan</option>
+                                @foreach($ruangan as $r)
+                                <option value="{{$r->id}}">{{$r->nama}}</option>
+                                @endforeach
+                            </select>
+                            @error('id_ruangan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>                                    
+                        </div>                                 
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-primary">Simpan <i class="fas fa-arrow-right"></i></button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>                               
                 </div>

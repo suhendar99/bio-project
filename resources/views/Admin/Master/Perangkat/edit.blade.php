@@ -7,7 +7,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/dataper" class="btn btn-primary col-1">Back</a>
+                    <a href="/dataper" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -54,14 +54,17 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Status</label>
-                            <input id="inputText3" type="text" class="form-control" placeholder="Status" name="status"value="{{ $perangkat->status }}">
+                            <select name="status" id="" class="form-control" value="{{ $perangkat->status }}">
+                                <option value="aktif">Aktif</option>
+                                <option value="off">Non Aktif</option>
+                            </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-redo"></i> Edit</button>
                     </form>
                 </div>
             </div>

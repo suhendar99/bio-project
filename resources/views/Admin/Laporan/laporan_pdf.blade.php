@@ -36,10 +36,21 @@
 		table tr th{
 			text-align: center;
 		}
+		table {
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		th, td {
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even) {background-color: #f2f2f2;}
 	</style>
 	<div class="row" style="margin-bottom: 50px;">
 		<div class="col-4 border-right">
-			<img src="{{$set->icon}}" style="float: left;" width="100%" alt="placeholder+image">
+			<img src="{{$set->icon}}" style="float: left;" width="40%" alt="placeholder+image">
 		</div>
 		<div class="col-8" >
 			<h3 style="text-align: center; margin-top: 50px;">

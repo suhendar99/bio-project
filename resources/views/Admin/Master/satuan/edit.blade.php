@@ -37,7 +37,7 @@
                             @enderror
                         </div>                                    
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-primary"> <i class="fas fa-redo"></i> Edit</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
                         </div>
                     </form>                               
                 </div>

@@ -77,8 +77,8 @@
                                         <td>{{ $o->no_hp }}</td>
                                         @if(Auth::user()->level == "Admin")
                                         <td>
-                                            <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
-                                            <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button>
+                                            <a href="/operator_edit/{{$o->id}}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                            <button onclick="deletes({{ $o->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                         </td>
                                         @endif
                                     </tr>

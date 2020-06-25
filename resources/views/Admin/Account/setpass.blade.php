@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"  required name="password">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"  required name="password" placeholder="Password Baru">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" required  name="password_confirmation">
+                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" required  name="password_confirmation" placeholder="Konfirmasi Password">
                                 @error('password_confirmation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

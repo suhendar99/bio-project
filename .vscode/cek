@@ -1,0 +1,1 @@
+<option value="Telegram" <?php if($setkirim->status_kirim == 'Telegram'){ echo "selected"; }  ?>>Telegram</option>

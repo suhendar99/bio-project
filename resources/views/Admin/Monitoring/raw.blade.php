@@ -46,7 +46,7 @@
  <script>
     $.get("{{ route('monitoring.data') }}", function(data){
     data_monitoring=data;
-    console.log(data_monitoring)
+    console.log(data_monitoring);
     });
  </script>
 @endpush

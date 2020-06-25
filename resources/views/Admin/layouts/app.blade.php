@@ -279,11 +279,12 @@
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
-    var data_monitoring = [1,2,3,4];
+    var data_monitoring;
     
     const rew =()=>{
         var html='';
-        data_monitoring.forEach((row) => {
+        if(data_monitoring.length > 0){
+            data_monitoring.forEach((row) => {
             html+=`<tr>
                 <td>${row.date}</td>
                 <td>${row.time}</td>
@@ -296,6 +297,8 @@
             </tr>`;
         }); 
         $('tbody').html(html);
+        }
+        
     }
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()
@@ -319,22 +322,22 @@
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 
-        if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
-            var raw = '<tr id="'+data.id+'">';
-            raw += '<td>' + date + '</td>';
-            raw += '<td>' + time + '</td>';
-            raw += '<td>' + data.perangkat_id + '</td>';
-            raw += '<td>' + data.ruangan_id + '</td>';
-            raw += '<td>' + data.suhu + '</td>';
-            raw += '<td>' + data.tekanan + '</td>';
-            raw += '<td>' + data.kelembapan + '</td>';
-            raw += '<td>' + data.alarm + '</td>';
-            raw += '</tr>';
+        // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
+        //     var raw = '<tr id="'+data.id+'">';
+        //     raw += '<td>' + date + '</td>';
+        //     raw += '<td>' + time + '</td>';
+        //     raw += '<td>' + data.perangkat_id + '</td>';
+        //     raw += '<td>' + data.ruangan_id + '</td>';
+        //     raw += '<td>' + data.suhu + '</td>';
+        //     raw += '<td>' + data.tekanan + '</td>';
+        //     raw += '<td>' + data.kelembapan + '</td>';
+        //     raw += '<td>' + data.alarm + '</td>';
+        //     raw += '</tr>';
 
-            $('#monitorTable tbody').prepend(raw);
-        } else {
-            alert('Cek Payload Alat Anda');
-        }
+        //     $('#monitorTable tbody').prepend(raw);
+        // } else {
+        //     alert('Cek Payload Alat Anda');
+        // }
 
          var data = JSON.parse(message.payloadString);
          data.date=date;

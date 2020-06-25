@@ -48,7 +48,7 @@ class AktivasiPerController extends Controller
     	// $ruangan = Ruangan::where('id','!=',5)->get();
         // $data = AktivasiPerangkat::where([['id_perangkat',$perangkat->id], ['id_ruangan',$ruangan->id]])->exists();
         // dd($datap, $datar);
-    	return view('Admin.Master.aktivasiper.create', ['perangkat'=>$datap,'ruangan'=>$datar]);
+    	return view('Admin.Master.aktivasiper.create', ['perangkat'=>$perangkat,'ruangan'=>$ruangan]);
     }
 
     public function store(Request $request)

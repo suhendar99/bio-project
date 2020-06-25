@@ -74,7 +74,7 @@ class OperatorController extends Controller
             ]);
 
         if ($v->fails()) {
-            dd($v->errors()->all());
+            // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
             $operator = Operator::find($id);

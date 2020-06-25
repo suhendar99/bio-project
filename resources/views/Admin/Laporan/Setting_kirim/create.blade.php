@@ -27,7 +27,7 @@
                             <label for="inputText3" class="col-form-label">Type Pengiriman</label>
                             <select name="status" id="" class="form-control">
                                 <option value="Email">Email</option>
-                                <option value="Telegram">Telegram</option>
+                                <!-- <option value="Telegram">Telegram</option> -->
                             </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">

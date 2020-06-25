@@ -49,7 +49,7 @@ class LaporanController extends Controller
         
             $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             // set_time_limit(300);
-            return $pdf->stream('Monitoring-Report-'.$req->akhir);
+        return $pdf->stream('Monitoring-Report-'.$req->akhir);
             // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             
             return back()->with('success', 'Ruangan berhasil ditambahkan');
@@ -200,7 +200,7 @@ class LaporanController extends Controller
         ]);
 
         if ($v->fails()) {
-            dd($v->errors()->all());
+            // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
             

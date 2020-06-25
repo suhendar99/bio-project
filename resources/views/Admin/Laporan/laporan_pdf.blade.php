@@ -19,15 +19,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Laporan Monitoring</title>
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+	<title>Laporan Monitoring</title>	
 	<style>
+		#customers {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		}
+
+		#customers td, #customers th {
+		border: 1px solid #ddd;
+		padding: 8px;
+		}
+
+		#customers tr:nth-child(even){background-color: #ddd;}
+
+		#customers tr:hover {background-color: #ddd;}
+
+		#customers th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #8a8a8a;
+		color: white;
+		}
+
 		*{
 			font-family:sans-serif;
 		}
+		table {
+			width: 100%;
+			padding: 5px;
+		}
+		table, th, tr, td {
+			border: 1px black;
+			text-align: center;
+		} 
 	</style>
 </head>
 <body>
+	<img src="{{$set->icon}}" style="float: left;" width="150px">
+	<h3 style="text-align: center; margin-top: 50px; margin-left: 100px;">
+		{{$set->header_img}}
+	</h3> 
+
 	<div class="container">
 	<style type="text/css">
 		table tr td{
@@ -64,93 +99,82 @@
 	</center>
 	
 
-	<div class="row">
-		<table class='table table-bordered' width="100%" style="border:1;">
-			<thead>
-				<tr>
-					<th>No</th>
-					<th>Waktu</th>
-					<th>Suhu</th>
-					<th>Kelembapan</th>
-					<th>Tekanan</th>
-					<th>Alarm</th>
-					<th>Nama Ruangan</th>
-					<th>No Seri Perngkat</th>
-				</tr>
-			</thead>
-			<tbody>
-				@php $i=1 @endphp
-				@foreach($data as $p)
-				<tr>
-					<td>{{ $i++ }}</td>
-					<td>{{$p->time}}</td>
-					<td>{{$p->suhu}}</td>
-					<td>{{$p->kelembapan}}</td>
-					<td>{{$p->tekanan}}</td>
-					<td>{{$p->alarm}}</td>
-					<td>{{$p->ruangan->nama}}</td>
-					<td>{{$p->perangkat->no_seri}}</td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
-	</div>
+	<table width="100%" style="margin-bottom: 30px; " id="customers">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>Waktu</th>
+				<th>Suhu</th>
+				<th>Kelembapan</th>
+				<th>Tekanan</th>
+				<th>Alarm</th>
+				<th>Nama Ruangan</th>
+				<th>No Seri Perangkat</th>
+			</tr>
+		</thead>
+		<tbody>
+			@php $i=1 @endphp
+			@foreach($data as $p)
+			<tr>
+				<td>{{ $i++ }}</td>
+				<td>{{$p->time}}</td>
+				<td>{{$p->suhu}}</td>
+				<td>{{$p->kelembapan}}</td>
+				<td>{{$p->tekanan}}</td>
+				<td>{{$p->alarm}}</td>
+				<td>{{$p->ruangan->nama}}</td>
+				<td>{{$p->perangkat->no_seri}}</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
 
-	<div class="row">
-		<table class="table table-bordered" width="100%" style="border-style:solid;">
-			<thead>
-				<tr>
-					<th>Jumlah Baris</th>
-					<th>Suhu Tertinggi</th>
-					<th>Suhu Terendah</th>
-					<th>Suhu Rata Rata</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>{{$count}}</td>
-					<td>{{$smin}}</td>
-					<td>{{$smax}}</td>
-					<td>{{$savg}}</td>
-				</tr>
-			</tbody>
-		</table>
-		<table width="100%" style="border-style:solid;">
-			<thead>
-				<th>Kelembapan Tertinggi</th>
-				<th>Kelembapan Terendah</th>
-				<th>Kelembapan Rata Rata</th>
-			</thead>
-			<tbody>
-				<td>{{$kmin}}</td>
-				<td>{{$kmax}}</td>
-				<td>{{$kavg}}</td>
-			</tbody>
-		</table>
-		<table width="100%" style="border-style:solid;">
-			<thead>
-				<th>Tekanan Tertinggi</th>
-				<th>Tekanan Terendah</th>
-				<th>Tekanan Rata Rata</th>
-			</thead>
-			<tbody>
-				<td>{{$tmin}}</td>
-				<td>{{$tmax}}</td>
-				<td>{{$tavg}}</td>
-			</tbody>
-		</table>
-	</div>
-	
-	<div class="row" style="margin-bottom: 50px;">
-		<div class="col-8">
-			
-		</div>
-		<div class="col-4">
-			{{$set->footer}},  {{$date}}<br>
-			{{Auth::user()->name}}
-		</div>
-	</div>
-		
+	<table style="text-align: left !important; margin-bottom: 50px;" id="customers">
+		<tr>
+			<td>Jumlah Baris</td>
+			<td style="text-align: right !important;">{{$count}}</td>
+		</tr>
+		<tr>
+			<td>Suhu Tertinggi</td>
+			<td style="text-align: right !important;">{{$smin}}</td>
+		</tr>
+		<tr>
+			<td>Suhu Terendah</td>
+			<td style="text-align: right !important;">{{$smax}}</td>
+		</tr>
+		<tr>
+			<td>Suhu Rata Rata</td>
+			<td style="text-align: right !important;">{{$savg}}</td>
+		</tr>
+		<tr>
+			<td>Kelembapan Tertinggi</td>
+			<td style="text-align: right !important;">{{$kmax}}</td>
+		</tr>
+		<tr>
+			<td>Kelembapan Terendah</td>
+			<td style="text-align: right !important;">{{$kmin}}</td>
+		</tr>
+		<tr>
+			<td>Kelembapan Rata Rata</td>
+			<td style="text-align: right !important;">{{$kavg}}</td>
+		</tr>
+		<tr>
+			<td>Tekanan Tertinggi</td>
+			<td style="text-align: right !important;">{{$tmax}}</td>
+		</tr>
+		<tr>
+			<td>Tekanan Terendah</td>
+			<td style="text-align: right !important;">{{$tmin}}</td>
+		</tr>
+		<tr>
+			<td>Tekanan Rata Rata</td>
+			<td style="text-align: right !important;">{{$tavg}}</td>
+		</tr>
+	</table>
+
+	<div style="float: right;">
+		{{$set->footer}},  {{$date}}<br>
+		{{Auth::user()->name}}
 	</div>
 </body>
 </html>

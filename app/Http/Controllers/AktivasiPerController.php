@@ -27,6 +27,11 @@ class AktivasiPerController extends Controller
         //     $ruangan = Ruangan::where('id','!=', $a->id_ruangan)->get();
         //     // dd($perangkat, $ruangan);  
         // }
+     //    $data = AktivasiPerangkat::all();
+    	// $ruangan = Ruangan::where('id','!=',5)->get();
+        // $data = AktivasiPerangkat::where([['id_perangkat',$perangkat->id], ['id_ruangan',$ruangan->id]])->exists();
+        // dd($datap, $datar);
+
         
         $ruangan = Ruangan::all();
         $perangkat = Perangkat::all();

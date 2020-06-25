@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Email</title>
-</head>
-<body>
-	<h3>
-		Hello I am Email
-	</h3>
-</body>
-</html>
+<h3>Halo, {{ $nama }} !</h3>
+<p>{{ $website }}</p>
+ 
+<p>Selamat datang di <a href="https://www.malasngoding.com/kirim-email-dengan-laravel/">www.malasngoding.com</a></p>
+<p>Tutorial Laravel #35 : kirim email dengan laravel.</p>

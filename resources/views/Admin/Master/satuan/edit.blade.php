@@ -5,13 +5,7 @@
             <div class="page-header">
                 <h2 class="pageheader-title">Data Satuan</h2>
                 <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Data Satuan</li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
-                        </ol>
-                    </nav>
+                    
                 </div>
             </div>
         </div>
@@ -23,13 +17,13 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('satuan.index') }}" class="btn btn-primary">Back</a>
+                    <a href="{{ route('satuan.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                      @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
                         </div>                                        
                     @endif
-                    <form action="{{ route('satuan.update', $satuan->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('satuan.update', [ 'id' => $satuan->id ]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                             <input type="hidden" class="form-control @error('parameter') is-invalid @enderror" value="{{ $satuan->parameter }}" name="parameter">
@@ -43,7 +37,7 @@
                             @enderror
                         </div>                                    
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary"> <i class="fas fa-redo"></i> Edit</button>
                         </div>
                     </form>                               
                 </div>

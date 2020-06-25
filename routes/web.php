@@ -35,19 +35,29 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/per_edit/{id}','OperatorController@update_per')->middleware('admin')->name('edit.per');
     Route::delete('/per_delete/{id}','OperatorController@delete_per')->middleware('admin')->name('delete.per');
     Route::get('/operator','OperatorController@index')->name('operator');
-    Route::get('/operator_add','OperatorController@create')->name('tambah.data.op');
-    Route::post('/op_tambah','OperatorController@store')->name('tambah.op');
-    Route::get('/operator_edit/{id}','OperatorController@edit')->name('edit.data.op');
-    Route::put('/op_edit/{id}','OperatorController@update');
-    Route::delete('/operator_delete/{id}','OperatorController@delete');
+    Route::get('/operator_add','OperatorController@create')->middleware('admin')->name('tambah.data.op');
+    Route::post('/op_tambah','OperatorController@store')->middleware('admin')->name('tambah.op');
+    Route::get('/operator_edit/{id}','OperatorController@edit')->middleware('admin')->name('edit.data.op');
+    Route::put('/op_edit/{id}','OperatorController@update')->middleware('admin');
+    Route::delete('/operator_delete/{id}','OperatorController@delete')->middleware('admin');
         // Data Perangkat
     Route::get('/dataper','OperatorController@dataper')->name('data.perangkat');
         // Data Ruangan
-    Route::resource('/data_ruang','RuanganController');
+    Route::get('/data_ruang','RuanganController@index')->name('data_ruang.index');
+    Route::get('/data_ruang/create','RuanganController@create')->middleware('admin')->name('data_ruang.create');
+    Route::post('/data_ruang/store','RuanganController@store')->middleware('admin')->name('data_ruang.store');
+    Route::get('/data_ruang/delete/{id}','RuanganController@destroy')->middleware('admin');
+    Route::get('/data_ruang/form/edit/{id}','RuanganController@edit')->middleware('admin')->name('data_ruang.edit');
+    Route::put('/data_ruang/update/{id}','RuanganController@update')->middleware('admin')->name('data_ruang.update');
         // Data Satuan
-    Route::resource('/satuan','SatuanController')->middleware('admin');
-    	// Data Aktivasi
+    Route::get('/satuan','SatuanController@index')->name('satuan.index');
+    Route::get('/satuan/create','SatuanController@create')->middleware('admin')->name('satuan.create');
+    Route::post('/satuan/store','SatuanController@store')->middleware('admin')->name('satuan.store');
+    Route::get('/satuan/edit/{id}','SatuanController@edit')->middleware('admin')->name('satuan.edit');
+    Route::put('/satuan/update/{id}','SatuanController@update')->middleware('admin')->name('satuan.update');
+
     Route::resource('/aktivasiper','AktivasiPerController');
+
     // monitoring
         // raw data
     Route::get('/monitoring','monitoringController@index')->name('monitoring');
@@ -55,9 +65,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/set_monitoring','MonitoringController@set_monitoring')->middleware('admin')->name('setting.monitoring');
     Route::get('/set_add_monitor','MonitoringController@add_monitor')->middleware('admin')->name('tambah.set.monitor');
     Route::post('/add_monitor','MonitoringController@add_aksi')->middleware('admin')->name('tambah.monitor');
-    Route::get('/set_edit_monitor/{id}','MonitoringController@edit');
-    Route::put('/edit_monitor/{id}','MonitoringController@update');
-    Route::delete('/delete_monitor/{id}','MonitoringController@delete');
+    Route::get('/set_edit_monitor/{id}','MonitoringController@edit')->middleware('admin');
+    Route::put('/edit_monitor/{id}','MonitoringController@update')->middleware('admin');
+    Route::delete('/delete_monitor/{id}','MonitoringController@delete')->middleware('admin');
 
 
 
@@ -89,5 +99,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/updated-activity', 'TelegramBotController@updatedActivity');
+    Route::get('/send-telegram', 'TelegramBotController@sendMessage');
 });
 

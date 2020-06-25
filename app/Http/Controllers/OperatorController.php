@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\operator;
-use App\Perangkat;
 use Validator;
+use App\Operator;
+use App\Perangkat;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class OperatorController extends Controller
 {
@@ -29,11 +30,10 @@ class OperatorController extends Controller
     public function store(Request $req)
     {
         $this->validate($req,[
-            'nama' => 'required|min:2',
+            'nama' => 'required|',
             'email' => 'required|email|unique:users',
             'nik' => 'required|numeric',
             'password' => 'required|min:6',
-            'instansi' => 'required|',
             'hp' => 'required|',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
@@ -41,13 +41,14 @@ class OperatorController extends Controller
         $req->foto->move(public_path('foto'),$foto);
 
         $operator =  new operator;
-        $operator->name = $req->name;
+        $operator->name = $req->nama;
         $operator->email = $req->email;
         $operator->password = Hash::make($req->password);
         $operator->nik = $req->nik;
-        $operator->instansi = $req->instansi;
         $operator->no_hp = $req->hp;
         $operator->foto = $foto;
+        $operator->level = "Operator";
+
         if ($operator->save()) {
             return redirect()->back()->with('success','Data Berhasil di Tambahkan');
         }else {
@@ -68,13 +69,12 @@ class OperatorController extends Controller
             'email' => 'required|email|unique:users,email,'.$id,
             'nik' => 'required|numeric|unique:users,nik,'.$id,
             'password' => 'required|min:6',
-            'instansi' => 'required|',
             'hp' => 'required|',
             'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
-        ]);
+            ]);
 
         if ($v->fails()) {
-            // dd($v->errors()->all());
+            dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
             $operator = Operator::find($id);
@@ -84,7 +84,6 @@ class OperatorController extends Controller
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
                 'nik' => $req->nik,
-                'instansi' => $req->instansi,
                 'no_hp'=> $req->hp,
             ]);
 
@@ -125,7 +124,7 @@ class OperatorController extends Controller
     public function store_per(Request $req)
     {
         $this->validate($req,[
-            'seri' => 'required|numeric:',
+            'no_seri' => 'required|numeric|unique:perangkats',
             'latitude' => 'required|',
             'longitude' => 'required|',
             'aktivasi' => 'required|date',
@@ -133,7 +132,7 @@ class OperatorController extends Controller
         ]);
 
         Perangkat::create([
-            'no_seri' => $req->seri,
+            'no_seri' => $req->no_seri,
             'latitude' => $req->latitude,
             'longitude' => $req->longitude,
             'tgl_aktivasi' => $req->aktivasi,
@@ -149,7 +148,7 @@ class OperatorController extends Controller
     public function update_per(Request $req, $id)
     {
         $this->validate($req,[
-            'seri' => 'required|numeric:',
+            'seri' => 'required|numeric|unique:perangkats,no_seri'.$id,
             'latitude' => 'required|',
             'longitude' => 'required|',
             'aktivasi' => 'required|date',

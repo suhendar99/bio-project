@@ -5,13 +5,7 @@
             <div class="page-header">
                 <h2 class="pageheader-title">Data Ruang</h2>
                 <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Data Ruang</li>
-                            <li class="breadcrumb-item active" aria-current="page">Create</li>
-                        </ol>
-                    </nav>
+                    
                 </div>
             </div>
         </div>
@@ -23,13 +17,13 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('data_ruang.index') }}" class="btn btn-primary">Back</a>
+                    <a href="{{ route('data_ruang.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                      @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
                         </div>                                        
                     @endif
-                    <form action="{{ route('data_ruang.update', $ruangan->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('data_ruang.update', ['id' => $ruangan->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -53,7 +47,7 @@
                             @enderror
                         </div>                                    
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-redo"></i> Simpan</button>
                         </div>
                     </form>                               
                 </div>

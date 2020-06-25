@@ -54,7 +54,7 @@
 	
 
 	<div class="row">
-		<table class='table table-bordered' width="100%">
+		<table class='table table-bordered' width="100%" style="border:1;">
 			<thead>
 				<tr>
 					<th>No</th>
@@ -86,19 +86,13 @@
 	</div>
 
 	<div class="row">
-		<table class="table table-bordered">
+		<table class="table table-bordered" width="100%" style="border-style:solid;">
 			<thead>
 				<tr>
 					<th>Jumlah Baris</th>
 					<th>Suhu Tertinggi</th>
 					<th>Suhu Terendah</th>
 					<th>Suhu Rata Rata</th>
-					<th>Kelembapan Tertinggi</th>
-					<th>Kelembapan Terendah</th>
-					<th>Kelembapan Rata Rata</th>
-					<th>Tekanan Tertinggi</th>
-					<th>Tekanan Terendah</th>
-					<th>Tekanan Rata Rata</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -107,13 +101,31 @@
 					<td>{{$smin}}</td>
 					<td>{{$smax}}</td>
 					<td>{{$savg}}</td>
-					<td>{{$kmin}}</td>
-					<td>{{$kmax}}</td>
-					<td>{{$kavg}}</td>
-					<td>{{$tmin}}</td>
-					<td>{{$tmax}}</td>
-					<td>{{$tavg}}</td>
 				</tr>
+			</tbody>
+		</table>
+		<table width="100%" style="border-style:solid;">
+			<thead>
+				<th>Kelembapan Tertinggi</th>
+				<th>Kelembapan Terendah</th>
+				<th>Kelembapan Rata Rata</th>
+			</thead>
+			<tbody>
+				<td>{{$kmin}}</td>
+				<td>{{$kmax}}</td>
+				<td>{{$kavg}}</td>
+			</tbody>
+		</table>
+		<table width="100%" style="border-style:solid;">
+			<thead>
+				<th>Tekanan Tertinggi</th>
+				<th>Tekanan Terendah</th>
+				<th>Tekanan Rata Rata</th>
+			</thead>
+			<tbody>
+				<td>{{$tmin}}</td>
+				<td>{{$tmax}}</td>
+				<td>{{$tavg}}</td>
 			</tbody>
 		</table>
 	</div>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Laporan;
-use App\Monitoring;
-use App\SetKirim;
 use PDF;
 use Validator;
+use App\Laporan;
+use App\Operator;
+use App\SetKirim;
+use App\Monitoring;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
@@ -148,16 +149,15 @@ class LaporanController extends Controller
     }
     public function add_kirim()
     {
-        $setkirim = SetKirim::all();
-        return view('Admin.Laporan.Setting_kirim.create',compact('setkirim'));   
+        $operator = Operator::all();
+        return view('Admin.Laporan.Setting_kirim.create',compact('operator'));   
     }
     public function aksi_add(Request $req)
     {
         $v = Validator::make($req->all(), [
-            'email' => 'required|email|unique:set_kirims',
-            'hp' => 'required|',
-            'date' => 'required|date',
-            'time' => 'required|',
+            'email' => 'required|',
+            'status' => 'required|',
+            'waktu' => 'required|'
         ]);
 
         if ($v->fails()) {
@@ -165,10 +165,10 @@ class LaporanController extends Controller
         }else {
             
             $employee = SetKirim::create([
-                'email' => $req->email,
-                'hp' => $req->hp,
-                'date' => $req->date,
-                'time' => $req->time,
+                'id_operator' => $req->email,
+                'status_kirim' => $req->status,
+                'waktu_kirim' => $req->waktu,
+                
             ]);
 
             
@@ -182,29 +182,29 @@ class LaporanController extends Controller
     }
     public function edit_kirim($id)
     {
+        $operator = Operator::all();
         $setkirim = SetKirim::findOrFail($id);
-        return view('Admin.Laporan.Setting_kirim.edit',compact('setkirim'));
+        return view('Admin.Laporan.Setting_kirim.edit',compact('setkirim','operator'));
     }
     public function aksi_edit(Request $req, $id)
     {
         $v = Validator::make($req->all(), [
-            'email' => 'required|email|unique:set_kirims,email,'.$id,
-            'hp' => 'required|',
-            'date' => 'required|date',
-            'time' => 'required|',
+            'email' => 'required|',
+            'status' => 'required|',
+            'waktu' => 'required|'
         ]);
 
         if ($v->fails()) {
+            dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
             
             $operator = SetKirim::find($id);
 
             $operator->update([
-                'email' => $req->email,
-                'hp' => $req->hp,
-                'date' => $req->date,
-                'time' => $req->time,
+                'id_operator' => $req->email,
+                'status_kirim' => $req->status,
+                'waktu_kirim' => $req->waktu,
             ]);
 
             //  LogUser::create([
@@ -212,7 +212,7 @@ class LaporanController extends Controller
             //     'detail' => 'added new category  product : '.$request->name
             // ]);
             
-            return back()->with('success', 'Data berhasil ditambahkan');
+            return back()->with('success', 'Data berhasil diedit');
         }        
     }
 }

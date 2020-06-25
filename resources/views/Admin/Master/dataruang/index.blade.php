@@ -14,7 +14,9 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
+                    @if(Auth::user()->level == "Admin")
                     <a href="{{ route('data_ruang.create') }}" class="btn btn-primary">Tambah ruangan</a>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
@@ -22,7 +24,9 @@
                                     <th>No</th>
                                     <th>Foto</th>
                                     <th>Nama Ruang</th>
+                                    @if(Auth::user()->level == "Admin")
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,10 +38,12 @@
                                         <img src="{{ $r->foto }}" alt="" srcset="" style="width:100px; height:100px">
                                     </td>
                                     <td>{{ $r->nama }}</td>
+                                    @if(Auth::user()->level == "Admin")
                                     <td>
-                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary">Edit</a>
-                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
+                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -50,9 +56,8 @@
 </div>
 
 
-<form action="" id="formDelete" method="POST">
+<form action="" id="formDelete" method="get">
     @csrf
-    @method('DELETE')
 
 </form>
 
@@ -61,7 +66,7 @@
 <script>
      function deletes(id){
         const formDelete = document.getElementById('formDelete')
-        formDelete.action = '/data_ruang/'+id
+        formDelete.action = '/data_ruang/delete/'+id
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",

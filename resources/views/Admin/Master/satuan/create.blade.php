@@ -23,7 +23,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('satuan.index') }}" class="btn btn-primary">Back</a>
+                    <a href="{{ route('satuan.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
                      @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -52,7 +52,7 @@
                             @enderror
                         </div>                                    
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan <i class="fas fa-arrow-right"></i></button>
                         </div>
                     </form>                               
                 </div>

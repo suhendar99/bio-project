@@ -319,72 +319,72 @@
       
       function onMessageArrived(message) {
          
-        var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        // var today = new Date();
+        // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        // var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 
-        if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
-            var raw = '<tr id="'+data.id+'">';
-            raw += '<td>' + date + '</td>';
-            raw += '<td>' + time + '</td>';
-            raw += '<td>' + data.perangkat_id + '</td>';
-            raw += '<td>' + data.ruangan_id + '</td>';
-            raw += '<td>' + data.suhu + '</td>';
-            raw += '<td>' + data.tekanan + '</td>';
-            raw += '<td>' + data.kelembapan + '</td>';
-            raw += '<td>' + data.alarm + '</td>';
-            raw += '</tr>';
+        // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
+        //     var raw = '<tr id="'+data.id+'">';
+        //     raw += '<td>' + date + '</td>';
+        //     raw += '<td>' + time + '</td>';
+        //     raw += '<td>' + data.perangkat_id + '</td>';
+        //     raw += '<td>' + data.ruangan_id + '</td>';
+        //     raw += '<td>' + data.suhu + '</td>';
+        //     raw += '<td>' + data.tekanan + '</td>';
+        //     raw += '<td>' + data.kelembapan + '</td>';
+        //     raw += '<td>' + data.alarm + '</td>';
+        //     raw += '</tr>';
 
-            $('#monitorTable tbody').prepend(raw);
-        } else {
-            alert('Cek Payload Alat Anda');
-        }
+        //     $('#monitorTable tbody').prepend(raw);
+        // } else {
+        //     alert('Cek Payload Alat Anda');
+        // }
 
-         var data = JSON.parse(message.payloadString);
-         data.date=date;
-         data.time=time;
-         data_monitoring.unshift(data);
-         data_monitoring.pop();
-         console.log(data_monitoring);
-        //  raw();
-        rew();
+        //  var data = JSON.parse(message.payloadString);
+        //  data.date=date;
+        //  data.time=time;
+        //  data_monitoring.unshift(data);
+        //  data_monitoring.pop();
+        //  console.log(data_monitoring);
+        // //  raw();
+        // rew();
 
-        // var raw = '<tr id="'+data.id+'">';
-        // raw += '<td>' + date + '</td>';
-        // raw += '<td>' + time + '</td>';
-        // raw += '<td>' + data.perangkat_id + '</td>';
-        // raw += '<td>' + data.ruangan_id + '</td>';
-        // raw += '<td>' + data.suhu + '</td>';
-        // raw += '<td>' + data.tekanan + '</td>';
-        // raw += '<td>' + data.kelembapan + '</td>';
-        // raw += '<td>' + data.alarm + '</td>';
-        // raw += '</tr>';
-        // $('#monitorTable tbody').prepend(raw);
+        // // var raw = '<tr id="'+data.id+'">';
+        // // raw += '<td>' + date + '</td>';
+        // // raw += '<td>' + time + '</td>';
+        // // raw += '<td>' + data.perangkat_id + '</td>';
+        // // raw += '<td>' + data.ruangan_id + '</td>';
+        // // raw += '<td>' + data.suhu + '</td>';
+        // // raw += '<td>' + data.tekanan + '</td>';
+        // // raw += '<td>' + data.kelembapan + '</td>';
+        // // raw += '<td>' + data.alarm + '</td>';
+        // // raw += '</tr>';
+        // // $('#monitorTable tbody').prepend(raw);
 
-        var over = data.suhu;
-        $('#suhuRoom').text(over);
+        // var over = data.suhu;
+        // $('#suhuRoom').text(over);
           
-        if (data.alarm == 1 ) {
-            var alarm = '<div class="cd-timeline__block js-cd-block">' ;
-            alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
-            alarm += '<img src="{{ asset('svg/alarm.svg') }}" alt="Movie" width="40px" height="40px">';
-            alarm += '</div>';
-            alarm += '<div class="cd-timeline__content js-cd-content">';
-            alarm += '<h3>Alarm 1</h3>';
-            alarm += '<p>Alarm ON :' + time + '</p>';
-            alarm += '<span class="cd-timeline__date">' + date + '</span>';
-            alarm += '</div>';
-            alarm += '</div>';
+        // if (data.alarm == 1 ) {
+        //     var alarm = '<div class="cd-timeline__block js-cd-block">' ;
+        //     alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
+        //     alarm += '<img src="{{ asset('svg/alarm.svg') }}" alt="Movie" width="40px" height="40px">';
+        //     alarm += '</div>';
+        //     alarm += '<div class="cd-timeline__content js-cd-content">';
+        //     alarm += '<h3>Alarm 1</h3>';
+        //     alarm += '<p>Alarm ON :' + time + '</p>';
+        //     alarm += '<span class="cd-timeline__date">' + date + '</span>';
+        //     alarm += '</div>';
+        //     alarm += '</div>';
 
-            $('#alarmReal').prepend(alarm);
-        } else {
+        //     $('#alarmReal').prepend(alarm);
+        // } else {
 
-        }
+        // }
         
           
          //console.log('BLOK MQTT');
        
-         insert_data(data);
+         insert_data(message);
          // console.log(html);
       }
       
@@ -403,8 +403,8 @@
           method:'POST',
           data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id},
           dataType:'JSON',
-          success:function(){
-            console.log('BERHASILLL');
+          success:function(response){
+            console.log(response);
           },
           error : function(e) {
             console.log(e)

@@ -9,7 +9,7 @@ class TelegramBotController extends Controller
 {
     public function updatedActivity()
     {
-        $activity = Telegram::getUpdates();
+        $activity = Telegram::getMe();;
         dd($activity);
     }
 

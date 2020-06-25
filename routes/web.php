@@ -57,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/satuan/update/{id}','SatuanController@update')->middleware('admin')->name('satuan.update');
 
     Route::resource('/aktivasiper','AktivasiPerController');
-
     // monitoring
         // raw data
     Route::get('/monitoring','monitoringController@index')->name('monitoring');

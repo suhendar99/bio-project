@@ -62,6 +62,37 @@
 	<h3 style="text-align: center; margin-top: 50px; margin-left: 100px;">
 		{{$set->header_img}}
 	</h3> 
+
+	<div class="container">
+	<style type="text/css">
+		table tr td{
+			text-align: center;
+		},
+		table tr th{
+			text-align: center;
+		}
+		table {
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		th, td {
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even) {background-color: #f2f2f2;}
+	</style>
+	<div class="row" style="margin-bottom: 50px;">
+		<div class="col-4 border-right">
+			<img src="{{$set->icon}}" style="float: left;" width="40%" alt="placeholder+image">
+		</div>
+		<div class="col-8" >
+			<h3 style="text-align: center; margin-top: 50px;">
+				{{$set->header_img}}
+			</h3> 
+		</div>
+	</div>
 	<center>
 		<h3>Data Monitoring</h3><br>
 		<h6>Dari {{$awal}} s.d. {{$akhir}}</h6>

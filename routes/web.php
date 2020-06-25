@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/satuan/edit/{id}','SatuanController@edit')->middleware('admin')->name('satuan.edit');
     Route::put('/satuan/update/{id}','SatuanController@update')->middleware('admin')->name('satuan.update');
 
+
     // Aktivasiper
     Route::get('/aktivasiper','AktivasiPerController@index')->name('aktivasiper.index');
     Route::get('/aktivasiper/create','AktivasiPerController@create')->middleware('admin')->name('aktivasiper.create');
@@ -63,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/aktivasiper/edit/{id}','AktivasiPerController@edit')->middleware('admin')->name('aktivasiper.edit');
     Route::put('/aktivasiper/update/{id}','AktivasiPerController@update')->middleware('admin')->name('aktivasiper.update');
     Route::get('/aktivasiper/delete/{id}','AktivasiPerController@destroy')->middleware('admin');
+
     // monitoring
         // raw data
     Route::get('/monitoring','monitoringController@index')->name('monitoring');
@@ -104,5 +106,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/updated-activity', 'TelegramBotController@updatedActivity');
+    Route::get('/send-telegram', 'TelegramBotController@sendMessage');
 });
 

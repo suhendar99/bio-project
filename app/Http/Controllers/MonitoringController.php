@@ -153,11 +153,11 @@ class MonitoringController extends Controller
 
             // dd($send);
 
-        }
+        // }
 
-        if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
-            Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
-        }
+        // if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
+        //     Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
+        // }
 
     }
 

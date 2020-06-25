@@ -3,38 +3,26 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Data Satuan</h2>
+                <h2 class="pageheader-title">Data Aktivasi Perangkat</h2>
                 <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Satuan</li>
-                        </ol>
-                    </nav>
+                    
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <!-- ============================================================== -->
-        <!-- basic table  -->
-        <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    @if(Auth::user()->level == "Admin")
-                    <a class="btn btn-primary" href="{{route('satuan.create')}}">Tambah Data</a>
-                    @endif
+                    <a href="{{ route('aktivasiper.create') }}" class="btn btn-primary">Tambah Aktivasi</a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Parameter</th>
-                                    <th>Satuan</th>
-                                    @if(Auth::user()->level == "Admin")
+                                    <th>Seri Perangkat</th>
+                                    <th>Nama Ruang</th>
                                     <th>Action</th>
-                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,14 +30,13 @@
                             @foreach( $data as $r)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $r->parameter}}</td>
-                                    <td>{{ $r->satuan }}</td>
-                                    @if(Auth::user()->level == "Admin")
-                                    <td>
-                                        <a href="{{ route('satuan.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
-                                        <!-- <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button> -->
+                                    <td>{{ $r->perangkat->no_seri}}
                                     </td>
-                                    @endif
+                                    <td>{{ $r->ruangan->nama }}</td>
+                                    <td>
+                                        <a href="{{ route('aktivasiper.edit', $r->id) }}" class="btn btn-primary">Edit</a>
+                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -58,11 +45,9 @@
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- end basic table  -->
-        <!-- ============================================================== -->
     </div>
 </div>
+
 
 <form action="" id="formDelete" method="POST">
     @csrf
@@ -75,7 +60,7 @@
 <script>
      function deletes(id){
         const formDelete = document.getElementById('formDelete')
-        formDelete.action = '/satuan/'+id
+        formDelete.action = '/aktivasiper/'+id
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -89,11 +74,11 @@
                 formDelete.submit();
                 Swal.fire(
                 'Deleted!',
-                'Satuan berhasil di hapus',
+                'Data berhasil di hapus',
                 'success'
                 )
             }
         })
     }
-</script>
+</script>            
 @endsection

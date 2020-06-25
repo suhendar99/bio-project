@@ -47,6 +47,8 @@ class OperatorController extends Controller
         $operator->nik = $req->nik;
         $operator->no_hp = $req->hp;
         $operator->foto = $foto;
+        $operator->level = "Operator";
+
         if ($operator->save()) {
             return redirect()->back()->with('success','Data Berhasil di Tambahkan');
         }else {

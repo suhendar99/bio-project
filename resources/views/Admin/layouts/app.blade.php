@@ -108,7 +108,8 @@
                                 {{ Request::is('operator*') ? 'show' : false }}
                                 {{ Request::is('dataper*') ? 'show' : false }}
                                 {{ Request::is('data_ruang*') ? 'show' : false }}
-                                {{ Request::is('satuan*') ? 'show' : false }}"
+                                {{ Request::is('satuan*') ? 'show' : false }}
+                                {{ Request::is('aktivasiper*') ? 'show' : false }}"
                                 >
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -116,6 +117,9 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link {{ Request::is('dataper*') ? 'active' : false }}" href="{{ route('data.perangkat') }}">Data Perangkat</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ Request::is('aktivasiper*') ? 'active' : false }}" href="{{ route('aktivasiper.index') }}">Data Aktivasi Perangkat</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link {{ Request::is('data_ruang*') ? 'active' : false }}" href="{{ route('data_ruang.index') }}">Data Ruang</a>
@@ -139,9 +143,11 @@
                                         <li class="nav-item">
                                             <a class="nav-link  {{ Request::is('monitoring*') ? 'active' : false }}" href="{{ route('monitoring') }}">Raw Data</a>
                                         </li>
+                                        @if(Auth::user()->level == "Admin")
                                         <li class="nav-item">
                                             <a class="nav-link {{ Request::is('set_monitoring*') ? 'active' : false }}" href="{{ route('setting.monitoring') }}">Pengaturan Monitoring</a>
                                         </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
@@ -167,7 +173,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            @if(Auth::user()->level == "Admin")
                             <li class="nav-item">
                                 <a class="nav-link
                                   {{ Request::is('set_app*') ? 'active' : false }}
@@ -185,7 +190,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            @endif
                         </ul>
                     </div>
                 </nav>
@@ -279,7 +283,7 @@
     
     const rew =()=>{
         var html='';
-        data_monitoring.forEach(row => {
+        data_monitoring.forEach((row) => {
             html+=`<tr>
                 <td>${row.date}</td>
                 <td>${row.time}</td>

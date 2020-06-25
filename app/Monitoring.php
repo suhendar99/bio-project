@@ -27,7 +27,7 @@ class Monitoring extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function alarm()
+    public function alarma()
     {
         // hasMany(RelatedModel, foreignKeyOnRelatedModel = monitoring_id, localKey = id)
         return $this->hasMany('App\Log_alerts', 'monitoring_id', 'id');

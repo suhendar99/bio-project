@@ -25,7 +25,7 @@
                             @if($data->icon == "")
                                 <i class="fa fa-picture-o" style="margin-bottom: 20px;"></i>
                             @else
-                                <img src="{{asset($data->icon)}}" alt="placeholder+image" style="width:50%">
+                                <img src="{{asset($data->icon)}}" alt="placeholder+image" width="90px" height="90px" style="margin-bottom:10px;">
                             @endif
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                    
+                                    <span>*Jika ingin bagus beri ukuran 450 x 450</span>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" name="header_img" class="form-control @error('header_img') is-invalid @enderror"  placeholder="Header laporan" value="{{$data->header_img}}" >
+                                    <input type="text" name="header_img" class="form-control @error('header_img') is-invalid @enderror"  placeholder="Nama Instansi" value="{{$data->header_img}}" >
                                     @error('header_img')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" name="footer" class="form-control @error('footer') is-invalid @enderror" placeholder="Footer" value="{{$data->footer}}">
+                                    <input type="text" name="footer" class="form-control @error('footer') is-invalid @enderror" placeholder="Lokasi atau Kota" value="{{$data->footer}}">
                                     @error('footer')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -78,8 +78,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/" class="btn btn-primary" style="margin-right: 370px;">Back</a>
-                        <button type="submit" class="btn btn-primary" style="margin-left: 420px;"><i class="fa fa-edit"></i>Edit Profile</button>
+                        <a href="/" class="btn btn-primary float-sm-left">Back</a>
+                        <button type="submit" class="btn btn-primary float-sm-right"><i class="fa fa-edit"></i>Edit Laporan</button>
                     </form>
                 </div>
             </div>

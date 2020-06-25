@@ -27,8 +27,8 @@ class VerifyMail extends Mailable
      *
      * @return $this
      */
-    public function build($build)
+    public function build()
     {
-        return $this->view('email', ['data' => $build]);
+        return $this->view('email');
     }
 }

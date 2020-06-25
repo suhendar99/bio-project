@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -230,6 +231,7 @@ return [
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
     ],
 
 ];

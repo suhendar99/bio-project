@@ -30,20 +30,25 @@ class LaporanController extends Controller
         set_time_limit(99999);
         $v = Validator::make($req->all(), [             
             'awal' => 'required|date',            
-            'akhir' => 'required|date',
+            'akhir' => 'required|date',         
+            'ruang' => 'required',
         ]);
         $awal = $req->awal;
         $akhir = $req->akhir;
         $set = Laporan::find(1)->first();
-        $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+
+        if ($req->ruang === "all") {
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        } else {
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+        }
+        
+        
         // dd($data);
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
         }else {
-            if ($req->ruang) {
-                # code...
-            }
 
             // dd($count,$suhumax);
         

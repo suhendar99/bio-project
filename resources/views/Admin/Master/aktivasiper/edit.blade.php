@@ -34,7 +34,7 @@
                             {{ session()->get('failed') }}
                         </div>                                        
                     @endif
-                    <form action="{{ route('aktivasiper.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('aktivasiper.update', ['id' => $data->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">

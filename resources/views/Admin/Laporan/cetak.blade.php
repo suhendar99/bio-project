@@ -58,7 +58,7 @@
                                                     <div class="form-group">
                                                         <label for="inputText3" class="col-form-label">Ruangan</label>
                                                         <select name="ruang" id="" class="form-control">
-                                                            <option value=""></option>}
+                                                            <option value="all">Semua ruangan</option>}
                                                             @foreach($ruang as $f)
                                                                 <option value="{{ $f->id }}">{{ $f->nama }}</option>
                                                             @endforeach

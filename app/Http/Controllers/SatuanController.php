@@ -10,7 +10,7 @@ class SatuanController extends Controller
 {
     public function index()
     {
-    	$data = Satuan::all();
+    	$data = Satuan::paginate(3);
     	return view('Admin.Master.satuan.index',['data' => $data]);
     }
 

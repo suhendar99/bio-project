@@ -7,7 +7,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/operator" class="btn btn-primary col-2">Back</a>
+                    <a href="/operator" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
                     <form action="{{ route('tambah.op') }}" method="post" enctype="multipart/form-data">
                     @if (session()->has('success'))
                         <div class="alert alert-success">
@@ -17,8 +17,8 @@
                         @csrf
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Nama Operator</label>
-                            <input id="inputText3" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Operator" name="name" value="{{ old('nama') }}">
-                            @error('name')
+                            <input id="inputText3" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Operator" name="nama" value="{{ old('nama') }}">
+                            @error('nama')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -52,15 +52,6 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Instansi</label>
-                            <input id="inputText3" type="text" class="form-control @error('instansi') is-invalid @enderror" placeholder="Instansi" name="instansi" value="{{ old('instansi') }}">
-                            @error('instansi')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Handphone</label>
                             <input id="inputText3" type="text" class="form-control @error('hp') is-invalid @enderror" placeholder="Number Handphone" name="hp" value="{{ old('hp') }}">
                             @error('hp')
@@ -78,7 +69,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Tambah <i class=" fas fa-arrow-right"></i></button>
                     </form>
                 </div>
             </div>

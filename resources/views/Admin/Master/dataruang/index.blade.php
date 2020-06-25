@@ -14,7 +14,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('data_ruang.create') }}" class="btn btn-primary">Tambah ruangan</a>
+                    <a href="{{ route('data_ruang.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Data</a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
@@ -35,8 +35,8 @@
                                     </td>
                                     <td>{{ $r->nama }}</td>
                                     <td>
-                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary">Edit</a>
-                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
+                                        <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                     </td>
                                 </tr>
                                 @endforeach

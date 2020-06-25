@@ -7,7 +7,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/dataper" class="btn btn-primary col-2">Back</a>
+                    <a href="/dataper" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
                     <form action="{{ route('tambah.per') }}" method="post">
                         @if (session()->has('success'))
                             <div class="alert alert-success">
@@ -17,8 +17,8 @@
                         @csrf
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Seri</label>
-                            <input id="inputText3" type="text" class="form-control @error('seri') is-invalid @enderror" placeholder="No Seri Perangkat" name="seri" value="{{ old('seri') }}">
-                            @error('seri')
+                            <input id="inputText3" type="text" class="form-control @error('no_seri') is-invalid @enderror" placeholder="No Seri Perangkat" name="no_seri" value="{{ old('no_seri') }}">
+                            @error('no_seri')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -63,7 +63,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Tambah <i class="fas fa-arrow-right"></i> </button>
                     </form>
                 </div>
             </div>

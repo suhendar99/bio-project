@@ -8,6 +8,7 @@ use App\Laporan;
 use App\Operator;
 use App\SetKirim;
 use App\Monitoring;
+use App\Ruangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,9 @@ class LaporanController extends Controller
 
     public function cetak_laporan()
     {
-        return view('Admin.Laporan.cetak');
+        $data = Ruangan::all();
+
+        return view('Admin.Laporan.cetak', ['ruang' => $data]);
     }
     public function downloadLaporan(Request $req)
     {
@@ -32,13 +35,15 @@ class LaporanController extends Controller
         $awal = $req->awal;
         $akhir = $req->akhir;
         $set = Laporan::find(1)->first();
-        $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
-        // dd([$data, $req->all()]);
+        $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+        // dd($data);
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
         }else {
-            
+            if ($req->ruang) {
+                # code...
+            }
 
             // dd($count,$suhumax);
         

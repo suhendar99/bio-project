@@ -271,15 +271,11 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" ="anonymous"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
-    <script>
-        $('#calendar').fullCalendar({
-        weekends: true,
-        });
-    </script>
+    
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
-    var data_monitoring;
+    var data_monitoring = [1,2,3,4];
     
     const rew =()=>{
         var html='';

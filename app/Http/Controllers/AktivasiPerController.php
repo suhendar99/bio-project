@@ -19,9 +19,36 @@ class AktivasiPerController extends Controller
 
     public function create()
     {
+        $aktivasi = AktivasiPerangkat::all();
     	$perangkat = Perangkat::all();
-    	$ruangan = Ruangan::all();
-    	return view('Admin.Master.aktivasiper.create', ['perangkat'=>$perangkat,'ruangan'=>$ruangan]);
+        $ruangan = Ruangan::all();
+
+        // dd('');
+        // $datap = [];
+        // foreach ($perangkat as $p) {
+        //     foreach ($aktivasi as $a) {
+        //         if ($p->id != $a->id_perangkat ) {
+        //             $datap[] = $p->id; 
+        //         }
+        //     } 
+        // }
+        // $ruangan = Ruangan::all();
+        // $datar = [];
+        // foreach ($ruangan as $r) {
+        //     foreach ($aktivasi as $a) {
+        //         if ($r->id == $a->id_ruangan && $p->id == $a->id_perangkat) {
+                    
+        //         } else {
+        //             $ruangan = Ruangan::where('id','!=',$a->id);
+        //             dd($ruangan);
+        //         } 
+        //     }
+        // }
+     //    $data = AktivasiPerangkat::all();
+    	// $ruangan = Ruangan::where('id','!=',5)->get();
+        // $data = AktivasiPerangkat::where([['id_perangkat',$perangkat->id], ['id_ruangan',$ruangan->id]])->exists();
+        // dd($datap, $datar);
+    	return view('Admin.Master.aktivasiper.create', ['perangkat'=>$datap,'ruangan'=>$datar]);
     }
 
     public function store(Request $request)

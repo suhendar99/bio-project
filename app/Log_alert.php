@@ -24,6 +24,6 @@ class Log_alert extends Model
     public function Monitoring()
     {
     	// belongsTo(RelatedModel, foreignKey = monitoring_id, keyOnRelatedModel = id)
-    	return $this->belongsTo('App\Monitoring', 'monitoring_id', 'id');
+    	return $this->belongsTo('App\Monitoring', 'monitoring_id', 'id_monitoring');
     }
 }

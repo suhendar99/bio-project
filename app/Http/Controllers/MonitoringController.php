@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+ 
+ 
+use App\Mail\sendEmail;
+use Illuminate\Support\Facades\Mail;
 use App\Operator;
 use App\Monitoring;
 use App\Satuan;
@@ -11,7 +14,6 @@ use App\Mqtt;
 use App\Setapp;
 use App\Log_alert;
 use Validator;
-use Mail;
 
 
 class MonitoringController extends Controller
@@ -38,21 +40,29 @@ class MonitoringController extends Controller
         return view('Admin.Dashboard.monitoring',compact('app','id'));
     }
 
-    public function sendmail()
+    public function sendEmail()
     {
-        try{
-            Mail::send('email', ['nama' => 'John Doe', 'pesan' => 'Alarm Actived'], function ()
-            {
-                $message->subject('This is Title');
-                $message->from('donotreply@biofarma.com', 'Biofarma');
-                $message->to('faliq.kintara14@gmail.com');
-            });
-            return back()->with('alert-success','Berhasil Kirim Email');
-        }
-        catch (Exception $e){
-            return response (['status' => false,'errors' => $e->getMessage()]);
-        }
+        Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
+ 
+        return "Email telah dikirim";
     }
+    // public function sendmail()
+    // {
+    //     try{
+    //         Mail::send('email', ['nama' => 'John Doe', 'pesan' => 'Alarm Actived'], function ()
+    //         {
+    //             $message->subject('This is Title');
+    //             $message->from('donotreply@biofarma.com', 'Biofarma');
+    //             $message->to('faliq.kintara14@gmail.com');
+    //         });
+    //         return back()->with('alert-success','Berhasil Kirim Email');
+    //     }
+    //     catch (Exception $e){
+    //         return response (['status' => false,'errors' => $e->getMessage()]);
+    //     }
+    // }
+
+
 
     public function store(Request $req)
     {

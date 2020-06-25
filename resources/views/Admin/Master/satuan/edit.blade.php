@@ -23,7 +23,7 @@
                             {{ session()->get('success') }}
                         </div>                                        
                     @endif
-                    <form action="{{ route('satuan.update', $satuan->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('satuan.update', [ 'id' => $satuan->id ]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                             <input type="hidden" class="form-control @error('parameter') is-invalid @enderror" value="{{ $satuan->parameter }}" name="parameter">

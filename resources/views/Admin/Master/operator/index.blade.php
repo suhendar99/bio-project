@@ -74,7 +74,6 @@
                                         <td>{{ $o->name }}</td>
                                         <td>{{ $o->email }}</td>
                                         <td>{{ $o->nik }}</td>
-                                        <td>{{ $o->instansi }}</td>
                                         <td>{{ $o->no_hp }}</td>
                                         @if(Auth::user()->level == "Admin")
                                         <td>

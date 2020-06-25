@@ -171,6 +171,7 @@ class LaporanController extends Controller
         ]);
 
         if ($v->fails()) {
+            dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
             

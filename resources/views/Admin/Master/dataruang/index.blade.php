@@ -22,6 +22,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>ID Ruang</th>
                                     <th>Foto</th>
                                     <th>Nama Ruang</th>
                                     @if(Auth::user()->level == "Admin")
@@ -34,6 +35,7 @@
                             @foreach( $data as $r)
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $r->id }}</td>
                                     <td>
                                         <img src="{{ $r->foto }}" alt="" srcset="" style="width:100px; height:100px">
                                     </td>

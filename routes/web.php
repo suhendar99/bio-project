@@ -89,5 +89,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/updated-activity', 'TelegramBotController@updatedActivity');
+    Route::get('/send-telegram', 'TelegramBotController@sendMessage');
 });
 

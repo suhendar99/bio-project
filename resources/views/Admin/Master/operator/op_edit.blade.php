@@ -65,7 +65,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-redo"></i> Edit </button>
+                        <button type="submit" class="btn btn-primary"> Edit </button>
                     </form>
                 </div>
             </div>

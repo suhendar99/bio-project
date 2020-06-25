@@ -34,6 +34,7 @@
                                 $no = 1;
                                 ?>
                                 @foreach($monitor as $o)
+                                {{ dd($o) }}
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $o->ruangan->nama }}</td>

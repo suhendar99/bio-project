@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/data_ruang','RuanganController');
         // Data Satuan
     Route::resource('/satuan','SatuanController')->middleware('admin');
+    	// Data Aktivasi
+    Route::resource('/aktivasiper','AktivasiPerController');
     // monitoring
         // raw data
     Route::get('/monitoring','monitoringController@index')->name('monitoring');
@@ -56,6 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/set_edit_monitor/{id}','MonitoringController@edit');
     Route::put('/edit_monitor/{id}','MonitoringController@update');
     Route::delete('/delete_monitor/{id}','MonitoringController@delete');
+
+
 
     // laporan
         // cetak laporan

@@ -47,6 +47,7 @@
     $.get("{{ route('monitoring.data') }}", function(data){
     data_monitoring=data;
     console.log(data_monitoring);
+    rew();
     });
  </script>
 @endpush

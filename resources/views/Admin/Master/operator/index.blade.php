@@ -39,7 +39,7 @@
                                 $no = 1;
                                 ?>
                                 @foreach($data as $o)
-                                @if(Auth::user()->level == "Admin")
+                                {{-- @if(Auth::user()->level == "Admin")
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>
@@ -60,7 +60,7 @@
                                     </td>
                                     @endif
                                 </tr>
-                                @else
+                                @else --}}
                                     @if($o->level == "Operator")
                                     <tr>
                                         <td>{{ $no++ }}</td>
@@ -84,7 +84,7 @@
                                         @endif
                                     </tr>
                                     @endif
-                                @endif
+                                {{-- @endif --}}
                                 @endforeach
                             </tbody>
                         </table>

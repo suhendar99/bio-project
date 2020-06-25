@@ -139,9 +139,11 @@
                                         <li class="nav-item">
                                             <a class="nav-link  {{ Request::is('monitoring*') ? 'active' : false }}" href="{{ route('monitoring') }}">Raw Data</a>
                                         </li>
+                                        @if(Auth::user()->level == "Admin")
                                         <li class="nav-item">
                                             <a class="nav-link {{ Request::is('set_monitoring*') ? 'active' : false }}" href="{{ route('setting.monitoring') }}">Pengaturan Monitoring</a>
                                         </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
@@ -167,7 +169,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            @if(Auth::user()->level == "Admin")
                             <li class="nav-item">
                                 <a class="nav-link
                                   {{ Request::is('set_app*') ? 'active' : false }}
@@ -185,7 +186,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            @endif
                         </ul>
                     </div>
                 </nav>
@@ -283,7 +283,7 @@
     
     const rew =()=>{
         var html='';
-        data_monitoring.forEach(row => {
+        data_monitoring.forEach((row) => {
             html+=`<tr>
                 <td>${row.date}</td>
                 <td>${row.time}</td>

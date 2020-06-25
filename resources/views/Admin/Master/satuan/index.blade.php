@@ -22,7 +22,9 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
+                    @if(Auth::user()->level == "Admin")
                     <a class="btn btn-primary" href="{{route('satuan.create')}}">Tambah Data</a>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
@@ -30,7 +32,9 @@
                                     <th>No</th>
                                     <th>Parameter</th>
                                     <th>Satuan</th>
+                                    @if(Auth::user()->level == "Admin")
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,10 +44,12 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $r->parameter}}</td>
                                     <td>{{ $r->satuan }}</td>
+                                    @if(Auth::user()->level == "Admin")
                                     <td>
                                         <a href="{{ route('satuan.edit', $r->id) }}" class="btn btn-primary">Edit</a>
                                         <!-- <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button> -->
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

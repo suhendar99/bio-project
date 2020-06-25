@@ -23,7 +23,9 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-body">
+                                @if(Auth::user()->level == 'Admin')
                                 <a href="{{ route('tambah.data.per') }}" class="btn btn-primary col-2">Tambah Data</a>
+                                @endif
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered first">
                                         <thead>
@@ -34,7 +36,9 @@
                                                 <th>Longitude</th>
                                                 <th>Status</th>
                                                 <th>Tanggal Aktivasi</th>
+                                                @if(Auth::user()->level == 'Admin')
                                                 <th>Action</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -49,10 +53,12 @@
                                                 <td>{{ $p->longitude }}</td>
                                                 <td>{{ $p->status }}</td>
                                                 <td>{{ $p->tgl_aktivasi }}</td>
+                                                @if(Auth::user()->level == 'Admin')
                                                 <td>
                                                     <a href="/edit_per/{{ $p->id }}" class="btn btn-primary">Edit</a>
                                                     <button onclick="deletes({{ $p->id }})" class="btn btn-danger">Delete</button>
                                                 </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>

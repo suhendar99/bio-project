@@ -40,6 +40,7 @@
                                 $no = 1;
                                 ?>
                                 @foreach($data as $o)
+                                @if(Auth::user()->level == "Admin")
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>
@@ -61,6 +62,31 @@
                                     </td>
                                     @endif
                                 </tr>
+                                @else
+                                    @if($o->level == "Operator")
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>
+                                        @if($o->foto == "")
+                                            <i class="fa fa-user fa-5x" style="margin-bottom: 20px;"></i>
+                                        @else
+                                        <img  src="{{ asset('foto/'.$o->foto) }}" keight="70px"width="70px">
+                                        @endif
+                                        </td>
+                                        <td>{{ $o->name }}</td>
+                                        <td>{{ $o->email }}</td>
+                                        <td>{{ $o->nik }}</td>
+                                        <td>{{ $o->instansi }}</td>
+                                        <td>{{ $o->no_hp }}</td>
+                                        @if(Auth::user()->level == "Admin")
+                                        <td>
+                                            <a href="/operator_edit/{{$o->id}}" class="btn btn-primary">Edit</a>
+                                            <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button>
+                                        </td>
+                                        @endif
+                                    </tr>
+                                    @endif
+                                @endif
                                 @endforeach
                             </tbody>
                         </table>

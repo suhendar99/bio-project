@@ -14,7 +14,9 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
+                    @if(Auth::user()->level == "Admin")
                     <a href="{{ route('aktivasiper.create') }}" class="btn btn-primary">Tambah Aktivasi</a>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>
@@ -33,10 +35,12 @@
                                     <td>{{ $r->perangkat->no_seri}}
                                     </td>
                                     <td>{{ $r->ruangan->nama }}</td>
+                                    @if(Auth::user()->level == "Admin")
                                     <td>
                                         <a href="{{ route('aktivasiper.edit', $r->id) }}" class="btn btn-primary">Edit</a>
                                         <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -49,9 +53,8 @@
 </div>
 
 
-<form action="" id="formDelete" method="POST">
+<form action="" id="formDelete" method="get">
     @csrf
-    @method('DELETE')
 
 </form>
 
@@ -60,7 +63,7 @@
 <script>
      function deletes(id){
         const formDelete = document.getElementById('formDelete')
-        formDelete.action = '/aktivasiper/'+id
+        formDelete.action = '/aktivasiper/delete/'+id
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",

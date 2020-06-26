@@ -28,7 +28,7 @@
                             <label for="inputText3" class="col-form-label">Type Pengiriman</label>
                             <select name="status" id="" class="form-control" >
                                 <option value="Email" <?php if($setkirim->status_kirim == 'Email'){ echo "selected"; }  ?>>Email</option>
-                                <option value="Telegram" <?php if($setkirim->status_kirim == 'Telegram'){ echo "selected"; }  ?>>Telegram</option>
+                                
                             </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-redo"></i> Edit</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
                 </div>
             </div>

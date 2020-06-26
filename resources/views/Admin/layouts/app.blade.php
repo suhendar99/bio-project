@@ -275,19 +275,16 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" ="anonymous"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
-    <script>
-        $('#calendar').fullCalendar({
-        weekends: true,
-        });
-    </script>
+    
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
-    var data_monitoring;
+    var data_monitoring ;
     
     const rew =()=>{
         var html='';
-        data_monitoring.forEach((row) => {
+        if(data_monitoring.length > 0){
+            data_monitoring.forEach((row) => {
             html+=`<tr>
                 <td>${row.date}</td>
                 <td>${row.time}</td>
@@ -300,6 +297,8 @@
             </tr>`;
         }); 
         $('tbody').html(html);
+        }
+        
     }
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()
@@ -307,7 +306,7 @@
         // Fetch the MQTT topic from the form        
         console.log('koneksi_berhasil');
         client.subscribe('{{ $topic }}');
-        rew();
+        // rew();
       }
       function onFailure()
       {
@@ -318,10 +317,18 @@
       }
       
       function onMessageArrived(message) {
+<<<<<<< HEAD
          
         // var today = new Date();
         // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         // var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+=======
+
+        // console.log(message.payloadString);         
+        var today = new Date();
+        var date = today.getFullYear()+'-'+("0" + today.getDate()).slice(-2)+'-'+today.getDate();
+        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+>>>>>>> 7ccb563edcd5897731572417fe2b4b855892ed89
 
         // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
         //     var raw = '<tr id="'+data.id+'">';
@@ -340,14 +347,16 @@
         //     alert('Cek Payload Alat Anda');
         // }
 
-        //  var data = JSON.parse(message.payloadString);
-        //  data.date=date;
-        //  data.time=time;
-        //  data_monitoring.unshift(data);
-        //  data_monitoring.pop();
+
+         var data = JSON.parse(message.payloadString + "");
+         data.date=date;
+         data.time=time;
+         data_monitoring.unshift(data);
+         data_monitoring.pop();
         //  console.log(data_monitoring);
         // //  raw();
-        // rew();
+        rew();
+
 
         // // var raw = '<tr id="'+data.id+'">';
         // // raw += '<td>' + date + '</td>';

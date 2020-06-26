@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
  
  
 use App\Mail\sendEmail;
+use App\Mail\VerifyMail;
 use Illuminate\Support\Facades\Mail;
 use App\Operator;
 use App\Monitoring;
@@ -42,9 +43,13 @@ class MonitoringController extends Controller
 
     public function sendEmail()
     {
-        Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
+        // Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
+        Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail("Hello"));      
+         return response()->json([
+            'status' => true,
+        ]);
  
-        return "Email telah dikirim";
+        // return "Email telah dikirim";
     }
     // public function sendmail()
     // {
@@ -144,21 +149,15 @@ class MonitoringController extends Controller
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
-            $send = Mail::raw([], function($message) {
-                $message->from('biofarma@bio.com', 'Company name');
-                $message->to('aguspadilah30@gmail.com');
-                $message->subject('Bahaya!!! Alarm Biofarma Lab Menyala!!!');
-                $message->setBody( '<html><h1>Cek Disini</h1><p>Go get it now !</p></html>', 'text/html' );
-                $message->addPart("5% off its awesome\n\nGo get it now!", 'text/plain');
-            });
+            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail());
 
             // dd($send);
 
         }
 
-        if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
-            Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
-        }
+        // if ($data->suhu > $smax || $data->suhu < $smin || $data->kelembapan > $kmax || $data->kelembapan < $kmin || $data->tekanan < $tmin || $data->tekanan > $tmax ) {
+        //     Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
+        // }
 
     }
 

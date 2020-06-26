@@ -54,6 +54,22 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="inputText3" class="col-form-label">Ruangan</label>
+                                                        <select name="ruang" id="" class="form-control">
+                                                            <option value="all">Semua ruangan</option>}
+                                                            @foreach($ruang as $f)
+                                                                <option value="{{ $f->id }}">{{ $f->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('status')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
                                             <button class="btn btn-primary" type="submit">Create PDF</button>
                                         </form>

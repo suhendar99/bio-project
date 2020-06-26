@@ -8,6 +8,7 @@ use App\Laporan;
 use App\Operator;
 use App\SetKirim;
 use App\Monitoring;
+use App\Ruangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,31 +21,40 @@ class LaporanController extends Controller
 
     public function cetak_laporan()
     {
-        return view('Admin.Laporan.cetak');
+        $data = Ruangan::all();
+
+        return view('Admin.Laporan.cetak', ['ruang' => $data]);
     }
     public function downloadLaporan(Request $req)
     {
         set_time_limit(99999);
         $v = Validator::make($req->all(), [             
             'awal' => 'required|date',            
-            'akhir' => 'required|date',
+            'akhir' => 'required|date',         
+            'ruang' => 'required',
         ]);
         $awal = $req->awal;
         $akhir = $req->akhir;
         $set = Laporan::find(1)->first();
-        $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
-        // dd([$data, $req->all()]);
+
+        if ($req->ruang === "all") {
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        } else {
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+        }
+        
+        
+        // dd($data);
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
         }else {
-            
 
             // dd($count,$suhumax);
         
             $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             // set_time_limit(300);
-            return $pdf->stream('Monitoring-Report-'.$req->akhir);
+        return $pdf->stream('Monitoring-Report-'.$req->akhir);
             // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             
             return back()->with('success', 'Ruangan berhasil ditambahkan');
@@ -195,7 +205,7 @@ class LaporanController extends Controller
         ]);
 
         if ($v->fails()) {
-            dd($v->errors()->all());
+            // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
             

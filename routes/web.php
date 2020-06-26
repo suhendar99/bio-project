@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/edit_monitor/{id}','MonitoringController@update')->middleware('admin');
     Route::delete('/delete_monitor/{id}','MonitoringController@delete')->middleware('admin');
 
+    Route::get('/aktivasi','Dashboard@data')->middleware('admin')->name('aktivasi.data');
 
 
     // laporan

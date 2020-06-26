@@ -142,7 +142,7 @@
 <script>
     
 
-    let monitoring = '@json($monitoring)'
+    let monitoring = '@json($data)'
             
               
     var suhu = []

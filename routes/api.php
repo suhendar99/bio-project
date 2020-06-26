@@ -22,3 +22,5 @@ Route::post('/operatorStore','OperatorController@store')->name('operator.store')
 Route::post('/monitoringStore','MonitoringController@store')->name('monitoring.store');
 
 Route::get('/get-data-monitoring','MonitoringController@data')->name('monitoring.data');
+
+Route::get('/getData','MonitoringController@getData');

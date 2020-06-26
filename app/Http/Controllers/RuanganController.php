@@ -36,7 +36,9 @@ class RuanganController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
             
-
+            if ($request->smax < $request->smin || $request->kmax < $request->kmin || $request->tmax < $request->tmin) {
+                return back()->with('failed', 'Parameter Maksimum Harus Lebih Besar Dari Minimum');
+            }
             if($request->hasfile('foto'))
             {                
                 $name = rand(). '.' . $request->foto->getClientOriginalExtension();           
@@ -80,17 +82,20 @@ class RuanganController extends Controller
         $v = Validator::make($request->all(), [             
             'nama' => 'required|',            
             'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'smax' => 'required',
-            'smin' => 'required',
-            'kmax' => 'required',
-            'kmin' => 'required',
-            'tmax' => 'required',
-            'tmin' => 'required',
+            'smax' => 'required|',
+            'smin' => 'required|',
+            'kmax' => 'required|',
+            'kmin' => 'required|',
+            'tmax' => 'required|',
+            'tmin' => 'required|',
         ]);
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
         }else {
+            if ($request->smax < $request->smin || $request->kmax < $request->kmin || $request->tmax < $request->tmin) {
+                return back()->with('failed', 'Parameter Maksimum Harus Lebih Besar Dari Minimum');
+            }
             $ruangan = Ruangan::find($id);
             
             $ruangan->update([
@@ -117,13 +122,18 @@ class RuanganController extends Controller
                     'foto' => $foto,
                 ]);
             }            
-            
+            // dd($ruangan);
+            if ($ruangan) {
+                return back()->with('success', 'Data ruangan berhasil di update');
+            } else {
+                return back()->with('failed', 'Data ruangan gagal di update');
+            }
             //  LogUser::create([
             //     'user_id' => Auth::user()->id,
             //     'detail' => 'added new category  product : '.$request->name
             // ]);
             
-            return back()->with('success', 'Data ruangan berhasil di update');
+            
         }
     }
 

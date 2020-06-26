@@ -45,7 +45,67 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>                                    
+                        </div> 
+                        <div class="form-group">
+                            <label for="">Suhu Maksimum</label>
+                            <input type="number" class="form-control @error('smax') is-invalid @enderror" value="{{ $ruangan->smax }}"  name="smax">
+
+                            @error('smax')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Suhu Minimum</label>
+                            <input type="number" class="form-control @error('smin') is-invalid @enderror" value="{{ $ruangan->smin }}"  name="smin">
+
+                            @error('smin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>          
+                        <div class="form-group">
+                            <label for="">Kelembapan Maksimum</label>
+                            <input type="number" class="form-control @error('kmax') is-invalid @enderror" value="{{ $ruangan->kmax }}"  name="smax">
+
+                            @error('kmax')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Kelembapan Minimum</label>
+                            <input type="number" class="form-control @error('kmin') is-invalid @enderror" value="{{ $ruangan->kmin }}"  name="kmin">
+
+                            @error('kmin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>          
+                        <div class="form-group">
+                            <label for="">Tekanan Maksimum</label>
+                            <input type="number" class="form-control @error('smax') is-invalid @enderror" value="{{ $ruangan->smax }}"  name="smax">
+
+                            @error('smax')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tekanan Minimum</label>
+                            <input type="number" class="form-control @error('smin') is-invalid @enderror" value="{{ $ruangan->smin }}"  name="smin">
+
+                            @error('smin')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>         
                         <div class="form-group">                                        
                             <button type="submit" class="btn btn-primary"> Simpan</button>
                         </div>

@@ -105,10 +105,17 @@
 	<center>
 		<h3>Data Monitoring</h3><br>
 	</center>
-	
-	<h6 style="text-align: left;">Sumber Data : {{$parameter}}</h6>
-	<h6 style="text-align: right;">Waktu : {{$awal}} s.d. {{$akhir}}</h6>
-	<table width="100%" style="margin-bottom: 30px; " id="customers">
+	<table style="margin-bottom:-10px;">
+		<tr>
+			<td rowspan="2" style="text-align:left; font-size:13px;">
+				Sumber Data : {{$parameter}}
+			</td>
+			<td rowspan="2" style="text-align:right; font-size:13px;">
+				Waktu : {{$awal}} s.d. {{$akhir}}
+			</td>
+		</tr>
+	</table>
+	<table width="100%" style="margin-bottom: -10px; " id="customers">
 		@if($pos == 'Parameter')
 		<thead>
 			<tr>

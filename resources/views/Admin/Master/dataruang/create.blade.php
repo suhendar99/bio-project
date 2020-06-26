@@ -54,8 +54,8 @@
                         </div>       
 
                         <div class="form-group">
-                            <label for="">Suhu Maksimum</label>
-                            <input type="number" class="form-control @error('smax') is-invalid @enderror"  name="smax">
+                            <label for="">Set point Suhu Maksimum</label>
+                            <input type="number" class="form-control @error('smax') is-invalid @enderror"  name="smax" value="{{ old('smax') }}">
 
                             @error('smax')
                                 <span class="invalid-feedback" role="alert">
@@ -64,8 +64,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Suhu Minimum</label>
-                            <input type="number" class="form-control @error('smin') is-invalid @enderror"  name="smin">
+                            <label for="">Set point Suhu Minimum</label>
+                            <input type="number" class="form-control @error('smin') is-invalid @enderror"  name="smin" value="{{ old('smin') }}">
 
                             @error('smin')
                                 <span class="invalid-feedback" role="alert">
@@ -74,8 +74,8 @@
                             @enderror
                         </div>          
                         <div class="form-group">
-                            <label for="">Kelembapan Maksimum</label>
-                            <input type="number" class="form-control @error('kmax') is-invalid @enderror"  name="kmax">
+                            <label for="">Set point Kelembapan Maksimum</label>
+                            <input type="number" class="form-control @error('kmax') is-invalid @enderror"  name="kmax" value="{{ old('kmax') }}">
 
                             @error('kmax')
                                 <span class="invalid-feedback" role="alert">
@@ -84,8 +84,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Kelembapan Minimum</label>
-                            <input type="number" class="form-control @error('kmin') is-invalid @enderror"  name="kmin">
+                            <label for="">Set point Kelembapan Minimum</label>
+                            <input type="number" class="form-control @error('kmin') is-invalid @enderror"  name="kmin" value="{{ old('kmin') }}">
 
                             @error('kmin')
                                 <span class="invalid-feedback" role="alert">
@@ -94,8 +94,8 @@
                             @enderror
                         </div>          
                         <div class="form-group">
-                            <label for="">Tekanan Maksimum</label>
-                            <input type="number" class="form-control @error('tmax') is-invalid @enderror"  name="tmax">
+                            <label for="">Set point Tekanan Maksimum</label>
+                            <input type="number" class="form-control @error('tmax') is-invalid @enderror"  name="tmax" value="{{ old('tmax') }}">
 
                             @error('tmax')
                                 <span class="invalid-feedback" role="alert">
@@ -104,8 +104,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Tekanan Minimum</label>
-                            <input type="number" class="form-control @error('tmin') is-invalid @enderror"  name="tmin">
+                            <label for="">Set point Tekanan Minimum</label>
+                            <input type="number" class="form-control @error('tmin') is-invalid @enderror"  name="tmin" value="{{ old('tmin') }}">
 
                             @error('tmin')
                                 <span class="invalid-feedback" role="alert">

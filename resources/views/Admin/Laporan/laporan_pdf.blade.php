@@ -109,29 +109,39 @@
 	<h6 style="text-align: left;">Sumber Data : {{$parameter}}</h6>
 	<h6 style="text-align: right;">Waktu : {{$awal}} s.d. {{$akhir}}</h6>
 	<table width="100%" style="margin-bottom: 30px; " id="customers">
-		<!-- @if(isset($data2))
+		@if($pos == 'Parameter')
 		<thead>
 			<tr>
 				<th>No</th>
 				<th>{{$parameter}}</th>
+				<th>Alarm</th>
+				<th>Nama Ruangan</th>
+				<th>No Seri Perangkat</th>
 			</tr>
 		</thead>
 		<tbody>
 			@php $i=1 @endphp
-			@foreach($data2 as $p)
+			@foreach($data as $p)
 			<tr>
 				<td>{{ $i++ }}</td>
 				@if($parameter == 'Suhu')
-				<td>{{ $p->Suhu }}</td>
+				<td>{{ $p->suhu }}</td>
 				@elseif($parameter == 'Kelembapan')
-				<td>{{ $p->Kelembapan }}</td>
+				<td>{{ $p->kelembapan }}</td>
 				@elseif($parameter == 'Tekanan')
-				<td>{{ $p->Tekanan }}</td>
+				<td>{{ $p->tekanan }}</td>
 				@endif
+				@if($p->alarm > 0)
+					<td id="alertff">ON</td>
+				@else
+					<td id="alertff">OFF</td>
+				@endif
+				<td>{{$p->ruangan->nama}}</td>
+				<td>{{$p->perangkat->no_seri}}</td>
 			</tr>
 			@endforeach
 		</tbody>
-		@else -->
+		@else
 		<thead>
 			<tr>
 				<th>No</th>
@@ -153,13 +163,13 @@
 				<td>{{$p->suhu}}</td>
 				<td>{{$p->kelembapan}}</td>
 				<td>{{$p->tekanan}}</td>
-				<td>{{$p->alarm}}</td>
+				<td id="alertff">{{$p->alarm}}</td>
 				<td>{{$p->ruangan->nama}}</td>
 				<td>{{$p->perangkat->no_seri}}</td>
 			</tr>
 			@endforeach
 		</tbody>
-		<!-- @endif -->
+		@endif
 	</table>
 
 	<table style="text-align: left !important; margin-bottom: 50px;" id="customers">
@@ -213,6 +223,22 @@
 	  <div class="page-number"></div>
 	</div>
 
+<script>
 
+	const rero = ()=>{
+        const alrm = document.querySelectorAll("#alertff");
+    	const on = "ON";    
+    	const off = "OFF";    
+        alrm.forEach(r =>{
+            if(r.innerHTML == 1){
+                r.innerHTML = on;
+            }else{
+                r.innerHTML = off;
+            }   
+        })
+    }
+    console.log('hai');
+    rero();
+</script>
 </body>
 </html>

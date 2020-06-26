@@ -96,6 +96,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit_kirim/{id}','LaporanController@edit_kirim')->name('edit.kirim');
     Route::put('/aksi_edit/{id}','LaporanController@aksi_edit')->name('aksi.edit');
     Route::delete('/delete_kirim/{id}','LaporanController@delete')->name('delete');
+
+    Route::get('/add_kirim_alarm','LaporanController@add_kirim_alarm')->name('add.kirim.alarm');
+    Route::post('/aksi_add_alarm','LaporanController@aksi_add_alarm')->name('aksi.add.alarm');
+    Route::get('/edit_kirim_alarm/{id}','LaporanController@edit_kirim_alarm')->name('edit.kirim.alarm');
+    Route::put('/aksi_edit_alarm/{id}','LaporanController@aksi_edit_alarm')->name('aksi.edit.alarm');
+    Route::delete('/delete_kirim_alarm/{id}','LaporanController@delete_alarm')->name('delete.alarm');
+
     // pengaturan
         // Pengaturan Aplikasi
     Route::get('/set_app','AppController@index')->name('pengaturan.app');

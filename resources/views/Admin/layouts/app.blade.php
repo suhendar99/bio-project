@@ -332,19 +332,16 @@
           console.log(responseObject)
       }
       
-      function onMessageArrived(message) {
-<<<<<<< HEAD
-         
+      function onMessageArrived(message) {         
         // var today = new Date();
         // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         // var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-=======
 
         // console.log(message.payloadString);         
         var today = new Date();
         var date = today.getFullYear()+'-'+("0" + today.getDate()).slice(-2)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
->>>>>>> 7ccb563edcd5897731572417fe2b4b855892ed89
+
 
         // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
         //     var raw = '<tr id="'+data.id+'">';

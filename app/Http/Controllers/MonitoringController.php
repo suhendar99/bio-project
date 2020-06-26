@@ -15,7 +15,6 @@ use App\Mqtt;
 use App\Setapp;
 use App\Log_alert;
 use Validator;
-// use Illuminate\Support\Facades\Auth;
 
 
 class MonitoringController extends Controller

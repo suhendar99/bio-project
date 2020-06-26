@@ -279,13 +279,13 @@
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
-    var data_monitoring ;
+    var data_monitoring = [1];
+    
     const on = "ON";
     const off = "OFF";
     
     const rew =()=>{
         var html='';
-        if(data_monitoring.length > 0){
             data_monitoring.forEach((row) => {
             html+=`<tr>
                 <td>${row.date}</td>
@@ -299,7 +299,6 @@
             </tr>`;
         }); 
         $('tbody').html(html);
-        }
         
         alp();
     }
@@ -332,7 +331,8 @@
           console.log(responseObject)
       }
       
-      function onMessageArrived(message) {         
+      function onMessageArrived(message) {
+        
         // var today = new Date();
         // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         // var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
@@ -433,11 +433,8 @@
         });
       }
 
-      const settingParameter = ()=>{
-          
-      }
 
-      const url = "{{ $url_broker }}"
+      const url = "{{ $url_broker }}";
       var clientId = "ws" + Math.random();
       // Create a client instance
       var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 32472, clientId);

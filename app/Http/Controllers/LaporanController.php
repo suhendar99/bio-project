@@ -39,22 +39,69 @@ class LaporanController extends Controller
         ]);
         $awal = $req->awal;
         $akhir = $req->akhir;
-        // $parameter = $req->satuan;
-        // $satuan = $parameter;
-        // $data2 = [];
+        $data2 = [];
         $set = Laporan::find(1)->first();
-
+        
+        // dd($req->ckck);
+        
         
 
         if ($awal > $akhir) {
              return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
         }
-        if ($req->ruang === "all") {
+        if ($req->ruang === "all" && $req->satuan === "allper") {
+            echo "all";
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
-        } else {
+            // dd($data);
+            $pos = 'Semua ruangan & parameter';
+        } elseif ($req->ruang !== "all" && $req->satuan ==="allper"){
+            echo "ruang".$req->ruang;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+            $parameter = Monitoring::where('ruangan_id', $req->ruang)->first();
+            // dd($data);
+            $pos = 'Ruangan';
+        } elseif ($req->ruang === "all" && $req->satuan !=="allper"){
+            echo "satuan".$req->satuan;
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+            
+                if ($req->satuan == "suhu") {
+                    $parameter = 'Suhu';
+                    // echo "satuan".$req->satuan;
+                } elseif ($req->satuan == "kelembapan") {
+                    $parameter = 'Kelembapan';
+                    // echo "satuan".$req->satuan;
+                } elseif ($req->satuan == "tekanan"){
+                    $parameter = 'Tekanan';
+                    // echo "satuan".$req->satuan;
+                }
+                
+            
+            
+            
+            // dd($data);
+            $pos = 'Parameter';
+        } elseif ($req->ruang !== "all" && $req->satuan !=="allper"){
+            echo "satuan".$req->satuan;
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+            
+                if ($req->satuan == "suhu") {
+                    $parameter = 'Suhu';
+                    // echo "satuan".$req->satuan;
+                } elseif ($req->satuan == "kelembapan") {
+                    $parameter = 'Kelembapan';
+                    // echo "satuan".$req->satuan;
+                } elseif ($req->satuan == "tekanan"){
+                    $parameter = 'Tekanan';
+                    // echo "satuan".$req->satuan;
+                }
+                
+            
+            
+            
+            // dd($data);
+            $pos = 'Parameter';
         }
-
+        // dd($data);
         // if ($req->satuan == "allpar") {
         //     // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->pluck($req->satuan);
         //     // dd($data);
@@ -67,8 +114,6 @@ class LaporanController extends Controller
         // if($req->ruang == "all" && $req->satuan == "allpar"){
         //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // }
-        
-        // dd($data);
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
@@ -77,14 +122,15 @@ class LaporanController extends Controller
             // dd($count,$suhumax);
             $pdf = app('dompdf.wrapper');
             $pdf->getDomPDF()->set_option("enable_php", true);
-            if ($data2 == 'null' ) {
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'parameter'=>$parameter, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
-            }else{
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'data2'=>$data2, 'parameter'=>$parameter, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            if ($pos == 'Ruangan') {
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+
+            }elseif($pos == 'Parameter'){
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             }
-            // set_time_limit(300);
+            set_time_limit(300);
             return $pdf->stream('Monitoring-Report-'.$req->akhir);
-            // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             
             return back();
         }

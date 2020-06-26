@@ -24,8 +24,6 @@
                                     <th>No</th>
                                     <th>Nama Ruangan</th>
                                     <th>Parameter</th>
-                                    <th>Max</th>
-                                    <th>Min</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -34,13 +32,12 @@
                                 $no = 1;
                                 ?>
                                 @foreach($monitor as $o)
-                                {{ dd($o) }}
+                                
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $o->ruangan->nama }}</td>
                                     <td>{{ $o->parameter }}</td>
-                                    <td>{{ $o->max }}</td>
-                                    <td>{{ $o->min }}</td>
+                                    
                                     <td>
                                         <a href="/set_edit_monitor/{{ $o->id }}" class="btn btn-primary">Edit</a>
                                         <!-- <button onclick="deletes({{ $o->id }})" class="btn btn-danger">Delete</button> -->

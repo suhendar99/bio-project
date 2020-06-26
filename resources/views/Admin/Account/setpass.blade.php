@@ -29,7 +29,7 @@
                     <input type="hidden" name="foto" value="{{$data->foto}}">
                     <div class="row">
                         <div class="col-6">
-                            Password
+                            New Password
                         </div>
                         <div class="col-6">
                             <div class="form-group">

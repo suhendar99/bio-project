@@ -19,12 +19,17 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    <a href="{{ route('data_ruang.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                      @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
                         </div>                                        
                     @endif
+                    @if (session()->has('failed'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('failed') }}
+                        </div>                                        
+                    @endif
+                    <a href="{{ route('data_ruang.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                     <form action="{{ route('data_ruang.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
@@ -47,10 +52,10 @@
                                 </span>
                             @enderror
                         </div>       
-                        
+
                         <div class="form-group">
                             <label for="">Suhu Maksimum</label>
-                            <input type="number" class="form-control @error('smax') is-invalid @enderror" value="{{ $ruangan->smax }}"  name="smax">
+                            <input type="number" class="form-control @error('smax') is-invalid @enderror"  name="smax">
 
                             @error('smax')
                                 <span class="invalid-feedback" role="alert">
@@ -60,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Suhu Minimum</label>
-                            <input type="number" class="form-control @error('smin') is-invalid @enderror" value="{{ $ruangan->smin }}"  name="smin">
+                            <input type="number" class="form-control @error('smin') is-invalid @enderror"  name="smin">
 
                             @error('smin')
                                 <span class="invalid-feedback" role="alert">
@@ -70,7 +75,7 @@
                         </div>          
                         <div class="form-group">
                             <label for="">Kelembapan Maksimum</label>
-                            <input type="number" class="form-control @error('kmax') is-invalid @enderror" value="{{ $ruangan->kmax }}"  name="smax">
+                            <input type="number" class="form-control @error('kmax') is-invalid @enderror"  name="kmax">
 
                             @error('kmax')
                                 <span class="invalid-feedback" role="alert">
@@ -80,7 +85,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Kelembapan Minimum</label>
-                            <input type="number" class="form-control @error('kmin') is-invalid @enderror" value="{{ $ruangan->kmin }}"  name="kmin">
+                            <input type="number" class="form-control @error('kmin') is-invalid @enderror"  name="kmin">
 
                             @error('kmin')
                                 <span class="invalid-feedback" role="alert">
@@ -90,9 +95,9 @@
                         </div>          
                         <div class="form-group">
                             <label for="">Tekanan Maksimum</label>
-                            <input type="number" class="form-control @error('smax') is-invalid @enderror" value="{{ $ruangan->smax }}"  name="smax">
+                            <input type="number" class="form-control @error('tmax') is-invalid @enderror"  name="tmax">
 
-                            @error('smax')
+                            @error('tmax')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -100,9 +105,9 @@
                         </div>
                         <div class="form-group">
                             <label for="">Tekanan Minimum</label>
-                            <input type="number" class="form-control @error('smin') is-invalid @enderror" value="{{ $ruangan->smin }}"  name="smin">
+                            <input type="number" class="form-control @error('tmin') is-invalid @enderror"  name="tmin">
 
-                            @error('smin')
+                            @error('tmin')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

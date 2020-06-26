@@ -16,8 +16,13 @@
                                     <p>Alarm ON : {{ $a->time }}</p>
                                     @foreach($a->alert as $q)
                                     @if($q->time == $a->time)
-                                    <p>Status : {{ $q->status }}</p>
-                                    <p>Keterangan : {{ $q->keterangan }} </p>
+                                    @if($q->status == "Hight presure")
+                                            <p class="text-danger">{{ $q->status }}</p>
+                                            @elseif($q->status == "Low presure")
+                                            <p class="text-primary">{{ $q->status }}</p>
+                                        @endif
+                                        
+                                        <p>Keterangan : {{ $q->keterangan }} </p>
                                     @endif
                                     @endforeach
                                     <span class="cd-timeline__date">{{ $a->date }}</span>

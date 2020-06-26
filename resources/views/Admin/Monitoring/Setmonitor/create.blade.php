@@ -55,7 +55,7 @@
                                 </span>
                             @enderror
                         </div> -->
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="inputEmail">Max</label>
                             <input id="inputText3" type="text" class="form-control @error('max') is-invalid @enderror" name="max" placeholder="Max" value="{{ old('max') }}">
                             @error('max')
@@ -77,7 +77,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>                        
+                        </div>                         -->
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>
                 </div>

@@ -1,25 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+use App\Mqtt;
  
  
+use Validator;
+use App\Satuan;
+use App\Setapp;
+use App\Ruangan;
+use App\Operator;
+use App\Log_alert;
+<<<<<<< HEAD
+use Validator;
+=======
+use App\Monitoring;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Operator;
-use App\Monitoring;
-use App\Satuan;
-use App\Ruangan;
-use App\Mqtt;
-use App\Setapp;
-use App\Log_alert;
-use Validator;
+use Illuminate\Support\Facades\Mail;
+>>>>>>> 5673998d8a2bd15917fce74c80fa13b33fd1e9d5
 
 
 class MonitoringController extends Controller
 {
+    public function getData(Request $req)
+    {
+
+        $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->latest()->get();
+        // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->get();
+        // dd($data);
+        return response()->json([
+            'response'=>$data
+        ]);
+
+
+    }
     public function index()
     {
         // dd($mqtt->topic);

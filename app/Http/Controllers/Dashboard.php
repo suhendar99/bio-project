@@ -12,8 +12,10 @@ use App\Setting;
 use App\Monitoring;
 use App\Satuan;
 use App\Log_alert;
+use App\Aktivasi;
 use Auth;
 use PDF;
+
 class Dashboard extends Controller
 {
     /**
@@ -25,8 +27,19 @@ class Dashboard extends Controller
     {
         return view('Admin.Dashboard.log');
     }
+
+    public function data()
+    {
+        $data = Aktivasi::orderBy('created_at','desc')->limit(9)->get();
+        return response()->json([
+            'response'=>$data
+        ]);
+        // return response()->json($data);
+    }
+
     public function index()
     {
+        $aktivasi = Aktivasi::orderBy('created_at','desc')->limit(10)->get();
         $data = Ruangan::all();
         $alarm = Monitoring::where('alarm',1)->latest()->limit(10)->get();
         // dd($alarm);
@@ -35,7 +48,7 @@ class Dashboard extends Controller
         $kelembapan = Satuan::where('parameter','Kelembapan')->first();
         $tekanan = Satuan::where('parameter','Tekanan')->first();
         $suhu = Satuan::where('parameter','Suhu')->first();
-        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu, 'alarm'=>$alarm, 'suhu'=>$suhu, 'kelembapan'=>$kelembapan,'tekanan'=>$tekanan]);
+        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu, 'alarm'=>$alarm, 'suhu'=>$suhu, 'kelembapan'=>$kelembapan,'tekanan'=>$tekanan, 'aktivasi'=>$aktivasi]);
     }
 
     public function login()

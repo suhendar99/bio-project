@@ -86,7 +86,7 @@
 	<style type="text/css">
 		table tr td{
 			text-align: center;
-		},
+		}
 		table tr th{
 			text-align: center;
 		}
@@ -163,7 +163,11 @@
 				<td>{{$p->suhu}}</td>
 				<td>{{$p->kelembapan}}</td>
 				<td>{{$p->tekanan}}</td>
-				<td id="alertff">{{$p->alarm}}</td>
+				@if($p->alarm > 0)
+					<td id="alertff">ON</td>
+				@else
+					<td id="alertff">OFF</td>
+				@endif
 				<td>{{$p->ruangan->nama}}</td>
 				<td>{{$p->perangkat->no_seri}}</td>
 			</tr>

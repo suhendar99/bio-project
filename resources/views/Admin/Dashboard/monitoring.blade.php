@@ -70,16 +70,6 @@
         <div class="row" style="margin-top:100px;">
             <div class="col-xl-4 col-md-12"  style="width:20rem;">
                 <div class="card bg-dark">
-                    <div class="card-header bg-dark text-white">
-                        <div class="row">
-                            <div class="col-6 border-right">
-                                Suhu
-                            </div>
-                            <div class="col-6">
-                                Set Point
-                            </div>
-                        </div>
-                    </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
@@ -93,7 +83,7 @@
                                 <div class="col-12">
                                     <center>Max</center>
                                     <div class="card bg-danger">
-                                        <center>{{$suhu->max}} C</center>
+                                        <center>{{$room->smax}} C</center>
                                     </div>
                                 </div>
                             </div>
@@ -101,10 +91,22 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$suhu->min}} C</center>
+                                        <center>{{$room->smin}} C</center>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark text-white">
+                    <div class="row">
+                        <div class="col-6 border-right">
+                           <center>Suhu</center>
+                        </div>
+                        <div class="col-6">
+                            <center>
+                                Set Point
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -112,16 +114,6 @@
         </div>
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
-                <div class="card-header bg-dark text-white">
-                    <div class="row">
-                        <div class="col-6 border-right">
-                            Kelembapan 
-                        </div>
-                        <div class="col-6">
-                            Set Point
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
@@ -135,7 +127,7 @@
                                 <div class="col-12">
                                     <center>Max</center>
                                     <div class="card bg-danger">
-                                        <center>{{$kelembapan->max}} %</center>
+                                        <center>{{$room->kmax}} %</center>
                                     </div>
                                 </div>
                             </div>
@@ -143,10 +135,22 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$kelembapan->min}} %</center>
+                                        <center>{{$room->kmin}} %</center>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark text-white">
+                    <div class="row">
+                        <div class="col-6 border-right">
+                           <center>Kelembapan</center>
+                        </div>
+                        <div class="col-6">
+                            <center>
+                                Set Point
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -154,16 +158,6 @@
         </div>
         <div class="col-xl-4 col-md-12"  style="width:20rem;">
             <div class="card bg-dark">
-                <div class="card-header bg-dark text-white">
-                    <div class="row">
-                        <div class="col-6 border-right">
-                            Tekanan 
-                        </div>
-                        <div class="col-6">
-                            Set Point
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
@@ -177,7 +171,7 @@
                                 <div class="col-12">
                                     <center>Max</center>
                                     <div class="card bg-danger">
-                                        <center>{{$tekanan->max}} Pa</center>
+                                        <center>{{$room->tmax}} Pa</center>
                                     </div>
                                 </div>
                             </div>
@@ -185,10 +179,22 @@
                                 <div class="col-12">
                                     <center>Min</center>
                                     <div class="card bg-primary">
-                                        <center>{{$tekanan->min}} Pa</center>
+                                        <center>{{$room->tmin}} Pa</center>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark text-white">
+                    <div class="row">
+                        <div class="col-6 border-right">
+                           <center>Tekanan</center>
+                        </div>
+                        <div class="col-6">
+                            <center>
+                                Set Point
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -218,7 +224,12 @@
             </div>
         </div> -->
     <div class="row" style="margin-top:15px; ">
-        <div class="col-2" style="margin-left: 20px;">
+        <div class="col-5 "style="margin-left: 20px;">
+            <div class="row text-white">
+                Harus Pilih salah satu
+            </div>
+        </div>
+        <div class="col-2" >
             <div class="row text-white">
                 <input type="checkbox" name="suhu" id="suhu" value="suhu" checked> Suhu<br>
             </div>

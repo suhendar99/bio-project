@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Operator;
 use App\Monitoring;
 use App\Satuan;
@@ -39,7 +40,8 @@ class MonitoringController extends Controller
         // dd($id);
         $id = $id;
         $app = Setapp::where('id',1)->first();
-        return view('Admin.Dashboard.monitoring',compact('app','id'));
+        $room = Ruangan::where('id',$id)->first();
+        return view('Admin.Dashboard.monitoring',compact('app','id','room'));
     }
 
     public function sendEmail()

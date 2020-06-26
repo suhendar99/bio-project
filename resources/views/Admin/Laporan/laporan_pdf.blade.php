@@ -55,6 +55,25 @@
 			border: 1px black;
 			text-align: center;
 		} 
+		#header,
+		#footer {
+		  position: fixed;
+		  left: 0;
+			right: 0;
+			color: #aaa;
+			font-size: 0.9em;
+		}
+		#header {
+		  top: 0;
+			border-bottom: 0.1pt solid #aaa;
+		}
+		#footer {
+		  bottom: 0;
+		  border-top: 0.1pt solid #aaa;
+		}
+		.page-number:before {
+		  content: "Page " counter(page);
+		}
 	</style>
 </head>
 <body>
@@ -87,9 +106,32 @@
 		<h3>Data Monitoring</h3><br>
 	</center>
 	
-	<h6 style="text-align: left;">Sumber Data :</h6>
+	<h6 style="text-align: left;">Sumber Data : {{$parameter}}</h6>
 	<h6 style="text-align: right;">Waktu : {{$awal}} s.d. {{$akhir}}</h6>
 	<table width="100%" style="margin-bottom: 30px; " id="customers">
+		<!-- @if(isset($data2))
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>{{$parameter}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			@php $i=1 @endphp
+			@foreach($data2 as $p)
+			<tr>
+				<td>{{ $i++ }}</td>
+				@if($parameter == 'Suhu')
+				<td>{{ $p->Suhu }}</td>
+				@elseif($parameter == 'Kelembapan')
+				<td>{{ $p->Kelembapan }}</td>
+				@elseif($parameter == 'Tekanan')
+				<td>{{ $p->Tekanan }}</td>
+				@endif
+			</tr>
+			@endforeach
+		</tbody>
+		@else -->
 		<thead>
 			<tr>
 				<th>No</th>
@@ -117,6 +159,7 @@
 			</tr>
 			@endforeach
 		</tbody>
+		<!-- @endif -->
 	</table>
 
 	<table style="text-align: left !important; margin-bottom: 50px;" id="customers">
@@ -166,5 +209,10 @@
 		{{$set->footer}},  {{$date}}<br>
 		{{Auth::user()->name}}
 	</div>
+	<div id="footer">
+	  <div class="page-number"></div>
+	</div>
+
+
 </body>
 </html>

@@ -24,6 +24,12 @@ class RuanganController extends Controller
     	$v = Validator::make($request->all(), [             
             'nama' => 'required|',            
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'smax' => 'required',
+            'smin' => 'required',
+            'kmax' => 'required',
+            'kmin' => 'required',
+            'tmax' => 'required',
+            'tmin' => 'required',
         ]);
 
         if ($v->fails()) {
@@ -41,6 +47,13 @@ class RuanganController extends Controller
             $employee = Ruangan::create([
                 'nama' => $request->nama,
                 'foto' => $foto,
+                'nama' => $request->nama,
+                'smax' => $request->smax,
+                'smin' => $request->smin,
+                'kmax' => $request->kmax,
+                'kmin' => $request->kmin,
+                'tmax' => $request->tmax,
+                'tmin' => $request->tmin,
             ]);
 
             
@@ -67,6 +80,12 @@ class RuanganController extends Controller
         $v = Validator::make($request->all(), [             
             'nama' => 'required|',            
             'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'smax' => 'required',
+            'smin' => 'required',
+            'kmax' => 'required',
+            'kmin' => 'required',
+            'tmax' => 'required',
+            'tmin' => 'required',
         ]);
 
         if ($v->fails()) {
@@ -75,7 +94,13 @@ class RuanganController extends Controller
             $ruangan = Ruangan::find($id);
             
             $ruangan->update([
-                'nama' => $request->nama
+                'nama' => $request->nama,
+                'smax' => $request->smax,
+                'smin' => $request->smin,
+                'kmax' => $request->kmax,
+                'kmin' => $request->kmin,
+                'tmax' => $request->tmax,
+                'tmin' => $request->tmin,
             ]);
 
             if($request->hasfile('foto'))

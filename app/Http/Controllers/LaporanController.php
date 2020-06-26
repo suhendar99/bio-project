@@ -9,6 +9,7 @@ use App\Operator;
 use App\SetKirim;
 use App\Monitoring;
 use App\Ruangan;
+use App\Satuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,27 +23,49 @@ class LaporanController extends Controller
     public function cetak_laporan()
     {
         $data = Ruangan::all();
-
-        return view('Admin.Laporan.cetak', ['ruang' => $data]);
+        $data2 = Satuan::all();
+        return view('Admin.Laporan.cetak', ['ruang' => $data, 'satuan' => $data2]);
     }
     public function downloadLaporan(Request $req)
     {
+
         set_time_limit(99999);
         $v = Validator::make($req->all(), [             
             'awal' => 'required|date',            
             'akhir' => 'required|date',         
             'ruang' => 'required',
+            'satuan' => 'required',
         ]);
         $awal = $req->awal;
         $akhir = $req->akhir;
+        // $parameter = $req->satuan;
+        // $satuan = $parameter;
+        // $data2 = [];
         $set = Laporan::find(1)->first();
 
+        
+
+        if ($awal > $akhir) {
+             return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
+        }
         if ($req->ruang === "all") {
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         } else {
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
         }
-        
+
+        // if ($req->satuan == "allpar") {
+        //     // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->pluck($req->satuan);
+        //     // dd($data);
+        //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        // } else {
+        //     $data2 = Monitoring::select($req->satuan)->whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->get();
+            
+        // }
+
+        // if($req->ruang == "all" && $req->satuan == "allpar"){
+        //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        // }
         
         // dd($data);
 
@@ -51,13 +74,18 @@ class LaporanController extends Controller
         }else {
 
             // dd($count,$suhumax);
-        
-            $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            $pdf = app('dompdf.wrapper');
+            $pdf->getDomPDF()->set_option("enable_php", true);
+            if ($data2 == 'null' ) {
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'parameter'=>$parameter, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            }else{
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'data2'=>$data2, 'parameter'=>$parameter, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            }
             // set_time_limit(300);
-        return $pdf->stream('Monitoring-Report-'.$req->akhir);
+            return $pdf->stream('Monitoring-Report-'.$req->akhir);
             // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             
-            return back()->with('success', 'Ruangan berhasil ditambahkan');
+            return back();
         }
         
     }

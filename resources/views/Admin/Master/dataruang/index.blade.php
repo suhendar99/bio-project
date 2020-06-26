@@ -25,6 +25,9 @@
                                     <th>ID Ruang</th>
                                     <th>Foto</th>
                                     <th>Nama Ruang</th>
+                                    <th>Suhu</th>
+                                    <th>Kelembapan</th>
+                                    <th>Tekanan</th>
                                     @if(Auth::user()->level == "Admin")
                                     <th>Action</th>
                                     @endif
@@ -40,6 +43,9 @@
                                         <img src="{{ $r->foto }}" alt="" srcset="" style="width:100px; height:100px">
                                     </td>
                                     <td>{{ $r->nama }}</td>
+                                    <td>Max : {{$r->smax}}<br>Min : {{$r->smin}}</td>
+                                    <td>Max : {{$r->kmax}}<br>Min : {{$r->kmin}}</td>
+                                    <td>Max : {{$r->tmax}}<br>Min : {{$r->tmin}}</td>
                                     @if(Auth::user()->level == "Admin")
                                     <td>
                                         <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>

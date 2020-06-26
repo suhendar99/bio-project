@@ -11,7 +11,7 @@
                     <div class="tab-regular">
                         <ul class="nav nav-tabs nav-fill" id="myTab7" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab-justify" data-toggle="tab" href="#home-justify" role="tab" aria-controls="home" aria-selected="true">Overview</a>
+                                <a class="nav-link active" id="home-tab-justify" data-toggle="tab" href="#home-justify" role="tab" aria-controls="home" aria-selected="true">Laporan</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="contact-tab-justify" data-toggle="tab" href="#contact-justify" role="tab" aria-controls="contact" aria-selected="false">Alarm</a>
@@ -21,6 +21,7 @@
                             <div class="tab-pane fade show active" id="home-justify" role="tabpanel" aria-labelledby="home-tab-justify">
                             @include('Admin.Laporan.Setting_kirim.index')
                             </div>
+
                             <div class="tab-pane fade" id="contact-justify" role="tabpanel" aria-labelledby="contact-tab-justify">
                             @include('Admin.Laporan.Alarm.alarm')
                             </div>

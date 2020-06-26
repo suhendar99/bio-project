@@ -1,14 +1,4 @@
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="page-header">
-                <h2 class="pageheader-title">Data Pengaturan Pengiriman Laporan</h2>
-                <div class="page-breadcrumb">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+<div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
@@ -45,38 +35,3 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<form action="" id="formDelete" method="POST">
-    @csrf
-    @method('DELETE')
-
-</form>
-
-<script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
-
-<script>
-     function deletes(id){
-        const formDelete = document.getElementById('formDelete')
-        formDelete.action = '/delete_kirim/'+id
-        Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.value) {
-                formDelete.submit();
-                Swal.fire(
-                'Deleted!',
-                'Ruangan berhasil di hapus',
-                'success'
-                )
-            }
-        })
-    }
-</script>            

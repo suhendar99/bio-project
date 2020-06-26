@@ -15,6 +15,7 @@ use App\Mqtt;
 use App\Setapp;
 use App\Log_alert;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class MonitoringController extends Controller
@@ -105,10 +106,10 @@ class MonitoringController extends Controller
             $log->save();
         }
 
-        if($req->suhu < $smin){
+        if($req->suhu < $smin){ 
             $log = new Log_alert;
             $log->status = 'Low presure';
-            $log->keterangan = $req->suhu.'C lebih tinggi dari '.$smin.'C';
+            $log->keterangan = $req->suhu.'C lebih rendah dari '.$smin.'C';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
             $log->save();
@@ -128,7 +129,7 @@ class MonitoringController extends Controller
         if($req->kelembapan < $kmin){
             $log = new Log_alert;
             $log->status = 'Low presure';
-            $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$smin.'%';
+            $log->keterangan = $req->kelembapan.'% lebih rendah dari '.$smin.'%';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
             $log->save();
@@ -147,7 +148,7 @@ class MonitoringController extends Controller
         if($req->tekanan < $tmin){
             $log = new Log_alert;
             $log->status = 'Low presure';
-            $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$smin.'Pa';
+            $log->keterangan = $req->tekanan.'Pa lebih rendah dari '.$smin.'Pa';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
             $log->save();
@@ -155,7 +156,7 @@ class MonitoringController extends Controller
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
-            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail());
+            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail(Auth::user()));
 
             // dd($send);
 

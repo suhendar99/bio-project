@@ -272,14 +272,14 @@
     <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" ="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
     
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
-    var data_monitoring ;
+    var data_monitoring;
     
     const rew =()=>{
         var html='';
@@ -317,18 +317,15 @@
       }
       
       function onMessageArrived(message) {
-<<<<<<< HEAD
          
         // var today = new Date();
         // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         // var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-=======
 
         // console.log(message.payloadString);         
         var today = new Date();
         var date = today.getFullYear()+'-'+("0" + today.getDate()).slice(-2)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
->>>>>>> 7ccb563edcd5897731572417fe2b4b855892ed89
 
         // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
         //     var raw = '<tr id="'+data.id+'">';
@@ -355,7 +352,7 @@
          data_monitoring.pop();
         //  console.log(data_monitoring);
         // //  raw();
-        rew();
+        // rew();
 
 
         // // var raw = '<tr id="'+data.id+'">';
@@ -376,7 +373,7 @@
         // if (data.alarm == 1 ) {
         //     var alarm = '<div class="cd-timeline__block js-cd-block">' ;
         //     alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
-        //     alarm += '<img src="{{ asset('svg/alarm.svg') }}" alt="Movie" width="40px" height="40px">';
+        //     alarm += '<img src="{asset('svg/alarm.svg')" alt="Movie" width="40px" height="40px">';
         //     alarm += '</div>';
         //     alarm += '<div class="cd-timeline__content js-cd-content">';
         //     alarm += '<h3>Alarm 1</h3>';
@@ -393,7 +390,7 @@
           
          //console.log('BLOK MQTT');
        
-         insert_data(message);
+         insert_data(data);
          // console.log(html);
       }
       

@@ -58,8 +58,8 @@
 	</style>
 </head>
 <body>
-	<img src="{{$set->icon}}" style="float: left;" width="150px">
-	<h3 style="text-align: center; margin-top: 50px; margin-left: 100px;">
+	<img src="{{$set->icon}}" style="float: left;" width="50px" height="50px">  
+	<h3 style=" margin-top: 30px; margin-right:20px;">
 		{{$set->header_img}}
 	</h3> 
 
@@ -83,22 +83,12 @@
 
 		tr:nth-child(even) {background-color: #f2f2f2;}
 	</style>
-	<div class="row" style="margin-bottom: 50px;">
-		<div class="col-4 border-right">
-			<img src="{{$set->icon}}" style="float: left;" width="40%" alt="placeholder+image">
-		</div>
-		<div class="col-8" >
-			<h3 style="text-align: center; margin-top: 50px;">
-				{{$set->header_img}}
-			</h3> 
-		</div>
-	</div>
 	<center>
 		<h3>Data Monitoring</h3><br>
-		<h6>Dari {{$awal}} s.d. {{$akhir}}</h6>
 	</center>
 	
-
+	<h6 style="text-align: left;">Sumber Data :</h6>
+	<h6 style="text-align: right;">Waktu : {{$awal}} s.d. {{$akhir}}</h6>
 	<table width="100%" style="margin-bottom: 30px; " id="customers">
 		<thead>
 			<tr>
@@ -131,7 +121,7 @@
 
 	<table style="text-align: left !important; margin-bottom: 50px;" id="customers">
 		<tr>
-			<td>Jumlah Baris</td>
+			<td>Jumlah Data</td>
 			<td style="text-align: right !important;">{{$count}}</td>
 		</tr>
 		<tr>

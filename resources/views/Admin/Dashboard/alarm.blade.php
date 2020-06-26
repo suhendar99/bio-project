@@ -12,10 +12,14 @@
                                 </div>
                                 <!-- cd-timeline__img -->
                                 <div class="cd-timeline__content js-cd-content">
-                                    <h3>Alarm 1</h3>
+                                    <h3>Alarm</h3>
                                     <p>Alarm ON : {{ $a->time }}</p>
-                                    <p>Status : {{ $a->alert }}</p>
-                                    <p>Keterangan : </p>
+                                    @foreach($a->alert as $q)
+                                    @if($q->time == $a->time)
+                                    <p>Status : {{ $q->status }}</p>
+                                    <p>Keterangan : {{ $q->keterangan }} </p>
+                                    @endif
+                                    @endforeach
                                     <span class="cd-timeline__date">{{ $a->date }}</span>
                                 </div>
                                 <!-- cd-timeline__content -->

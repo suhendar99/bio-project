@@ -101,6 +101,7 @@ class MonitoringController extends Controller
             $log->status = 'Hight presure';
             $log->keterangan = $req->suhu.'C lebih tinggi dari '.$smax.'C';
             $log->monitoring_id = $data->id;
+            $log->time = $req->time;
             $log->save();
         }
 
@@ -109,6 +110,7 @@ class MonitoringController extends Controller
             $log->status = 'Low presure';
             $log->keterangan = $req->suhu.'C lebih tinggi dari '.$smin.'C';
             $log->monitoring_id = $data->id;
+            $log->time = $req->time;
             $log->save();
 
         }
@@ -118,6 +120,7 @@ class MonitoringController extends Controller
             $log->status = 'Hight presure';
             $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$smax.'%';
             $log->monitoring_id = $data->id;
+            $log->time = $req->time;
             $log->save();
 
         }
@@ -127,6 +130,7 @@ class MonitoringController extends Controller
             $log->status = 'Low presure';
             $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$smin.'%';
             $log->monitoring_id = $data->id;
+            $log->time = $req->time;
             $log->save();
         }
 
@@ -135,6 +139,7 @@ class MonitoringController extends Controller
             $log->status = 'Hight presure';
             $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$smax.'Pa';
             $log->monitoring_id = $data->id;
+            $log->time = $req->time;
             $log->save();
 
         }
@@ -144,6 +149,7 @@ class MonitoringController extends Controller
             $log->status = 'Low presure';
             $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$smin.'Pa';
             $log->monitoring_id = $data->id;
+            $log->time = $req->time;
             $log->save();
         }
 

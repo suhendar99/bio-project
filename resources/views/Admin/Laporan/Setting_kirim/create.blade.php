@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="section-block" id="basicform">
-                <h3 class="section-title">Tambah Data Operator</h3>
+                <h3 class="section-title">Tambah Pengaturan Kirim Laporan</h3>
             </div>
             <div class="card">
                 <div class="card-body">
@@ -16,32 +16,34 @@
                     @endif
                         @csrf
                         <div class="form-group">
-                            <label for="inputEmail">Email Operator</label>
-                            <select class="form-control" name="email">
+                            <label for="inputEmail">Email Tujuan</label>
+                            <select class="form-control @error('email') is-invalid @enderror" name="email">
                                 @foreach($operator as $i)
                                     <option value="{{ $i->id }}">{{ $i->email }}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Type Pengiriman</label>
-                            <select name="status" id="" class="form-control">
-                                <option value="Email">Email</option>
-                                <!-- <option value="Telegram">Telegram</option> -->
-                            </select>
-                            @error('status')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputText3" class="col-form-label">Waktu Pengiriman</label>
-                            <select name="waktu" id="" class="form-control">
+                            <label for="inputText3" class="col-form-label">frekuensi Pengiriman</label>
+                            <select name="status" id="" class="form-control">
                                 <option value="daily">Daily</option>
                                 <option value="weekly">Weekly</option>
                                 <option value="mounthly">Mounthly</option>
                             </select>
+                            @error('status')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="inputText3" class="col-form-label">Waktu Pengiriman</label>
+                            <input type="time" name="waktu" id="" class="form-control @error('waktu') is-invalid @enderror" value="{{ old('waktu') }}">
                             @error('waktu')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

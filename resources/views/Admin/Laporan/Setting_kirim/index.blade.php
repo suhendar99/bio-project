@@ -1,9 +1,7 @@
-@extends('Admin.layouts.app')
-@section('content')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Data Ruang</h2>
+                <h2 class="pageheader-title">Data Pengaturan Pengiriman Laporan</h2>
                 <div class="page-breadcrumb">
                     
                 </div>
@@ -20,8 +18,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>E Mail</th>
-                                    <th>Type Pengiriman</th>
+                                    <th>E Mail Tujuan</th>
+                                    <th>Frakuensi Pengiriman</th>
                                     <th>Waktu Pengiriman</th>
                                     <th>Action</th>
                                 </tr>
@@ -35,8 +33,8 @@
                                     <td>{{ $r->status_kirim }}</td>
                                     <td>{{ $r->waktu_kirim }}</td>
                                     <td>
-                                        <a href="/edit_kirim/{{ $r->id }}" class="btn btn-primary">Edit</a>
-                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger">Delete</button>
+                                        <a href="/edit_kirim/{{ $r->id }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -82,4 +80,3 @@
         })
     }
 </script>            
-@endsection

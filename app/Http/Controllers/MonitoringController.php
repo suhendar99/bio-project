@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Auth;
 use App\Operator;
 use App\Monitoring;
 use App\Satuan;
@@ -109,7 +108,7 @@ class MonitoringController extends Controller
         $tekanan = Satuan::where('parameter','Tekanan')->first();
         $tmax = $tekanan->max;
         $tmin = $tekanan->min; 
-
+        
         if ($req->suhu > $smax) {
             $log = new Log_alert;
             $log->status = 'Hight presure';

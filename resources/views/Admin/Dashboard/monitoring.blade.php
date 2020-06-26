@@ -231,7 +231,7 @@
         </div>
         <div class="col-2" >
             <div class="row text-white">
-                <input type="checkbox" name="suhu" id="suhu" value="suhu" checked> Suhu<br>
+                <input type="checkbox" name="suhu" id="suhu" value="suhu" checked disabled> Suhu<br>
             </div>
         </div>
         <div class="col-2">

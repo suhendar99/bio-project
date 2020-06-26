@@ -11,7 +11,7 @@ class Ruangan extends Model
     protected $table = 'ruangans';
     protected $primarykey = "id";
     protected $fillable = [
-    	'foto','nama'
+    	'foto','nama','smax','smin','kmax','kmin','tmax','tmin',
     ];
 
     public function monitoring()

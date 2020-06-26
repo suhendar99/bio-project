@@ -21,6 +21,17 @@ use Illuminate\Support\Facades\Auth;
 
 class MonitoringController extends Controller
 {
+    public function getData(Request $req)
+    {
+        $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->get();
+        dd($data);
+        return response()->json([
+            'response'=>$data
+        ]);
+
+
+    }
     public function index()
     {
         // dd($mqtt->topic);

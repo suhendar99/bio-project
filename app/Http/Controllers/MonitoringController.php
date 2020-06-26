@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Operator;
 use App\Monitoring;
 use App\Satuan;
@@ -155,7 +156,7 @@ class MonitoringController extends Controller
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
-            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail());
+            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail(Auth::user()));
 
             // dd($send);
 

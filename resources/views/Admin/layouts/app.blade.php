@@ -280,6 +280,8 @@
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
     var data_monitoring ;
+    const on = "ON";
+    const off = "OFF";
     
     const rew =()=>{
         var html='';
@@ -292,14 +294,28 @@
                 <td>${row.ruangan_id}</td>
                 <td>${row.suhu}</td>
                 <td>${row.kelembapan}</td>
-                <td>${row.tekanan}</td>
-                <td>${row.alarm}</td>
+                <td>${row.tekanan}</td>                
+                <td id="alertff">${row.alarm}</td>
             </tr>`;
         }); 
         $('tbody').html(html);
         }
         
+        alp();
     }
+
+    const alp = ()=>{
+        const alrm = document.querySelectorAll("#alertff");
+        
+        alrm.forEach(r =>{
+            if(r.innerHTML == 1){
+                r.innerHTML = on;
+            }else{
+                r.innerHTML = off;
+            }   
+        })
+    }
+
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()
       {

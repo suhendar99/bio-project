@@ -65,7 +65,7 @@
                                 </div>
                                 <a class="dropdown-item" href="/profile/{{ Auth::user()->id }}"><i class="fas fa-cog mr-2"></i> My Profile </a>
                                 <a class="dropdown-item" href="/editPassword/{{ Auth::user()->id }}"><i class="fas fa-key mr-2"></i> Ganti Password </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                <form id="logout-form" action="{{ route('logout') }}" method="post">
                                     @csrf
                                     <center><button class="btn btn-primary col-12"><i class="fas fa-power-off mr-2"></i>Logout</button></center>
                                 </form>
@@ -144,9 +144,9 @@
                                             <a class="nav-link  {{ Request::is('monitoring*') ? 'active' : false }}" href="{{ route('monitoring') }}">Raw Data</a>
                                         </li>
                                         @if(Auth::user()->level == "Admin")
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <a class="nav-link {{ Request::is('set_monitoring*') ? 'active' : false }}" href="{{ route('setting.monitoring') }}">Pengaturan Monitoring</a>
-                                        </li>
+                                        </li> -->
                                         @endif
                                     </ul>
                                 </div>
@@ -250,10 +250,10 @@
     <script src="{{ asset('concept/assets/vendor/charts/c3charts/c3.min.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
-    <script src="{{ asset('concept/assets/libs/js/dashboard-ecommerce.js') }}"></script>
+    <!-- <script src="{{ asset('concept/assets/libs/js/dashboard-ecommerce.js') }}"></script> -->
     <script src="{{ asset('concept/assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
-    <script src="{{ asset('concept/assets/vendor/gauge/gauge.min.js') }}"></script>
-    <script src="{{ asset('concept/assets/vendor/gauge/gauge.js') }}"></script>
+    <!-- <script src="{{ asset('concept/assets/vendor/gauge/gauge.min.js') }}"></script>
+    <script src="{{ asset('concept/assets/vendor/gauge/gauge.js') }}"></script> -->
     <script src="{{ asset('concept/assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
@@ -298,7 +298,7 @@
                 <td id="alertff">${row.alarm}</td>
             </tr>`;
         }); 
-        $('tbody').html(html);
+        $('#monitoring tbody').html(html);
         
         alp();
     }

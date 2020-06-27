@@ -23,6 +23,11 @@ class AppController extends Controller
         $data = Setapp::all();
         return view('Admin.layout.app',['data'=>$data, 'mqtt'=>$mqtt]);
     }
+    public function login()
+    {
+        $d = Setapp::all();
+        return view('auth.login',compact('d'));
+    }
 
     public function set_mqtt()
     {
@@ -82,10 +87,10 @@ class AppController extends Controller
     public function update(Request $req, $id)
     {
         $v = Validator::make($req->all(), [             
-            'nama_apps'  => 'required|max:25',
+            'nama_apps'  => 'required|max:10',
             'overview'   => 'required',       
             'icon'  => 'image|mimes:jpeg,png,jpg|max:1024',
-            'tab' => 'required|'
+            'tab' => 'required|max:10'
         ]);
 
         if ($v->fails()) {

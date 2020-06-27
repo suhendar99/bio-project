@@ -25,9 +25,9 @@
                                     <th>ID Ruang</th>
                                     <th>Foto</th>
                                     <th>Nama Ruang</th>
-                                    <th>Suhu</th>
-                                    <th>Kelembapan</th>
-                                    <th>Tekanan</th>
+                                    <th>Set point Suhu</th>
+                                    <th>Set point Kelembapan</th>
+                                    <th>Set point Tekanan</th>
                                     @if(Auth::user()->level == "Admin")
                                     <th>Action</th>
                                     @endif

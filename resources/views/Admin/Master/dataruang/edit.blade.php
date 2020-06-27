@@ -52,7 +52,7 @@
                             @enderror
                         </div> 
                         <div class="form-group">
-                            <label for="">Suhu Maksimum</label>
+                            <label for="">Set point Suhu Maksimum</label>
                             <input type="number" class="form-control @error('smax') is-invalid @enderror" value="{{ $ruangan->smax }}"  name="smax">
 
                             @error('smax')
@@ -62,7 +62,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Suhu Minimum</label>
+                            <label for="">Set point Suhu Minimum</label>
                             <input type="number" class="form-control @error('smin') is-invalid @enderror" value="{{ $ruangan->smin }}"  name="smin">
 
                             @error('smin')
@@ -72,7 +72,7 @@
                             @enderror
                         </div>          
                         <div class="form-group">
-                            <label for="">Kelembapan Maksimum</label>
+                            <label for="">Set point Kelembapan Maksimum</label>
                             <input type="number" class="form-control @error('kmax') is-invalid @enderror" value="{{ $ruangan->kmax }}"  name="kmax">
 
                             @error('kmax')
@@ -82,7 +82,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Kelembapan Minimum</label>
+                            <label for="">Set point Kelembapan Minimum</label>
                             <input type="number" class="form-control @error('kmin') is-invalid @enderror" value="{{ $ruangan->kmin }}"  name="kmin">
 
                             @error('kmin')
@@ -92,7 +92,7 @@
                             @enderror
                         </div>          
                         <div class="form-group">
-                            <label for="">Tekanan Maksimum</label>
+                            <label for="">Set point Tekanan Maksimum</label>
                             <input type="number" class="form-control @error('tmax') is-invalid @enderror" value="{{ $ruangan->tmax }}"  name="tmax">
 
                             @error('tmax')
@@ -102,7 +102,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Tekanan Minimum</label>
+                            <label for="">Set point Tekanan Minimum</label>
                             <input type="number" class="form-control @error('tmin') is-invalid @enderror" value="{{ $ruangan->tmin }}"  name="tmin">
 
                             @error('tmin')
@@ -112,7 +112,7 @@
                             @enderror
                         </div>         
                         <div class="form-group">                                        
-                            <button type="submit" class="btn btn-primary"> Simpan</button>
+                            <button type="submit" class="btn btn-primary"> Edit</button>
                         </div>
                     </form>                               
                 </div>

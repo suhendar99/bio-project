@@ -79,11 +79,7 @@
                                                         <label for="inputText3" class="col-form-label">Parameter</label>
                                                         <select name="satuan" id="" class="form-control">
                                                             <option value="allper">Semua parameter</option>
-                                                            {{-- @foreach($satuan as $e)
-                                                                @if($e->id < 5)
-                                                                <option value="{{ $e->id }}">{{ $e->parameter }}</option>
-                                                                @endif
-                                                            @endforeach --}}
+                                                            
                                                             <option value="suhu">Suhu</option>}
                                                             <option value="kelembapan">Kelembapan</option>}
                                                             <option value="tekanan">Tekanan</option>}
@@ -98,11 +94,13 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <button class="btn btn-primary" type="submit">Cetak Laporan</button>
-                                                <div class="col-6">
-                                                    <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
-                                                </div>
+                                            <div class="col-6">
+                                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
                                             </div>
+                                                <div class="col-6">
+                                <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
+                            </div>
+                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -135,11 +133,20 @@
 <!-- ============================================================== -->
 
 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div id="chart"></div>
+        </div>
+    </div>
+</div>
+
+
 
 <script>
     
 
-    let monitoring = '@json($data)'
+    let monitoring = '@json($monitoring)'
             
               
     var suhu = []

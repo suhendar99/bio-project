@@ -58,6 +58,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-body">
+                <!-- <a class="btn btn-warning col-2" style="margin-bottom:15px;" href="{{ route('export') }}">Export Log Aktivitas</a> -->
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered" id="logTable" >
                         <thead>
@@ -79,7 +80,6 @@
                                 <td>{{$a->description}}</td>
                                 <td>{{$a->created_at}}</td>
                             </tr>
-                            
                             @endforeach
                         </tbody>
                     </table>

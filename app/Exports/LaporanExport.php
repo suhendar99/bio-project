@@ -3,15 +3,28 @@
 namespace App\Exports;
 
 use App\Aktivasi;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromView;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class LaporanExport implements FromCollection
+class LaporanExport implements FromView, ShouldAutoSize
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    use Exportable;
+
+    public function view(): view
     {
-        return Aktivasi::all();
+        return view('Admin.Laporan.Aktivitas.view', [
+            'Aktivasi' => Aktivasi::all()
+        ]);
+    }
+
+    public function headings(): array
+    {
+        return [
+            'causer_id',
+            'description',
+            'created_at'
+        ];
     }
 }

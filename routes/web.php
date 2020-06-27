@@ -85,9 +85,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cetak_laporan','LaporanController@cetak_laporan')->name('cetak.laporan');
     Route::post('/downloadLaporan','LaporanController@downloadLaporan')->name('downloadLaporan');
         // Cetak Log
-    Route::get('export','LaporanController@export')->name('export');
-    Route::get('importview','LaporanController@importview');
-    Route::post('import','LaporanController@import')->name('import');
+    Route::get('/export','LaporanController@export')->name('export');
+    Route::get('/importview','LaporanController@importview');
+    Route::post('/import','LaporanController@import')->name('import');
         // Pengaturan Laporan
     Route::get('/set_laporan','LaporanController@set_laporan')->name('setting.laporan');
     Route::post('/storeSetlaporan','LaporanController@store')->name('tambah.setlaporan');

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\KirimAlarm;
+use App\Imports\LaporanImport;
+use App\Exports\LaporanExport;
+use App\Aktivasi;
+use Excel;
 use PDF;
 use Validator;
 use App\Laporan;
@@ -142,7 +146,7 @@ class LaporanController extends Controller
             }
             set_time_limit(300);
             return $pdf->stream('Monitoring-Report-'.$req->akhir);
-            return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            return view('Admin.Laporan.laporan_pdx  f',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             
             return back();
         }
@@ -388,8 +392,18 @@ class LaporanController extends Controller
             return back()->with('success', 'Data berhasil diedit');
         }        
     }
+    public function importview()
+    {
+        return view('Admin.Laporan.Aktivitas.excel');
+    }
     public function export()
     {
-        
+        set_time_limit(99999);
+        return(new LaporanExport)->download('Aktivitas.xlsx');
+    }
+    public function import()
+    {
+        Excel::import(new LaporanImport,request()->file('file'));
+        return back();
     }
 }

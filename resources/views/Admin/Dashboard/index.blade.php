@@ -23,7 +23,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Id Pengguna</th>
+                                <th>Nama Pengguna</th>
+                                <th>Level</th>
                                 <th>Aktivitas</th>
                                 <th>Waktu</th>
                             </tr>
@@ -33,7 +34,8 @@
                             @foreach($aktivasi as $a)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$a->causer_id}}</td>
+                                <td>{{$a->operator->name}}</td>
+                                <td>{{$a->operator->level}}</td>
                                 <td>{{$a->description}}</td>
                                 <td>{{$a->created_at}}</td>
                             </tr>

@@ -1,3 +1,6 @@
+@php
+    $apps = \App\Setapp::where('id', 1)->first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,8 +39,8 @@
                             <form method="post" action="{{ route('login') }}" >
                                 @csrf
                                 <center>
-                                    <img src="{{ asset('svg/avatar.svg') }}" class="avatar" alt="" width="100px">
-                                    <h2>BIOFARMA</h2>
+                                    <img src="{{ asset('foto/app/'.$apps->icon) }}" class="rounded-circle" alt="" width="100px" height="100px">
+                                    <h2>{{ $apps->nama_apps }}</h2>
                                     <span>Login to Start Monitoring</span>
                                     <div class="form-group" style="margin-top: 20px;">
                                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" style="border-radius: 30px; height: 50px;" required>
@@ -64,7 +67,7 @@
             </div>
         </div>
         <footer class="container">
-            <p style="text-align:center;">&copy; 2020 Biofarma</p>
+            <p style="text-align:center;">&copy; {{ $apps->nama_apps }} 2020 </p>
         </footer>
     </div>
 </body>

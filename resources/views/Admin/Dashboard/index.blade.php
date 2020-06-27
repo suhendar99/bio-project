@@ -90,7 +90,7 @@
 </div>
 @endif
 <script>
-    // $.get("{{ route('aktivasi.data') }}", function(data){
+    // $.get(" route('aktivasi.data') ", function(data){
     // console.log(data);
     // act(data);
     // var record = JSON.parse(data);

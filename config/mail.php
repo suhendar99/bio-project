@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => 'al@makerindo.com',
-        'name' => 'admin@soorvei.com',
+        'name' => 'biofarma@makerindo.com',
     ],
 
     /*

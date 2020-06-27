@@ -108,7 +108,7 @@
 	<table style="margin-bottom:-10px;">
 		<tr>
 			<td rowspan="2" style="text-align:left; font-size:13px;">
-				Sumber Data : {{$parameter}}
+				Sumber Data : {{ $sumber }}
 			</td>
 			<td rowspan="2" style="text-align:right; font-size:13px;">
 				Waktu : {{$awal}} s.d. {{$akhir}}

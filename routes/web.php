@@ -104,7 +104,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/aksi_add','LaporanController@aksi_add')->name('aksi.add');
     Route::get('/edit_kirim/{id}','LaporanController@edit_kirim')->name('edit.kirim');
     Route::put('/aksi_edit/{id}','LaporanController@aksi_edit')->name('aksi.edit');
-    Route::delete('/delete_kirim/{id}','LaporanController@delete')->name('delete');
+    Route::delete('/delete_kirim/{id}','LaporanController@delete');
 
     Route::get('/add_kirim_alarm','LaporanController@add_kirim_alarm')->name('add.kirim.alarm');
     Route::post('/aksi_add_alarm','LaporanController@aksi_add_alarm')->name('aksi.add.alarm');

@@ -14,7 +14,7 @@
                         {{$suhu->parameter}}
                     </div>
                     <div class="col-3" id="suhuRoom">
-                         {{$d->monitoring? $d->monitoring->suhu:"0"}} 
+                         {{$d->monitoring ? $d->monitoring->suhu:"0"}} 
                     </div>
                     <div class="col-2">
                         {{$suhu->satuan}}
@@ -25,7 +25,7 @@
                         {{$kelembapan->parameter}}
                     </div>
                     <div class="col-3">
-                         {{$d->monitoring? $d->monitoring->kelembapan:"0"}}
+                         {{$d->monitoring ? $d->monitoring->kelembapan:"0"}}
                     </div>
                     <div class="col-2">
                         {{$kelembapan->satuan}}
@@ -36,7 +36,7 @@
                         {{$tekanan->parameter}}
                     </div>
                     <div class="col-3">
-                         {{$d->monitoring? $d->monitoring->tekanan:"0"}}
+                         {{$d->monitoring ? $d->monitoring->tekanan:"0"}}
                     </div> 
                     <div class="col-2">
                         {{$tekanan->satuan}}

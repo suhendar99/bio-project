@@ -148,7 +148,7 @@ class OperatorController extends Controller
     public function update_per(Request $req, $id)
     {
         $this->validate($req,[
-            'seri' => 'required|numeric|unique:perangkats,no_seri'.$id,
+            'seri' => 'required|numeric|unique:perangkats,no_seri,'.$id,
             'latitude' => 'required|',
             'longitude' => 'required|',
             'aktivasi' => 'required|date',

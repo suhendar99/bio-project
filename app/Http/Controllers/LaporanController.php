@@ -61,10 +61,13 @@ class LaporanController extends Controller
             $pp = "kosong";
             $sumber = "Semua Ruangan dan Parameter";
         } elseif ($req->ruang !== "all" && $req->satuan ==="allper"){
-            echo "ruang".$req->ruang;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
             $parameter = Monitoring::where('ruangan_id', $req->ruang)->first();
             // dd($data);
+            if(!isset($parameter)){
+                return back()->with('failed', "Data kosong");
+            }
+
             $pos = 'Ruangan';
             $pp = "ll";
             $sumber = $parameter->ruangan->nama;

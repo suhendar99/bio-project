@@ -22,9 +22,9 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">                            
                 <div class="card-body">
-                    @if(Auth::user()->level == "Admin")
-                    <a class="btn btn-primary" href="{{route('satuan.create')}}">Tambah Data</a>
-                    @endif
+                    {{-- @if(Auth::user()->level == "Admin")
+                    <a class="btn btn-primary" href="{{route('satuan.creates')}}">Tambah Data</a>
+                    @endif --}}
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
                             <thead>

@@ -53,13 +53,15 @@ class LaporanController extends Controller
             echo "all";
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
             // dd($data);
-            $pos = 'Semua ruangan & parameter';
+            $pos = 'Ruangan';
+            $pp = "kosong";
         } elseif ($req->ruang !== "all" && $req->satuan ==="allper"){
             echo "ruang".$req->ruang;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
             $parameter = Monitoring::where('ruangan_id', $req->ruang)->first();
             // dd($data);
             $pos = 'Ruangan';
+            $pp = "ll";
         } elseif ($req->ruang === "all" && $req->satuan !=="allper"){
             echo "satuan".$req->satuan;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
@@ -80,6 +82,7 @@ class LaporanController extends Controller
             
             // dd($data);
             $pos = 'Parameter';
+            $pp = "ll";
         } elseif ($req->ruang !== "all" && $req->satuan !=="allper"){
             echo "satuan".$req->satuan;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
@@ -100,6 +103,7 @@ class LaporanController extends Controller
             
             // dd($data);
             $pos = 'Parameter';
+            $pp = "ll";
         }
         // dd($data);
         // if ($req->satuan == "allpar") {
@@ -122,7 +126,10 @@ class LaporanController extends Controller
             // dd($count,$suhumax);
             $pdf = app('dompdf.wrapper');
             $pdf->getDomPDF()->set_option("enable_php", true);
-            if ($pos == 'Ruangan') {
+            if ($pp == "kosong"){
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                
+            }elseif ($pos == 'Ruangan') {
                 $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 
             }elseif($pos == 'Parameter'){

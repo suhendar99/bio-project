@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="monitorTable" >
+                    <table class="table table-striped table-bordered" id="monitoring" >
                         <thead>
                             <tr>
                                 <th>Date</th>

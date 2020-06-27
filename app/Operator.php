@@ -23,4 +23,8 @@ class Operator extends Model
     {
         return $this->hasMany('App\KirimAlarm','id_operator','id');
     }
+    public function aktivasi()
+    {
+        return $this->hasOne('App\Aktivasi','causer_id','id');
+    }
 }

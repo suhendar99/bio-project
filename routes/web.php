@@ -81,7 +81,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/pdfLog','Dashboard@pdfLog');
     Route::post('/pdfLogPrint','Dashboard@pdfLogPrint');
-    Route::get('/excelLog','Dashboard@excelLog');
+    Route::get('/excelLog','LaporanController@importview');
+    Route::post('/excelLogPrint','LaporanController@export');
 
     // laporan
         // cetak laporan

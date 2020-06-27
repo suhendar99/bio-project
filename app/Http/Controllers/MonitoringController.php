@@ -1,22 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+use App\Mqtt;
  
  
+use Validator;
+use App\Satuan;
+use App\Setapp;
+use App\Ruangan;
+use App\Operator;
+use App\Log_alert;
+use App\Monitoring;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Operator;
-use App\Monitoring;
-use App\Satuan;
-use App\Ruangan;
-use App\Mqtt;
-use App\Setapp;
-use App\Log_alert;
-use Validator;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class MonitoringController extends Controller

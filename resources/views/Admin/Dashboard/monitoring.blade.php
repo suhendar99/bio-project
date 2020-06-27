@@ -223,15 +223,10 @@
                     </select>
             </div>
         </div> -->
-    <div class="row" style="margin-top:15px; ">
-        <div class="col-5 "style="margin-left: 20px;">
-            <div class="row text-white">
-                Harus Pilih salah satu
-            </div>
-        </div>
+    <!--  -->
         <div class="col-2" >
             <div class="row text-white">
-                <input type="checkbox" name="suhu" id="suhu" value="suhu" checked> Suhu<br>
+                <input type="checkbox" name="suhu" id="suhu" value="suhu" checked disabled> Suhu<br>
             </div>
         </div>
         <div class="col-2">

@@ -2,6 +2,7 @@
                     <!-- timeline  -->
                     <!-- ============================================================== -->
                 
+                    <span>*Hanya Menampilkan 10 Kejadian Terakhir</span>
                     <section class="cd-timeline js-cd-timeline">
                         <div class="cd-timeline__container" id="alarmReal">
                             <!-- cd-timeline__block -->
@@ -16,8 +17,13 @@
                                     <p>Alarm ON : {{ $a->time }}</p>
                                     @foreach($a->alert as $q)
                                     @if($q->time == $a->time)
-                                    <p>Status : {{ $q->status }}</p>
-                                    <p>Keterangan : {{ $q->keterangan }} </p>
+                                    @if($q->status == "Hight presure")
+                                            <p class="text-danger">{{ $q->status }}</p>
+                                            @elseif($q->status == "Low presure")
+                                            <p class="text-primary">{{ $q->status }}</p>
+                                        @endif
+                                        
+                                        <p>Keterangan : {{ $q->keterangan }} </p>
                                     @endif
                                     @endforeach
                                     <span class="cd-timeline__date">{{ $a->date }}</span>

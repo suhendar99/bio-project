@@ -323,8 +323,10 @@
         client.subscribe('{{ $topic }}');
         // rew();
       }
-      function onFailure()
+      function onFailure(xhr)
       {
+          console.log(xhr);
+          
           console.log('KONEKSI_GAGAL!!!!!')
       }
       function onConnectionLost(responseObject) {

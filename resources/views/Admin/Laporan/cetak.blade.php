@@ -68,100 +68,12 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                        <!-- ============================================================== -->
-                        <!-- end pageheader  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- select options  -->
-                        <!-- ============================================================== -->
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form action="/downloadLaporan" method="post">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="input-select">Tanggal Awal</label>
-                                                        <input type="date" name="awal" class="form-control  @error('awal') is-invalid @enderror" id="awal">
-                                                        @error('awal')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="input-select">Tanggal Akhir</label>
-                                                        <input type="date" name="akhir" class="form-control @error('akhir') is-invalid @enderror" id="akhir">
-                                                        @error('akhir')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="inputText3" class="col-form-label">Ruangan</label>
-                                                        <select name="ruang" id="" class="form-control">
-                                                            <option value="all">Semua ruangan</option>
-                                                            @foreach($ruang as $f)
-                                                                <option value="{{ $f->id }}">{{ $f->nama }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('status')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="inputText3" class="col-form-label">Parameter</label>
-                                                        <select name="satuan" id="" class="form-control">
-                                                            <option value="allper">Semua parameter</option>
-                                                            
-                                                            <option value="suhu">Suhu</option>}
-                                                            <option value="kelembapan">Kelembapan</option>}
-                                                            <option value="tekanan">Tekanan</option>}
-                                                            option
-                                                        </select>
-                                                        @error('status')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-
-                                            <div class="col-6">
-                                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
-                                            </div>
-
-                                            <div class="col-6">
-                                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
-                                            </div>
-
-                                                <div class="col-6">
-                                                <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
-                                                <span>*) Hanya menampilkan 10 data terakhir</span>
-                                            </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Ruangan</label>
-                                <select name="ruang" id="ruangan" class="form-control">
+                                <select name="ruang" id="" class="form-control">
                                     <option value="all">Semua ruangan</option>
                                     @foreach($ruang as $f)
                                         <option value="{{ $f->id }}">{{ $f->nama }}</option>
@@ -177,7 +89,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Parameter</label>
-                                <select name="satuan" id="parameter" class="form-control">
+                                <select name="satuan" id="" class="form-control">
                                     <option value="allper">Semua parameter</option>
                                     
                                     <option value="suhu">Suhu</option>}
@@ -194,11 +106,11 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-6">
-                    <button class="btn btn-primary" type="submit">Cetak Laporan</button>
-                    </div>
                         <div class="col-6">
-                        <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
+                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
+                        </div>
+                        <div class="col-6">
+                            <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
                         <span>*) Hanya menampilkan 10 data terakhir</span>
                     </div>
                     </div>
@@ -227,7 +139,7 @@
     )
 </script>
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <!-- ============================================================== -->
 <!-- pageheader  -->
@@ -341,6 +253,7 @@
 
     };
     function render() {
+        console.log(awal);
         $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

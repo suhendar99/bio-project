@@ -13,4 +13,6 @@ class Setapp extends Model
     protected $fillable = [
     	'icon','nama_apps','overview','tab'
     ];
+
+    
 }

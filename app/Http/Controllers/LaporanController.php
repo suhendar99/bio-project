@@ -54,14 +54,12 @@ class LaporanController extends Controller
              return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
         }
         if ($req->ruang === "all" && $req->satuan === "allper") {
-            echo "all";
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
             // dd($data);
             $pos = 'Ruangan';
             $pp = "kosong";
             $sumber = "Semua Ruangan dan Parameter";
         } elseif ($req->ruang !== "all" && $req->satuan ==="allper"){
-            echo "ruang".$req->ruang;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
             $parameter = Monitoring::where('ruangan_id', $req->ruang)->first();
             // dd($data);
@@ -69,7 +67,6 @@ class LaporanController extends Controller
             $pp = "ll";
             $sumber = $parameter->ruangan->nama;
         } elseif ($req->ruang === "all" && $req->satuan !=="allper"){
-            echo "satuan".$req->satuan;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
             
                 if ($req->satuan == "suhu") {
@@ -91,7 +88,6 @@ class LaporanController extends Controller
             $pp = "ll";
             $sumber = $parameter;
         } elseif ($req->ruang !== "all" && $req->satuan !=="allper"){
-            echo "satuan".$req->satuan;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
             
             $rooms = Monitoring::where('ruangan_id', $req->ruang)->first();

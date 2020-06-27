@@ -70,6 +70,8 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Ruangan</label>

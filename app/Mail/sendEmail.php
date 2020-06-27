@@ -11,14 +11,17 @@ class sendEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user;
+    public $foto;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -29,11 +32,12 @@ class sendEmail extends Mailable
     public function build()
     {
        return $this->from('biofarma@mail.com')
-       ->view('email')
+       ->view('Admin.email.alertemail')
        ->with(
         [
             'nama' => 'Bioarma',
             'website' => 'www.biofarma.com'
-        ]);
+        ])
+       ;
     }
 }

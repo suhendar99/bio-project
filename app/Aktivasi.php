@@ -19,4 +19,9 @@ class Aktivasi extends Model
      * @var array
      */
     protected $fillable = ['log_name', 'description', 'subject_id', 'subject_type', 'causer_id', 'causer_type', 'properties'];
+
+    public function operator()
+    {
+        return $this->belongsTo('App\Operator','causer_id','id');
+    }
 }

@@ -63,6 +63,9 @@
                 </div>
             </div>
         </div>
+        <footer class="container">
+            <p style="text-align:center;">&copy; 2020 Biofarma</p>
+        </footer>
     </div>
 </body>
 </html>

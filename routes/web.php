@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');
     Route::get('/','Dashboard@index')->name('dashboard');
     Route::get('/a','AppController@test');
+    Route::get('/b','AppController@login');
     // Master Data
         // Setting Account
     Route::get('/profile/{id}','AccountController@index');

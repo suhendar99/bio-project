@@ -112,7 +112,7 @@ class LaporanController extends Controller
             // dd($data);
             $pos = 'Parameter';
             $pp = "ll";
-            $sumber = $parameter." & ".$rooms;
+            $sumber = $parameter." & ".$rooms->ruangan->nama;
         }
         // dd($data);
         // if ($req->satuan == "allpar") {

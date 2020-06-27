@@ -79,6 +79,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/aktivasi','Dashboard@data')->middleware('admin')->name('aktivasi.data');
 
+    Route::get('/pdfLog','Dashboard@pdfLog');
+    Route::post('/pdfLogPrint','Dashboard@pdfLogPrint');
+    Route::get('/excelLog','Dashboard@excelLog');
 
     // laporan
         // cetak laporan

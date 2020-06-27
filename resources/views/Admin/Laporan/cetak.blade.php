@@ -96,9 +96,15 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+
                                             <div class="col-6">
                                             <button class="btn btn-primary" type="submit">Cetak Laporan</button>
                                             </div>
+
+                                            <div class="col-6">
+                                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
+                                            </div>
+
                                                 <div class="col-6">
                                                 <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
                                                 <span>*) Hanya menampilkan 10 data terakhir</span>
@@ -112,6 +118,7 @@
                         <!-- ============================================================== -->
                         <!-- end select options  -->
                         <!-- ============================================================== -->
+
 
 <script>
   window.Promise ||
@@ -133,6 +140,7 @@
 <!-- ============================================================== -->
 <!-- pageheader  -->
 <!-- ============================================================== -->
+
 
 <div class="row">
     <div class="col-12">

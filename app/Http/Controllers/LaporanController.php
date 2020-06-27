@@ -128,8 +128,7 @@ class LaporanController extends Controller
             $pdf->getDomPDF()->set_option("enable_php", true);
             if ($pp == "kosong"){
                 $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
-
-
+                
             }elseif ($pos == 'Ruangan') {
                 $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 

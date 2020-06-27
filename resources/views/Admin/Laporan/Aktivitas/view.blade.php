@@ -1,7 +1,7 @@
-<table border="1">
+<table style="border:1px solid black;   ">
     <thead>
     <tr>
-    <td>No</td>
+        <td>No</td>
         <td>Nama Pengguna</td>
         <td>Level</td>
         <td>Aktivitas</td>

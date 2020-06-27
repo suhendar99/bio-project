@@ -142,7 +142,7 @@
 <script>
     
 
-    let monitoring = '@json($data)'
+    let monitoring = '@json($monitoring)'
             
               
     var suhu = []
@@ -251,8 +251,8 @@
             endDate:$('#akhir').val(),
           },
           dataType:'JSON',
-          success:function(response){
-            console.log(response);
+          success:function(data){
+            console.log(data);
           },
           error : function(e) {
             console.log(e)

@@ -164,6 +164,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,6 +233,7 @@ return [
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

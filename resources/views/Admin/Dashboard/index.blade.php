@@ -14,6 +14,44 @@
     </div>
 </div>
 <div class="row">
+<!--     <form action="/pdfLog" method="post">
+    @csrf
+    <div class="col-6">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="input-select">Tanggal Awal</label>
+                    <input type="date" name="awal" class="form-control  @error('awal') is-invalid @enderror" id="awal">
+                    @error('awal')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="input-select">Tanggal Akhir</label>
+                    <input type="date" name="akhir" class="form-control  @error('akhir') is-invalid @enderror" id="akhir">
+                    @error('akhir')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-6 ">
+        <a href="/pdfLog" class="btn btn-primary" style="margin-right: 20px;">
+            <i class="fa fa-file-pdf-o"></i>
+        </a>
+        <a href="/excelLog" class="btn btn-primary">
+            <i class="fa fa-file-excel-o"></i>
+        </a>
+    </div>
+</div>
+<div class="row">
     <!-- ============================================================== -->
     <!-- basic table  -->
     <!-- ============================================================== -->

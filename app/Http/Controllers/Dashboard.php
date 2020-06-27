@@ -14,8 +14,11 @@ use App\Satuan;
 use App\Log_alert;
 use App\Aktivasi;
 use App\Operator;
+use App\Laporan;
 use Auth;
 use PDF;
+use Carbon\Carbon;
+use Validator;
 
 class Dashboard extends Controller
 {
@@ -109,69 +112,44 @@ class Dashboard extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function pdfLog()
     {
-        //
+        return view('Admin.Dashboard.pdfLog');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function pdfLogPrint(Request $req)
     {
-        //
+        
+        $v = Validator::make($req->all(), [             
+            'awal' => 'required|date',            
+            'akhir' => 'required|date',   
+        ]);
+        $awal = $req->awal;
+        $akhir = $req->akhir;
+        $set = Laporan::find(1)->first();
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $date1 = new Carbon($req->awal);
+            $date2 = new Carbon($req->akhir);
+            $date2 = $date2->addDays(1);
+            // $data = Aktivasi::whereBetween('created_at',[$date1->format('Y-m-d'),$date2->format('Y-m-d')])->get();
+            $data = Aktivasi::where('created_at','>=',$date1->format('Y-m-d'))->where('created_at','<=',$date2->format('Y-m-d'))->get();
+            // dd($req->all(),$data);
+
+            // dd($count,$suhumax);
+            $pdf = app('dompdf.wrapper');
+            $pdf->getDomPDF()->set_option("enable_php", true);
+            set_time_limit(300);
+            $pdf = PDF::loadview('Admin.Dashboard.log_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            return $pdf->stream('Monitoring-Report-'.$req->akhir);
+            return view('Admin.Dashboard.log_pdf',['data'=>$data, 'awal'=>$awal, 'akhir'=>$akhir]);
+            
+            return back();
+        }
+
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

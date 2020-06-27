@@ -250,10 +250,10 @@
     <script src="{{ asset('concept/assets/vendor/charts/c3charts/c3.min.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
-    <script src="{{ asset('concept/assets/libs/js/dashboard-ecommerce.js') }}"></script>
+    <!-- <script src="{{ asset('concept/assets/libs/js/dashboard-ecommerce.js') }}"></script> -->
     <script src="{{ asset('concept/assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
-    <script src="{{ asset('concept/assets/vendor/gauge/gauge.min.js') }}"></script>
-    <script src="{{ asset('concept/assets/vendor/gauge/gauge.js') }}"></script>
+    <!-- <script src="{{ asset('concept/assets/vendor/gauge/gauge.min.js') }}"></script>
+    <script src="{{ asset('concept/assets/vendor/gauge/gauge.js') }}"></script> -->
     <script src="{{ asset('concept/assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('concept/assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
@@ -298,7 +298,7 @@
                 <td id="alertff">${row.alarm}</td>
             </tr>`;
         }); 
-        $('tbody').html(html);
+        $('#monitoring tbody').html(html);
         
         alp();
     }

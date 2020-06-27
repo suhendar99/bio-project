@@ -100,9 +100,10 @@
                                             <button class="btn btn-primary" type="submit">Cetak Laporan</button>
                                             </div>
                                                 <div class="col-6">
-                                <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
-                            </div>
-                            </div>
+                                                <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
+                                                <span>*) Hanya menampilkan 10 data terakhir</span>
+                                            </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

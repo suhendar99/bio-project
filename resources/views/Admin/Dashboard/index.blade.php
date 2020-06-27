@@ -1,4 +1,6 @@
-
+@php
+    $apps = \App\Aktivasi::all();
+@endphp
 @extends('Admin.layouts.app')
 
 @section('content')
@@ -31,7 +33,7 @@
                         </thead>
                         <tbody>
                             @php $no = 1 @endphp
-                            @foreach($aktivasi as $a)
+                            @foreach($aktivasi as $a)                
                             <tr>
                                 <td>{{$no++}}</td>
                                 <td>{{$a->operator->name}}</td>
@@ -39,6 +41,7 @@
                                 <td>{{$a->description}}</td>
                                 <td>{{$a->created_at}}</td>
                             </tr>
+                            
                             @endforeach
                         </tbody>
                     </table>

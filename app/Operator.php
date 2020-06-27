@@ -25,6 +25,6 @@ class Operator extends Model
     }
     public function aktivasi()
     {
-        return $this->hasOne('App\Aktivasi','causer_id','id');
+        return $this->hasMany('App\Aktivasi','causer_id','id');
     }
 }

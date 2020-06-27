@@ -396,10 +396,22 @@ class LaporanController extends Controller
     {
         return view('Admin.Laporan.Aktivitas.excel');
     }
-    public function export()
+    public function export(Request $req)
     {
-        set_time_limit(99999);
-        return(new LaporanExport)->download('Aktivitas.xlsx');
+        $v = Validator::make($req->all(), [             
+            'awal' => 'required|date',            
+            'akhir' => 'required|date',   
+        ]);
+        if ($req->awal > $req->akhir) {
+             return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
+        }
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $input = $req->all();
+            set_time_limit(99999);
+            return(new LaporanExport($input))->download('Aktivitas-'.$req->akhir.'.xlsx');
+        }
     }
     public function import()
     {

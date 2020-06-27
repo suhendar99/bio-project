@@ -42,14 +42,7 @@
             </div>
         </div>
     </div> -->
-    <div class="col-6 ">
-        <a href="/pdfLog" class="btn btn-primary" style="margin-right: 20px;">
-            <i class="fa fa-file-pdf-o"></i>
-        </a>
-        <a href="/excelLog" class="btn btn-primary">
-            <i class="fa fa-file-excel-o"></i>
-        </a>
-    </div>
+    
 </div>
 <div class="row">
     <!-- ============================================================== -->
@@ -57,6 +50,14 @@
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
+            <div class="row" style="margin-top: 10px; margin-left: 20px;">
+                <a href="/pdfLog" class="btn btn-primary" style="margin-right: 20px;">
+                    <i class="fa fa-file-pdf"> Export PDF</i>
+                </a>
+                <a href="/excelLog" class="btn btn-primary">
+                    <i class="fa fa-file-excel"> Export Excel</i>
+                </a>
+            </div>
             <div class="card-body">
                 <!-- <a class="btn btn-warning col-2" style="margin-bottom:15px;" href="{{ route('export') }}">Export Log Aktivitas</a> -->
                 <div class="table-responsive">

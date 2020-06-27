@@ -172,7 +172,7 @@ class MonitoringController extends Controller
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
-            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail(Auth::user()));
+            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail($kelembapan));
 
             // dd($send);
 

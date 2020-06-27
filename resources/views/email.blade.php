@@ -3,6 +3,6 @@
 {{-- <p>{{ $website }}</p> --}}
  
 <p>Alert</p>
-{{ $user }}
+<p>Cek monighfghfgfghfhgftoring sekarang juga!</p>
+<p>{{ $user }}</p>
 
-<p>Cek monitoring sekarang juga! cek cek cek cek</p>

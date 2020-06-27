@@ -10,16 +10,12 @@ use App\Setapp;
 use App\Ruangan;
 use App\Operator;
 use App\Log_alert;
-<<<<<<< HEAD
-use Validator;
-=======
 use App\Monitoring;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
->>>>>>> 5673998d8a2bd15917fce74c80fa13b33fd1e9d5
 
 
 class MonitoringController extends Controller

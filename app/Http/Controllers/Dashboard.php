@@ -128,6 +128,10 @@ class Dashboard extends Controller
         $akhir = $req->akhir;
         $set = Laporan::find(1)->first();
 
+        if ($awal > $akhir) {
+             return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
+        }
+
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
         }else {
@@ -135,7 +139,7 @@ class Dashboard extends Controller
             $date2 = new Carbon($req->akhir);
             $date2 = $date2->addDays(1);
             // $data = Aktivasi::whereBetween('created_at',[$date1->format('Y-m-d'),$date2->format('Y-m-d')])->get();
-            $data = Aktivasi::where('created_at','>=',$date1->format('Y-m-d'))->where('created_at','<=',$date2->format('Y-m-d'))->get();
+            $data = Aktivasi::where('created_at','>=',$date1->format('Y-m-d'))->where('created_at','<=',$date2->format('Y-m-d'))->latest()->get();
             // dd($req->all(),$data);
 
             // dd($count,$suhumax);

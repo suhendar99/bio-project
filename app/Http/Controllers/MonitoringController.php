@@ -10,6 +10,7 @@ use App\Setapp;
 use App\Ruangan;
 use App\Operator;
 use App\Log_alert;
+use App\KirimAlarm;
 use App\Monitoring;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
@@ -113,6 +114,8 @@ class MonitoringController extends Controller
         $tmax = $tekanan->max;
         $tmin = $tekanan->min; 
 
+        $toMail = KirimAlarm::all();
+
         if ($req->suhu > $smax) {
             $log = new Log_alert;
             $log->status = 'Hight presure';
@@ -172,7 +175,9 @@ class MonitoringController extends Controller
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
-            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail($kelembapan));
+            foreach ($toMail as $send) {
+                Mail::to(Operator::where('id', $send->id_operator)->first())->send(new sendEmail($send->custom_teks));
+            }
 
             // dd($send);
 

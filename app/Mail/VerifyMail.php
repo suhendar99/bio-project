@@ -11,15 +11,17 @@ class VerifyMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $data;
+    public $pdf;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($data, $pdf)
     {
-        $this->user = $user;
+        $this->data = $data;
+        $this->pdf = $pdf;
     }
 
     /**
@@ -29,6 +31,6 @@ class VerifyMail extends Mailable
      */
     public function build()
     {
-        return $this->view('email');
+        return $this->view('Admin.Email.email_laporan_pdf')->attachData($this->pdf->output(), "invoice.pdf");
     }
 }

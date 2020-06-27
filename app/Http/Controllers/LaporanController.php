@@ -388,4 +388,8 @@ class LaporanController extends Controller
             return back()->with('success', 'Data berhasil diedit');
         }        
     }
+    public function export()
+    {
+        
+    }
 }

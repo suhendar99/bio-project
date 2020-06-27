@@ -94,21 +94,20 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-<<<<<<< HEAD
-                                                <button class="btn btn-primary" type="submit">Cetak Laporan</button>
-                                                <div class="col-6">
-                                                    <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
-                                                </div>
-                                            </div>
-=======
+
                                             <div class="col-6">
                                             <button class="btn btn-primary" type="submit">Cetak Laporan</button>
                                             </div>
+
+                                            <div class="col-6">
+                                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
+                                            </div>
+
                                                 <div class="col-6">
                                 <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
                             </div>
                             </div>
->>>>>>> 4f163d1205d48c0985c572f6650e5db619650ffd
+
                                         </form>
                                     </div>
                                 </div>
@@ -117,10 +116,7 @@
                         <!-- ============================================================== -->
                         <!-- end select options  -->
                         <!-- ============================================================== -->
-<<<<<<< HEAD
 
-=======
->>>>>>> 4f163d1205d48c0985c572f6650e5db619650ffd
 
 <script>
   window.Promise ||
@@ -143,8 +139,7 @@
 <!-- pageheader  -->
 <!-- ============================================================== -->
 
-<<<<<<< HEAD
-=======
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -152,7 +147,15 @@
         </div>
     </div>
 </div>
->>>>>>> 4f163d1205d48c0985c572f6650e5db619650ffd
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div id="chart"></div>
+        </div>
+    </div>
+</div>
+
 
 
 <script>

@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\SetKirim;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,9 +26,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->call(function(){
-        //     DB::table('monitoring')->delete();
-        // })->hourly();
+        $setKirim = SetKirim::all();
+        foreach ($setKirim as $user) {
+            if ($user->status_kirim == "Daily") {
+                $schedule->command('minute:email')->dailyAt("'".$user->waktu_kirim."'");
+            } else {
+                $schedule->command('minute:email')->weekly();
+            }
+            
+        }
+        
     }
 
     /**

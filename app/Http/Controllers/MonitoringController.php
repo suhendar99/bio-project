@@ -10,6 +10,7 @@ use App\Setapp;
 use App\Ruangan;
 use App\Operator;
 use App\Log_alert;
+use App\KirimAlarm;
 use App\Monitoring;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
@@ -22,14 +23,20 @@ class MonitoringController extends Controller
 {
     public function getData(Request $req)
     {
-
-        $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->latest()->get();
+        if ($req->room == "all") {
+            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
+        } else {
+            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+        }
+        
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->get();
         // dd($data);
-        return response()->json([
-            'response'=>$data
-        ]);
+        // return response()->json([
+        //     'response'=>$data
+        // ]);
+        // dd($data);
+        return response()->json($data);
 
 
     }
@@ -111,6 +118,8 @@ class MonitoringController extends Controller
         $tmax = $tekanan->max;
         $tmin = $tekanan->min; 
 
+        $toMail = KirimAlarm::all();
+
         if ($req->suhu > $smax) {
             $log = new Log_alert;
             $log->status = 'Hight presure';
@@ -170,7 +179,9 @@ class MonitoringController extends Controller
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
-            Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail(Auth::user()));
+            foreach ($toMail as $send) {
+                Mail::to(Operator::where('id', $send->id_operator)->first())->send(new sendEmail($send->custom_teks));
+            }
 
             // dd($send);
 

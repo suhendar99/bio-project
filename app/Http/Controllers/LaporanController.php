@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\KirimAlarm;
+use App\Imports\LaporanImport;
+use App\Exports\LaporanExport;
+use App\Aktivasi;
+use Excel;
 use PDF;
 use Validator;
 use App\Laporan;
@@ -55,6 +59,7 @@ class LaporanController extends Controller
             // dd($data);
             $pos = 'Ruangan';
             $pp = "kosong";
+            $sumber = "Semua Ruangan dan Parameter";
         } elseif ($req->ruang !== "all" && $req->satuan ==="allper"){
             echo "ruang".$req->ruang;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
@@ -62,6 +67,7 @@ class LaporanController extends Controller
             // dd($data);
             $pos = 'Ruangan';
             $pp = "ll";
+            $sumber = $parameter->ruangan->nama;
         } elseif ($req->ruang === "all" && $req->satuan !=="allper"){
             echo "satuan".$req->satuan;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
@@ -83,10 +89,12 @@ class LaporanController extends Controller
             // dd($data);
             $pos = 'Parameter';
             $pp = "ll";
+            $sumber = $parameter;
         } elseif ($req->ruang !== "all" && $req->satuan !=="allper"){
             echo "satuan".$req->satuan;
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
             
+            $rooms = Monitoring::where('ruangan_id', $req->ruang)->first();
                 if ($req->satuan == "suhu") {
                     $parameter = 'Suhu';
                     // echo "satuan".$req->satuan;
@@ -104,6 +112,7 @@ class LaporanController extends Controller
             // dd($data);
             $pos = 'Parameter';
             $pp = "ll";
+            $sumber = $parameter." & ".$rooms;
         }
         // dd($data);
         // if ($req->satuan == "allpar") {
@@ -127,18 +136,17 @@ class LaporanController extends Controller
             $pdf = app('dompdf.wrapper');
             $pdf->getDomPDF()->set_option("enable_php", true);
             if ($pp == "kosong"){
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
-
-
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                
             }elseif ($pos == 'Ruangan') {
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 
             }elseif($pos == 'Parameter'){
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             }
             set_time_limit(300);
             return $pdf->stream('Monitoring-Report-'.$req->akhir);
-            return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            return view('Admin.Laporan.laporan_pdx  f',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             
             return back();
         }
@@ -383,5 +391,31 @@ class LaporanController extends Controller
             
             return back()->with('success', 'Data berhasil diedit');
         }        
+    }
+    public function importview()
+    {
+        return view('Admin.Laporan.Aktivitas.excel');
+    }
+    public function export(Request $req)
+    {
+        $v = Validator::make($req->all(), [             
+            'awal' => 'required|date',            
+            'akhir' => 'required|date',   
+        ]);
+        if ($req->awal > $req->akhir) {
+             return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
+        }
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $input = $req->all();
+            set_time_limit(99999);
+            return(new LaporanExport($input))->download('Aktivitas-'.$req->akhir.'.xlsx');
+        }
+    }
+    public function import()
+    {
+        Excel::import(new LaporanImport,request()->file('file'));
+        return back();
     }
 }

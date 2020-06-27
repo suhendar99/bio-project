@@ -1,28 +1,73 @@
 @php
     $monitoring = \App\Monitoring::whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();
+    $data = [];
+
 @endphp
 @extends('Admin.layouts.app')
 
 @section('content')
 
-                        <!-- ============================================================== -->
-                        <!-- pageheader  -->
-                        <!-- ============================================================== -->
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="page-header">
-                                    <h2 class="pageheader-title">Cetak Laporan</h2>
-                                    <div class="page-breadcrumb">
-                                        <nav aria-label="breadcrumb">
-                                            <ol class="breadcrumb">
-                                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                                <li class="breadcrumb-item active" aria-current="page">Cetak Laporan</li>
-                                            </ol>
-                                        </nav>
-                                    </div>
-                                </div>
+<!-- ============================================================== -->
+<!-- pageheader  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <h2 class="pageheader-title">Cetak Laporan</h2>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cetak Laporan</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end pageheader  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- select options  -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                        </div>                                        
+                @endif
+                @if (session()->has('failed'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('failed') }}
+                    </div>                                        
+                @endif
+                <form action="/downloadLaporan" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="input-select">Tanggal Awal</label>
+                                <input type="date" name="awal" class="form-control  @error('awal') is-invalid @enderror" id="awal">
+                                @error('awal')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="input-select">Tanggal Akhir</label>
+                                <input type="date" name="akhir" class="form-control @error('akhir') is-invalid @enderror" id="akhir">
+                                @error('akhir')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                         <!-- ============================================================== -->
                         <!-- end pageheader  -->
                         <!-- ============================================================== -->
@@ -39,7 +84,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="input-select">Tanggal Awal</label>
-                                                        <input type="date" name="awal" class="form-control  @error('awal') is-invalid @enderror">
+                                                        <input type="date" name="awal" class="form-control  @error('awal') is-invalid @enderror" id="awal">
                                                         @error('awal')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -50,7 +95,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="input-select">Tanggal Akhir</label>
-                                                        <input type="date" name="akhir" class="form-control @error('akhir') is-invalid @enderror">
+                                                        <input type="date" name="akhir" class="form-control @error('akhir') is-invalid @enderror" id="akhir">
                                                         @error('akhir')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -94,21 +139,78 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+
                                             <div class="col-6">
                                             <button class="btn btn-primary" type="submit">Cetak Laporan</button>
                                             </div>
+
+                                            <div class="col-6">
+                                            <button class="btn btn-primary" type="submit">Cetak Laporan</button>
+                                            </div>
+
                                                 <div class="col-6">
-                                <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
-                            </div>
-                            </div>
+                                                <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
+                                                <span>*) Hanya menampilkan 10 data terakhir</span>
+                                            </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- ============================================================== -->
-                        <!-- end select options  -->
-                        <!-- ============================================================== -->
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="inputText3" class="col-form-label">Ruangan</label>
+                                <select name="ruang" id="ruangan" class="form-control">
+                                    <option value="all">Semua ruangan</option>
+                                    @foreach($ruang as $f)
+                                        <option value="{{ $f->id }}">{{ $f->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="inputText3" class="col-form-label">Parameter</label>
+                                <select name="satuan" id="parameter" class="form-control">
+                                    <option value="allper">Semua parameter</option>
+                                    
+                                    <option value="suhu">Suhu</option>}
+                                    <option value="kelembapan">Kelembapan</option>}
+                                    <option value="tekanan">Tekanan</option>}
+                                    option
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-6">
+                    <button class="btn btn-primary" type="submit">Cetak Laporan</button>
+                    </div>
+                        <div class="col-6">
+                        <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
+                        <span>*) Hanya menampilkan 10 data terakhir</span>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- end select options  -->
+<!-- ============================================================== -->
+
 
 <script>
   window.Promise ||
@@ -131,6 +233,7 @@
 <!-- pageheader  -->
 <!-- ============================================================== -->
 
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -139,46 +242,22 @@
     </div>
 </div>
 
+<script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
 
 <script>
     
 
-    let monitoring = '@json($monitoring)'
             
               
     var suhu = []
     var kelembapan = []
     var tekanan = []
   
-    let dates = 0
-    let formatted_date = "";
-    let newMonitor = JSON.parse(monitoring).sort((a,b)=>{
-      return a.time.localeCompare(b.time);
-    });
-    console.log(newMonitor);
-    let monitor = newMonitor
-    monitor.forEach(element => {
-        dates = new Date(element.date+' '+element.time)
-        suhu.push({
-          x: element.time,
-          y: element.suhu
-        })
-        tekanan.push({
-          x: element.time,
-          y: element.tekanan
-        })
-        kelembapan.push({
-          x: element.time,
-          y: element.kelembapan
-        })
-        
-    });
+   
 
-     console.log(suhu);
-        
-        var options = {
+    var options = {
           
-          series: [
+        series: [
             {
                 data: suhu,
                 name: "Suhu"
@@ -226,18 +305,41 @@
         xaxis: {
         },
         yaxis: {
-          max: 200
+          max: 100
         },
         legend: {
           show: true
         },
-        };
+    };  
+    
 
         
 
         //////////////
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        
+    document.getElementById("myBtn").onclick = function() {
+        if($('#awal').val() === ""){
+            Swal.fire({
+                title: 'Tanggal awal tidak boleh kosong',
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+               })
+        } else if ($('#akhir').val() === "") {
+            Swal.fire({
+                title: 'Tanggal akhir tidak boleh kosong',
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+               })
+        } else {
+            render()
+            chart.render();
+        }
 
-    document.getElementById("myBtn").onclick = function() {render()};
+
+    };
     function render() {
         $.ajaxSetup({
             headers: {
@@ -250,18 +352,53 @@
           data:{
             startDate:$('#awal').val(),
             endDate:$('#akhir').val(),
+            room:$('#ruangan').val(),
           },
           dataType:'JSON',
-          success:function(response){
-            console.log(response);
+          success:function(data){
+              suhu = [];
+              kelembapan = [];
+              tekanan = [];
+             let dates = 0
+            let formatted_date = "";
+            let newMonitor = data.sort((a,b)=>{
+              return a.time.localeCompare(b.time);
+            });
+            let monitor = newMonitor
+            monitor.forEach(element => {
+                // dates = new Date(element.date+' '+element.time)
+                suhu.push({
+                  x: element.time,
+                  y: element.suhu
+                })
+                tekanan.push({
+                  x: element.time,
+                  y: element.tekanan
+                })
+                kelembapan.push({
+                  x: element.time,
+                  y: element.kelembapan
+                })
+                
+            });
+            chart.updateSeries([
+            {
+                data: suhu
+            },
+            {
+                data: tekanan
+            },
+            {
+                data: kelembapan
+            }
+        ])
           },
           error : function(e) {
             console.log(e)
           }
         });
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        
     }
     
     // $(document).ready(function () {  

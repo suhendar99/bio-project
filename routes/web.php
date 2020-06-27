@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');
     Route::get('/','Dashboard@index')->name('dashboard');
     Route::get('/a','AppController@test');
+    Route::get('/b','Auth/LoginController@tampilan');
     // Master Data
         // Setting Account
     Route::get('/profile/{id}','AccountController@index');
@@ -78,12 +79,19 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/aktivasi','Dashboard@data')->middleware('admin')->name('aktivasi.data');
 
+    Route::get('/pdfLog','Dashboard@pdfLog');
+    Route::post('/pdfLogPrint','Dashboard@pdfLogPrint');
+    Route::get('/excelLog','LaporanController@importview');
+    Route::post('/excelLogPrint','LaporanController@export');
 
     // laporan
         // cetak laporan
     Route::get('/cetak_laporan','LaporanController@cetak_laporan')->name('cetak.laporan');
     Route::post('/downloadLaporan','LaporanController@downloadLaporan')->name('downloadLaporan');
-
+        // Cetak Log
+    Route::get('/export','LaporanController@export')->name('export');
+    Route::get('/importview','LaporanController@importview');
+    Route::post('/import','LaporanController@import')->name('import');
         // Pengaturan Laporan
     Route::get('/set_laporan','LaporanController@set_laporan')->name('setting.laporan');
     Route::post('/storeSetlaporan','LaporanController@store')->name('tambah.setlaporan');

@@ -1,4 +1,6 @@
-
+@php
+    $apps = \App\Aktivasi::all();
+@endphp
 @extends('Admin.layouts.app')
 
 @section('content')
@@ -12,28 +14,70 @@
     </div>
 </div>
 <div class="row">
+<!--     <form action="/pdfLog" method="post">
+    @csrf
+    <div class="col-6">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="input-select">Tanggal Awal</label>
+                    <input type="date" name="awal" class="form-control  @error('awal') is-invalid @enderror" id="awal">
+                    @error('awal')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="input-select">Tanggal Akhir</label>
+                    <input type="date" name="akhir" class="form-control  @error('akhir') is-invalid @enderror" id="akhir">
+                    @error('akhir')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </div> -->
+    
+</div>
+<div class="row">
     <!-- ============================================================== -->
     <!-- basic table  -->
     <!-- ============================================================== -->
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
+            <div class="row" style="margin-top: 10px; margin-left: 20px;">
+                <a href="/pdfLog" class="btn btn-primary" style="margin-right: 20px;">
+                    <i class="fa fa-file-pdf"> Export PDF</i>
+                </a>
+                <a href="/excelLog" class="btn btn-primary">
+                    <i class="fa fa-file-excel"> Export Excel</i>
+                </a>
+            </div>
             <div class="card-body">
+                <!-- <a class="btn btn-warning col-2" style="margin-bottom:15px;" href="{{ route('export') }}">Export Log Aktivitas</a> -->
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered" id="logTable" >
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Id Pengguna</th>
+                                <th>Nama Pengguna</th>
+                                <th>Level</th>
                                 <th>Aktivitas</th>
                                 <th>Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $no = 1 @endphp
-                            @foreach($aktivasi as $a)
+                            @foreach($aktivasi as $a)                
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$a->causer_id}}</td>
+                                <td>{{$a->operator->name}}</td>
+                                <td>{{$a->operator->level}}</td>
                                 <td>{{$a->description}}</td>
                                 <td>{{$a->created_at}}</td>
                             </tr>
@@ -88,7 +132,7 @@
 </div>
 @endif
 <script>
-    // $.get("{{ route('aktivasi.data') }}", function(data){
+    // $.get(" route('aktivasi.data') ", function(data){
     // console.log(data);
     // act(data);
     // var record = JSON.parse(data);

@@ -2,6 +2,7 @@
                     <!-- timeline  -->
                     <!-- ============================================================== -->
                 
+                    <span>*Hanya Menampilkan 10 Kejadian Terakhir</span>
                     <section class="cd-timeline js-cd-timeline">
                         <div class="cd-timeline__container" id="alarmReal">
                             <!-- cd-timeline__block -->

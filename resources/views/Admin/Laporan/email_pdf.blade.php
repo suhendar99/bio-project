@@ -228,7 +228,7 @@
 
 	<div style="float: right;">
 		{{$set->footer}},  {{$date}}<br>
-		{{Auth::user()->name}}
+		{{ $email }}
 	</div>
 	<div id="footer">
 	  <div class="page-number"></div>

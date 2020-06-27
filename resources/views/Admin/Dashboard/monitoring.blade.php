@@ -201,8 +201,8 @@
             </div>
         </div>
     </div>
-        <!-- <div class="row">
-            <div class="col-6">
+        <div class="row">
+            <!-- <div class="col-6">
                 <h4 class="text-white">Dari Tanggal </h4>
                     <select name="" id="" class="form-control bg-dark text-white">
                         <option value="">1</option>
@@ -539,10 +539,13 @@
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
         
+        if (suhu.length > 9) {
+            suhu.splice(0,1)
+            tekanan.splice(0,1)
+            kelembapan.splice(0,1)        
+        }
 
-        suhu.splice(0,1)
-        tekanan.splice(0,1)
-        kelembapan.splice(0,1)
+        
         // lastsuhu.splice(0,1)
 
         if (data.ruangan_id == {{$id}}) {

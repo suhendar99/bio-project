@@ -24,7 +24,7 @@
                                     <td>{{ $r->waktu_kirim }}</td>
                                     <td>
                                         <a href="/edit_kirim/{{ $r->id }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
-                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                        <button onclick="deletess({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -44,7 +44,7 @@
 <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
 
 <script>
-     function deletes(id){
+     function deletess(id){
         const formDelete = document.getElementById('formDelete')
         formDelete.action = '/delete_kirim/'+id
         Swal.fire({

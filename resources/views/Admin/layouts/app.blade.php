@@ -276,6 +276,7 @@
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
     
+<script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
@@ -343,33 +344,28 @@
         var today = new Date();
         var date = today.getFullYear()+'-'+("0" + today.getDate()).slice(-2)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        var data = JSON.parse(message.payloadString + "");
 
-        // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5 ||data.ruangan_id == 6 ||data.ruangan_id == 7 ||data.ruangan_id == 8 ) {
-        //     var raw = '<tr id="'+data.id+'">';
-        //     raw += '<td>' + date + '</td>';
-        //     raw += '<td>' + time + '</td>';
-        //     raw += '<td>' + data.perangkat_id + '</td>';
-        //     raw += '<td>' + data.ruangan_id + '</td>';
-        //     raw += '<td>' + data.suhu + '</td>';
-        //     raw += '<td>' + data.tekanan + '</td>';
-        //     raw += '<td>' + data.kelembapan + '</td>';
-        //     raw += '<td>' + data.alarm + '</td>';
-        //     raw += '</tr>';
+        if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
+            
+            data.date=date;
+            data.time=time;
+            data_monitoring.unshift(data);
+            data_monitoring.pop();
+            //  console.log(data_monitoring);
+            // //  raw();
+            rew();
+        } else {
+            Swal.fire({
+                title: 'Ruangan Id Harus Sesuai',
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+               })
+        }
 
-        //     $('#monitorTable tbody').prepend(raw);
-        // } else {
-        //     alert('Cek Payload Alat Anda');
-        // }
 
-
-         var data = JSON.parse(message.payloadString + "");
-         data.date=date;
-         data.time=time;
-         data_monitoring.unshift(data);
-         data_monitoring.pop();
-        //  console.log(data_monitoring);
-        // //  raw();
-        rew();
+         
 
 
         // // var raw = '<tr id="'+data.id+'">';

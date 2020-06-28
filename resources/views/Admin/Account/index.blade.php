@@ -54,8 +54,8 @@
                             <input type="text" class="form-control" readonly placeholder="{{$data->level}}">
                         </div>
                     </div>
-                        <a href="/dashboard" class="btn btn-primary" style="margin-right: 370px;">Back</a>
-                        <a href="/editProfile/{{$data->id}}" class="btn btn-primary" style="margin-left: 400px;"><i class="fa fa-edit"></i>Edit Profile</a>
+                        <a href="/dashboard" class="btn btn-primary float-left">Back</a>
+                        <a href="/editProfile/{{$data->id}}" class="btn btn-primary float-right""><i class="fa fa-edit"></i>Edit Profile</a>
                 </div>
             </div>
         </div>

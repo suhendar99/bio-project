@@ -19,7 +19,7 @@
                         <div class="card">
                             <div class="card-body">
                                 @if(Auth::user()->level == 'Admin')
-                                <a href="{{ route('tambah.data.per') }}" class="btn btn-primary col-2">Tambah Data</a>
+                                <a href="{{ route('tambah.data.per') }}" class="btn btn-primary">Tambah Data</a>
                                 @endif
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered first">

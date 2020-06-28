@@ -68,14 +68,14 @@
     </div>
     <div class="container">
         <div class="row" style="margin-top:100px;">
-            <div class="col-xl-4 col-md-12"  style="width:20rem;">
+            <div class="col-xl-4">
                 <div class="card bg-dark">
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
                         <div class="col-md-6">
                             <center>
                                 <!-- <img src="{{ asset('svg/suhu.svg') }}" alt="" height="100px" width="100px" style="margin-bottom:20px;"> -->
-                                <div id="chart_div" style="width: 100%;"></div>
+                                <div id="chart_div"></div>
                             </center>
                         </div>
                         <div class="col-6">
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-md-12"  style="width:20rem;">
+        <div class="col-xl-4">
             <div class="card bg-dark">
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-md-12"  style="width:20rem;">
+        <div class="col-xl-4">
             <div class="card bg-dark">
                 <div class="card-body bg-dark text-white rounded">
                     <div class="row">

@@ -106,17 +106,15 @@ class MonitoringController extends Controller
     	$data->ruangan_id = $req->ruangan_id;
     	$data->save();
 
-        $suhu = Satuan::where('parameter','Suhu')->first();
-        $smax = $suhu->max;
-        $smin = $suhu->min;
+        $ruang = Ruangan::where('id', $req->ruangan_id)->first();
+        $smax = $ruang->smax;
+        $smin = $ruang->smin;
 
-        $kelembapan = Satuan::where('parameter','Kelembapan')->first();
-        $kmax = $kelembapan->max;
-        $kmin = $kelembapan->min;
+        $kmax = $ruang->kmax;
+        $kmin = $ruang->kmin;
 
-        $tekanan = Satuan::where('parameter','Tekanan')->first();
-        $tmax = $tekanan->max;
-        $tmin = $tekanan->min; 
+        $tmax = $ruang->tmax;
+        $tmin = $ruang->tmin; 
 
         $toMail = KirimAlarm::all();
 

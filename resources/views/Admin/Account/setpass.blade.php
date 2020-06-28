@@ -59,10 +59,10 @@
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-10">
-                            <a href="/" class="btn btn-primary" >Back</a>
+                            <a href="/" class="btn btn-primary float-left" >Back</a>
                         </div>
                         <div class="col-2">
-                            <button type="submit" class="btn btn-primary" ><i class="fa fa-edit"></i>Simpan</button>
+                            <button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i>Simpan</button>
                         </div>
                     </div>
                     </form>

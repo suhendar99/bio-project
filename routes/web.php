@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
 
     // monitoring
         // raw data
-    Route::get('/monitoring','monitoringController@index')->name('monitoring');
+    Route::get('/monitoring','MonitoringController@index')->name('monitoring');
         // pengaturan Monitoring
     Route::get('/set_monitoring','MonitoringController@set_monitoring')->middleware('admin')->name('setting.monitoring');
     Route::get('/set_add_monitor','MonitoringController@add_monitor')->middleware('admin')->name('tambah.set.monitor');

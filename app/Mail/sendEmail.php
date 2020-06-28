@@ -32,7 +32,7 @@ class sendEmail extends Mailable
     public function build()
     {
        return $this->from('biofarma@mail.com')
-       ->view('Admin.email.alertemail')
+       ->view('Admin.Email.alertemail')
        ->with(
         [
             'nama' => 'Bioarma',

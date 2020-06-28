@@ -17,7 +17,7 @@
                     {{ method_field('PUT') }}
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">URL Broker</label>
-                            <input id="inputText3" type="url" class="form-control @error('broker') is-invalid @enderror" placeholder="URL Broker" name="broker" value="{{ $mqtt->url_broker }}">
+                            <input id="inputText3" type="text" class="form-control @error('broker') is-invalid @enderror" placeholder="URL Broker" name="broker" value="{{ $mqtt->url_broker }}">
                             @error('broker')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

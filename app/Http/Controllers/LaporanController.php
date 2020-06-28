@@ -130,9 +130,6 @@ class LaporanController extends Controller
                 $parameter = 'Tekanan';
                 // echo "satuan".$req->satuan;
             }
-                
-            
-            
             
             // dd($data);
             $pos = 'Parameter';

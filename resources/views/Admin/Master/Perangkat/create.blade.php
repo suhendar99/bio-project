@@ -7,7 +7,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/dataper" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a href="/dataper" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                     <form action="{{ route('tambah.per') }}" method="post">
                         @if (session()->has('success'))
                             <div class="alert alert-success">

@@ -146,7 +146,7 @@ class LaporanController extends Controller
             }
             set_time_limit(300);
             return $pdf->stream('Monitoring-Report-'.$req->akhir);
-            return view('Admin.Laporan.laporan_pdx  f',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             
             return back();
         }

@@ -29,7 +29,7 @@
                             <select name="status" id="" class="form-control" >
                                 <option value="daily"<?php if($setkirim->waktu_kirim == 'daily'){ echo "selected"; }  ?>>Daily</option>
                                 <option value="weekly"<?php if($setkirim->waktu_kirim == 'weekly'){ echo "selected"; }  ?>>Weekly</option>
-                                <option value="mounthly"<?php if($setkirim->waktu_kirim == 'mountly'){ echo "selected"; }  ?>>Mounthly</option>
+                                
                             </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">

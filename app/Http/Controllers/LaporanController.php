@@ -360,7 +360,7 @@ class LaporanController extends Controller
     public function aksi_add_alarm(Request $req)
     {
         $v = Validator::make($req->all(), [
-            'email' => 'required|unique:set_kirims,id_operator',
+            'email' => 'required|',
             'custom' => 'required|'
         ]);
 
@@ -393,7 +393,7 @@ class LaporanController extends Controller
     public function aksi_edit_alarm(Request $req, $id)
     {
         $v = Validator::make($req->all(), [
-            'email' => 'required|unique:set_kirims,id_operator,'.$id,
+            'email' => 'required|',
             'custom' => 'required|'
         ]);
 

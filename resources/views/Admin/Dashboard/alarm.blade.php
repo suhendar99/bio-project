@@ -17,7 +17,7 @@
                                     <p>Alarm ON : {{ $a->time }}</p>
                                     @foreach($a->alert as $q)
                                     @if($q->time == $a->time)
-                                    @if($q->status == "Hight presure")
+                                    @if($q->status == "High presure")
                                             <p class="text-danger">{{ $q->status }}</p>
                                             @elseif($q->status == "Low presure")
                                             <p class="text-primary">{{ $q->status }}</p>

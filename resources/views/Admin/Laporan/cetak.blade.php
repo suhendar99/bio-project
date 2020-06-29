@@ -45,7 +45,7 @@
                         {{ session()->get('failed') }}
                     </div>                                        
                 @endif
-                <form action="/downloadLaporan" method="post">
+                <form action="/downloadLaporan" method="post" id="formqq">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -107,21 +107,25 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row">
-                        <div class="container">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-                                <label class="form-check-label" for="inlineRadio1">PDF</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Excel</label>
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="row">
                         <div class="col-6">
-                        <button class="btn btn-primary" type="submit">Cetak Laporan</button>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkPdf">
+                                <label class="form-check-label" for="checkPdf">
+                                    PDF
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkExcel">
+                                <label class="form-check-label" for="checkExcel">
+                                    Excel
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                        <button class="btn btn-primary" type="submit" name="btpdf">Cetak Laporan</button>
                         </div>
                             <div class="col-6">
                             <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
@@ -166,6 +170,28 @@
 
 <script>
     
+    const formExcel = ()=>{
+        const pdf = document.querySelector("#checkPdf");
+        const excel = document.querySelector("#checkExcel");
+        const actionForm = document.querySelector("#formqq");
+
+        pdf.checked = true;
+
+        pdf.addEventListener('click', e=>{
+            if(excel.checked == true){
+                excel.checked = false;
+            }
+            actionForm.action = "http://localhost:8000/downloadLaporan";
+        });     
+        excel.addEventListener('click', e=>{
+            if(pdf.checked == true){
+                pdf.checked = false;
+            }
+            actionForm.action = "{{ route('download.excel') }}";
+        });     
+    }
+
+    formExcel();
 
             
               

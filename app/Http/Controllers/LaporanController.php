@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\KirimAlarm;
 use App\Imports\LaporanImport;
 use App\Exports\LaporanExport;
+use App\Exports\ExportLaporan;
 use App\Aktivasi;
 use Excel;
 use PDF;
@@ -47,7 +48,6 @@ class LaporanController extends Controller
         $set = Laporan::find(1)->first();
         
         // dd($req->ckck);
-        
         
 
         if ($awal > $akhir) {
@@ -149,6 +149,7 @@ class LaporanController extends Controller
         // if($req->ruang == "all" && $req->satuan == "allpar"){
         //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // }
+        
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
@@ -433,6 +434,27 @@ class LaporanController extends Controller
             $input = $req->all();
             set_time_limit(99999);
             return(new LaporanExport($input))->download('Aktivitas-'.$req->akhir.'.xlsx');
+        }
+    }
+    public function ExportExcel(Request $req)
+    {
+        return view('Admin.Laporan.cetakexcel');
+    }
+    public function downloadExcel(Request $req)
+    {
+        $v = Validator::make($req->all(), [             
+            'awal' => 'required|date',            
+            'akhir' => 'required|date',   
+        ]);
+        if ($req->awal > $req->akhir) {
+             return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
+        }
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $input = $req->all();
+            set_time_limit(99999);
+            return(new ExportLaporan($req->awal, $req->akhir))->download('Laporan-'.$req->akhir.'.xlsx');
         }
     }
     public function import()

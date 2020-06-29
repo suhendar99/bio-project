@@ -5,9 +5,9 @@
     $suhu = \App\Satuan::where('parameter','suhu' )->first();
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get(); 
     $countmon = $monitoring->count();
-
+    $gauge = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->first();
 @endphp
 
  <?php
@@ -224,21 +224,6 @@
             </div>
         </div> -->
     <!--  -->
-        <div class="col-2" >
-            <div class="row text-white">
-                <input type="checkbox" name="suhu" id="suhu" value="suhu" checked disabled> Suhu<br>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="row text-white">
-                <input type="checkbox" name="kelembapan" id="kelembapan" value="kelembapan" checked>Kelembapan<br>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="row text-white">
-                    <input type="checkbox" name="tekanan" id="tekanan" value="tekanan" checked>Tekanan<br>
-            </div>
-        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -371,6 +356,79 @@
   </script>            
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
     <script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var sgauge = {{$gauge->suhu}};
+        var kgauge = {{$gauge->kelembapan}};
+        var tgauge = {{$gauge->tekanan}};
+        console.log(sgauge,kgauge,tgauge);
+        var data1 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', sgauge],
+        ]);
+
+        var options1 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
+        };
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', kgauge],
+        ]);
+
+        var options2 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
+        };
+
+        var data3 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', tgauge],
+        ]);
+
+        var options3 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 1000,
+            easing: 'out',
+          },
+        };
+
+        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+        chart1.draw(data1, options1);
+        chart2.draw(data2, options2);
+        chart3.draw(data3, options3);
+
+        {{-- setInterval(function() {
+          data1.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+          chart1.draw(data1, options1);
+        }, 3000); --}}
+      }
+    </script>
+    <script type="text/javascript">
          console.log(suhu);
         
         var options = {
@@ -423,7 +481,7 @@
         xaxis: {
         },
         yaxis: {
-          max: 200
+          max: 150
         },
         legend: {
           show: true
@@ -580,14 +638,15 @@
         ]);
 
         var options1 = {
-          animation:{
-            duration: 400,
-          },
           width: 400, height: 120,
           redFrom: 70, redTo: 100,
           yellowFrom: 40, yellowTo: 70,
           greenFrom: 0, greenTo: 40,
-          minorTicks: 5
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
         };
 
         var data2 = google.visualization.arrayToDataTable([
@@ -595,15 +654,16 @@
           ['', 80],
         ]);
 
-        var options2 = {          
-          animation:{
-            duration: 400,
-          },
+        var options2 = {  
           width: 400, height: 120,
           redFrom: 70, redTo: 100,
           yellowFrom: 40, yellowTo: 70,
           greenFrom: 0, greenTo: 40,
-          minorTicks: 5
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
         };
 
         var data3 = google.visualization.arrayToDataTable([
@@ -618,9 +678,9 @@
           greenFrom: 0, greenTo: 40,
           minorTicks: 5,
           animation:{
-            duration: 400,
-            easing: 'out'
-          },
+                duration: 1000,
+                easing: 'out',
+            },
         };
 
         var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
@@ -690,70 +750,6 @@
         onSuccess: onConnect,
         onFailure: onFailure
       });
-      
-    </script>
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['gauge']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data1 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 0],
-        ]);
-
-        var options1 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-            duration: 4000,
-          },
-        };
-
-        var data2 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 0],
-        ]);
-
-        var options2 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-            duration: 4000,
-          },
-        };
-
-        var data3 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 0],
-        ]);
-
-        var options3 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-            duration: 4000,
-          },
-        };
-
-        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
-        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
-        chart1.draw(data1, options1);
-        chart2.draw(data2, options2);
-        chart3.draw(data3, options3);
-
-      }
     </script>
 
 </body>

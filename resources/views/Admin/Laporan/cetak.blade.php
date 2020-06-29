@@ -107,7 +107,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="container">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
@@ -118,7 +118,7 @@
                                 <label class="form-check-label" for="inlineRadio1">Excel</label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col-6">
                         <button class="btn btn-primary" type="submit">Cetak Laporan</button>

@@ -49,7 +49,9 @@ class LaporanController extends Controller
         
         // dd($req->ckck);
         
-
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }
         if ($awal > $akhir) {
              return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
         }

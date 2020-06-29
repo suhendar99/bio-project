@@ -106,17 +106,15 @@ class MonitoringController extends Controller
     	$data->ruangan_id = $req->ruangan_id;
     	$data->save();
 
-        $suhu = Satuan::where('parameter','Suhu')->first();
-        $smax = $suhu->max;
-        $smin = $suhu->min;
+        $ruang = Ruangan::where('id', $req->ruangan_id)->first();
+        $smax = $ruang->smax;
+        $smin = $ruang->smin;
 
-        $kelembapan = Satuan::where('parameter','Kelembapan')->first();
-        $kmax = $kelembapan->max;
-        $kmin = $kelembapan->min;
+        $kmax = $ruang->kmax;
+        $kmin = $ruang->kmin;
 
-        $tekanan = Satuan::where('parameter','Tekanan')->first();
-        $tmax = $tekanan->max;
-        $tmin = $tekanan->min; 
+        $tmax = $ruang->tmax;
+        $tmin = $ruang->tmin; 
 
         $toMail = KirimAlarm::all();
 
@@ -142,7 +140,7 @@ class MonitoringController extends Controller
         if($req->kelembapan > $kmax){
             $log = new Log_alert;
             $log->status = 'Hight presure';
-            $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$smax.'%';
+            $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$kmax.'%';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
             $log->save();
@@ -152,7 +150,7 @@ class MonitoringController extends Controller
         if($req->kelembapan < $kmin){
             $log = new Log_alert;
             $log->status = 'Low presure';
-            $log->keterangan = $req->kelembapan.'% lebih rendah dari '.$smin.'%';
+            $log->keterangan = $req->kelembapan.'% lebih rendah dari '.$kmin.'%';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
             $log->save();
@@ -161,7 +159,7 @@ class MonitoringController extends Controller
         if($req->tekanan > $tmax){
             $log = new Log_alert;
             $log->status = 'Hight presure';
-            $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$smax.'Pa';
+            $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
             $log->save();
@@ -171,7 +169,7 @@ class MonitoringController extends Controller
         if($req->tekanan < $tmin){
             $log = new Log_alert;
             $log->status = 'Low presure';
-            $log->keterangan = $req->tekanan.'Pa lebih rendah dari '.$smin.'Pa';
+            $log->keterangan = $req->tekanan.'Pa lebih rendah dari '.$tmin.'Pa';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
             $log->save();

@@ -224,7 +224,7 @@
             </div>
         </div> -->
     <!--  -->
-        <div class="col-2" >
+        {{-- <div class="col-2" >
             <div class="row text-white">
                 <input type="checkbox" name="suhu" id="suhu" value="suhu" checked disabled> Suhu<br>
             </div>
@@ -239,7 +239,7 @@
                     <input type="checkbox" name="tekanan" id="tekanan" value="tekanan" checked>Tekanan<br>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="row">
         <div class="col-md-12">
             <div class="card" id="chart" style="width: 100%"></div>

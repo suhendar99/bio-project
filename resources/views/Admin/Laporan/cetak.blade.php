@@ -72,12 +72,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <!-- ============================================================== -->
-                        <!-- end pageheader  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- select options  -->
-                        <!-- ============================================================== -->
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Ruangan</label>
@@ -114,6 +108,18 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="container">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                                <label class="form-check-label" for="inlineRadio1">PDF</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Excel</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-6">
                         <button class="btn btn-primary" type="submit">Cetak Laporan</button>
                         </div>
@@ -127,9 +133,6 @@
         </div>
     </div>
 </div>
-<!-- ============================================================== -->
-<!-- end select options  -->
-<!-- ============================================================== -->
 
 
 <script>
@@ -149,9 +152,6 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<!-- ============================================================== -->
-<!-- pageheader  -->
-<!-- ============================================================== -->
 
 
 <div class="row">

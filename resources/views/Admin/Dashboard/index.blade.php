@@ -68,6 +68,7 @@
                                 <th>Nama Pengguna</th>
                                 <th>Level</th>
                                 <th>Aktivitas</th>
+                                <th>Menu</th>
                                 <th>Waktu</th>
                             </tr>
                         </thead>
@@ -79,6 +80,29 @@
                                 <td>{{$a->operator->name}}</td>
                                 <td>{{$a->operator->level}}</td>
                                 <td>{{$a->description}}</td>
+                                <td>
+                                    @if($a->subject_type == "")
+                                        Auth
+                                    @elseif($a->subject_type == "App\Mqtt")
+                                        Pengaturan MQTT Broker
+                                    @elseif($a->subject_type == "App\Laporan")
+                                        Pengaturan Laporan
+                                    @elseif($a->subject_type == "App\Operator")
+                                        Data Operator
+                                    @elseif($a->subject_type == "App\Perangkat")
+                                        Data Perangkat
+                                    @elseif($a->subject_type == "App\Ruangan")
+                                        Data Ruangan                                    
+                                    @elseif($a->subject_type == "App\Satuan")
+                                        Data Satuan
+                                    @elseif($a->subject_type == "App\Setapp")
+                                        Pengaturan Aplikasi
+                                    @elseif($a->subject_type == "App\SetKirim")
+                                        Pengaturan Pengiriman Laporan
+                                    @elseif($a->subject_type == "App\KirimAlarm")
+                                        Pengaturan Pengiriman Alarm
+                                    @endif
+                                </td>
                                 <td>{{$a->created_at}}</td>
                             </tr>
                             @endforeach

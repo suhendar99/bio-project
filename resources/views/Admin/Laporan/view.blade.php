@@ -1,4 +1,9 @@
-<table style="border:1px solid black;   ">
+<style>
+    .border{
+        
+    }
+</style>
+<table>
     <thead>
     <tr>
         <td>No</td>

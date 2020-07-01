@@ -12,13 +12,22 @@
                         @if (session()->has('success'))
                             <div class="alert alert-success">
                                 {{ session()->get('success') }}
-                            </div>                                        
+                            </div>
                         @endif
                         @csrf
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">No Seri</label>
                             <input id="inputText3" type="text" class="form-control @error('no_seri') is-invalid @enderror" placeholder="No Seri Perangkat" name="no_seri" value="{{ old('no_seri') }}">
                             @error('no_seri')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="inputText3" class="col-form-label">Kode Perangkat</label>
+                            <input id="inputText3" type="text" class="form-control @error('kode') is-invalid @enderror" placeholder="kode Perangkat" name="kode" value="{{ old('kode') }}">
+                            @error('kode')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

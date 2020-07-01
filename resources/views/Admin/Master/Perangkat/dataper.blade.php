@@ -6,7 +6,7 @@
                         <div class="page-header">
                             <h2 class="pageheader-title">Data Perangkat</h2>
                             <div class="page-breadcrumb">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -27,6 +27,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>No Series</th>
+                                                <th>Kode Perangkat</th>
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>
                                                 <th>Status</th>
@@ -37,13 +38,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php 
+                                        <?php
                                             $no =1;
                                         ?>
                                         @foreach($perangkat as $p)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $p->no_seri }}</td>
+                                                <td>{{ $p->kode }}</td>
                                                 <td>{{ $p->latitude }}</td>
                                                 <td>{{ $p->longitude }}</td>
                                                 <td>{{ $p->status }}</td>

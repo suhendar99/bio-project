@@ -52,7 +52,7 @@ class OperatorController extends Controller
         if ($operator->save()) {
             return redirect()->back()->with('success','Data Berhasil di Tambahkan');
         }else {
-            return back();   
+            return back();
         }
     }
 
@@ -64,7 +64,7 @@ class OperatorController extends Controller
 
     public function update(Request $req, $id)
     {
-        $v = Validator::make($req->all(), [             
+        $v = Validator::make($req->all(), [
             'nama' => 'required|',
             'email' => 'required|email|unique:users,email,'.$id,
             'nik' => 'required|numeric|unique:users,nik,'.$id,
@@ -78,7 +78,7 @@ class OperatorController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
             $operator = Operator::find($id);
-            
+
             $operator->update([
                 'name' => $req->nama,
                 'email' => $req->email,
@@ -88,25 +88,25 @@ class OperatorController extends Controller
             ]);
 
             if($req->hasfile('foto'))
-            {                
-                $img = rand(). '.' . $req->foto->getClientOriginalExtension();           
-                $req->foto->move(public_path("foto"), $img);                                       
+            {
+                $img = rand(). '.' . $req->foto->getClientOriginalExtension();
+                $req->foto->move(public_path("foto"), $img);
                 $foto = 'foto'.$img;
                 if(is_writable(public_path($operator->foto))) {
                     unlink(public_path($operator->foto));
-                }     
+                }
                 $foto = 'foto'.$img;
 
                 $operator->update([
                     'foto' => $foto,
                 ]);
-            }            
-            
+            }
+
             //  LogUser::create([
             //     'user_id' => Auth::user()->id,
             //     'detail' => 'added new category  product : '.$request->name
             // ]);
-            
+
             return back()->with('success', 'Data berhasil di update');
         }
     }
@@ -125,6 +125,7 @@ class OperatorController extends Controller
     {
         $this->validate($req,[
             'no_seri' => 'required|numeric|unique:perangkats',
+            'kode' => 'required|',
             'latitude' => 'required|',
             'longitude' => 'required|',
             'aktivasi' => 'required|date',
@@ -133,6 +134,7 @@ class OperatorController extends Controller
 
         Perangkat::create([
             'no_seri' => $req->no_seri,
+            'kode' => $req->kode,
             'latitude' => $req->latitude,
             'longitude' => $req->longitude,
             'tgl_aktivasi' => $req->aktivasi,
@@ -154,9 +156,10 @@ class OperatorController extends Controller
             'aktivasi' => 'required|date',
             'status' => 'required|'
         ]);
-        
+
         $perangkat = Perangkat::findOrFail($id);
         $perangkat->no_seri = $req->seri;
+        $perangkat->kode = $req->kode;
         $perangkat->latitude = $req->latitude;
         $perangkat->longitude = $req->longitude;
         $perangkat->tgl_aktivasi = $req->aktivasi;

@@ -41,4 +41,8 @@ class ExportLaporan implements FromView, ShouldAutoSize
         ]);
         
     }
+    public static function afterSheet(AfterSheet $event)
+    {
+        $event->getSheet()->getDelegate()->getStyle('A1:G1')->getFont()->setName('Calibri')->setSize(14);
+    }
 }

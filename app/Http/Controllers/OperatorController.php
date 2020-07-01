@@ -32,7 +32,7 @@ class OperatorController extends Controller
         $this->validate($req,[
             'nama' => 'required|',
             'email' => 'required|email|unique:users',
-            'nik' => 'required|numeric',
+            'nik' => 'required|numeric|unique:users',
             'password' => 'required|min:6',
             'hp' => 'required|',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048'

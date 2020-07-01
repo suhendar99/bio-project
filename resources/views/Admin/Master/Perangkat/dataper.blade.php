@@ -26,7 +26,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>No Series</th>
+                                                <th>No Seri</th>
                                                 <th>Kode Perangkat</th>
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>

@@ -531,7 +531,8 @@
           },
           legend: {
             show: true
-          },
+          },          
+        colors: ['#ff0000', '#26a0fc' ,'#546E7A']
         };
 
         var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
@@ -593,6 +594,7 @@
           legend: {
             show: true
           },
+          colors: ['#ff0000', '#26a0fc' ,'#546E7A']
         };
 
         var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
@@ -654,6 +656,7 @@
           legend: {
             show: true
           },
+          colors: ['#ff0000', '#26a0fc' ,'#546E7A']
         };
 
         var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);

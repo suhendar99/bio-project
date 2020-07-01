@@ -107,7 +107,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col-6">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="checkPdf">
@@ -122,11 +122,10 @@
                                 </label>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="row">
                         <div class="col-6">
-                        <button class="btn btn-primary" type="submit" >Cetak Laporan</button>
-                        {{-- name="btpdf" --}}
+                        <button class="btn btn-primary" type="submit" name="btpdf">Cetak Laporan</button>
                         </div>
                             <div class="col-6">
                             <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>

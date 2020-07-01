@@ -8,7 +8,7 @@
         <td>Kelembapan</td>
         <td>Tekanan</td>
         <td>Alarm Status</td>
-        <td>id ruangan</td>
+        <td>Nama Ruangan</td>
     </tr>
     </thead>
     <tbody>

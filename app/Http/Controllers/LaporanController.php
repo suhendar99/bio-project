@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\KirimAlarm;
 use App\Imports\LaporanImport;
 use App\Exports\LaporanExport;
+use App\Exports\ExportLaporan;
 use App\Aktivasi;
 use Excel;
 use PDF;
@@ -48,8 +49,9 @@ class LaporanController extends Controller
         
         // dd($req->ckck);
         
-        
-
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }
         if ($awal > $akhir) {
              return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
         }
@@ -149,6 +151,7 @@ class LaporanController extends Controller
         // if($req->ruang == "all" && $req->satuan == "allpar"){
         //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // }
+        
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
@@ -433,6 +436,162 @@ class LaporanController extends Controller
             $input = $req->all();
             set_time_limit(99999);
             return(new LaporanExport($input))->download('Aktivitas-'.$req->akhir.'.xlsx');
+        }
+    }
+    public function ExportExcel(Request $req)
+    {
+        return view('Admin.Laporan.cetakexcel');
+    }
+    public function downloadExcel(Request $req)
+    {
+        $v = Validator::make($req->all(), [             
+            'awal' => 'required|date',            
+            'akhir' => 'required|date',   
+        ]);
+        $awal = $req->awal;
+        $akhir = $req->akhir;
+        $data2 = [];
+        $set = Laporan::find(1)->first();
+        
+        // dd($req->ckck);
+        
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }
+        if ($awal > $akhir) {
+             return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
+        }
+        if ($req->ruang === "all" && $req->satuan === "allper") {
+            // Data monitoring
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+            if(count($data) == 0){
+                return back()->with('failed', "Tidak ada data dari ".$req->awal." sampai ".$req->akhir);
+            }
+            // dd($data);
+            $pos = 'Ruangan';
+            $kirim = 1;
+            $sumber = "Semua Ruangan dan Parameter";
+        } elseif ($req->ruang !== "all" && $req->satuan ==="allper"){
+            // Data monitorign berdasarkan ID ruangan
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+
+            if(count($data) == 0){
+                return back()->with('failed', "Tidak ada data untuk ruangan dari ".$req->awal." sampai ".$req->akhir);
+            }
+
+            $parameter = Monitoring::where('ruangan_id', $req->ruang)->first();
+
+            // dd($data);
+
+            if(!isset($parameter)){
+                return back()->with('failed', "Tidak ada ruangan");
+            }
+
+            $pos = 'Ruangan';
+            $kirim = 2;
+            $sumber = $parameter->ruangan->nama;
+        } elseif ($req->ruang === "all" && $req->satuan !=="allper"){
+
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+
+            if(count($data) == 0){
+                return back()->with('failed', "Tidak ada data dari ".$req->awal." sampai ".$req->akhir);
+            }
+                
+            if ($req->satuan == "suhu") {
+                $parameter = 'Suhu';
+                // echo "satuan".$req->satuan;
+            } elseif ($req->satuan == "kelembapan") {
+                $parameter = 'Kelembapan';
+                // echo "satuan".$req->satuan;
+            } elseif ($req->satuan == "tekanan"){
+                $parameter = 'Tekanan';
+                // echo "satuan".$req->satuan;
+            }
+            
+            
+            
+            // dd($data);
+            $pos = 'Parameter';
+            $kirim = 2;
+            $sumber = $parameter;
+        } elseif ($req->ruang !== "all" && $req->satuan !=="allper"){
+            $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
+
+            if(count($data) == 0){
+                return back()->with('failed', "Tidak ada data untuk ruangan dari ".$req->awal." sampai ".$req->akhir);
+            }
+            
+            $rooms = Monitoring::where('ruangan_id', $req->ruang)->first();
+
+            if(!isset($rooms)){
+                return back()->with('failed', "Tidak ada ruangan");
+            }
+
+            if ($req->satuan == "suhu") {
+                $parameter = 'Suhu';
+                // echo "satuan".$req->satuan;
+            } elseif ($req->satuan == "kelembapan") {
+                $parameter = 'Kelembapan';
+                // echo "satuan".$req->satuan;
+            } elseif ($req->satuan == "tekanan"){
+                $parameter = 'Tekanan';
+                // echo "satuan".$req->satuan;
+            }
+            
+            // dd($data);
+            $pos = 'Parameter';
+            $kirim = 2;
+            $sumber = $parameter." & ".$rooms->ruangan->nama;
+        }
+        // dd($data);
+        // if ($req->satuan == "allpar") {
+        //     // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->pluck($req->satuan);
+        //     // dd($data);
+        //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        // } else {
+        //     $data2 = Monitoring::select($req->satuan)->whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->get();
+            
+        // }
+
+        // if($req->ruang == "all" && $req->satuan == "allpar"){
+        //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        // }
+        
+
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+
+            // dd($count,$suhumax);
+            $pdf = app('dompdf.wrapper');
+            $pdf->getDomPDF()->set_option("enable_php", true);
+            if ($kirim == 1 && $pos == "Ruangan"){
+                return(new ExportLaporan($req->awal, $req->akhir,['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'set'=>$set]))->download('Laporan-'.$req->akhir.'.xlsx');
+                // $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                
+            }elseif ($kirim == 2 && $pos == 'Ruangan') {
+                return(new ExportLaporan($req->awal, $req->akhir,['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'sumber' => $sumber, 'set'=>$set]))->download('Laporan-'.$req->akhir.'.xlsx');
+                // $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                
+            }elseif($kirim == 2 && $pos == 'Parameter'){
+                return(new ExportLaporan($req->awal, $req->akhir,['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'sumber' => $sumber, 'set'=>$set]))->download('Laporan-'.$req->akhir.'.xlsx');
+                // $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            }
+            set_time_limit(300);
+            return $pdf->stream('Monitoring-Report-'.$req->akhir);
+            return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            
+            return back();
+        }
+        if ($req->awal > $req->akhir) {
+             return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
+        }
+        if ($v->fails()) {
+            return back()->withErrors($v)->withInput();
+        }else {
+            $input = $req->all();
+            set_time_limit(99999);
         }
     }
     public function import()

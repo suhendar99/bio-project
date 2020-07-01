@@ -83,6 +83,8 @@ Route::middleware(['auth'])->group(function () {
         // cetak laporan
     Route::get('/cetak_laporan','LaporanController@cetak_laporan')->name('cetak.laporan');
     Route::post('/downloadLaporan','LaporanController@downloadLaporan')->name('downloadLaporan');
+    Route::get('/export_laporan', 'LaporanController@ExportExcel');
+    Route::post('/export_excel','LaporanController@downloadExcel')->name('download.excel');
         // Cetak Log
     Route::get('/export','LaporanController@export')->name('export');
     Route::get('/importview','LaporanController@importview');

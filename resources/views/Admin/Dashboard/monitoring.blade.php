@@ -5,12 +5,11 @@
     $suhu = \App\Satuan::where('parameter','suhu' )->first();
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();
-    $countmon = $monitoring->count();
-
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();  
+    $gauge = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->first();
 @endphp
 
- <?php
+<?php
         $topic = $mqtt->topic;
         $username = $mqtt->username;
         $password = $mqtt->password;
@@ -224,27 +223,23 @@
             </div>
         </div> -->
     <!--  -->
-        {{-- <div class="col-2" >a
-            <div class="row text-white">
-                <input type="checkbox" name="suhu" id="suhu" value="suhu" checked disabled> Suhu<br>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="row text-white">
-                <input type="checkbox" name="kelembapan" id="kelembapan" value="kelembapan" checked>Kelembapan<br>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="row text-white">
-                    <input type="checkbox" name="tekanan" id="tekanan" value="tekanan" checked>Tekanan<br>
-            </div>
-        </div>
-    </div> --}}
+    </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card" id="chart" style="width: 100%"></div>
+            <div class="card" id="chartSuhu" style="width: 100%"></div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" id="chartTekanan" style="width: 100%"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" id="chartKelembapan" style="width: 100%"></div>
+        </div>
+    </div>
+    
 </div>
     
     <!-- ============================================================== -->
@@ -371,67 +366,236 @@
   </script>            
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
     <script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var sgauge = {{$gauge->suhu}};
+        var kgauge = {{$gauge->kelembapan}};
+        var tgauge = {{$gauge->tekanan}};
+        console.log(sgauge,kgauge,tgauge);
+        var data1 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', sgauge],
+        ]);
+
+        var options1 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
+        };
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', kgauge],
+        ]);
+
+        var options2 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
+        };
+
+        var data3 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', tgauge],
+        ]);
+
+        var options3 = {
+          width: 400, height: 120,
+          redFrom: 70, redTo: 100,
+          yellowFrom: 40, yellowTo: 70,
+          greenFrom: 0, greenTo: 40,
+          minorTicks: 5,
+          animation:{
+            duration: 1000,
+            easing: 'out',
+          },
+        };
+
+        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+        chart1.draw(data1, options1);
+        chart2.draw(data2, options2);
+        chart3.draw(data3, options3);
+
+        {{-- setInterval(function() {
+          data1.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+          chart1.draw(data1, options1);
+        }, 3000); --}}
+      }
+    </script>
+    <script type="text/javascript">
          console.log(suhu);
         
-        var options = {
+        var optionsSuhu = {
           
           series: [
             {
                 data: suhu,
                 name: "Suhu"
+            }
+          ],
+          chart: {
+            id: 'realtime',
+            height: 350,
+            type: 'line',
+            animations: {
+              enabled: true,
+              easing: 'linear',
+              dynamicAnimation: {
+                speed: 1000
+              }
             },
-            {
-                data: tekanan,
-                name: "Tekanan"
+            toolbar: {
+              show: false
             },
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: true
+          },
+          stroke: {
+            curve: 'smooth'
+          },
+          title: {
+            text: 'Monitoring Suhu',
+            align: 'left'
+          },
+          markers: {
+            size: 0
+          },
+          xaxis: {
+          },
+          yaxis: {
+            max: 150
+          },
+          legend: {
+            show: true
+          },
+        };
+
+        var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
+        chartSuhu.render();
+
+        var optionsKelembapan = {
+          
+          series: [
             {
                 data: kelembapan,
                 name: "Kelembapan"
             }
-        ],
+          ],
           chart: {
-          id: 'realtime',
-          height: 350,
-          type: 'line',
-          animations: {
-            enabled: true,
-            easing: 'linear',
-            dynamicAnimation: {
-              speed: 1000
+            id: 'realtime',
+            height: 350,
+            type: 'line',
+            animations: {
+              enabled: true,
+              easing: 'linear',
+              dynamicAnimation: {
+                speed: 1000
+              }
+            },
+            toolbar: {
+              show: false
+            },
+            zoom: {
+              enabled: false
             }
           },
-          toolbar: {
-            show: false
+          dataLabels: {
+            enabled: true
           },
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: true
-        },
-        stroke: {
-          curve: 'smooth'
-        },
-        title: {
-          text: 'Monitoring',
-          align: 'left'
-        },
-        markers: {
-          size: 0
-        },
-        xaxis: {
-        },
-        yaxis: {
-          max: 200
-        },
-        legend: {
-          show: true
-        },
+          stroke: {
+            curve: 'smooth'
+          },
+          title: {
+            text: 'Monitoring Kelembapan',
+            align: 'left'
+          },
+          markers: {
+            size: 0
+          },
+          xaxis: {
+          },
+          yaxis: {
+            max: 150
+          },
+          legend: {
+            show: true
+          },
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
+        chartKelembapan.render();
+
+        var optionsTekanan = {
+          
+          series: [
+            {
+                data: tekanan,
+                name: "Tekanan"
+            },
+          ],
+          chart: {
+            id: 'realtime',
+            height: 350,
+            type: 'line',
+            animations: {
+              enabled: true,
+              easing: 'linear',
+              dynamicAnimation: {
+                speed: 1000
+              }
+            },
+            toolbar: {
+              show: false
+            },
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: true
+          },
+          stroke: {
+            curve: 'smooth'
+          },
+          title: {
+            text: 'Monitoring Tekanan',
+            align: 'left'
+          },
+          markers: {
+            size: 0
+          },
+          xaxis: {
+          },
+          yaxis: {
+            max: 150
+          },
+          legend: {
+            show: true
+          },
+        };
+
+        var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
+        chartTekanan.render();
       
       
     //     window.setInterval(function () {
@@ -561,17 +725,25 @@
           x: time,
           y: data.kelembapan
         })
+        
 
-         chart.updateSeries([
+        
+        chartSuhu.updateSeries([
             {
                 data: suhu
             },
-            {
-                data: tekanan
-            },
+        ])
+
+        chartKelembapan.updateSeries([
             {
                 data: kelembapan
             }
+        ])
+
+        chartTekanan.updateSeries([
+            {
+                data: tekanan
+            },
         ])
 
         var data1 = google.visualization.arrayToDataTable([
@@ -580,14 +752,15 @@
         ]);
 
         var options1 = {
-          animation:{
-            duration: 400,
-          },
           width: 400, height: 120,
           redFrom: 70, redTo: 100,
           yellowFrom: 40, yellowTo: 70,
           greenFrom: 0, greenTo: 40,
-          minorTicks: 5
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
         };
 
         var data2 = google.visualization.arrayToDataTable([
@@ -595,15 +768,16 @@
           ['', 80],
         ]);
 
-        var options2 = {          
-          animation:{
-            duration: 400,
-          },
+        var options2 = {  
           width: 400, height: 120,
           redFrom: 70, redTo: 100,
           yellowFrom: 40, yellowTo: 70,
           greenFrom: 0, greenTo: 40,
-          minorTicks: 5
+          minorTicks: 5,
+          animation:{
+                duration: 1000,
+                easing: 'out',
+            },
         };
 
         var data3 = google.visualization.arrayToDataTable([
@@ -618,9 +792,9 @@
           greenFrom: 0, greenTo: 40,
           minorTicks: 5,
           animation:{
-            duration: 400,
-            easing: 'out'
-          },
+                duration: 1000,
+                easing: 'out',
+            },
         };
 
         var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
@@ -662,7 +836,7 @@
         $.ajax({
           url:url,
           method:'POST',
-          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id},
+          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id,cvc:data.cvc,vvc:data.vvc},
           dataType:'JSON',
           success:function(){
             console.log('BERHASILLL');
@@ -690,70 +864,6 @@
         onSuccess: onConnect,
         onFailure: onFailure
       });
-      
-    </script>
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['gauge']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data1 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 0],
-        ]);
-
-        var options1 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-            duration: 4000,
-          },
-        };
-
-        var data2 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 0],
-        ]);
-
-        var options2 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-            duration: 4000,
-          },
-        };
-
-        var data3 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 0],
-        ]);
-
-        var options3 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-            duration: 4000,
-          },
-        };
-
-        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
-        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
-        chart1.draw(data1, options1);
-        chart2.draw(data2, options2);
-        chart3.draw(data3, options3);
-
-      }
     </script>
 
 </body>

@@ -836,7 +836,7 @@
         $.ajax({
           url:url,
           method:'POST',
-          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id},
+          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id,cvc:data.cvc,vvc:data.vvc},
           dataType:'JSON',
           success:function(){
             console.log('BERHASILLL');

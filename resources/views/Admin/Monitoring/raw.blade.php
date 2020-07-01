@@ -26,6 +26,8 @@
                                 <th>Suhu</th>
                                 <th>Tekanan</th>
                                 <th>Kelembapan</th>
+                                <th>CVC</th>
+                                <th>VVC</th>
                                 <th>Alarm</th>
                             </tr>
                         </thead>

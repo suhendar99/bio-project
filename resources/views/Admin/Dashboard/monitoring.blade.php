@@ -226,9 +226,20 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card" id="chart" style="width: 100%"></div>
+            <div class="card" id="chartSuhu" style="width: 100%"></div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" id="chartTekanan" style="width: 100%"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" id="chartKelembapan" style="width: 100%"></div>
+        </div>
+    </div>
+    
 </div>
     
     <!-- ============================================================== -->
@@ -430,7 +441,7 @@
     <script type="text/javascript">
          console.log(suhu);
         
-        var options = {
+        var optionsSuhu = {
           
           series: [
             {
@@ -445,50 +456,170 @@
                 data: kelembapan,
                 name: "Kelembapan"
             }
-        ],
+          ],
           chart: {
-          id: 'realtime',
-          height: 350,
-          type: 'line',
-          animations: {
-            enabled: true,
-            easing: 'linear',
-            dynamicAnimation: {
-              speed: 1000
+            id: 'realtime',
+            height: 350,
+            type: 'line',
+            animations: {
+              enabled: true,
+              easing: 'linear',
+              dynamicAnimation: {
+                speed: 1000
+              }
+            },
+            toolbar: {
+              show: false
+            },
+            zoom: {
+              enabled: false
             }
           },
-          toolbar: {
-            show: false
+          dataLabels: {
+            enabled: true
           },
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: true
-        },
-        stroke: {
-          curve: 'smooth'
-        },
-        title: {
-          text: 'Monitoring',
-          align: 'left'
-        },
-        markers: {
-          size: 0
-        },
-        xaxis: {
-        },
-        yaxis: {
-          max: 150
-        },
-        legend: {
-          show: true
-        },
+          stroke: {
+            curve: 'smooth'
+          },
+          title: {
+            text: 'Monitoring Suhu',
+            align: 'left'
+          },
+          markers: {
+            size: 0
+          },
+          xaxis: {
+          },
+          yaxis: {
+            max: 150
+          },
+          legend: {
+            show: true
+          },
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
+        chartSuhu.render();
+
+        var optionsKelembapan = {
+          
+          series: [
+            {
+                data: suhu,
+                name: "Suhu"
+            },
+            {
+                data: tekanan,
+                name: "Tekanan"
+            },
+            {
+                data: kelembapan,
+                name: "Kelembapan"
+            }
+          ],
+          chart: {
+            id: 'realtime',
+            height: 350,
+            type: 'line',
+            animations: {
+              enabled: true,
+              easing: 'linear',
+              dynamicAnimation: {
+                speed: 1000
+              }
+            },
+            toolbar: {
+              show: false
+            },
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: true
+          },
+          stroke: {
+            curve: 'smooth'
+          },
+          title: {
+            text: 'Monitoring Kelembapan',
+            align: 'left'
+          },
+          markers: {
+            size: 0
+          },
+          xaxis: {
+          },
+          yaxis: {
+            max: 150
+          },
+          legend: {
+            show: true
+          },
+        };
+
+        var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
+        chartKelembapan.render();
+
+        var optionsTekanan = {
+          
+          series: [
+            {
+                data: suhu,
+                name: "Suhu"
+            },
+            {
+                data: tekanan,
+                name: "Tekanan"
+            },
+            {
+                data: kelembapan,
+                name: "Kelembapan"
+            }
+          ],
+          chart: {
+            id: 'realtime',
+            height: 350,
+            type: 'line',
+            animations: {
+              enabled: true,
+              easing: 'linear',
+              dynamicAnimation: {
+                speed: 1000
+              }
+            },
+            toolbar: {
+              show: false
+            },
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: true
+          },
+          stroke: {
+            curve: 'smooth'
+          },
+          title: {
+            text: 'Monitoring Tekanan',
+            align: 'left'
+          },
+          markers: {
+            size: 0
+          },
+          xaxis: {
+          },
+          yaxis: {
+            max: 150
+          },
+          legend: {
+            show: true
+          },
+        };
+
+        var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
+        chartTekanan.render();
       
       
     //     window.setInterval(function () {
@@ -618,8 +749,40 @@
           x: time,
           y: data.kelembapan
         })
+        smax.push({
+          x: time,
+          y: 90
+        })
+        smin.push({
+          x: time,
+          y: 10
+        })
 
-         chart.updateSeries([
+        chartSuhu.updateSeries([
+            {
+                data: suhu
+            },
+            {
+                data: smin
+            },
+            {
+                data: smax
+            }
+        ])
+
+        chartKelembapan.updateSeries([
+            {
+                data: suhu
+            },
+            {
+                data: tekanan
+            },
+            {
+                data: kelembapan
+            }
+        ])
+
+        chartTekanan.updateSeries([
             {
                 data: suhu
             },

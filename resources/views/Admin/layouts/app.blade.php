@@ -295,7 +295,9 @@
                 <td>${row.ruangan_id}</td>
                 <td>${row.suhu}</td>
                 <td>${row.kelembapan}</td>
-                <td>${row.tekanan}</td>                
+                <td>${row.tekanan}</td>
+                <td>${row.cvc}</td>
+                <td>${row.vvc}</td>                
                 <td id="alertff">${row.alarm}</td>
             </tr>`;
         }); 
@@ -408,6 +410,7 @@
       }
       
       function insert_data(data) {
+        
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
@@ -420,7 +423,7 @@
         $.ajax({
           url:url,
           method:'POST',
-          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id},
+          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id,vvc:data.vvc,cvc:data.cvc},
           dataType:'JSON',
           success:function(response){
             console.log(response);

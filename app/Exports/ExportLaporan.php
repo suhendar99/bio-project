@@ -15,26 +15,29 @@ class ExportLaporan implements FromView, ShouldAutoSize
 
     public $awal;
     public $akhir;
+    protected $satuan, $ruangan;
 
-    function __construct($input, $put) {
+    function __construct($input, $put, $satuan, $ruangan) {
         $this->awal = $input;
         $this->akhir = $put;
+        $this->satuan = $satuan;
+        $this->ruangan = $ruangan;
     }
 
     public function view(): view
     {
-        // dd($this->input['awal']);
-        // $awal = $this->input['awal'];
-        // $akhir = $this->input['akhir'];
+        $data = Monitoring::whereBetween('date',[$this->awal, $this->akhir]);
+        
 
-        $data = Monitoring::whereBetween('date',[$this->awal, $this->akhir])->latest()->get();
+        if ($this->ruangan != 'all') {
+            $data = $data->where('ruangan_id',$this->ruangan);
+        }
 
-        // $date1 = new Carbon($this->input['awal']);
-        // $date2 = new Carbon($this->input['akhir']);
-        // $date2 = $date2->addDays(1);
-        // dd($input);
+        $data = $data->get();
+        
         return view('Admin.Laporan.view', [
-        'monitor' => $data
+        'monitor' => $data,
+        'satuan' => $this->satuan,
         ]);
         
     }

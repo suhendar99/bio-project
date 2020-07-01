@@ -749,16 +749,24 @@
           x: time,
           y: data.kelembapan
         })
+        smax.push({
+          x: time,
+          y: 90
+        })
+        smin.push({
+          x: time,
+          y: 10
+        })
 
         chartSuhu.updateSeries([
             {
                 data: suhu
             },
             {
-                data: tekanan
+                data: smin
             },
             {
-                data: kelembapan
+                data: smax
             }
         ])
 

@@ -48,17 +48,17 @@
                     </div>
                     <div class="col-6">
                         <center>
-                            <small>VVC</small>
+                            <small>VVC </small>
                         </center> 
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6 border-right">
-                        <center> 0
+                        <center> {{$d->monitoring? $d->monitoring->cvc:"0"}}
                         </center>
                     </div>
                     <div class="col-6">
-                        <center> 0
+                        <center> {{$d->monitoring ? $d->monitoring->vvc:"0"}}
                         </center>
                     </div>
                 </div>

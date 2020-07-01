@@ -104,6 +104,8 @@ class MonitoringController extends Controller
     	$data->alarm = $req->alarm;
     	$data->perangkat_id = $req->perangkat_id;
     	$data->ruangan_id = $req->ruangan_id;
+        $data->cvc = $req->cvc;
+        $data->vvc = $req->vvc;
     	$data->save();
 
         $ruang = Ruangan::where('id', $req->ruangan_id)->first();

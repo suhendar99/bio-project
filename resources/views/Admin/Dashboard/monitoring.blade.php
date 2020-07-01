@@ -331,11 +331,22 @@
 
     <script>
         let monitoring = '@json($monitoring)'
-        
+        let suhuMaxs = '{{ $room->smax }}'
+        let suhuMins = '{{ $room->smin }}'
+        let kelembapanMaxs = '{{ $room->kmax }}'
+        let kelembapanMins = '{{ $room->kmin }}'
+        let tekananMaxs = '{{ $room->tmax }}'
+        let tekananMins = '{{ $room->tmin }}'
           
   var suhu = []
+  var suhuMax = []
+  var suhuMin = []
   var kelembapan = []
+  var kelembapanMax = []
+  var kelembapanMin = []
   var tekanan = []
+  var tekananMax = []
+  var tekananMin = []
   
     let dates = 0
     const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -351,13 +362,37 @@
           x: element.time,
           y: element.suhu
         })
-        tekanan.push({
+        suhuMax.push({
           x: element.time,
-          y: element.tekanan
+          y: suhuMaxs
+        })
+        suhuMin.push({
+          x: element.time,
+          y: suhuMins
         })
         kelembapan.push({
           x: element.time,
           y: element.kelembapan
+        })
+        kelembapanMax.push({
+          x: element.time,
+          y: kelembapanMaxs
+        })
+        kelembapanMin.push({
+          x: element.time,
+          y: kelembapanMins
+        })
+        tekanan.push({
+          x: element.time,
+          y: element.tekanan
+        })
+         tekananMax.push({
+          x: element.time,
+          y: tekananMaxs
+        })
+        tekananMin.push({
+          x: element.time,
+          y: tekananMins
         })
         
     });
@@ -445,8 +480,16 @@
           
           series: [
             {
+              data  : suhuMax,
+              name: "Suhu Max"
+            },
+            {
                 data: suhu,
                 name: "Suhu"
+            },
+            {
+              data  : suhuMin,
+              name: "Suhu Min"
             }
           ],
           chart: {
@@ -483,7 +526,8 @@
           xaxis: {
           },
           yaxis: {
-            max: 150
+            max: parseInt(suhuMaxs) + 30,
+            min: parseInt(suhuMins) - 30,
           },
           legend: {
             show: true
@@ -497,8 +541,16 @@
           
           series: [
             {
+              data  : kelembapanMax,
+              name: "Kelembapan Max"
+            },
+            {
                 data: kelembapan,
                 name: "Kelembapan"
+            },
+            {
+              data  : kelembapanMin,
+              name: "Kelembapan Min"
             }
           ],
           chart: {
@@ -534,8 +586,9 @@
           },
           xaxis: {
           },
-          yaxis: {
-            max: 150
+          yaxis: {            
+            max: parseInt(kelembapanMaxs) + 30,
+            min: parseInt(kelembapanMins) - 30,
           },
           legend: {
             show: true
@@ -548,10 +601,18 @@
         var optionsTekanan = {
           
           series: [
+             {
+              data  : tekananMax,
+              name: "Tekanan Max"
+            },
             {
                 data: tekanan,
                 name: "Tekanan"
             },
+            {
+              data  : tekananMin,
+              name: "Tekanan Min"
+            }
           ],
           chart: {
             id: 'realtime',
@@ -586,8 +647,9 @@
           },
           xaxis: {
           },
-          yaxis: {
-            max: 150
+          yaxis: {            
+            max: parseInt(tekananMaxs) + 30,
+            min: parseInt(tekananMins) - 30,
           },
           legend: {
             show: true
@@ -730,19 +792,37 @@
         
         chartSuhu.updateSeries([
             {
+                data: suhuMax
+            },
+            {
                 data: suhu
+            },
+            {
+                data: suhuMin
             },
         ])
 
         chartKelembapan.updateSeries([
             {
+                data: kelembapanMax
+            },
+            {
                 data: kelembapan
-            }
+            },
+            {
+                data: kelembapanMin
+            },
         ])
 
-        chartTekanan.updateSeries([
+        chartTekanan.updateSeries([           
+            {
+                data: tekananMax
+            },
             {
                 data: tekanan
+            },
+            {
+                data: tekananMin
             },
         ])
 

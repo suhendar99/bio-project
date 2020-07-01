@@ -447,14 +447,6 @@
             {
                 data: suhu,
                 name: "Suhu"
-            },
-            {
-                data: tekanan,
-                name: "Tekanan"
-            },
-            {
-                data: kelembapan,
-                name: "Kelembapan"
             }
           ],
           chart: {
@@ -504,14 +496,6 @@
         var optionsKelembapan = {
           
           series: [
-            {
-                data: suhu,
-                name: "Suhu"
-            },
-            {
-                data: tekanan,
-                name: "Tekanan"
-            },
             {
                 data: kelembapan,
                 name: "Kelembapan"
@@ -565,17 +549,9 @@
           
           series: [
             {
-                data: suhu,
-                name: "Suhu"
-            },
-            {
                 data: tekanan,
                 name: "Tekanan"
             },
-            {
-                data: kelembapan,
-                name: "Kelembapan"
-            }
           ],
           chart: {
             id: 'realtime',
@@ -749,34 +725,16 @@
           x: time,
           y: data.kelembapan
         })
-        smax.push({
-          x: time,
-          y: 90
-        })
-        smin.push({
-          x: time,
-          y: 10
-        })
+        
 
+        
         chartSuhu.updateSeries([
             {
                 data: suhu
             },
-            {
-                data: smin
-            },
-            {
-                data: smax
-            }
         ])
 
         chartKelembapan.updateSeries([
-            {
-                data: suhu
-            },
-            {
-                data: tekanan
-            },
             {
                 data: kelembapan
             }
@@ -784,14 +742,8 @@
 
         chartTekanan.updateSeries([
             {
-                data: suhu
-            },
-            {
                 data: tekanan
             },
-            {
-                data: kelembapan
-            }
         ])
 
         var data1 = google.visualization.arrayToDataTable([
@@ -884,7 +836,7 @@
         $.ajax({
           url:url,
           method:'POST',
-          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id},
+          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id,cvc:data.cvc,vvc:data.vvc},
           dataType:'JSON',
           success:function(){
             console.log('BERHASILLL');

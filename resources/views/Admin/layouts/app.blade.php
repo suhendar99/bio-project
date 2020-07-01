@@ -295,7 +295,9 @@
                 <td>${row.ruangan_id}</td>
                 <td>${row.suhu}</td>
                 <td>${row.kelembapan}</td>
-                <td>${row.tekanan}</td>                
+                <td>${row.tekanan}</td>
+                <td>${row.cvc}</td>
+                <td>${row.vvc}</td>                
                 <td id="alertff">${row.alarm}</td>
             </tr>`;
         }); 
@@ -420,7 +422,7 @@
         $.ajax({
           url:url,
           method:'POST',
-          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id},
+          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id,vvc:data.vvc,cvc:data.cvc},
           dataType:'JSON',
           success:function(response){
             console.log(response);

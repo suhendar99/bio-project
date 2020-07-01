@@ -27,6 +27,8 @@
                                 <th>Tekanan</th>
                                 <th>Kelembapan</th>
                                 <th>Alarm</th>
+                                <th>CVC</th>
+                                <th>VVC</th>
                             </tr>
                         </thead>
                         <tbody>

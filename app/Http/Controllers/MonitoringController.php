@@ -23,11 +23,11 @@ class MonitoringController extends Controller
 {
     public function getData(Request $req)
     {
-        if ($req->room == "all") {
-            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
-        } else {
-            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
-        }
+        // if ($req->room == "all") {
+        //     $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
+        // } else {
+        //     $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+        // }
         
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->get();
@@ -35,6 +35,7 @@ class MonitoringController extends Controller
         // return response()->json([
         //     'response'=>$data
         // ]);
+        $data = Monitoring::where('ruangan_id',$req->ruangan)->limit(20)->get();
         // dd($data);
         return response()->json($data);
 

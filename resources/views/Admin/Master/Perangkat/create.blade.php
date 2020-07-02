@@ -24,7 +24,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="inputText3" class="col-form-label">Kode Perangkat</label>
                             <input id="inputText3" type="text" class="form-control @error('kode') is-invalid @enderror" placeholder="kode Perangkat" name="kode" value="{{ old('kode') }}">
                             @error('kode')
@@ -32,7 +32,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="inputEmail">Latitude</label>
                             <input id="inputText3" type="text" placeholder="Example 78.9879" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{ old('latitude') }}">

@@ -124,8 +124,7 @@ class OperatorController extends Controller
     public function store_per(Request $req)
     {
         $this->validate($req,[
-            'no_seri' => 'required|numeric|unique:perangkats',
-            'kode' => 'required|',
+            'no_seri' => 'required|unique:perangkats',
             'latitude' => 'required|',
             'longitude' => 'required|',
             'aktivasi' => 'required|date',
@@ -134,7 +133,6 @@ class OperatorController extends Controller
 
         Perangkat::create([
             'no_seri' => $req->no_seri,
-            'kode' => $req->kode,
             'latitude' => $req->latitude,
             'longitude' => $req->longitude,
             'tgl_aktivasi' => $req->aktivasi,
@@ -150,7 +148,7 @@ class OperatorController extends Controller
     public function update_per(Request $req, $id)
     {
         $this->validate($req,[
-            'seri' => 'required|numeric|unique:perangkats,no_seri,'.$id,
+            'seri' => 'required|unique:perangkats,no_seri,'.$id,
             'latitude' => 'required|',
             'longitude' => 'required|',
             'aktivasi' => 'required|date',
@@ -159,7 +157,6 @@ class OperatorController extends Controller
 
         $perangkat = Perangkat::findOrFail($id);
         $perangkat->no_seri = $req->seri;
-        $perangkat->kode = $req->kode;
         $perangkat->latitude = $req->latitude;
         $perangkat->longitude = $req->longitude;
         $perangkat->tgl_aktivasi = $req->aktivasi;

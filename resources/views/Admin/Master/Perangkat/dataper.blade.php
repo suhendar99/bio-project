@@ -27,7 +27,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>No Seri</th>
-                                                <th>Kode Perangkat</th>
+                                                {{-- <th>Kode Perangkat</th> --}}
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>
                                                 <th>Status</th>
@@ -45,7 +45,6 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $p->no_seri }}</td>
-                                                <td>{{ $p->kode }}</td>
                                                 <td>{{ $p->latitude }}</td>
                                                 <td>{{ $p->longitude }}</td>
                                                 <td>{{ $p->status }}</td>

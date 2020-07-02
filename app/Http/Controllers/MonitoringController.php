@@ -23,11 +23,42 @@ class MonitoringController extends Controller
 {
     public function getData(Request $req)
     {
-        // if ($req->room == "all") {
-        //     $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
-        // } else {
-        //     $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
-        // }
+        $room = Ruangan::where('id', $req->room)->first();
+        if ($req->room == "all") {
+            if($req->parameter == "allpar"){
+                $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
+                return response()->json($data);
+            } elseif($req->parameter != "allpar"){
+                if ($req->parameter == "suhu") {
+                    $parameter = $req->parameter;
+                } elseif($req->parameter == "kelembapan"){
+                    $parameter = $req->parameter;
+                } elseif($req->parameter == "tekanan"){
+                    $parameter = $req->parameter;
+                }
+                return response()->json($data);
+
+            }
+        } elseif($req->room != "all") {
+            if($req->parameter == "allpar"){
+                $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+                return response()->json($data);
+
+            } elseif($req->parameter != "allpar"){
+                if ($req->parameter == "suhu") {
+                    $data = Monitoring::select('suhu')->whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+                } elseif ($req->parameter == "kelembapan"){
+                    $data = Monitoring::select('kelembapan')->whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+                } elseif ($req->parameter == "tekanan"){
+                    $data = Monitoring::select('tekanan')->whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+                }
+                // dd($data);
+                return response()->json($data);
+
+            }
+        }
+
+        
         
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->get();
@@ -35,10 +66,8 @@ class MonitoringController extends Controller
         // return response()->json([
         //     'response'=>$data
         // ]);
-        $data = Monitoring::where('ruangan_id',$req->ruangan)->limit(20)->get();
+        // $data = Monitoring::where('ruangan_id',$req->ruangan)->limit(20)->get();
         // dd($data);
-        return response()->json($data);
-
 
     }
     public function index()

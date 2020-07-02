@@ -342,14 +342,11 @@
       
       function onMessageArrived(message) {
         
-        // var today = new Date();
-        // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        // var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 
         // console.log(message.payloadString);         
-        var today = new Date();
-        var date = today.getFullYear()+'-'+("0" + today.getDate()).slice(-2)+'-'+today.getDate();
-        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
         var data = JSON.parse(message.payloadString + "");
 
         if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {

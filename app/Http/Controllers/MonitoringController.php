@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Mqtt;
- 
- 
+
+
 use Validator;
 use App\Satuan;
 use App\Setapp;
@@ -23,12 +23,18 @@ class MonitoringController extends Controller
 {
     public function getData(Request $req)
     {
+        if ($req->room == "all") {
+            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
+        } else {
+            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+        }
+
+
         // if ($req->room == "all") {
         //     $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
         // } else {
         //     $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
         // }
-        
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
         // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->get();
         // dd($data);
@@ -56,7 +62,7 @@ class MonitoringController extends Controller
 
 
     public function room($id)
-    {   
+    {
         // dd($id);
         $id = $id;
         $app = Setapp::where('id',1)->first();
@@ -72,11 +78,11 @@ class MonitoringController extends Controller
     public function sendEmail()
     {
         // Mail::to("aguspadilah30@gmail.com")->send(new sendEmail());
-        Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail("Hello"));      
+        Mail::to("faliq.kintara14@gmail.com")->send(new VerifyMail("Hello"));
          return response()->json([
             'status' => true,
         ]);
- 
+
         // return "Email telah dikirim";
     }
     // public function sendmail()
@@ -122,7 +128,7 @@ class MonitoringController extends Controller
         $kmin = $ruang->kmin;
 
         $tmax = $ruang->tmax;
-        $tmin = $ruang->tmin; 
+        $tmin = $ruang->tmin;
 
         $toMail = KirimAlarm::all();
 
@@ -135,7 +141,7 @@ class MonitoringController extends Controller
             $log->save();
         }
 
-        if($req->suhu < $smin){ 
+        if($req->suhu < $smin){
             $log = new Log_alert;
             $log->status = 'Low presure';
             $log->keterangan = $req->suhu.'C lebih rendah dari '.$smin.'C';
@@ -211,7 +217,7 @@ class MonitoringController extends Controller
     }
     public function add_aksi(Request $req)
     {
-        $v = Validator::make($req->all(), [             
+        $v = Validator::make($req->all(), [
             'nama' => 'required|',
             'parameter' => 'required|',
             'max' => 'required|numeric',
@@ -243,12 +249,12 @@ class MonitoringController extends Controller
 
 
 
-            
+
             //  LogUser::create([
             //     'user_id' => Auth::user()->id,
             //     'detail' => 'added new category  product : '.$request->name
             // ]);
-            
+
             return back()->with('success', 'Ruangan berhasil ditambahkan');
         }
     }
@@ -263,7 +269,7 @@ class MonitoringController extends Controller
 
     public function update(Request $req, $id)
     {
-    	$v = Validator::make($req->all(), [             
+    	$v = Validator::make($req->all(), [
             'nama' => 'required|',
             'parameter' => 'required|',
             'satuan' => 'required|',
@@ -280,7 +286,7 @@ class MonitoringController extends Controller
             }
 
             $operator = Satuan::find($id);
-            
+
             $operator->update([
                 'id_ruangan' => $req->nama,
                 'parameter' => $req->parameter,
@@ -288,12 +294,12 @@ class MonitoringController extends Controller
                 'max' => $req->max,
                 'min' => $req->min
             ]);
-            
+
             //  LogUser::create([
             //     'user_id' => Auth::user()->id,
             //     'detail' => 'added new category  product : '.$request->name
             // ]);
-            
+
             return back()->with('success', 'Data berhasil di update');
         }
     }

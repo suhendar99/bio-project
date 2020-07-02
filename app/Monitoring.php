@@ -19,7 +19,7 @@ class Monitoring extends Model
 
     public function perangkat()
     {
-    	return $this->belongsTo('App\Perangkat', 'perangkat_id', 'kode');
+    	return $this->belongsTo('App\Perangkat', 'perangkat_id', 'no_seri');
    	}
 
     /**

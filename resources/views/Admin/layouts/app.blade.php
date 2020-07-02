@@ -232,9 +232,6 @@
         $url_broker = $mqtt->url_broker;
     ?>
 
-    @if (session()->has('alert'))
-        {{ session()->get('alert') }}
-    @endif
     <!-- jquery 3.3.1 -->
     <script src="{{ asset('concept/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
     <!-- bootstap bundle js -->
@@ -348,7 +345,9 @@
 
         // console.log(message.payloadString);         
         var today = new Date();
-        var date = today.getFullYear()+'-'+("0" + today.getDate()).slice(-2)+'-'+today.getDate();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        // var date = today.getFullYear()+'-'+("0" + today.getMonth()).slice(-2)+'-'+today.getDate();
+        console.log(date);
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
         var data = JSON.parse(message.payloadString + "");
 

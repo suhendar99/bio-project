@@ -60,6 +60,11 @@ class MonitoringController extends Controller
         $id = $id;
         $app = Setapp::where('id',1)->first();
         $room = Ruangan::where('id',$id)->first();
+        $dataMonitoring = Monitoring::where('ruangan_id', $room->id)->get();
+        if(count($dataMonitoring) == 0){
+            return redirect()->back()->with('alert', "Ruang ".$room->nama." tidak memiliki data");
+        }
+
         return view('Admin.Dashboard.monitoring',compact('app','id','room'));
     }
 
@@ -122,7 +127,7 @@ class MonitoringController extends Controller
 
         if ($req->suhu > $smax) {
             $log = new Log_alert;
-            $log->status = 'Hight presure';
+            $log->status = 'High presure';
             $log->keterangan = $req->suhu.'C lebih tinggi dari '.$smax.'C';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
@@ -141,7 +146,7 @@ class MonitoringController extends Controller
 
         if($req->kelembapan > $kmax){
             $log = new Log_alert;
-            $log->status = 'Hight presure';
+            $log->status = 'High presure';
             $log->keterangan = $req->kelembapan.'% lebih tinggi dari '.$kmax.'%';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;
@@ -160,7 +165,7 @@ class MonitoringController extends Controller
 
         if($req->tekanan > $tmax){
             $log = new Log_alert;
-            $log->status = 'Hight presure';
+            $log->status = 'High presure';
             $log->keterangan = $req->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
             $log->monitoring_id = $data->id;
             $log->time = $req->time;

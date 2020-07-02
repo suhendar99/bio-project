@@ -38,12 +38,12 @@
                 @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
-                        </div>                                        
+                        </div>
                 @endif
                 @if (session()->has('failed'))
                     <div class="alert alert-danger">
                         {{ session()->get('failed') }}
-                    </div>                                        
+                    </div>
                 @endif
                 <form action="/downloadLaporan" method="post" id="formqq">
                     @csrf
@@ -93,7 +93,7 @@
                                 <label for="inputText3" class="col-form-label">Parameter</label>
                                 <select name="satuan" id="parameter" class="form-control">
                                     <option value="allper">Semua parameter</option>
-                                    
+
                                     <option value="suhu">Suhu</option>}
                                     <option value="kelembapan">Kelembapan</option>}
                                     <option value="tekanan">Tekanan</option>}
@@ -127,10 +127,10 @@
                         <div class="col-6">
                         <button class="btn btn-primary" type="submit" name="btpdf">Cetak Laporan</button>
                         </div>
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                             <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
                             <span>*) Hanya menampilkan 10 data terakhir</span>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div>
@@ -169,7 +169,7 @@
 <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
 
 <script>
-    
+
     const formExcel = ()=>{
         const pdf = document.querySelector("#checkPdf");
         const excel = document.querySelector("#checkExcel");
@@ -182,27 +182,27 @@
                 excel.checked = false;
             }
             actionForm.action = "http://localhost:8000/downloadLaporan";
-        });     
+        });
         excel.addEventListener('click', e=>{
             if(pdf.checked == true){
                 pdf.checked = false;
             }
             actionForm.action = "{{ route('download.excel') }}";
-        });     
+        });
     }
 
     formExcel();
 
-            
-              
+
+
     var suhu = []
     var kelembapan = []
     var tekanan = []
-  
-   
+
+
 
     var options = {
-          
+
         series: [
             {
                 data: suhu,
@@ -256,14 +256,14 @@
         legend: {
           show: true
         },
-    };  
-    
+    };
 
-        
+
+
 
         //////////////
         var chart = new ApexCharts(document.querySelector("#chart"), options);
-        
+
     document.getElementById("myBtn").onclick = function() {
         if($('#awal').val() === ""){
             Swal.fire({
@@ -325,7 +325,7 @@
                   x: element.time,
                   y: element.kelembapan
                 })
-                
+
             });
             chart.updateSeries([
             {
@@ -344,26 +344,26 @@
           }
         });
 
-        
+
     }
-    
-    // $(document).ready(function () {  
-    //     $('#dataTable').DataTable({  
-    //         "ajax": {  
-    //             "url": "/api/getBetween",  
-    //             "type": "GET",  
-    //             "datatype": "json"  
-    //         },  
-    //         "columns": [  
-    //             { "data": "Name" },  
-    //             { "data": "Position" },  
-    //             { "data": "Office" },  
-    //             { "data": "Age" },  
-    //             { "data": "Salary" }  
-    //         ]  
-    //     });  
+
+    // $(document).ready(function () {
+    //     $('#dataTable').DataTable({
+    //         "ajax": {
+    //             "url": "/api/getBetween",
+    //             "type": "GET",
+    //             "datatype": "json"
+    //         },
+    //         "columns": [
+    //             { "data": "Name" },
+    //             { "data": "Position" },
+    //             { "data": "Office" },
+    //             { "data": "Age" },
+    //             { "data": "Salary" }
+    //         ]
+    //     });
     // });
-  
+
 </script>
 
 <!-- ============================================================== -->

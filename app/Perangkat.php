@@ -14,6 +14,15 @@ class Perangkat extends Model
         'no_seri','kode', 'latitude', 'longitude', 'tgl_aktivasi', 'status'
     ];
 
-
+    /**
+     * Perangkat has many Monitoring.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function monitoring()
+    {
+    	// hasMany(RelatedModel, foreignKeyOnRelatedModel = perangkat_id, localKey = id)
+    	return $this->hasMany('App\Monitoring', 'perangkat_id', 'kode');
+    }
 
 }

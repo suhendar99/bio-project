@@ -60,6 +60,11 @@ class MonitoringController extends Controller
         $id = $id;
         $app = Setapp::where('id',1)->first();
         $room = Ruangan::where('id',$id)->first();
+        $dataMonitoring = Monitoring::where('ruangan_id', $room->id)->get();
+        if(count($dataMonitoring) == 0){
+            return redirect()->back()->with('alert', "Ruang ".$room->nama." tidak memiliki data");
+        }
+
         return view('Admin.Dashboard.monitoring',compact('app','id','room'));
     }
 

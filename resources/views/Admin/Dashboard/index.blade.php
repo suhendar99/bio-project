@@ -139,6 +139,11 @@
                         </ul>
                         <div class="tab-content" id="myTabContent7" bg-dark>
                             <div class="tab-pane fade show active" id="home-justify" role="tabpanel" aria-labelledby="home-tab-justify">
+                                @if (session()->has('alert'))
+                                    <div class="alert alert-danger">
+                                        {{ session()->get('alert') }}
+                                    </div>
+                                @endif
                             @include('Admin.Dashboard.overview')
                             </div>
                             <div class="tab-pane fade" id="profile-justify" role="tabpanel" aria-labelledby="profile-tab-justify">

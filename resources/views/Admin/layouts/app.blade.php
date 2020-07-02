@@ -231,6 +231,10 @@
         $password = $mqtt->password;
         $url_broker = $mqtt->url_broker;
     ?>
+
+    @if (session()->has('alert'))
+        {{ session()->get('alert') }}
+    @endif
     <!-- jquery 3.3.1 -->
     <script src="{{ asset('concept/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
     <!-- bootstap bundle js -->

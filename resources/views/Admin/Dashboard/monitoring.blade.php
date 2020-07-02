@@ -338,67 +338,65 @@
         let tekananMaxs = '{{ $room->tmax }}'
         let tekananMins = '{{ $room->tmin }}'
           
-  var suhu = []
-  var suhuMax = []
-  var suhuMin = []
-  var kelembapan = []
-  var kelembapanMax = []
-  var kelembapanMin = []
-  var tekanan = []
-  var tekananMax = []
-  var tekananMin = []
+        var suhu = []
+        var suhuMax = []
+        var suhuMin = []
+        var kelembapan = []
+        var kelembapanMax = []
+        var kelembapanMin = []
+        var tekanan = []
+        var tekananMax = []
+        var tekananMin = []
   
-    let dates = 0
-    const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let formatted_date = "";
-    let newMonitor = JSON.parse(monitoring).sort((a,b)=>{
-      return a.time.localeCompare(b.time);
-    });
-    console.log(newMonitor);
-    let monitor = newMonitor
-    monitor.forEach(element => {
-        dates = new Date(element.date+' '+element.time)
-        suhu.push({
-          x: element.time,
-          y: element.suhu
-        })
-        suhuMax.push({
-          x: element.time,
-          y: suhuMaxs
-        })
-        suhuMin.push({
-          x: element.time,
-          y: suhuMins
-        })
-        kelembapan.push({
-          x: element.time,
-          y: element.kelembapan
-        })
-        kelembapanMax.push({
-          x: element.time,
-          y: kelembapanMaxs
-        })
-        kelembapanMin.push({
-          x: element.time,
-          y: kelembapanMins
-        })
-        tekanan.push({
-          x: element.time,
-          y: element.tekanan
-        })
-         tekananMax.push({
-          x: element.time,
-          y: tekananMaxs
-        })
-        tekananMin.push({
-          x: element.time,
-          y: tekananMins
-        })
-        
-    });
-
-  
-  </script>            
+        let dates = 0
+        const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let formatted_date = "";
+        let newMonitor = JSON.parse(monitoring).sort((a,b)=>{
+          return a.time.localeCompare(b.time);
+        });
+        console.log(newMonitor);
+        let monitor = newMonitor
+        monitor.forEach(element => {
+            dates = new Date(element.date+' '+element.time)
+            suhu.push({
+              x: element.time,
+              y: element.suhu
+            })
+            suhuMax.push({
+              x: element.time,
+              y: suhuMaxs
+            })
+            suhuMin.push({
+              x: element.time,
+              y: suhuMins
+            })
+            kelembapan.push({
+              x: element.time,
+              y: element.kelembapan
+            })
+            kelembapanMax.push({
+              x: element.time,
+              y: kelembapanMaxs
+            })
+            kelembapanMin.push({
+              x: element.time,
+              y: kelembapanMins
+            })
+            tekanan.push({
+              x: element.time,
+              y: element.tekanan
+            })
+             tekananMax.push({
+              x: element.time,
+              y: tekananMaxs
+            })
+            tekananMin.push({
+              x: element.time,
+              y: tekananMins
+            })
+            
+        });
+    </script>            
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['gauge']});
@@ -790,8 +788,6 @@
           x: time,
           y: data.kelembapan
         })
-        
-
         
         chartSuhu.updateSeries([
             {

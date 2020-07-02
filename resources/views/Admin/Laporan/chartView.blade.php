@@ -103,8 +103,18 @@
 
 <div class="row" style="margin-top: 50px;">
     <div class="col-12">
-        <div class="card">
-            <div id="chart"></div>
+        <div class="card" id="suhuAppend">
+            <div id="chartSuhu"></div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card" id="tekananAppend">
+            <div id="chartTekanan"></div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card" id="kelembapanAppend">
+            <div id="chartKelembapan"></div>
         </div>
     </div>
 </div>
@@ -164,15 +174,27 @@
             parameter:$('#parameter').val(),
           },
           dataType:'JSON',
-          success:function(data){
-
-            let monitoring = data
-            let suhuMaxs = '{{ $room->smax }}'
-            let suhuMins = '{{ $room->smin }}'
-            let kelembapanMaxs = '{{ $room->kmax }}'
-            let kelembapanMins = '{{ $room->kmin }}'
-            let tekananMaxs = '{{ $room->tmax }}'
-            let tekananMins = '{{ $room->tmin }}'
+          success:function(response){
+              $('#chartSuhu').remove()
+            $('#suhuAppend').append(`<div id="chartSuhu"></div>`)
+            $('#chartTekanan').remove()
+            $('#tekananAppend').append(`<div id="chartTekanan"></div>`)
+            $('#chartKelembapan').remove()
+            $('#kelembapanAppend').append(`<div id="chartKelembapan"></div>`)
+            let monitoring = response.data
+            let suhuMaxs = response.smax
+            let suhuMins = response.smin
+            let kelembapanMaxs = response.kmax
+            let kelembapanMins = response.kmin
+            let tekananMaxs = response.tmax
+            let tekananMins = response.tmin
+            console.log(suhuMins);
+            console.log(suhuMaxs);
+            console.log(kelembapanMaxs);
+            console.log(kelembapanMins);
+            console.log(tekananMaxs);
+            console.log(tekananMins);
+            
             var optionsSuhu = {
           
               series: [
@@ -359,14 +381,13 @@
             var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
             chartTekanan.render();
 
-            console.log(data);
             suhu = [];
             kelembapan = [];
             tekanan = [];
             let dates = 0
             const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             let formatted_date = "";
-            let newMonitor = JSON.parse(monitoring).sort((a,b)=>{
+            let newMonitor = monitoring.sort((a,b)=>{
               return a.time.localeCompare(b.time);
             });
             console.log(newMonitor);
@@ -410,8 +431,9 @@
                   y: tekananMins
                 })
                 
-            });
+            });        
 
+              
             chartSuhu.updateSeries([
                 {
                     data: suhuMax

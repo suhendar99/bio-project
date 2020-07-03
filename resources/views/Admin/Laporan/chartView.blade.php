@@ -120,21 +120,7 @@
 </div>
 
 <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
-<script>
-   
-      
-    var suhu = []
-    var suhuMax = []
-    var suhuMin = []
-    var kelembapan = []
-    var kelembapanMax = []
-    var kelembapanMin = []
-    var tekanan = []
-    var tekananMax = []
-    var tekananMin = []
 
-    
-</script>  
 <script>
     document.getElementById("myBtn").onclick = function() {
         if($('#awal').val() === ""){
@@ -175,12 +161,21 @@
           },
           dataType:'JSON',
           success:function(response){
-              $('#chartSuhu').remove()
-            $('#suhuAppend').append(`<div id="chartSuhu"></div>`)
+            var suhu = []
+    var suhuMax = []
+    var suhuMin = []
+    var kelembapan = []
+    var kelembapanMax = []
+    var kelembapanMin = []
+    var tekanan = []
+    var tekananMax = []
+    var tekananMin = []
+            $('#chartSuhu').remove()
+            $('#suhuAppend').prepend(`<div id="chartSuhu"></div>`)
             $('#chartTekanan').remove()
-            $('#tekananAppend').append(`<div id="chartTekanan"></div>`)
+            $('#tekananAppend').prepend(`<div id="chartTekanan"></div>`)
             $('#chartKelembapan').remove()
-            $('#kelembapanAppend').append(`<div id="chartKelembapan"></div>`)
+            $('#kelembapanAppend').prepend(`<div id="chartKelembapan"></div>`)
             let monitoring = response.data
             let suhuMaxs = response.smax
             let suhuMins = response.smin
@@ -255,7 +250,9 @@
             };
 
             var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
-            chartSuhu.render();
+            if ($('#parameter').val() == "suhu" || $('#parameter').val() == "allpar") {
+                chartSuhu.render();
+            }
 
             var optionsKelembapan = {
               
@@ -317,7 +314,10 @@
             };
 
             var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
-            chartKelembapan.render();
+            if ($('#parameter').val() == "kelembapan" || $('#parameter').val() == "allpar") {
+                chartKelembapan.render();
+            }
+            
 
             var optionsTekanan = {
               
@@ -379,7 +379,9 @@
             };
 
             var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
-            chartTekanan.render();
+            if ($('#parameter').val() == "tekanan" || $('#parameter').val() == "allpar") {
+                chartTekanan.render();
+            }
 
             suhu = [];
             kelembapan = [];
@@ -390,8 +392,8 @@
             let newMonitor = monitoring.sort((a,b)=>{
               return a.time.localeCompare(b.time);
             });
-            console.log(newMonitor);
             let monitor = newMonitor
+            console.log(newMonitor);
             monitor.forEach(element => {
                 dates = new Date(element.date+' '+element.time)
                 suhu.push({

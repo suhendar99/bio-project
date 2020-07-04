@@ -5,7 +5,7 @@
             @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}
-                </div>                                        
+                </div>
             @endif
             <div class="section-block" id="basicform">
                 <h3 class="section-title">My Profile</h3>
@@ -48,7 +48,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                
+
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                             <a href="/" class="btn btn-primary float-left" >Back</a>
                         </div>
                         <div class="col-2">
-                            <button type="submit" class="btn btn-primary" ><i class="fa fa-edit float-right"></i>Simpan</button>
+                            <button type="submit" class="btn btn-primary float-right" ><i class="fa fa-edit"></i>Simpan</button>
                         </div>
                     </div>
                     </form>

@@ -249,11 +249,8 @@
             colors: ['#ff0000', '#26a0fc' ,'#546E7A']
             };
 
-            var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
-            if ($('#parameter').val() == "suhu" || $('#parameter').val() == "allpar") {
-                chartSuhu.render();
-            }
-
+          
+            
             var optionsKelembapan = {
               
               series: [
@@ -313,11 +310,7 @@
               colors: ['#ff0000', '#26a0fc' ,'#546E7A']
             };
 
-            var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
-            if ($('#parameter').val() == "kelembapan" || $('#parameter').val() == "allpar") {
-                chartKelembapan.render();
-            }
-            
+          
 
             var optionsTekanan = {
               
@@ -378,9 +371,22 @@
               colors: ['#ff0000', '#26a0fc' ,'#546E7A']
             };
 
+            var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
             var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
-            if ($('#parameter').val() == "tekanan" || $('#parameter').val() == "allpar") {
-                chartTekanan.render();
+            var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
+
+            chartSuhu.render();
+            chartKelembapan.render();
+            chartTekanan.render();
+
+            if ($('#parameter').val() == "kelembapan" || $('#parameter').val() == "tekanan") {
+              $('#chartSuhu').addClass('d-none')
+            }
+            if ($('#parameter').val() == "tekanan" || $('#parameter').val() == "suhu") {
+              $('#chartKelembapan').addClass('d-none')
+            }
+            if ($('#parameter').val() == "suhu" || $('#parameter').val() == "kelembapan") {
+              $('#chartTekanan').addClass('d-none')
             }
 
             suhu = [];

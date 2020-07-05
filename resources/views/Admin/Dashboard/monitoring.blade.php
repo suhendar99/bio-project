@@ -5,7 +5,7 @@
     $suhu = \App\Satuan::where('parameter','suhu' )->first();
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();  
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();  
     $gauge = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->first();
 @endphp
 
@@ -337,7 +337,7 @@
         let kelembapanMins = '{{ $room->kmin }}'
         let tekananMaxs = '{{ $room->tmax }}'
         let tekananMins = '{{ $room->tmin }}'
-          
+          console.log(monitoring)
         var suhu = []
         var suhuMax = []
         var suhuMin = []

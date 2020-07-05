@@ -5,6 +5,7 @@
     $suhu = \App\Satuan::where('parameter','suhu' )->first();
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
+    $ruangan = App\Ruangan::where('id', $id)->first();
     $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();  
     $gauge = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->first();
 @endphp
@@ -59,6 +60,7 @@
         <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
             <div class="container">
                 <a class="btn btn-danger rounded" href="{{ route('dashboard') }}"><i class="fas fa-arrow-left"></i> Back</a>
+                <p class="mb-0 ml-5"> {{ $ruangan->nama }} </p>
                 <div class="btn btn-default rounded ml-auto">
                     <i class="fas fa-clock"></i><div id="waktu"></div>
                 </div>

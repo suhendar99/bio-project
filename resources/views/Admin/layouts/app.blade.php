@@ -352,8 +352,8 @@
 
         // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
 
-            
-        // } 
+
+        // }
 
         $.ajaxSetup({
             headers: {
@@ -377,7 +377,7 @@
                 //  console.log(data_monitoring);
                 // //  raw();
                 rew();
-                insert_data(data);
+                // insert_data(data);
             } else {
                 Swal.fire({
                     title: 'No Seri Harus Sesuai',

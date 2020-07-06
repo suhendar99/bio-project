@@ -189,73 +189,9 @@
             console.log(kelembapanMins);
             console.log(tekananMaxs);
             console.log(tekananMins);            
-            if ($('#parameter').val() == "tekanan" || $('#parameter').val() == "allpar") {
-                var optionsTekanan = {
-                  
-                  series: [
-                     {
-                      data  : tekananMax,
-                      name: "Max Value"
-                    },
-                    {
-                        data: tekanan,
-                        name: "Current Value"
-                    },
-                    {
-                      data  : tekananMin,
-                      name: "Min Value"
-                    }
-                  ],
-                  chart: {
-                    id: 'realtime',
-                    height: 350,
-                    type: 'line',
-                    animations: {
-                      enabled: true,
-                      easing: 'linear',
-                      dynamicAnimation: {
-                        speed: 1000
-                      }
-                    },
-                    toolbar: {
-                      show: false
-                    },
-                    zoom: {
-                      enabled: false
-                    }
-                  },
-                  dataLabels: {
-                    enabled: true
-                  },
-                  stroke: {
-                    curve: 'smooth'
-                  },
-                  title: {
-                    text: 'Monitoring Tekanan',
-                    align: 'left'
-                  },
-                  markers: {
-                    size: 0
-                  },
-                  xaxis: {
-                  },
-                  yaxis: {            
-                    max: parseInt(tekananMaxs) + 30,
-                    min: parseInt(tekananMins) - 30,
-                  },
-                  legend: {
-                    show: true
-                  },
-                  colors: ['#ff0000', '#26a0fc' ,'#546E7A']
-                };
-
-                var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
-                chartTekanan.render();
-            }
 
             if ($('#parameter').val() == "suhu" || $('#parameter').val() == "allpar") {
                 var optionsSuhu = {
-              
                   series: [
                     {
                       data  : suhuMax,
@@ -379,8 +315,84 @@
                 var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
                 chartKelembapan.render();
             }
-            
-            
+          
+
+            var optionsTekanan = {
+              
+              series: [
+                 {
+                  data  : tekananMax,
+                  name: "Tekanan Max"
+                },
+                {
+                    data: tekanan,
+                    name: "Tekanan"
+                },
+                {
+                  data  : tekananMin,
+                  name: "Tekanan Min"
+                }
+              ],
+              chart: {
+                id: 'realtime',
+                height: 350,
+                type: 'line',
+                animations: {
+                  enabled: true,
+                  easing: 'linear',
+                  dynamicAnimation: {
+                    speed: 1000
+                  }
+                },
+                toolbar: {
+                  show: false
+                },
+                zoom: {
+                  enabled: false
+                }
+              },
+              dataLabels: {
+                enabled: true
+              },
+              stroke: {
+                curve: 'smooth'
+              },
+              title: {
+                text: 'Monitoring Tekanan',
+                align: 'left'
+              },
+              markers: {
+                size: 0
+              },
+              xaxis: {
+              },
+              yaxis: {            
+                max: parseInt(tekananMaxs) + 30,
+                min: parseInt(tekananMins) - 30,
+              },
+              legend: {
+                show: true
+              },
+              colors: ['#ff0000', '#26a0fc' ,'#546E7A']
+            };
+
+            var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
+            var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
+            var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
+
+            chartSuhu.render();
+            chartKelembapan.render();
+            chartTekanan.render();
+
+            if ($('#parameter').val() == "kelembapan" || $('#parameter').val() == "tekanan") {
+              $('#chartSuhu').addClass('d-none')
+            }
+            if ($('#parameter').val() == "tekanan" || $('#parameter').val() == "suhu") {
+              $('#chartKelembapan').addClass('d-none')
+            }
+            if ($('#parameter').val() == "suhu" || $('#parameter').val() == "kelembapan") {
+              $('#chartTekanan').addClass('d-none')
+            }
 
             suhu = [];
             kelembapan = [];

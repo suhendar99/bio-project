@@ -7,11 +7,11 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/set_kirim_laporan" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a href="/set_kirim_laporan" class="btn btn-primary "><i class="fas fa-arrow-left"></i> Kembali</a>
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
-                        </div>                                        
+                        </div>
                     @endif
                     <form action="/aksi_edit/{{ $setkirim->id }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -29,7 +29,7 @@
                             <select name="status" id="" class="form-control" >
                                 <option value="daily"<?php if($setkirim->waktu_kirim == 'daily'){ echo "selected"; }  ?>>Daily</option>
                                 <option value="weekly"<?php if($setkirim->waktu_kirim == 'weekly'){ echo "selected"; }  ?>>Weekly</option>
-                                
+
                             </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">

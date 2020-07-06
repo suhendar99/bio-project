@@ -14,7 +14,7 @@
                         {{$suhu->parameter}}
                     </div>
                     <div class="col-3" id="suhuRoom">
-                         {{$d->monitoring ? $d->monitoring->suhu:"0"}} 
+                         {{$d->monitoring ? $d->monitoring->suhu:"0"}}
                     </div>
                     <div class="col-2">
                         {{$suhu->satuan}}
@@ -37,14 +37,14 @@
                     </div>
                     <div class="col-3">
                          {{$d->monitoring ? $d->monitoring->tekanan:"0"}}
-                    </div> 
+                    </div>
                     <div class="col-2">
                         {{$tekanan->satuan}}
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center bg-dark">
-                <a href="/room/{{$d->id}}" class="btn btn-primary col-md-9 btn-sm" style="margin-bottom:12px;">
+                <a href="/room/{{$d->id}}" class="btn btn-primary col-md-8 btn-sm" style="margin-bottom:12px;">
                     Monitoring
                 </a>
             </div>

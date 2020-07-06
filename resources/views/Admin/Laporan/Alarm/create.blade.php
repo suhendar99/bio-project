@@ -7,12 +7,12 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <a href="/set_kirim_laporan" class="btn btn-primary col-2"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a href="/set_kirim_laporan" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                     <form action="{{ route('aksi.add.alarm') }}" method="post" enctype="multipart/form-data">
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
-                        </div>                                        
+                        </div>
                     @endif
                         @csrf
                         <div class="form-group">
@@ -36,7 +36,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                        </div>                        
+                        </div>
                         <button type="submit" class="btn btn-primary">Tambah <i class="fas fa-arrow-right"></i></button>
                     </form>
                 </div>

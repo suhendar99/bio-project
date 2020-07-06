@@ -44,7 +44,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputText3" class="col-form-label">Ruangan</label>
-                <select name="ruang" id="ruangan" class="form-control">
+                <select name="ruang" id="ruangan" class="form-control" onchange="render()">
                     @foreach($ruang as $f)
                         <option value="{{ $f->id }}">{{ $f->nama }}</option>
                     @endforeach
@@ -59,7 +59,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputText3" class="col-form-label">Parameter</label>
-                <select name="satuan" id="parameter" class="form-control">
+                <select name="satuan" id="parameter" class="form-control" onchange="render()">
                     <option value="allpar">Semua parameter</option>
                     <option value="suhu">Suhu</option>
                     <option value="kelembapan">Kelembapan</option>
@@ -144,6 +144,7 @@
 
 
     };
+    
     function render() {
         $.ajaxSetup({
             headers: {

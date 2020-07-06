@@ -6,7 +6,7 @@
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
     $ruangan = App\Ruangan::where('id', $id)->first();
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();  
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();
     $gauge = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->first();
 @endphp
 
@@ -18,7 +18,7 @@
 ?>
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -37,14 +37,14 @@
     <title>{{ $app->nama_apps }}</title>
     <link href="{{ asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   
+
 <style>
-  
+
     #chart {
       max-width: 1500px;
       margin: 35px auto;
     }
-  
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -60,7 +60,11 @@
         <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
             <div class="container">
                 <a class="btn btn-danger rounded" href="{{ route('dashboard') }}"><i class="fas fa-arrow-left"></i> Back</a>
-                <p class="mb-0 ml-5"> {{ $ruangan->nama }} </p>
+                <div class="container">
+                    <center>
+                        <h3 class="text-white">{{ $ruangan->nama }}</h3>
+                    </center>
+                </div>
                 <div class="btn btn-default rounded ml-auto">
                     <i class="fas fa-clock"></i><div id="waktu"></div>
                 </div>
@@ -241,9 +245,9 @@
             <div class="card" id="chartKelembapan" style="width: 100%"></div>
         </div>
     </div>
-    
+
 </div>
-    
+
     <!-- ============================================================== -->
     <!-- end navbar -->
     <!-- ============================================================== -->
@@ -267,7 +271,7 @@
     <script src="{{ asset('assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
 	<!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script> -->
-	
+
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         function showTime() {
@@ -292,7 +296,7 @@
 		    detik = checkTime(detik);
 		 document.getElementById('waktu').innerHTML=jam + ":" + menit + ":" + detik + " " + a_p;
 		    }
- 
+
 		function checkTime(i) {
 		    if (i < 10) {
 		        i = "0" + i;
@@ -303,12 +307,12 @@
 
     </script>
     <style>
-      
+
         #chart {
       max-width: 100%;
       margin: 35px auto;
     }
-      
+
     </style>
 
     <script>
@@ -327,9 +331,9 @@
 
     </script>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    
+
 
     <script>
         let monitoring = '@json($monitoring)'
@@ -349,7 +353,7 @@
         var tekanan = []
         var tekananMax = []
         var tekananMin = []
-  
+
         let dates = 0
         const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let formatted_date = "";
@@ -396,9 +400,9 @@
               x: element.time,
               y: tekananMins
             })
-            
+
         });
-    </script>            
+    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['gauge']});
@@ -475,9 +479,9 @@
     </script>
     <script type="text/javascript">
          console.log(suhu);
-        
+
         var optionsSuhu = {
-          
+
           series: [
             {
               data  : suhuMax,
@@ -531,7 +535,7 @@
           },
           legend: {
             show: true
-          },          
+          },
         colors: ['#ff0000', '#26a0fc' ,'#546E7A']
         };
 
@@ -539,7 +543,7 @@
         chartSuhu.render();
 
         var optionsKelembapan = {
-          
+
           series: [
             {
               data  : kelembapanMax,
@@ -587,7 +591,7 @@
           },
           xaxis: {
           },
-          yaxis: {            
+          yaxis: {
             max: parseInt(kelembapanMaxs) + 30,
             min: parseInt(kelembapanMins) - 30,
           },
@@ -601,7 +605,7 @@
         chartKelembapan.render();
 
         var optionsTekanan = {
-          
+
           series: [
              {
               data  : tekananMax,
@@ -649,7 +653,7 @@
           },
           xaxis: {
           },
-          yaxis: {            
+          yaxis: {
             max: parseInt(tekananMaxs) + 30,
             min: parseInt(tekananMins) - 30,
           },
@@ -661,25 +665,25 @@
 
         var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
         chartTekanan.render();
-      
-      
+
+
     //     window.setInterval(function () {
     //     getNewSeries(lastDate, {
     //       min: 10,
     //       max: 90
     //     })
-      
+
     //     chart.updateSeries([{
     //       data: data
     //     }])
     //   }, 1000)
-      let lalstsuhu = suhu 
-      let lastekanan = tekanan 
-      let lastkelembapan = kelembapan 
-      
+      let lalstsuhu = suhu
+      let lastekanan = tekanan
+      let lastkelembapan = kelembapan
+
       $('#suhu').on('change', function(e) {
           if (this.checked) {
-              suhu = lastsuhu                        
+              suhu = lastsuhu
             }else{
                 lastsuhu = suhu
                 suhu = []
@@ -701,7 +705,7 @@
 
       $('#tekanan').on('change', function(e) {
         if (this.checked) {
-            tekanan = lastekanan                        
+            tekanan = lastekanan
         }else{
             lastekanan = tekanan
             tekanan = []
@@ -722,13 +726,13 @@
 
       $('#kelembapan').on('change', function(e) {
         if (this.checked) {
-            kelembapan = lastkelembapan                        
+            kelembapan = lastkelembapan
         }else{
             lastkelembapan = kelembapan
             kelembapan = []
         }
 
-       
+
 
          chart.updateSeries([
             {
@@ -745,11 +749,11 @@
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()
       {
-        // Fetch the MQTT topic from the form        
+        // Fetch the MQTT topic from the form
         console.log('koneksi_berhasil');
         client.subscribe('{{ $topic }}');
       }
-      
+
       function onFailure()
       {
           console.log('KONEKSI_GAGAL!!!!!')
@@ -760,21 +764,21 @@
       }
 
       function onMessageArrived(message) {
-         
+
          var data = JSON.parse(message.payloadString);
         console.log(data);
-        
+
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-        
+
         if (suhu.length > 9) {
             suhu.splice(0,1)
             tekanan.splice(0,1)
-            kelembapan.splice(0,1)        
+            kelembapan.splice(0,1)
         }
 
-        
+
         // lastsuhu.splice(0,1)
 
         if (data.ruangan_id == {{$id}}) {
@@ -790,7 +794,7 @@
           x: time,
           y: data.kelembapan
         })
-        
+
         chartSuhu.updateSeries([
             {
                 data: suhuMax
@@ -815,7 +819,7 @@
             },
         ])
 
-        chartTekanan.updateSeries([           
+        chartTekanan.updateSeries([
             {
                 data: tekananMax
             },
@@ -849,7 +853,7 @@
           ['', 80],
         ]);
 
-        var options2 = {  
+        var options2 = {
           width: 400, height: 120,
           redFrom: 70, redTo: 100,
           yellowFrom: 40, yellowTo: 70,
@@ -897,13 +901,13 @@
               console.log(e);
           }
         }
-          
+
          //console.log('BLOK MQTT');
-       
+
          insert_data(data);
          // console.log(html);
       }
-      
+
       function insert_data(data) {
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -932,11 +936,11 @@
       var clientId = "ws" + Math.random();
       // Create a client instance
       var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 32472, clientId);
-      
+
       // set callback handlers
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
-      
+
       // connect the client
       client.connect({
         useSSL: true,
@@ -948,5 +952,5 @@
     </script>
 
 </body>
- 
+
 </html>

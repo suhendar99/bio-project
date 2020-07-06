@@ -24,3 +24,5 @@ Route::post('/monitoringStore','MonitoringController@store')->name('monitoring.s
 Route::get('/get-data-monitoring','MonitoringController@data')->name('monitoring.data');
 
 Route::get('/getData','MonitoringController@getData');
+
+Route::get('/checkSeri','MonitoringController@checkSeri');

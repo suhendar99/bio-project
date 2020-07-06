@@ -17,10 +17,23 @@ use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Perangkat;
 
 
 class MonitoringController extends Controller
 {
+    public function checkSeri(Request $req)
+    {
+        $data = Perangkat::where('no_seri',$req->no_seri)->first();
+        if ($data === null) {
+           echo "Gagal";
+        } else {
+            $status = 1;
+            return response()->json([
+                'status' => $status
+            ]);
+        }
+    }
     public function getData(Request $req)
     {
         $room = Ruangan::where('id', $req->room)->first();

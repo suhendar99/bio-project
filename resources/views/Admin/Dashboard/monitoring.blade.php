@@ -767,145 +767,170 @@
 
          var data = JSON.parse(message.payloadString);
         console.log(data);
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+          url:'/api/checkSeri',
+          method:'GET',
+          data:{
+            no_seri:data.perangkat_id,
+          },
+          dataType:'JSON',
+          success:function(response){
+            console.log(response.status)
+            if (response.status == 1) {
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+                
+                if (suhu.length > 9) {
+                    suhu.splice(0,1)
+                    tekanan.splice(0,1)
+                    kelembapan.splice(0,1)        
+                }
 
-        var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+                
+                // lastsuhu.splice(0,1)
 
-        if (suhu.length > 9) {
-            suhu.splice(0,1)
-            tekanan.splice(0,1)
-            kelembapan.splice(0,1)
-        }
+                if (data.ruangan_id == {{$id}}) {
+                suhu.push({
+                  x: time,
+                  y: data.suhu
+                })
+                tekanan.push({
+                  x: time,
+                  y: data.tekanan
+                })
+                kelembapan.push({
+                  x: time,
+                  y: data.kelembapan
+                })
+                
+                chartSuhu.updateSeries([
+                    {
+                        data: suhuMax
+                    },
+                    {
+                        data: suhu
+                    },
+                    {
+                        data: suhuMin
+                    },
+                ])
 
+                chartKelembapan.updateSeries([
+                    {
+                        data: kelembapanMax
+                    },
+                    {
+                        data: kelembapan
+                    },
+                    {
+                        data: kelembapanMin
+                    },
+                ])
 
-        // lastsuhu.splice(0,1)
+                chartTekanan.updateSeries([           
+                    {
+                        data: tekananMax
+                    },
+                    {
+                        data: tekanan
+                    },
+                    {
+                        data: tekananMin
+                    },
+                ])
 
-        if (data.ruangan_id == {{$id}}) {
-        suhu.push({
-          x: time,
-          y: data.suhu
-        })
-        tekanan.push({
-          x: time,
-          y: data.tekanan
-        })
-        kelembapan.push({
-          x: time,
-          y: data.kelembapan
-        })
+                var data1 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
 
-        chartSuhu.updateSeries([
-            {
-                data: suhuMax
-            },
-            {
-                data: suhu
-            },
-            {
-                data: suhuMin
-            },
-        ])
+                var options1 = {
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
 
-        chartKelembapan.updateSeries([
-            {
-                data: kelembapanMax
-            },
-            {
-                data: kelembapan
-            },
-            {
-                data: kelembapanMin
-            },
-        ])
+                var data2 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
 
-        chartTekanan.updateSeries([
-            {
-                data: tekananMax
-            },
-            {
-                data: tekanan
-            },
-            {
-                data: tekananMin
-            },
-        ])
+                var options2 = {  
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
 
-        var data1 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 80],
-        ]);
+                var data3 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
 
-        var options1 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-                duration: 1000,
-                easing: 'out',
-            },
-        };
+                var options3 = {
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
 
-        var data2 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 80],
-        ]);
+                var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+                var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+                var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
 
-        var options2 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-                duration: 1000,
-                easing: 'out',
-            },
-        };
+                  try {
+                    data1.setValue(0,1,data.suhu);
+                    chart1.draw(data1, options1)
+                    ;
+                    data2.setValue(0,1,data.kelembapan);
+                    chart2.draw(data2, options2);
 
-        var data3 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 80],
-        ]);
+                    data3.setValue(0,1,data.tekanan);
+                    chart3.draw(data3, options3);
 
-        var options3 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-                duration: 1000,
-                easing: 'out',
-            },
-        };
-
-        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
-        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
-
-          try {
-            data1.setValue(0,1,data.suhu);
-            chart1.draw(data1, options1)
-            ;
-            data2.setValue(0,1,data.kelembapan);
-            chart2.draw(data2, options2);
-
-            data3.setValue(0,1,data.tekanan);
-            chart3.draw(data3, options3);
-
-          } catch(e) {
-              // statements
-              console.log(e);
+                  } catch(e) {
+                      // statements
+                      console.log(e);
+                  }
+                }
+                insert_data(data);
+            } else {
+                Swal.fire({
+                    title: 'No Seri Harus Sesuai',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                })
+            }
+          },
+          error : function(e) {
+            console.log(e)
           }
-        }
+        });
 
-         //console.log('BLOK MQTT');
 
-         insert_data(data);
-         // console.log(html);
       }
 
       function insert_data(data) {

@@ -394,5 +394,6 @@ class MonitoringController extends Controller
     public function cek(Request $request)
     {
         dispatch(new Mqttjob());
+        
     }
 }

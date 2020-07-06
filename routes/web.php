@@ -9,10 +9,10 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+// */
 Route::get('/cek','MonitoringController@cek');
 route::get('/publish/{topic}/{message}','MonitoringController@sendMsgViaMqtt');
-route::get('/subscribe/{topic}','MonitoringController@subscribeToTopic');
+route::post('/subscribe/{topic}','MonitoringController@subscribeToTopic');
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
 	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');

@@ -30,11 +30,6 @@ class Mqttjob implements ShouldQueue
      */
     public function handle()
     {
-        $topic = "qwerty";
-        Mqtt::ConnectAndSubscribe($topic, function($topic, $msg){
-            echo "Msg Received: \n";
-            echo "Topic: {$topic}\n\n";
-            echo "\t$msg\n\n";
-        });
+       
     }
 }

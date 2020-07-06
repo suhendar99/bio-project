@@ -15,7 +15,7 @@ class AppController extends Controller
      */
     public function index()
     {
-        $data = Setapp::first();        
+        $data = Setapp::first();
         return view('Admin.App.set', ['data'=>$data,]);
     }
     public function test()
@@ -86,9 +86,9 @@ class AppController extends Controller
      */
     public function update(Request $req, $id)
     {
-        $v = Validator::make($req->all(), [             
-            'nama_apps'  => 'required|max:10',
-            'overview'   => 'required',       
+        $v = Validator::make($req->all(), [
+            'nama_apps'  => 'required|max:20',
+            'overview'   => 'required',
             'icon'  => 'image|mimes:jpeg,png,jpg|max:1024',
             'tab' => 'required|max:10'
         ]);
@@ -97,7 +97,7 @@ class AppController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
             $data = Setapp::find($id);
-            
+
             $data->update([
                 'nama_apps'  => $req->nama_apps,
                 'overview'   => $req->overview,
@@ -112,7 +112,7 @@ class AppController extends Controller
                 $data->update([
                     'icon' => $icon,
                 ]);
-            }            
+            }
             // dd($data);
             return back()->with('success', 'Profil berhasil di update');
         }

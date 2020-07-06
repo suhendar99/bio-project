@@ -163,14 +163,15 @@
           dataType:'JSON',
           success:function(response){
             var suhu = []
-    var suhuMax = []
-    var suhuMin = []
-    var kelembapan = []
-    var kelembapanMax = []
-    var kelembapanMin = []
-    var tekanan = []
-    var tekananMax = []
-    var tekananMin = []
+
+            var suhuMax = []
+            var suhuMin = []
+            var kelembapan = []
+            var kelembapanMax = []
+            var kelembapanMin = []
+            var tekanan = []
+            var tekananMax = []
+            var tekananMin = []
             $('#chartSuhu').remove()
             $('#suhuAppend').prepend(`<div id="chartSuhu"></div>`)
             $('#chartTekanan').remove()
@@ -482,6 +483,7 @@
           error : function(e) {
             console.log(e)
           }
+
       });
     }
 </script>

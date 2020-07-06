@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Salman\Mqtt\MqttServiceProvider::class,
 
     ],
 
@@ -234,6 +235,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Mqtt' => \Salman\Mqtt\Facades\Mqtt::class,
     ],
 
 ];

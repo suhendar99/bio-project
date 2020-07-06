@@ -9,7 +9,7 @@ class Monitoring extends Model
     protected $table = "monitoring";
     protected $primarykey = "id_monitoring";
     protected $fillable = [
-        'suhu','kelembapan','tekanan','cahaya','alarm','perangkat_id','ruangan_id'
+        'suhu','kelembapan','tekanan','cahaya','alarm','perangkat_id','ruangan_id', 'date', 'time' , 'vvc', 'cvc'
     ];
 
     public function ruangan()

@@ -32,7 +32,7 @@
                             <label for="inputText3" class="col-form-label">frekuensi Pengiriman</label>
                             <select name="status" id="" class="form-control">
                                 <option value="daily">Daily</option>
-                                <option value="weekly">Weekly</option>
+                                {{-- <option value="weekly">Weekly</option> --}}
                             </select>
                             @error('status')
                             <span class="invalid-feedback" role="alert">

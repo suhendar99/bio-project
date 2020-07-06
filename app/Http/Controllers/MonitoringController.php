@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Mqtt;
-
-
+use Mqtt as Broker;
 use Validator;
 use App\Satuan;
 use App\Setapp;
@@ -18,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Perangkat;
+use App\Jobs\Mqttjob;
 
 
 class MonitoringController extends Controller
@@ -37,7 +37,7 @@ class MonitoringController extends Controller
     public function getData(Request $req)
     {
         $room = Ruangan::where('id', $req->room)->first();
-        $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id', $req->room)->limit(10)->latest()->get();        
+        $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id', $req->room)->limit(10)->latest()->get();
         $ruang = Ruangan::where('id', $req->room)->first();
         $smax = $ruang->smax;
         $smin = $ruang->smin;
@@ -369,5 +369,30 @@ class MonitoringController extends Controller
         $satuan = Satuan::findOrFail($id);
         $satuan->delete();
         return redirect()->back();
+    }
+
+    public function sendMsgViaMqtt($topic , $message)
+    {
+        $client_id = Auth::user()->id;
+        $output = Broker::ConnectAndPublish($topic, $message, $client_id);
+
+        if ($output == 'true')
+        {
+            return "published";
+        }
+        return "Failed";
+    }
+
+    public function subscribeToTopic($topic)
+    {
+        Mqtt::ConnectAndSubscribe($topic, function($topic, $msg){
+            echo "Msg Received: \n";
+            echo "Topic: {$topic}\n\n";
+            echo "\t$msg\n\n";
+        });
+    }
+    public function cek(Request $request)
+    {
+        dispatch(new Mqttjob());
     }
 }

@@ -28,7 +28,7 @@
                             <label for="inputText3" class="col-form-label">Frekuensi Pengiriman</label>
                             <select name="status" id="" class="form-control" >
                                 <option value="daily"<?php if($setkirim->waktu_kirim == 'daily'){ echo "selected"; }  ?>>Daily</option>
-                                <option value="weekly"<?php if($setkirim->waktu_kirim == 'weekly'){ echo "selected"; }  ?>>Weekly</option>
+                                
 
                             </select>
                             @error('status')

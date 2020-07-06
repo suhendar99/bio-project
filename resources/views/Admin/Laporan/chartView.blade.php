@@ -44,7 +44,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputText3" class="col-form-label">Ruangan</label>
-                <select name="ruang" id="ruangan" class="form-control" >
+                <select name="ruang" id="ruangan" class="form-control" onchange="render()">
                     @foreach($ruang as $f)
                         <option value="{{ $f->id }}">{{ $f->nama }}</option>
                     @endforeach
@@ -59,7 +59,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputText3" class="col-form-label">Parameter</label>
-                <select name="satuan" id="parameter" class="form-control" onchange="getComboA(this)">
+                <select name="satuan" id="parameter" class="form-control" onchange="render()">
                     <option value="allpar">Semua parameter</option>
                     <option value="suhu">Suhu</option>
                     <option value="kelembapan">Kelembapan</option>
@@ -77,7 +77,7 @@
         <div class="col-6">
             <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
             <span>*) Hanya menampilkan 10 data terakhir</span>
-        </div>
+        </div> 
     </div>
 </form>
 
@@ -138,12 +138,13 @@
                 cancelButtonColor: '#d33',
                })
         } else {
-
+            
             render()
         }
 
 
     };
+    
     function render() {
         $.ajaxSetup({
             headers: {
@@ -162,6 +163,7 @@
           dataType:'JSON',
           success:function(response){
             var suhu = []
+
             var suhuMax = []
             var suhuMin = []
             var kelembapan = []
@@ -189,9 +191,9 @@
             console.log(kelembapanMins);
             console.log(tekananMaxs);
             console.log(tekananMins);
-
+            
             var optionsSuhu = {
-
+          
               series: [
                 {
                   data  : suhuMax,
@@ -245,14 +247,14 @@
               },
               legend: {
                 show: true
-              },
+              },          
             colors: ['#ff0000', '#26a0fc' ,'#546E7A']
             };
 
-
-
+          
+            
             var optionsKelembapan = {
-
+              
               series: [
                 {
                   data  : kelembapanMax,
@@ -300,7 +302,7 @@
               },
               xaxis: {
               },
-              yaxis: {
+              yaxis: {            
                 max: parseInt(kelembapanMaxs) + 30,
                 min: parseInt(kelembapanMins) - 30,
               },
@@ -310,10 +312,10 @@
               colors: ['#ff0000', '#26a0fc' ,'#546E7A']
             };
 
-
+          
 
             var optionsTekanan = {
-
+              
               series: [
                  {
                   data  : tekananMax,
@@ -361,7 +363,7 @@
               },
               xaxis: {
               },
-              yaxis: {
+              yaxis: {            
                 max: parseInt(tekananMaxs) + 30,
                 min: parseInt(tekananMins) - 30,
               },
@@ -438,10 +440,10 @@
                   x: element.time,
                   y: tekananMins
                 })
+                
+            });        
 
-            });
-
-
+              
             chartSuhu.updateSeries([
                 {
                     data: suhuMax
@@ -466,7 +468,7 @@
                 },
             ])
 
-            chartTekanan.updateSeries([
+            chartTekanan.updateSeries([           
                 {
                     data: tekananMax
                 },
@@ -481,364 +483,8 @@
           error : function(e) {
             console.log(e)
           }
+
       });
     }
-    function getComboA(selectObject) {
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-          url:'api/getData',
-          method:'GET',
-          data:{
-            startDate:$('#awal').val(),
-            endDate:$('#akhir').val(),
-            room:$('#ruangan').val(),
-            parameter:$('#parameter').val(),
-          },
-          dataType:'JSON',
-          success:function(response){
-        var suhu = []
-            var suhuMax = []
-            var suhuMin = []
-            var kelembapan = []
-            var kelembapanMax = []
-            var kelembapanMin = []
-            var tekanan = []
-            var tekananMax = []
-            var tekananMin = []
-            $('#chartSuhu').remove()
-            $('#suhuAppend').prepend(`<div id="chartSuhu"></div>`)
-            $('#chartTekanan').remove()
-            $('#tekananAppend').prepend(`<div id="chartTekanan"></div>`)
-            $('#chartKelembapan').remove()
-            $('#kelembapanAppend').prepend(`<div id="chartKelembapan"></div>`)
-            let monitoring = response.data
-            let suhuMaxs = response.smax
-            let suhuMins = response.smin
-            let kelembapanMaxs = response.kmax
-            let kelembapanMins = response.kmin
-            let tekananMaxs = response.tmax
-            let tekananMins = response.tmin
-            console.log(suhuMins);
-            console.log(suhuMaxs);
-            console.log(kelembapanMaxs);
-            console.log(kelembapanMins);
-            console.log(tekananMaxs);
-            console.log(tekananMins);
-
-            var optionsSuhu = {
-
-              series: [
-                {
-                  data  : suhuMax,
-                  name: "Suhu Max"
-                },
-                {
-                    data: suhu,
-                    name: "Suhu"
-                },
-                {
-                  data  : suhuMin,
-                  name: "Suhu Min"
-                }
-              ],
-              chart: {
-                id: 'realtime',
-                height: 350,
-                type: 'line',
-                animations: {
-                  enabled: true,
-                  easing: 'linear',
-                  dynamicAnimation: {
-                    speed: 1000
-                  }
-                },
-                toolbar: {
-                  show: false
-                },
-                zoom: {
-                  enabled: false
-                }
-              },
-              dataLabels: {
-                enabled: true
-              },
-              stroke: {
-                curve: 'smooth'
-              },
-              title: {
-                text: 'Monitoring Suhu',
-                align: 'left'
-              },
-              markers: {
-                size: 0
-              },
-              xaxis: {
-              },
-              yaxis: {
-                max: parseInt(suhuMaxs) + 30,
-                min: parseInt(suhuMins) - 30,
-              },
-              legend: {
-                show: true
-              },
-            colors: ['#ff0000', '#26a0fc' ,'#546E7A']
-            };
-
-
-
-            var optionsKelembapan = {
-
-              series: [
-                {
-                  data  : kelembapanMax,
-                  name: "Kelembapan Max"
-                },
-                {
-                    data: kelembapan,
-                    name: "Kelembapan"
-                },
-                {
-                  data  : kelembapanMin,
-                  name: "Kelembapan Min"
-                }
-              ],
-              chart: {
-                id: 'realtime',
-                height: 350,
-                type: 'line',
-                animations: {
-                  enabled: true,
-                  easing: 'linear',
-                  dynamicAnimation: {
-                    speed: 1000
-                  }
-                },
-                toolbar: {
-                  show: false
-                },
-                zoom: {
-                  enabled: false
-                }
-              },
-              dataLabels: {
-                enabled: true
-              },
-              stroke: {
-                curve: 'smooth'
-              },
-              title: {
-                text: 'Monitoring Kelembapan',
-                align: 'left'
-              },
-              markers: {
-                size: 0
-              },
-              xaxis: {
-              },
-              yaxis: {
-                max: parseInt(kelembapanMaxs) + 30,
-                min: parseInt(kelembapanMins) - 30,
-              },
-              legend: {
-                show: true
-              },
-              colors: ['#ff0000', '#26a0fc' ,'#546E7A']
-            };
-
-
-
-            var optionsTekanan = {
-
-              series: [
-                 {
-                  data  : tekananMax,
-                  name: "Tekanan Max"
-                },
-                {
-                    data: tekanan,
-                    name: "Tekanan"
-                },
-                {
-                  data  : tekananMin,
-                  name: "Tekanan Min"
-                }
-              ],
-              chart: {
-                id: 'realtime',
-                height: 350,
-                type: 'line',
-                animations: {
-                  enabled: true,
-                  easing: 'linear',
-                  dynamicAnimation: {
-                    speed: 1000
-                  }
-                },
-                toolbar: {
-                  show: false
-                },
-                zoom: {
-                  enabled: false
-                }
-              },
-              dataLabels: {
-                enabled: true
-              },
-              stroke: {
-                curve: 'smooth'
-              },
-              title: {
-                text: 'Monitoring Tekanan',
-                align: 'left'
-              },
-              markers: {
-                size: 0
-              },
-              xaxis: {
-              },
-              yaxis: {
-                max: parseInt(tekananMaxs) + 30,
-                min: parseInt(tekananMins) - 30,
-              },
-              legend: {
-                show: true
-              },
-              colors: ['#ff0000', '#26a0fc' ,'#546E7A']
-            };
-
-        var value = selectObject.value;
-        if (value == "allpar") {
-            var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
-            var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
-            var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
-
-            chartSuhu.render();
-            chartKelembapan.render();
-            chartTekanan.render();
-
-            if ($('#parameter').val() == "kelembapan" || $('#parameter').val() == "tekanan") {
-              $('#chartSuhu').addClass('d-none')
-            }
-            if ($('#parameter').val() == "tekanan" || $('#parameter').val() == "suhu") {
-              $('#chartKelembapan').addClass('d-none')
-            }
-            if ($('#parameter').val() == "suhu" || $('#parameter').val() == "kelembapan") {
-              $('#chartTekanan').addClass('d-none')
-            }
-        }else if(value == "suhu"){
-            var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
-            chartSuhu.render();
-            if ($('#parameter').val() == "kelembapan" || $('#parameter').val() == "tekanan") {
-              $('#chartSuhu').addClass('d-none')
-            }
-        }else if(value == "kelembapan"){
-            var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
-            chartKelembapan.render();
-            if ($('#parameter').val() == "tekanan" || $('#parameter').val() == "suhu") {
-              $('#chartKelembapan').addClass('d-none')
-            }
-        }else if(value == "tekanan"){
-            var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
-            chartTekanan.render();
-            if ($('#parameter').val() == "suhu" || $('#parameter').val() == "kelembapan") {
-              $('#chartTekanan').addClass('d-none')
-            }
-        }
-        // console.log(value)
-
-            suhu = [];
-            kelembapan = [];
-            tekanan = [];
-            let dates = 0
-            const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            let formatted_date = "";
-            let newMonitor = monitoring.sort((a,b)=>{
-              return a.time.localeCompare(b.time);
-            });
-            let monitor = newMonitor
-            console.log(newMonitor);
-            monitor.forEach(element => {
-                dates = new Date(element.date+' '+element.time)
-                suhu.push({
-                  x: element.time,
-                  y: element.suhu
-                })
-                suhuMax.push({
-                  x: element.time,
-                  y: suhuMaxs
-                })
-                suhuMin.push({
-                  x: element.time,
-                  y: suhuMins
-                })
-                kelembapan.push({
-                  x: element.time,
-                  y: element.kelembapan
-                })
-                kelembapanMax.push({
-                  x: element.time,
-                  y: kelembapanMaxs
-                })
-                kelembapanMin.push({
-                  x: element.time,
-                  y: kelembapanMins
-                })
-                tekanan.push({
-                  x: element.time,
-                  y: element.tekanan
-                })
-                 tekananMax.push({
-                  x: element.time,
-                  y: tekananMaxs
-                })
-                tekananMin.push({
-                  x: element.time,
-                  y: tekananMins
-                })
-
-            });
-
-
-            chartSuhu.updateSeries([
-                {
-                    data: suhuMax
-                },
-                {
-                    data: suhu
-                },
-                {
-                    data: suhuMin
-                },
-            ])
-
-            chartKelembapan.updateSeries([
-                {
-                    data: kelembapanMax
-                },
-                {
-                    data: kelembapan
-                },
-                {
-                    data: kelembapanMin
-                },
-            ])
-
-            chartTekanan.updateSeries([
-                {
-                    data: tekananMax
-                },
-                {
-                    data: tekanan
-                },
-                {
-                    data: tekananMin
-                },
-            ])
-          }
-    });}
 </script>
 

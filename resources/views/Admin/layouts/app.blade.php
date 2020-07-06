@@ -350,24 +350,47 @@
         // console.log(message.payloadString);
         var data = JSON.parse(message.payloadString + "");
 
-        if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
+        // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
 
-            data.date=date;
-            data.time=time;
-            data_monitoring.unshift(data);
-            data_monitoring.pop();
-            //  console.log(data_monitoring);
-            // //  raw();
-            rew();
-        } else {
-            Swal.fire({
-                title: 'Ruangan Id Harus Sesuai',
-                icon: 'warning',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-               })
-        }
+            
+        // } 
 
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+          url:'api/checkSeri',
+          method:'GET',
+          data:{
+            no_seri:data.perangkat_id,
+          },
+          dataType:'JSON',
+          success:function(response){
+            console.log(response.status)
+            if (response.status == 1) {
+                data.date=date;
+                data.time=time;
+                data_monitoring.unshift(data);
+                data_monitoring.pop();
+                //  console.log(data_monitoring);
+                // //  raw();
+                rew();
+                insert_data(data);
+            } else {
+                Swal.fire({
+                    title: 'No Seri Harus Sesuai',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                })
+            }
+          },
+          error : function(e) {
+            console.log(e)
+          }
+        });
 
 
 
@@ -407,7 +430,7 @@
 
          //console.log('BLOK MQTT');
 
-         insert_data(data);
+         // insert_data(data);
          // console.log(html);
       }
 

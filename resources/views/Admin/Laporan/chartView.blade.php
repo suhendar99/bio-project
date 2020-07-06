@@ -188,129 +188,133 @@
             console.log(kelembapanMaxs);
             console.log(kelembapanMins);
             console.log(tekananMaxs);
-            console.log(tekananMins);
+            console.log(tekananMins);            
 
-            var optionsSuhu = {
+            if ($('#parameter').val() == "suhu" || $('#parameter').val() == "allpar") {
+                var optionsSuhu = {
+                  series: [
+                    {
+                      data  : suhuMax,
+                      name: "Max Value"
+                    },
+                    {
+                        data: suhu,
+                        name: "Current Value"
+                    },
+                    {
+                      data  : suhuMin,
+                      name: "Min Value"
+                    }
+                  ],
+                  chart: {
+                    id: 'realtime',
+                    height: 350,
+                    type: 'line',
+                    animations: {
+                      enabled: true,
+                      easing: 'linear',
+                      dynamicAnimation: {
+                        speed: 1000
+                      }
+                    },
+                    toolbar: {
+                      show: false
+                    },
+                    zoom: {
+                      enabled: false
+                    }
+                  },
+                  dataLabels: {
+                    enabled: true
+                  },
+                  stroke: {
+                    curve: 'smooth'
+                  },
+                  title: {
+                    text: 'Monitoring Suhu',
+                    align: 'left'
+                  },
+                  markers: {
+                    size: 0
+                  },
+                  xaxis: {
+                  },
+                  yaxis: {
+                    max: parseInt(suhuMaxs) + 30,
+                    min: parseInt(suhuMins) - 30,
+                  },
+                  legend: {
+                    show: true
+                  },          
+                colors: ['#ff0000', '#26a0fc' ,'#546E7A']
+                };
+                var chartSuhu = new ApexCharts(document.querySelector("#chartSuhu"), optionsSuhu);
+                chartSuhu.render();
+            }
 
-              series: [
-                {
-                  data  : suhuMax,
-                  name: "Suhu Max"
-                },
-                {
-                    data: suhu,
-                    name: "Suhu"
-                },
-                {
-                  data  : suhuMin,
-                  name: "Suhu Min"
-                }
-              ],
-              chart: {
-                id: 'realtime',
-                height: 350,
-                type: 'line',
-                animations: {
-                  enabled: true,
-                  easing: 'linear',
-                  dynamicAnimation: {
-                    speed: 1000
-                  }
-                },
-                toolbar: {
-                  show: false
-                },
-                zoom: {
-                  enabled: false
-                }
-              },
-              dataLabels: {
-                enabled: true
-              },
-              stroke: {
-                curve: 'smooth'
-              },
-              title: {
-                text: 'Monitoring Suhu',
-                align: 'left'
-              },
-              markers: {
-                size: 0
-              },
-              xaxis: {
-              },
-              yaxis: {
-                max: parseInt(suhuMaxs) + 30,
-                min: parseInt(suhuMins) - 30,
-              },
-              legend: {
-                show: true
-              },
-            colors: ['#ff0000', '#26a0fc' ,'#546E7A']
-            };
+            if ($('#parameter').val() == "kelembapan" || $('#parameter').val() == "allpar") {
+                var optionsKelembapan = {
+                  
+                  series: [
+                    {
+                      data  : kelembapanMax,
+                      name: "Max Value"
+                    },
+                    {
+                        data: kelembapan,
+                        name: "Current Value"
+                    },
+                    {
+                      data  : kelembapanMin,
+                      name: "Min Value"
+                    }
+                  ],
+                  chart: {
+                    id: 'realtime',
+                    height: 350,
+                    type: 'line',
+                    animations: {
+                      enabled: true,
+                      easing: 'linear',
+                      dynamicAnimation: {
+                        speed: 1000
+                      }
+                    },
+                    toolbar: {
+                      show: false
+                    },
+                    zoom: {
+                      enabled: false
+                    }
+                  },
+                  dataLabels: {
+                    enabled: true
+                  },
+                  stroke: {
+                    curve: 'smooth'
+                  },
+                  title: {
+                    text: 'Monitoring Kelembapan',
+                    align: 'left'
+                  },
+                  markers: {
+                    size: 0
+                  },
+                  xaxis: {
+                  },
+                  yaxis: {            
+                    max: parseInt(kelembapanMaxs) + 30,
+                    min: parseInt(kelembapanMins) - 30,
+                  },
+                  legend: {
+                    show: true
+                  },
+                  colors: ['#ff0000', '#26a0fc' ,'#546E7A']
+                };
 
-
-
-            var optionsKelembapan = {
-
-              series: [
-                {
-                  data  : kelembapanMax,
-                  name: "Kelembapan Max"
-                },
-                {
-                    data: kelembapan,
-                    name: "Kelembapan"
-                },
-                {
-                  data  : kelembapanMin,
-                  name: "Kelembapan Min"
-                }
-              ],
-              chart: {
-                id: 'realtime',
-                height: 350,
-                type: 'line',
-                animations: {
-                  enabled: true,
-                  easing: 'linear',
-                  dynamicAnimation: {
-                    speed: 1000
-                  }
-                },
-                toolbar: {
-                  show: false
-                },
-                zoom: {
-                  enabled: false
-                }
-              },
-              dataLabels: {
-                enabled: true
-              },
-              stroke: {
-                curve: 'smooth'
-              },
-              title: {
-                text: 'Monitoring Kelembapan',
-                align: 'left'
-              },
-              markers: {
-                size: 0
-              },
-              xaxis: {
-              },
-              yaxis: {
-                max: parseInt(kelembapanMaxs) + 30,
-                min: parseInt(kelembapanMins) - 30,
-              },
-              legend: {
-                show: true
-              },
-              colors: ['#ff0000', '#26a0fc' ,'#546E7A']
-            };
-
-
+                var chartKelembapan = new ApexCharts(document.querySelector("#chartKelembapan"), optionsKelembapan);
+                chartKelembapan.render();
+            }
 
             var optionsTekanan = {
 

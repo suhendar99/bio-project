@@ -267,9 +267,9 @@ class MonitoringController extends Controller
             $awal = date("Y-m-d");
             $akhir = date("Y-m-d");
             
-            $text = "A new contact us query\n"
-            . "<b>Email Address: </b>\n"
-            . "test@mail.com\n"
+            $text = "Alert!!!\n"
+            . "<b>Somethings wrong is hapening</b>\n"
+            . "Check the monitoring\n"
             . "<b>Message: </b>\n"
             . "Hello there";
 
@@ -281,11 +281,11 @@ class MonitoringController extends Controller
                 'text' => $text
             ]);
 
-               Telegram::sendDocument([
-            'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
-             'document' => InputFile::create('report/sample.pdf'),
-             'caption' => 'This is a document',
-        ]);
+        //        Telegram::sendDocument([
+        //     'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+        //      'document' => InputFile::create('report/sample.pdf'),
+        //      'caption' => 'This is a document',
+        // ]);
 
             
 

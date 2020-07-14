@@ -44,7 +44,7 @@
         <!-- navbar -->
         <!-- ============================================================== -->
         <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <nav class="navbar navbar-expand-md bg-white fixed-top">
                 <a class="navbar-brand" style="text-transform:none;" href="#">{{ $app->nama_apps }}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"><i class="fas fa-user"></i></span>
@@ -57,7 +57,7 @@
                                 <i class="fa fa-user"></i>
                             @else
                                 <img src="{{asset('foto/'.Auth::user()->foto)}}" alt="placeholder+image" style="width: 40px;">
-                            @endif 
+                            @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
@@ -97,14 +97,14 @@
                                 <a class="nav-link {{ Request::is('/') ? 'active' : false }}" href="{{ route('dashboard') }}"  aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link 
+                                <a class="nav-link
                                 {{ Request::is('operator*') ? 'active' : false }}
                                 {{ Request::is('dataper*') ? 'active' : false }}
                                 {{ Request::is('data_ruang*') ? 'active' : false }}
                                 {{ Request::is('data_satuan*') ? 'active' : false }}
-                                " 
+                                "
                                 href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-user"></i>Data Master</a>
-                                <div id="submenu-2" class="collapse submenu 
+                                <div id="submenu-2" class="collapse submenu
                                 {{ Request::is('operator*') ? 'show' : false }}
                                 {{ Request::is('dataper*') ? 'show' : false }}
                                 {{ Request::is('data_ruang*') ? 'show' : false }}
@@ -208,15 +208,17 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
-                <div class="container-fluid">
-                    <div class="row" style="margin-left:250px;">
+        <div class="row">
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2018 Makerindo. All rights reserved
+                             Copyright © 2020 Makerindo. All rights reserved
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         <!-- ============================================================== -->
         <!-- end footer -->
         <!-- ============================================================== -->
@@ -276,16 +278,16 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
-    
+
 <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
 <script type="text/javascript">
     var data_monitoring = [1];
-    
+
     const on = "ON";
     const off = "OFF";
-    
+
     const rew =()=>{
         var html='';
             data_monitoring.forEach((row) => {
@@ -298,31 +300,31 @@
                 <td>${row.kelembapan}</td>
                 <td>${row.tekanan}</td>
                 <td>${row.cvc}</td>
-                <td>${row.vvc}</td>                
+                <td>${row.vvc}</td>
                 <td id="alertff">${row.alarm}</td>
             </tr>`;
-        }); 
+        });
         $('#monitoring tbody').html(html);
-        
+
         alp();
     }
 
     const alp = ()=>{
         const alrm = document.querySelectorAll("#alertff");
-        
+
         alrm.forEach(r =>{
             if(r.innerHTML == 1){
                 r.innerHTML = on;
             }else{
                 r.innerHTML = off;
-            }   
+            }
         })
     }
 
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()
       {
-        // Fetch the MQTT topic from the form        
+        // Fetch the MQTT topic from the form
         console.log('koneksi_berhasil');
         client.subscribe('{{ $topic }}');
         // rew();
@@ -330,47 +332,67 @@
       function onFailure(xhr)
       {
           console.log(xhr);
-          
+
           console.log('KONEKSI_GAGAL!!!!!')
       }
       function onConnectionLost(responseObject) {
           console.log(responseObject)
       }
-      
-      function onMessageArrived(message) {
-        
-        // var today = new Date();
-        // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        // var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 
-        // console.log(message.payloadString);         
+      function onMessageArrived(message) {
+
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         // var date = today.getFullYear()+'-'+("0" + today.getMonth()).slice(-2)+'-'+today.getDate();
         console.log(date);
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+
+        // console.log(message.payloadString);
         var data = JSON.parse(message.payloadString + "");
 
-        if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
-            
-            data.date=date;
-            data.time=time;
-            data_monitoring.unshift(data);
-            data_monitoring.pop();
-            //  console.log(data_monitoring);
-            // //  raw();
-            rew();
-        } else {
-            Swal.fire({
-                title: 'Ruangan Id Harus Sesuai',
-                icon: 'warning',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-               })
-        }
+        // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
 
 
-         
+        // }
+
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+          url:'api/checkSeri',
+          method:'GET',
+          data:{
+            no_seri:data.perangkat_id,
+          },
+          dataType:'JSON',
+          success:function(response){
+            console.log(response.status)
+            if (response.status == 1) {
+                data.date=date;
+                data.time=time;
+                data_monitoring.unshift(data);
+                data_monitoring.pop();
+                //  console.log(data_monitoring);
+                // //  raw();
+                rew();
+                // insert_data(data);
+            } else {
+                Swal.fire({
+                    title: 'No Seri Harus Sesuai',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                })
+            }
+          },
+          error : function(e) {
+            console.log(e)
+          }
+        });
+
+
 
 
         // // var raw = '<tr id="'+data.id+'">';
@@ -387,7 +409,7 @@
 
         // var over = data.suhu;
         // $('#suhuRoom').text(over);
-          
+
         // if (data.alarm == 1 ) {
         //     var alarm = '<div class="cd-timeline__block js-cd-block">' ;
         //     alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
@@ -404,16 +426,16 @@
         // } else {
 
         // }
-        
-          
+
+
          //console.log('BLOK MQTT');
-       
-         insert_data(data);
+
+         // insert_data(data);
          // console.log(html);
       }
-      
+
       function insert_data(data) {
-        
+
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
@@ -442,11 +464,11 @@
       var clientId = "ws" + Math.random();
       // Create a client instance
       var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 32472, clientId);
-      
+
       // set callback handlers
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
-      
+
       // connect the client
       client.connect({
         useSSL: true,
@@ -458,5 +480,5 @@
 </script>
 @stack('script')
 </body>
- 
+
 </html>

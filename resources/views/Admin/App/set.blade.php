@@ -5,7 +5,7 @@
             @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}
-                </div>                                        
+                </div>
             @endif
             <div class="section-block" id="basicform">
                 <h3 class="section-title">Pengaturan Aplikasi</h3>
@@ -37,7 +37,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                
+
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                
+
                             </div>
                         </div>
                     </div>

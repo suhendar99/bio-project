@@ -5,7 +5,8 @@
     $suhu = \App\Satuan::where('parameter','suhu' )->first();
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->whereDate('date',now())->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();  
+    $ruangan = App\Ruangan::where('id', $id)->first();
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();
     $gauge = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->first();
 @endphp
 
@@ -17,7 +18,7 @@
 ?>
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -36,14 +37,14 @@
     <title>{{ $app->nama_apps }}</title>
     <link href="{{ asset('apex/assets/samples/styles.css') }}" rel="stylesheet" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   
+
 <style>
-  
+
     #chart {
       max-width: 1500px;
       margin: 35px auto;
     }
-  
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -59,6 +60,11 @@
         <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
             <div class="container">
                 <a class="btn btn-danger rounded" href="{{ route('dashboard') }}"><i class="fas fa-arrow-left"></i> Back</a>
+                <div class="container">
+                    <center>
+                        <h3 class="text-white">{{ $ruangan->nama }}</h3>
+                    </center>
+                </div>
                 <div class="btn btn-default rounded ml-auto">
                     <i class="fas fa-clock"></i><div id="waktu"></div>
                 </div>
@@ -239,9 +245,9 @@
             <div class="card" id="chartKelembapan" style="width: 100%"></div>
         </div>
     </div>
-    
+
 </div>
-    
+
     <!-- ============================================================== -->
     <!-- end navbar -->
     <!-- ============================================================== -->
@@ -265,7 +271,7 @@
     <script src="{{ asset('assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
 	<!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script> -->
-	
+
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         function showTime() {
@@ -290,7 +296,7 @@
 		    detik = checkTime(detik);
 		 document.getElementById('waktu').innerHTML=jam + ":" + menit + ":" + detik + " " + a_p;
 		    }
- 
+
 		function checkTime(i) {
 		    if (i < 10) {
 		        i = "0" + i;
@@ -301,12 +307,12 @@
 
     </script>
     <style>
-      
+
         #chart {
       max-width: 100%;
       margin: 35px auto;
     }
-      
+
     </style>
 
     <script>
@@ -325,9 +331,9 @@
 
     </script>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    
+
 
     <script>
         let monitoring = '@json($monitoring)'
@@ -337,68 +343,66 @@
         let kelembapanMins = '{{ $room->kmin }}'
         let tekananMaxs = '{{ $room->tmax }}'
         let tekananMins = '{{ $room->tmin }}'
-          
-  var suhu = []
-  var suhuMax = []
-  var suhuMin = []
-  var kelembapan = []
-  var kelembapanMax = []
-  var kelembapanMin = []
-  var tekanan = []
-  var tekananMax = []
-  var tekananMin = []
-  
-    let dates = 0
-    const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let formatted_date = "";
-    let newMonitor = JSON.parse(monitoring).sort((a,b)=>{
-      return a.time.localeCompare(b.time);
-    });
-    console.log(newMonitor);
-    let monitor = newMonitor
-    monitor.forEach(element => {
-        dates = new Date(element.date+' '+element.time)
-        suhu.push({
-          x: element.time,
-          y: element.suhu
-        })
-        suhuMax.push({
-          x: element.time,
-          y: suhuMaxs
-        })
-        suhuMin.push({
-          x: element.time,
-          y: suhuMins
-        })
-        kelembapan.push({
-          x: element.time,
-          y: element.kelembapan
-        })
-        kelembapanMax.push({
-          x: element.time,
-          y: kelembapanMaxs
-        })
-        kelembapanMin.push({
-          x: element.time,
-          y: kelembapanMins
-        })
-        tekanan.push({
-          x: element.time,
-          y: element.tekanan
-        })
-         tekananMax.push({
-          x: element.time,
-          y: tekananMaxs
-        })
-        tekananMin.push({
-          x: element.time,
-          y: tekananMins
-        })
-        
-    });
+          console.log(monitoring)
+        var suhu = []
+        var suhuMax = []
+        var suhuMin = []
+        var kelembapan = []
+        var kelembapanMax = []
+        var kelembapanMin = []
+        var tekanan = []
+        var tekananMax = []
+        var tekananMin = []
 
-  
-  </script>            
+        let dates = 0
+        const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let formatted_date = "";
+        let newMonitor = JSON.parse(monitoring).sort((a,b)=>{
+          return a.time.localeCompare(b.time);
+        });
+        console.log(newMonitor);
+        let monitor = newMonitor
+        monitor.forEach(element => {
+            dates = new Date(element.date+' '+element.time)
+            suhu.push({
+              x: element.time,
+              y: element.suhu
+            })
+            suhuMax.push({
+              x: element.time,
+              y: suhuMaxs
+            })
+            suhuMin.push({
+              x: element.time,
+              y: suhuMins
+            })
+            kelembapan.push({
+              x: element.time,
+              y: element.kelembapan
+            })
+            kelembapanMax.push({
+              x: element.time,
+              y: kelembapanMaxs
+            })
+            kelembapanMin.push({
+              x: element.time,
+              y: kelembapanMins
+            })
+            tekanan.push({
+              x: element.time,
+              y: element.tekanan
+            })
+             tekananMax.push({
+              x: element.time,
+              y: tekananMaxs
+            })
+            tekananMin.push({
+              x: element.time,
+              y: tekananMins
+            })
+
+        });
+    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['gauge']});
@@ -475,9 +479,9 @@
     </script>
     <script type="text/javascript">
          console.log(suhu);
-        
+
         var optionsSuhu = {
-          
+
           series: [
             {
               data  : suhuMax,
@@ -531,7 +535,7 @@
           },
           legend: {
             show: true
-          },          
+          },
         colors: ['#ff0000', '#26a0fc' ,'#546E7A']
         };
 
@@ -539,7 +543,7 @@
         chartSuhu.render();
 
         var optionsKelembapan = {
-          
+
           series: [
             {
               data  : kelembapanMax,
@@ -587,7 +591,7 @@
           },
           xaxis: {
           },
-          yaxis: {            
+          yaxis: {
             max: parseInt(kelembapanMaxs) + 30,
             min: parseInt(kelembapanMins) - 30,
           },
@@ -601,7 +605,7 @@
         chartKelembapan.render();
 
         var optionsTekanan = {
-          
+
           series: [
              {
               data  : tekananMax,
@@ -649,7 +653,7 @@
           },
           xaxis: {
           },
-          yaxis: {            
+          yaxis: {
             max: parseInt(tekananMaxs) + 30,
             min: parseInt(tekananMins) - 30,
           },
@@ -661,25 +665,25 @@
 
         var chartTekanan = new ApexCharts(document.querySelector("#chartTekanan"), optionsTekanan);
         chartTekanan.render();
-      
-      
+
+
     //     window.setInterval(function () {
     //     getNewSeries(lastDate, {
     //       min: 10,
     //       max: 90
     //     })
-      
+
     //     chart.updateSeries([{
     //       data: data
     //     }])
     //   }, 1000)
-      let lalstsuhu = suhu 
-      let lastekanan = tekanan 
-      let lastkelembapan = kelembapan 
-      
+      let lalstsuhu = suhu
+      let lastekanan = tekanan
+      let lastkelembapan = kelembapan
+
       $('#suhu').on('change', function(e) {
           if (this.checked) {
-              suhu = lastsuhu                        
+              suhu = lastsuhu
             }else{
                 lastsuhu = suhu
                 suhu = []
@@ -701,7 +705,7 @@
 
       $('#tekanan').on('change', function(e) {
         if (this.checked) {
-            tekanan = lastekanan                        
+            tekanan = lastekanan
         }else{
             lastekanan = tekanan
             tekanan = []
@@ -722,13 +726,13 @@
 
       $('#kelembapan').on('change', function(e) {
         if (this.checked) {
-            kelembapan = lastkelembapan                        
+            kelembapan = lastkelembapan
         }else{
             lastkelembapan = kelembapan
             kelembapan = []
         }
 
-       
+
 
          chart.updateSeries([
             {
@@ -745,11 +749,11 @@
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()
       {
-        // Fetch the MQTT topic from the form        
+        // Fetch the MQTT topic from the form
         console.log('koneksi_berhasil');
         client.subscribe('{{ $topic }}');
       }
-      
+
       function onFailure()
       {
           console.log('KONEKSI_GAGAL!!!!!')
@@ -760,152 +764,175 @@
       }
 
       function onMessageArrived(message) {
-         
+
          var data = JSON.parse(message.payloadString);
         console.log(data);
-        
-        var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-        
-        if (suhu.length > 9) {
-            suhu.splice(0,1)
-            tekanan.splice(0,1)
-            kelembapan.splice(0,1)        
-        }
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+          url:'/api/checkSeri',
+          method:'GET',
+          data:{
+            no_seri:data.perangkat_id,
+          },
+          dataType:'JSON',
+          success:function(response){
+            console.log(response.status)
+            if (response.status == 1) {
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+                
+                if (suhu.length > 9) {
+                    suhu.splice(0,1)
+                    tekanan.splice(0,1)
+                    kelembapan.splice(0,1)        
+                }
 
-        
-        // lastsuhu.splice(0,1)
+                
+                // lastsuhu.splice(0,1)
 
-        if (data.ruangan_id == {{$id}}) {
-        suhu.push({
-          x: time,
-          y: data.suhu
-        })
-        tekanan.push({
-          x: time,
-          y: data.tekanan
-        })
-        kelembapan.push({
-          x: time,
-          y: data.kelembapan
-        })
-        
+                if (data.ruangan_id == {{$id}}) {
+                suhu.push({
+                  x: time,
+                  y: data.suhu
+                })
+                tekanan.push({
+                  x: time,
+                  y: data.tekanan
+                })
+                kelembapan.push({
+                  x: time,
+                  y: data.kelembapan
+                })
+                
+                chartSuhu.updateSeries([
+                    {
+                        data: suhuMax
+                    },
+                    {
+                        data: suhu
+                    },
+                    {
+                        data: suhuMin
+                    },
+                ])
 
-        
-        chartSuhu.updateSeries([
-            {
-                data: suhuMax
-            },
-            {
-                data: suhu
-            },
-            {
-                data: suhuMin
-            },
-        ])
+                chartKelembapan.updateSeries([
+                    {
+                        data: kelembapanMax
+                    },
+                    {
+                        data: kelembapan
+                    },
+                    {
+                        data: kelembapanMin
+                    },
+                ])
 
-        chartKelembapan.updateSeries([
-            {
-                data: kelembapanMax
-            },
-            {
-                data: kelembapan
-            },
-            {
-                data: kelembapanMin
-            },
-        ])
+                chartTekanan.updateSeries([           
+                    {
+                        data: tekananMax
+                    },
+                    {
+                        data: tekanan
+                    },
+                    {
+                        data: tekananMin
+                    },
+                ])
 
-        chartTekanan.updateSeries([           
-            {
-                data: tekananMax
-            },
-            {
-                data: tekanan
-            },
-            {
-                data: tekananMin
-            },
-        ])
+                var data1 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
 
-        var data1 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 80],
-        ]);
+                var options1 = {
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
 
-        var options1 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-                duration: 1000,
-                easing: 'out',
-            },
-        };
+                var data2 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
 
-        var data2 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 80],
-        ]);
+                var options2 = {  
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
 
-        var options2 = {  
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-                duration: 1000,
-                easing: 'out',
-            },
-        };
+                var data3 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
 
-        var data3 = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['', 80],
-        ]);
+                var options3 = {
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
 
-        var options3 = {
-          width: 400, height: 120,
-          redFrom: 70, redTo: 100,
-          yellowFrom: 40, yellowTo: 70,
-          greenFrom: 0, greenTo: 40,
-          minorTicks: 5,
-          animation:{
-                duration: 1000,
-                easing: 'out',
-            },
-        };
+                var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+                var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+                var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
 
-        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
-        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+                  try {
+                    data1.setValue(0,1,data.suhu);
+                    chart1.draw(data1, options1)
+                    ;
+                    data2.setValue(0,1,data.kelembapan);
+                    chart2.draw(data2, options2);
 
-          try {
-            data1.setValue(0,1,data.suhu);
-            chart1.draw(data1, options1)
-            ;
-            data2.setValue(0,1,data.kelembapan);
-            chart2.draw(data2, options2);
+                    data3.setValue(0,1,data.tekanan);
+                    chart3.draw(data3, options3);
 
-            data3.setValue(0,1,data.tekanan);
-            chart3.draw(data3, options3);
-
-          } catch(e) {
-              // statements
-              console.log(e);
+                  } catch(e) {
+                      // statements
+                      console.log(e);
+                  }
+                }
+                insert_data(data);
+            } else {
+                Swal.fire({
+                    title: 'No Seri Harus Sesuai',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                })
+            }
+          },
+          error : function(e) {
+            console.log(e)
           }
-        }
-          
-         //console.log('BLOK MQTT');
-       
-         insert_data(data);
-         // console.log(html);
+        });
+
+
       }
-      
+
       function insert_data(data) {
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -934,11 +961,11 @@
       var clientId = "ws" + Math.random();
       // Create a client instance
       var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 32472, clientId);
-      
+
       // set callback handlers
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
-      
+
       // connect the client
       client.connect({
         useSSL: true,
@@ -950,5 +977,5 @@
     </script>
 
 </body>
- 
+
 </html>

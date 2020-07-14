@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mqtt;
+
 use PDF;
 
 
+use Mqtt as Broker;
 use Validator;
 use App\Satuan;
 use App\Setapp;
@@ -20,18 +22,81 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use App\Perangkat;
+use App\Jobs\Mqttjob;
 
 
 class MonitoringController extends Controller
 {
+    public function checkSeri(Request $req)
+    {
+        $data = Perangkat::where('no_seri',$req->no_seri)->first();
+        if ($data === null) {
+           echo "Gagal";
+        } else {
+            $status = 1;
+            return response()->json([
+                'status' => $status
+            ]);
+        }
+    }
     public function getData(Request $req)
     {
-        if ($req->room == "all") {
-            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
-        } else {
-            $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
-        }
+        $room = Ruangan::where('id', $req->room)->first();
+        $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id', $req->room)->limit(10)->latest()->get();
+        $ruang = Ruangan::where('id', $req->room)->first();
+        $smax = $ruang->smax;
+        $smin = $ruang->smin;
 
+        $kmax = $ruang->kmax;
+        $kmin = $ruang->kmin;
+
+        $tmax = $ruang->tmax;
+        $tmin = $ruang->tmin;
+
+          return response()->json([
+              'smax' => $smax,
+              'smin' => $smin,
+              'kmax' => $kmax,
+              'kmin' => $kmin,
+              'tmax' => $tmax,
+              'tmin' => $tmin,
+              'data' => $data,
+          ]);
+
+        // if ($req->room == "all") {
+        //     if($req->parameter == "allpar"){
+        //         $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
+        //         return response()->json($data);
+        //     } elseif($req->parameter != "allpar"){
+        //         if ($req->parameter == "suhu") {
+        //             $parameter = $req->parameter;
+        //         } elseif($req->parameter == "kelembapan"){
+        //             $parameter = $req->parameter;
+        //         } elseif($req->parameter == "tekanan"){
+        //             $parameter = $req->parameter;
+        //         }
+        //         return response()->json($data);
+
+        //     }
+        // } elseif($req->room != "all") {
+        //     if($req->parameter == "allpar"){
+        //         $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+        //         return response()->json($data);
+
+        //     } elseif($req->parameter != "allpar"){
+        //         if ($req->parameter == "suhu") {
+        //             $data = Monitoring::select('suhu')->whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+        //         } elseif ($req->parameter == "kelembapan"){
+        //             $data = Monitoring::select('kelembapan')->whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+        //         } elseif ($req->parameter == "tekanan"){
+        //             $data = Monitoring::select('tekanan')->whereBetween('date',[$req->startDate, $req->endDate])->where('ruangan_id',$req->room)->limit(10)->latest()->get();
+        //         }
+        //         // dd($data);
+        //         return response()->json($data);
+
+        //     }
+        // }
 
         // if ($req->room == "all") {
         //     $data = Monitoring::whereBetween('date',[$req->startDate, $req->endDate])->limit(10)->latest()->get();
@@ -44,10 +109,8 @@ class MonitoringController extends Controller
         // return response()->json([
         //     'response'=>$data
         // ]);
-        $data = Monitoring::where('ruangan_id',$req->ruangan)->limit(20)->get();
+        // $data = Monitoring::where('ruangan_id',$req->ruangan)->limit(20)->get();
         // dd($data);
-        return response()->json($data);
-
 
     }
     public function index()
@@ -340,5 +403,31 @@ class MonitoringController extends Controller
         $satuan = Satuan::findOrFail($id);
         $satuan->delete();
         return redirect()->back();
+    }
+
+    public function sendMsgViaMqtt($topic , $message)
+    {
+        $client_id = Auth::user()->id;
+        $output = Broker::ConnectAndPublish($topic, $message, $client_id);
+
+        if ($output == 'true')
+        {
+            return "published";
+        }
+        return "Failed";
+    }
+
+    public function subscribeToTopic($topic)
+    {
+        Mqtt::ConnectAndSubscribe($topic, function($topic, $msg){
+            echo "Msg Received: \n";
+            echo "Topic: {$topic}\n\n";
+            echo "\t$msg\n\n";
+        });
+    }
+    public function cek(Request $request)
+    {
+        dispatch(new Mqttjob());
+        
     }
 }

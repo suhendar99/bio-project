@@ -6,7 +6,9 @@ use Illuminate\Console\Command;
 use App\Mqtt;
 use PDF;
  
- 
+use Telegram\Bot\Laravel\Facades\Telegram;
+use Telegram\Bot\FileUpload\InputFile;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Satuan;
 use App\Setapp;
@@ -75,21 +77,21 @@ class everyMinute extends Command
                 }
             }
 
-            if ($po->status_kirim == "Weekly") {
-                if ($date <= 7) {
-                    $end = date("Y-m");
-                    $awal = $end."-".$rose;
-                    $akhir = date("Y-m-d");
-                } else {
-                    $end = date("Y-m");
-                    $first = date("d")-7 ;
-                    $awal = $end."-".$first;
-                    $akhir = date("Y-m-d");
-                }
-            } else {
-                $awal = date("Y-m-d");
-                $akhir = date("Y-m-d");
-            }
+            // if ($po->status_kirim == "Weekly") {
+            //     if ($date <= 7) {
+            //         $end = date("Y-m");
+            //         $awal = $end."-".$rose;
+            //         $akhir = date("Y-m-d");
+            //     } else {
+            //         $end = date("Y-m");
+            //         $first = date("d")-7 ;
+            //         $awal = $end."-".$first;
+            //         $akhir = date("Y-m-d");
+            //     }
+            // } else {
+            $awal = date("Y-m-d");
+            $akhir = date("Y-m-d");
+            // }
             
             
             $data = Monitoring::whereBetween('date',[$awal, $akhir])->latest()->get();
@@ -103,7 +105,25 @@ class everyMinute extends Command
             $pdf = PDF::loadview('Admin.Laporan.email_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'email' => $po->Operator->email, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 
             try{
+                // 
                 Mail::to($po->Operator->email)->send(new VerifyMail($data, $pdf));
+
+                $store = $pdf->download()->getOriginalContent();
+
+                $namePDF = time().'_file.pdf';
+
+                Storage::disk('public')->put($namePDF, $store);
+                //  Telegram::sendMessage([
+                //     'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+                //     'parse_mode' => 'HTML',
+                //     'text' => $text
+                // ]);
+
+                Telegram::sendDocument([
+                    'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+                     'document' => InputFile::create(public_path().'/report/'.$namePDF),
+                     'caption' => 'This is a document',
+                ]);
             }catch(JWTException $exception){
                 $this->serverstatuscode = "0";
                 $this->serverstatusdes = $exception->getMessage();

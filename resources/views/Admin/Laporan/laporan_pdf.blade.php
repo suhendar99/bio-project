@@ -9,7 +9,7 @@
 	$kavg = $data->avg('kelembapan');
 
 	$tmax = $data->max('tekanan');
-	$tmin = $data->min('tekanan'); 
+	$tmin = $data->min('tekanan');
 	$tavg = $data->avg('tekanan');
 
 	$date = date("d M Y");
@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Laporan Monitoring</title>	
+	<title>Laporan Monitoring</title>
 	<style>
 		#customers {
 		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -54,7 +54,7 @@
 		table, th, tr, td {
 			border: 1px black;
 			text-align: center;
-		} 
+		}
 		#header,
 		#footer {
 		  position: fixed;
@@ -77,10 +77,10 @@
 	</style>
 </head>
 <body>
-	<img src="{{$set->icon}}" style="float: left;" width="50px" height="50px">  
+	<img src="{{$set->icon}}" style="float: left;" width="50px" height="50px">
 	<h3 style=" margin-top: 30px; margin-right:20px;">
 		{{$set->header_img}}
-	</h3> 
+	</h3>
 
 	<div class="container">
 	<style type="text/css">
@@ -238,14 +238,14 @@
 
 	const rero = ()=>{
         const alrm = document.querySelectorAll("#alertff");
-    	const on = "ON";    
-    	const off = "OFF";    
+    	const on = "ON";
+    	const off = "OFF";
         alrm.forEach(r =>{
             if(r.innerHTML == 1){
                 r.innerHTML = on;
             }else{
                 r.innerHTML = off;
-            }   
+            }
         })
     }
     console.log('hai');

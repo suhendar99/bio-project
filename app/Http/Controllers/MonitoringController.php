@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Mqtt;
+
+use PDF;
+
+
 use Mqtt as Broker;
 use Validator;
 use App\Satuan;
@@ -16,6 +21,8 @@ use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Telegram\Bot\Laravel\Facades\Telegram;
+use Telegram\Bot\FileUpload\InputFile;
 use App\Perangkat;
 use App\Jobs\Mqttjob;
 
@@ -249,12 +256,40 @@ class MonitoringController extends Controller
             $log->save();
         }
 
+            
+
         // dd($data->alarm);
         if ($data->alarm == 1) {
             foreach ($toMail as $send) {
                 Mail::to(Operator::where('id', $send->id_operator)->first())->send(new sendEmail($send->custom_teks));
             }
 
+            $awal = date("Y-m-d");
+            $akhir = date("Y-m-d");
+            
+            $text = "A new contact us query\n"
+            . "<b>Email Address: </b>\n"
+            . "test@mail.com\n"
+            . "<b>Message: </b>\n"
+            . "Hello there";
+
+        
+
+             Telegram::sendMessage([
+                'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+                'parse_mode' => 'HTML',
+                'text' => $text
+            ]);
+
+               Telegram::sendDocument([
+            'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+             'document' => InputFile::create('report/sample.pdf'),
+             'caption' => 'This is a document',
+        ]);
+
+            
+
+            
             // dd($send);
 
         }

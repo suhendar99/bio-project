@@ -32,7 +32,7 @@ class TelegramBotController extends Controller
         
          Telegram::sendDocument([
             'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
-             'document' => InputFile::create('report/sample.pdf'),
+             'document' => InputFile::create('report/file.pdf'),
              'caption' => 'This is a document',
         ]);
         

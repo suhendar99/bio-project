@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Mqtt;
 
 class mqttcommand extends Command
 {
@@ -37,7 +38,9 @@ class mqttcommand extends Command
      */
     public function handle()
     {
-        $topic = "qwerty";
+        $mqtt = Mqtt::find(1);
+
+        $topic = $mqtt->topic;
         subscribe_mqtt($topic);
     }
 }

@@ -37,7 +37,7 @@ class mqttcommand extends Command
      */
     public function handle()
     {
-        $topic = "qwerty";
+        $topic = "biofarma1";
         subscribe_mqtt($topic);
     }
 }

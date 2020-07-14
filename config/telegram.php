@@ -34,7 +34,7 @@ return [
     'bots'                         => [
         'mybot' => [
             'username'            => 'biofarma_bot',
-            'token'               => env('TELEGRAM_BOT_TOKEN', ''),
+            'token'               => '1230497616:AAH7t8vvIOzY3t5SNAZsLIGAJxSijpqDvmI',
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', ''),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', ''),
             'commands'            => [

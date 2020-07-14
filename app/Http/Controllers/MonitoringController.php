@@ -256,7 +256,7 @@ class MonitoringController extends Controller
             $log->save();
         }
 
-            
+
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
@@ -266,14 +266,12 @@ class MonitoringController extends Controller
 
             $awal = date("Y-m-d");
             $akhir = date("Y-m-d");
-            
-            $text = "A new contact us query\n"
-            . "<b>Email Address: </b>\n"
-            . "test@mail.com\n"
-            . "<b>Message: </b>\n"
-            . "Hello there";
 
-        
+            $text = "Alert!!!\n"
+            . "<b>Message: </b>\n"
+            . "Somethings wrong";
+
+
 
              Telegram::sendMessage([
                 'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
@@ -281,15 +279,15 @@ class MonitoringController extends Controller
                 'text' => $text
             ]);
 
-               Telegram::sendDocument([
-            'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
-             'document' => InputFile::create('report/sample.pdf'),
-             'caption' => 'This is a document',
-        ]);
+            //    Telegram::sendDocument([
+            // 'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+            //  'document' => InputFile::create('report/sample.pdf'),
+            //  'caption' => 'This is a document',
+        // ]);
 
-            
 
-            
+
+
             // dd($send);
 
         }
@@ -429,6 +427,6 @@ class MonitoringController extends Controller
     public function cek(Request $request)
     {
         dispatch(new Mqttjob());
-        
+
     }
 }

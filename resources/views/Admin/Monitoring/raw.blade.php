@@ -24,8 +24,8 @@
                                 <th>Perangkat</th>
                                 <th>Ruangan</th>
                                 <th>Suhu</th>
-                                <th>Tekanan</th>
                                 <th>Kelembapan</th>
+                                <th>Tekanan</th>
                                 <th>CVC</th>
                                 <th>VVC</th>
                                 <th>Alarm</th>

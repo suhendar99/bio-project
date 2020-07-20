@@ -256,7 +256,7 @@ class MonitoringController extends Controller
             $log->save();
         }
 
-            
+
 
         // dd($data->alarm);
         if ($data->alarm == 1) {
@@ -269,11 +269,10 @@ class MonitoringController extends Controller
             
             $text = "Alert!!!\n"
             . "<b>Somethings wrong is hapening</b>\n"
-            . "Check the monitoring\n"
             . "<b>Message: </b>\n"
-            . "Hello there";
+            . "Somethings wrong";
 
-        
+
 
              Telegram::sendMessage([
                 'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
@@ -287,9 +286,8 @@ class MonitoringController extends Controller
         //      'caption' => 'This is a document',
         // ]);
 
-            
 
-            
+
             // dd($send);
 
         }
@@ -429,6 +427,6 @@ class MonitoringController extends Controller
     public function cek(Request $request)
     {
         dispatch(new Mqttjob());
-        
+
     }
 }

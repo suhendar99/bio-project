@@ -15,9 +15,11 @@
             <div class="card">
                 <div class="card-body">
                     @if(Auth::user()->level == "Admin")
-                    <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i> Tambah Data 
-                    </a>
+                    <div class="form-group">
+                        <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> Tambah Data 
+                        </a>
+                    </div>
                     @endif
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">

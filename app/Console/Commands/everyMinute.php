@@ -77,25 +77,10 @@ class everyMinute extends Command
                 }
             }
 
-            // if ($po->status_kirim == "Weekly") {
-            //     if ($date <= 7) {
-            //         $end = date("Y-m");
-            //         $awal = $end."-".$rose;
-            //         $akhir = date("Y-m-d");
-            //     } else {
-            //         $end = date("Y-m");
-            //         $first = date("d")-7 ;
-            //         $awal = $end."-".$first;
-            //         $akhir = date("Y-m-d");
-            //     }
-            // } else {
             $awal = date("Y-m-d");
             $akhir = date("Y-m-d");
-            // }
-            
             
             $data = Monitoring::whereBetween('date',[$awal, $akhir])->latest()->get();
-                // dd($data);
             $pos = 'Ruangan';
             $pp = "kosong";
             $sumber = "Semua Ruangan dan Parameter";
@@ -106,8 +91,8 @@ class everyMinute extends Command
 
             try{
                 // 
-                Mail::to($po->Operator->email)->send(new VerifyMail($data, $pdf));
-
+                Mail::to(Operator::where('id', $po->id_operator)->first())->send(new VerifyMail($data, $pdf));
+                echo $po->id_operator."\n";
                 $store = $pdf->download()->getOriginalContent();
 
                 $namePDF = time().'_file.pdf';

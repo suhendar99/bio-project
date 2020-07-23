@@ -77,7 +77,9 @@ class OperatorController extends Controller
             // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
+            // Delete foto
             $operator = Operator::find($id);
+            File::delete('foto/'.$operator->foto);
 
             $operator->update([
                 'name' => $req->nama,

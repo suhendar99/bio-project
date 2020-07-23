@@ -7,6 +7,7 @@ use App\KirimAlarm;
 use App\Operator;
 use App\Mail\sendEmail;
 use App\Mail\VerifyMail;
+use App\Mqtt;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Telegram\Bot\FileUpload\InputFile;
 use Illuminate\Support\Facades\Mail;
@@ -34,7 +35,7 @@ if (!function_exists('subscribe_mqtt') ){
                 'date' => date('Y-m-d')
             ]);
 
-            
+
             if ($datamsg->alarm == 1) {
                 $toMail = KirimAlarm::all();
                 foreach ($toMail as $send) {
@@ -43,7 +44,7 @@ if (!function_exists('subscribe_mqtt') ){
                 }
                 // $awal = date("Y-m-d");
                 // $akhir = date("Y-m-d");
-                
+
                 // $set = Laporan::find(1)->first();
                 // $data = Monitoring::whereBetween('date',[$awal, $akhir])->latest()->get();
                 //     // dd($data);
@@ -57,13 +58,13 @@ if (!function_exists('subscribe_mqtt') ){
 
                 // $awal = date("Y-m-d");
                 // $akhir = date("Y-m-d");
-                
+
                 $text = "Alert!!!\n"
             . "<b>Somethings wrong is hapening</b>\n"
             . "<b>Message: </b>\n"
             . "Somethings wrong";
 
-            
+
                 // $store = $pdf->download()->getOriginalContent();
 
 

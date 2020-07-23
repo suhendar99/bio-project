@@ -67,7 +67,6 @@
                     <!-- end basic table  -->
                     <!-- ============================================================== -->
                 </div>
-            </div>
             <form action="" id="formDelete" method="POST">
                 @csrf
                 @method('DELETE')

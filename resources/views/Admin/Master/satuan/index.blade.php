@@ -20,7 +20,7 @@
         <!-- basic table  -->
         <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card">                            
+            <div class="card">
                 <div class="card-body">
                     {{-- @if(Auth::user()->level == "Admin")
                     <a class="btn btn-primary" href="{{route('satuan.creates')}}">Tambah Data</a>
@@ -62,7 +62,6 @@
         <!-- end basic table  -->
         <!-- ============================================================== -->
     </div>
-</div>
 
 <form action="" id="formDelete" method="POST">
     @csrf

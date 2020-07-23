@@ -15,12 +15,12 @@ if (!function_exists('subscribe_mqtt') ){
     function subscribe_mqtt($topic)
     {
         \Mqtt::ConnectAndSubscribe($topic, function($topic, $msg){
-            
+
             echo "Msg Received: \n";
             echo "Topic: {$topic}\n\n";
             echo "\t$msg\n\n";
             $datamsg = json_decode($msg);
-            
+
             Monitoring::create([
                 'suhu' => $datamsg->suhu,
                 'kelembapan' => $datamsg->kelembapan,
@@ -65,6 +65,7 @@ if (!function_exists('subscribe_mqtt') ){
 
             
                 // $store = $pdf->download()->getOriginalContent();
+
 
                 // $namePDF = time().'_file.pdf';
 

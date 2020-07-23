@@ -110,7 +110,8 @@ class RuanganController extends Controller
 
             if($request->hasfile('foto'))
             {                
-                $name = rand(). '.' . $request->foto->getClientOriginalExtension();           
+                $name = rand(). '.' . $request->foto->getClientOriginalExtension();
+                File::delete($ruangan->foto);
                 $request->foto->move(public_path("foto/ruangan"), $name);                                       
                 $foto = 'foto/ruangan/'.$name;
                 if(is_writable(public_path($ruangan->foto))) {                    

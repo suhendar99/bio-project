@@ -10,9 +10,11 @@
                     <a href="/operator" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                     <form action="{{ route('tambah.op') }}" method="post" enctype="multipart/form-data">
                     @if (session()->has('success'))
+                    <div class="form-group">
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
-                        </div>                                        
+                        </div>           
+                    </div>                             
                     @endif
                         @csrf
                         <div class="form-group">

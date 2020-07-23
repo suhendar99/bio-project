@@ -12,7 +12,6 @@ class sendEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
-    public $foto;
 
     /**
      * Create a new message instance.
@@ -31,7 +30,7 @@ class sendEmail extends Mailable
      */
     public function build()
     {
-       return $this->from('biofarma@mail.com')
+       return $this
        ->view('Admin.Email.alertemail')
        ->with(
         [

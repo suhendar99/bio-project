@@ -9,9 +9,11 @@
                 <div class="card-body">
                     <a href="/operator" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
                     @if (session()->has('success'))
+                    <div class="form-group">
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
-                        </div>                                        
+                        </div>              
+                    </div>                          
                     @endif
                     <form action="/op_edit/{{ $operator->id }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}

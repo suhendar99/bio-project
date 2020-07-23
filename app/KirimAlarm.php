@@ -14,6 +14,6 @@ class KirimAlarm extends Model
 
     public function operator()
     {
-        return $this->belongsTo('App\Operator','id_operator','id');
+        return $this->belongsTo('App\Operator','id_operator');
     }
 }

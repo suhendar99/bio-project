@@ -8,6 +8,7 @@ use App\Perangkat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class OperatorController extends Controller
 {
@@ -64,43 +65,61 @@ class OperatorController extends Controller
 
     public function update(Request $req, $id)
     {
-        $v = Validator::make($req->all(), [
-            'nama' => 'required|',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'nik' => 'required|numeric|unique:users,nik,'.$id,
-            'password' => 'required|min:6',
-            'hp' => 'required|',
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
+        if ($req->file('foto')) {
+            $v = Validator::make($req->all(), [
+                'nama' => 'required|',
+                'email' => 'required|email|unique:users,email,'.$id,
+                'nik' => 'required|numeric|unique:users,nik,'.$id,
+                'password' => 'required|min:6',
+                'hp' => 'required|',
+                'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
+        } else {
+            $v = Validator::make($req->all(), [
+                'nama' => 'required|',
+                'email' => 'required|email|unique:users,email,'.$id,
+                'nik' => 'required|numeric|unique:users,nik,'.$id,
+                'password' => 'required|min:6',
+                'hp' => 'required|',
+            ]);
+        }
+        
+        
 
         if ($v->fails()) {
             // dd($v->errors()->all());
             return back()->withErrors($v)->withInput();
         }else {
-            // Delete foto
-            $operator = Operator::find($id);
-            File::delete('foto/'.$operator->foto);
+            if($req->file('foto')){
+                // Delete foto
+                $operator = Operator::find($id);
+                File::delete('foto/'.$operator->foto);
 
-            $operator->update([
-                'name' => $req->nama,
-                'email' => $req->email,
-                'password' => Hash::make($req->password),
-                'nik' => $req->nik,
-                'no_hp'=> $req->hp,
-            ]);
+                $foto = $req->file('foto');
 
-            if($req->hasfile('foto'))
-            {
-                $img = rand(). '.' . $req->foto->getClientOriginalExtension();
-                $req->foto->move(public_path("foto"), $img);
-                $foto = 'foto'.$img;
-                if(is_writable(public_path($operator->foto))) {
-                    unlink(public_path($operator->foto));
-                }
-                $foto = 'foto'.$img;
+                $nama_foto = 'IMG-'.time().'-'.$req->foto->getClientOriginalName();
+                $req->foto->move(public_path("foto"), $nama_foto);
 
                 $operator->update([
-                    'foto' => $foto,
+                    'name' => $req->nama,
+                    'email' => $req->email,
+                    'password' => Hash::make($req->password),
+                    'nik' => $req->nik,
+                    'no_hp'=> $req->hp,
+                    'foto' => $nama_foto,
+                ]);
+
+
+                // if(is_writable(public_path($operator->foto))) {
+                //     unlink(public_path($operator->foto));
+                // }
+            }else{
+                $operator->update([
+                    'name' => $req->nama,
+                    'email' => $req->email,
+                    'password' => Hash::make($req->password),
+                    'nik' => $req->nik,
+                    'no_hp'=> $req->hp,
                 ]);
             }
 
@@ -116,6 +135,7 @@ class OperatorController extends Controller
     public function delete($id)
     {
         $data = Operator::findOrFail($id);
+        File::delete('foto/'.$data->foto);
         $data->delete();
         return redirect()->back();
     }

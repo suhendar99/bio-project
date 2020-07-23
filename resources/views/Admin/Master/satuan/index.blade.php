@@ -5,12 +5,6 @@
             <div class="page-header">
                 <h2 class="pageheader-title">Data Satuan</h2>
                 <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Satuan</li>
-                        </ol>
-                    </nav>
                 </div>
             </div>
         </div>

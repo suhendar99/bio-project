@@ -10,14 +10,14 @@
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
-                        </div>                                        
+                        </div>
                     @endif
                     <form action="/set_mqtt_update/{{ $mqtt->id }}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">URL Broker</label>
-                            <input id="inputText3" type="text" class="form-control @error('broker') is-invalid @enderror" placeholder="URL Broker" name="broker" value="{{ $mqtt->url_broker }}">
+                            <input id="inputText3" type="text" class="form-control @error('broker') is-invalid @enderror" placeholder="URL Broker" name="broker" value="{{ $mqtt->url_broker }}" readonly>
                             @error('broker')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Username</label>
-                            <input id="inputText3" type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Usename" name="username" value="{{ $mqtt->username }}">
+                            <input id="inputText3" type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Usename" name="username" value="{{ $mqtt->username }}" readonly>
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Password</label>
-                            <input id="inputText3" type="text" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ $mqtt->password }}">
+                            <input id="inputText3" type="text" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ $mqtt->password }}" readonly>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="col-form-label">QOS</label>
-                            <select name="qos" id="" class="form-control">
+                            <select name="qos" id="" class="form-control" disabled>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Keep Alive</label>
-                            <input id="inputText3" type="text" class="form-control @error('alive') is-invalid @enderror" placeholder="Keep Alive" name="alive" value="{{ $mqtt->keep_alive }}">
+                            <input id="inputText3" type="text" class="form-control @error('alive') is-invalid @enderror" placeholder="Keep Alive" name="alive" value="{{ $mqtt->keep_alive }}" readonly>
                             <span>*Satuan Detik </span>
                             @error('alive')
                                 <span class="invalid-feedback" role="alert">

@@ -17,7 +17,7 @@
                     @if(Auth::user()->level == "Admin")
                     <div class="form-group">
                         <a href="{{ route('tambah.data.op') }}" class="btn btn-primary">
-                            <i class="fas fa-user-plus"></i> Tambah Data 
+                             Tambah Operator
                         </a>
                     </div>
                     @endif
@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-    
+
     <form action="" id="formDelete" method="POST">
         @csrf
         @method('DELETE')
@@ -126,5 +126,5 @@
                 }
             })
         }
-        </script>            
+        </script>
 @endsection

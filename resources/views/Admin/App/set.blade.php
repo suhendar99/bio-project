@@ -89,7 +89,7 @@
                         </div>
                     </div>
                         <a href="/" class="btn btn-primary float-left">Back</a>
-                        <button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i>Edit Profile</button>
+                        <button type="submit" class="btn btn-primary float-right">Edit Profile</button>
                     </form>
                 </div>
             </div>

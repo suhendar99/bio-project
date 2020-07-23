@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
-use Mqtt;
+// use Mqtt;
 use App\Monitoring;
 use App\Laporan;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -10,12 +10,12 @@ if (!function_exists('subscribe_mqtt') ){
     function subscribe_mqtt($topic)
     {
         \Mqtt::ConnectAndSubscribe($topic, function($topic, $msg){
-            
+
             echo "Msg Received: \n";
             echo "Topic: {$topic}\n\n";
             echo "\t$msg\n\n";
             $datamsg = json_decode($msg);
-            
+
             Monitoring::create([
                 'suhu' => $datamsg->suhu,
                 'kelembapan' => $datamsg->kelembapan,
@@ -28,14 +28,14 @@ if (!function_exists('subscribe_mqtt') ){
                 'time' => date('H:i:s'),
                 'date' => date('Y-m-d')
             ]);
-            
+
             if ($datamsg->alarm == 1) {
                 // foreach ($toMail as $send) {
                 //     Mail::to(Operator::where('id', $send->id_operator)->first())->send(new sendEmail($send->custom_teks));
                 // }
                 $awal = date("Y-m-d");
                 $akhir = date("Y-m-d");
-                
+
                 $set = Laporan::find(1)->first();
                 $data = Monitoring::whereBetween('date',[$awal, $akhir])->latest()->get();
                     // dd($data);
@@ -49,14 +49,14 @@ if (!function_exists('subscribe_mqtt') ){
 
                 // $awal = date("Y-m-d");
                 // $akhir = date("Y-m-d");
-                
+
                 // $text = "A new contact us query\n"
                 // . "<b>Email Address: </b>\n"
                 // . "test@mail.com\n"
                 // . "<b>Message: </b>\n"
                 // . "Hello there";
 
-            
+
                 $store = $pdf->download()->getOriginalContent();
 
                 $namePDF = time().'_file.pdf';

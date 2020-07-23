@@ -9,7 +9,7 @@
 return [
 
     'host'     => env('mqtt_host','m15.cloudmqtt.com'),
-    'password' => env('mqtt_password','vzbr4DnPz1Af'),
+    'password' => env('mqtt_password','SMXz9EyJcRmB'),
     'username' => env('mqtt_username','aqeiblzz'),
     'certfile' => env('mqtt_cert_file',''),
     'port'     => env('mqtt_port','12472'),

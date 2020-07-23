@@ -207,8 +207,6 @@
                     @yield('content')
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="footer">
                 <div class="container">
                     <div class="row">
@@ -320,55 +318,6 @@
             }
         })
     }
-
-    function minMax()
-    {
-        const smin = document.querySelector("#suhuMin");
-        const smax = document.querySelector("#suhuMax");
-        const kmin = document.querySelector("#keMin");
-        const kmax = document.querySelector("#keMax");
-        const tmin = document.querySelector("#teMin");
-        const tmax = document.querySelector("#teMax");
-
-        smin.max = parseInt(smax.value) - 1;
-        kmin.max = parseInt(kmax.value) - 1;
-        tmin.max = parseInt(tmax.value) - 1;
-
-        smax.addEventListener('keyup', function(a){
-            smin.max = a.target.value;
-        });
-
-        smin.addEventListener('keyup', function(a){
-            if (a.target.valueAsNumber >= smax.value) {
-                console.log(a);
-                a.target.valueAsNumber = parseInt(smax.value) - 1;
-            }
-        });
-
-        kmax.addEventListener('keyup', function(a){
-            kmin.max = a.target.value;
-        });
-
-        kmin.addEventListener('keyup', function(a){
-            if (a.target.valueAsNumber >= kmax.value) {
-                console.log(a);
-                a.target.valueAsNumber = parseInt(kmax.value) - 1;
-            }
-        });
-
-        tmax.addEventListener('keyup', function(a){
-            tmin.max = a.target.value;
-        });
-
-        tmin.addEventListener('keyup', function(a){
-            if (a.target.valueAsNumber >= tmax.value) {
-                console.log(a);
-                a.target.valueAsNumber = parseInt(tmax.value) - 1;
-            }
-        });
-    }
-
-    minMax();
 
       //area ini untuk topic yang ada di broker mqtt
       function onConnect()

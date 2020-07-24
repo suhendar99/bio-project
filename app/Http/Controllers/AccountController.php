@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 use App\Operator;
 use Auth;
 use Validator;
@@ -36,24 +37,30 @@ class AccountController extends Controller
             return back()->withErrors($v)->withInput();
         }else {
             $data = Operator::find($id);
-            
-            $data->update([
-                'name' 	=> $req->name,
-                'nik' 	=> $req->nik,
-                'no_hp'	=> $req->no_hp,
-                'level' => $req->level,
-                'email'	=> $req->email,
-            ]);
 
-            if($req->hasfile('foto'))
-            {
+            if ($req->file('foto')) {
+                File::delete('foto/'.$data->foto);
+
                 $foto = 'IMG-'.time().'-'.$req->foto->getClientOriginalName();
-        		$req->foto->move(public_path('foto'),$foto);
+                $req->foto->move(public_path('foto'),$foto);
 
                 $data->update([
+                    'name'  => $req->name,
+                    'nik'   => $req->nik,
+                    'no_hp' => $req->no_hp,
+                    'level' => $req->level,
+                    'email' => $req->email,
                     'foto' => $foto,
                 ]);
-            }            
+            } else {
+                $data->update([
+                    'name'  => $req->name,
+                    'nik'   => $req->nik,
+                    'no_hp' => $req->no_hp,
+                    'level' => $req->level,
+                    'email' => $req->email,
+                ]);
+            }   
             // dd($data);
             return back()->with('success', 'Profil berhasil di update');
         }
@@ -78,13 +85,13 @@ class AccountController extends Controller
             $data = Operator::find($id);
             
             $data->update([
-                'name' 	=> $req->name,
-                'nik' 	=> $req->nik,
-                'no_hp'	=> $req->no_hp,
-                'level' => $req->level,
-                'email'	=> $req->email,
+                // 'name' 	=> $req->name,
+                // 'nik' 	=> $req->nik,
+                // 'no_hp'	=> $req->no_hp,
+                // 'level' => $req->level,
+                // 'email'	=> $req->email,
                 'password' => Hash::make($req->password),
-                'foto' => $req->foto,
+                // 'foto' => $req->foto,
             ]);
             // dd($data);
             return back()->with('success', 'Profil berhasil di update');

@@ -176,7 +176,7 @@
 					<td id="alertff">OFF</td>
 				@endif
 				<td>{{$p->ruangan->nama}}</td>
-				{{-- <td>{{$p->perangkat->no_seri}}</td> --}}
+				<td>{{$p->perangkat->no_seri}}</td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -228,7 +228,7 @@
 
 	<div style="float: right;">
 		{{$set->footer}},  {{$date}}<br>
-		{{ $email }}
+		{{ $name }}
 	</div>
 	<div id="footer">
 	  <div class="page-number"></div>

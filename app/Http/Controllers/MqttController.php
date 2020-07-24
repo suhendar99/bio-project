@@ -28,12 +28,12 @@ class MqttController extends Controller
     public function update(Request $req, $id)
     {
         $v = Validator::make($req->all(), [
-            'broker' => 'required|url',
-            'username' => 'required|',
-            'password' => 'required|',
+            // 'broker' => 'required|url',
+            // 'username' => 'required|',
+            // 'password' => 'required|',
             'topic' => 'required|',
-            'qos' => 'required|',
-            'alive' => 'required|numeric'
+            // 'qos' => 'required|',
+            // 'alive' => 'required|numeric'
 
         ]);
         if ($v->fails()) {
@@ -43,12 +43,12 @@ class MqttController extends Controller
             $mqtt = Mqtt::find($id);
             
             $mqtt->update([
-                'url_broker' => $req->broker,
-                'username' => $req->username,
-                'password' => $req->password,
+                // 'url_broker' => $req->broker,
+                // 'username' => $req->username,
+                // 'password' => $req->password,
                 'topic' => $req->topic,
-                'qos' => $req->qos, 
-                'keep_alive' => $req->alive,
+                // 'qos' => $req->qos, 
+                // 'keep_alive' => $req->alive,
             ]);
         }
         return redirect()->back()->with('success','Data Di Update');

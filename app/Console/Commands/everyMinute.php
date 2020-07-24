@@ -87,7 +87,7 @@ class everyMinute extends Command
 
             $pdf = app('dompdf.wrapper');
             $pdf->getDomPDF()->set_option("enable_php", true);
-            $pdf = PDF::loadview('Admin.Laporan.email_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'email' => $po->Operator->email, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+            $pdf = PDF::loadview('Admin.Laporan.email_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'name' => $po->operator->name, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 
             try{
                 // 
@@ -107,7 +107,8 @@ class everyMinute extends Command
                 Telegram::sendDocument([
                     'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
                      'document' => InputFile::create(public_path().'/report/'.$namePDF),
-                     'caption' => 'This is a document',
+                     'caption' => 'Document, '.$po->operator->name."\n"
+                     .$po->operator->email."\n",
                 ]);
             }catch(JWTException $exception){
                 $this->serverstatuscode = "0";

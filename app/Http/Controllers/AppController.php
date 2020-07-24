@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Setapp;
+use Illuminate\Support\Facades\File;
 
 class AppController extends Controller
 {
@@ -98,19 +99,26 @@ class AppController extends Controller
         }else {
             $data = Setapp::find($id);
 
-            $data->update([
-                'nama_apps'  => $req->nama_apps,
-                'overview'   => $req->overview,
-                'tab' => $req->tab
-            ]);
 
-            if($req->hasfile('icon'))
-            {
+            if ($req->file('icon')) {
+                // Delete Icon
+                File::delete('foto/app/'.$data->icon);
+
+                // Upload Icon
                 $icon = 'IMG-'.time().'-'.$req->icon->getClientOriginalName();
                 $req->icon->move(public_path('foto/app'),$icon);
 
                 $data->update([
+                    'nama_apps'  => $req->nama_apps,
+                    'overview'   => $req->overview,
+                    'tab' => $req->tab,
                     'icon' => $icon,
+                ]);
+            } else {
+                $data->update([
+                    'nama_apps'  => $req->nama_apps,
+                    'overview'   => $req->overview,
+                    'tab' => $req->tab
                 ]);
             }
             // dd($data);

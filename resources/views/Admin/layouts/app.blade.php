@@ -29,8 +29,11 @@
     <script src="{{ asset('concept/assets/vendor/jquery/jquery-3.3.1.min.js') }}"></script>
     <style>
         .dashboard-wrapper {
-    min-height: none !important;
-}
+            min-height: 0px !important;
+        }
+        .fixed-bottom {
+            z-index: -1 !important;
+        }
     </style>
 </head>
 
@@ -56,7 +59,7 @@
                             @if(Auth::user()->foto == "")
                                 <i class="fa fa-user"></i>
                             @else
-                                <img src="{{asset('foto/'.Auth::user()->foto)}}" alt="placeholder+image" style="width: 40px;">
+                                <img src="{{asset('foto/'.Auth::user()->foto)}}" alt="user" style="width: 40px;">
                             @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
@@ -207,11 +210,11 @@
                     @yield('content')
                 </div>
             </div>
-            <div class="footer">
-                <div class="container">
+            <div class="footer fixed-bottom">
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2020 Makerindo. All rights reserve
+                        <div class="col-12 text-right">
+                             Copyright © 2020 Makerindo. All rights reserved
                         </div>
                     </div>
                 </div>

@@ -114,6 +114,7 @@ class OperatorController extends Controller
                 //     unlink(public_path($operator->foto));
                 // }
             }else{
+                $operator = Operator::find($id);
                 $operator->update([
                     'name' => $req->nama,
                     'email' => $req->email,

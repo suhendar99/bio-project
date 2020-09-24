@@ -24,24 +24,6 @@ if (!function_exists('subscribe_mqtt') ){
 	        echo "\t$msg\n\n";
 	        $payload = json_decode($msg);
 
-	        // "cvc_vest":0,"cvc_dressing":0,"cvc_sample":0,"cvc_airlock":0,"cvc_uji":0,"vvc_sample":0,"vvc_airlock":0,"vvc_uji":0,
-	        // "vvc_vest":0,"vvc_dr":0,"temp_vest":0,"temp_dr":0,"temp_sample":0,"temp_airlock":0,"temp_uji":0,"rh_vest":0,"rh_dr":0,
-	        // "rh_sample":0,"rh_airlock":0,"rh_uji":0,"scaling_r":0,"scaling_sample":0,"scaling_vesti":0,"scaling_dr":0,
-	        // "scaling_airloc":0
-	     //    $jeruk = (object) array("suhu"=>40,"kelembapan"=>90,"tekanan"=>95,"perangkat_id" : "Dc234Zz","ruangan_id" : 1,"cvc"=>123,"vvc"=>123,"alarm"=>1);
-	     //    $object = (object) [
-				  //   'propertyOne' => 'foo',
-				  //   'propertyTwo' => 42,
-				  // ],[
-				  //   'propertyOne' => 'fii',
-				  //   'propertyTwo' => 42,
-				  // ];
-	        // $payload = json_decode($jeruk);
-	        // dd($jeruk->{'kelembapan'});'
-	        // dd($object->propertyOne);
-	        // dd(key($jeruk));
-	        // $payload = json_decode($jeruk);
-	        // echo $jeruk;
 	        $jsonobj = '[
 	        	{
 	        		"suhu" : '.$payload->temp_airlock.',
@@ -109,11 +91,12 @@ if (!function_exists('subscribe_mqtt') ){
 	    	// $all = json_decode($datas);
 	        // $payload = array();
 	        foreach ($datas as $data) {
-		        Monitoring::create([
+	        	$alert = 0;
+
+		        $monitor = Monitoring::create([
 		            'suhu' => $data->suhu,
 		            'kelembapan' => $data->kelembapan,
 		            'tekanan' => $data->tekanan,
-		            'alarm' => $data->alarm,
 		            'perangkat_id' => $data->perangkat_id,
 		            'ruangan_id' => $data->ruangan_id,
 		            'cvc' => $data->cvc,
@@ -136,64 +119,62 @@ if (!function_exists('subscribe_mqtt') ){
 
 		        if ($data->suhu > $smax) {
 		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih tinggi dari '.$smax.'C';
-		            // $log = new Log_alert;
-		            // $log->status = 'High presure';
-		            // $log->keterangan = $data->suhu.'C lebih tinggi dari '.$smax.'C';
-		            // $log->monitoring_id = $data->id;
-		            // $log->time = date('H:i:s');
-		            // $log->save();
+		            $log = new Log_alert;
+		            $log->status = 'High presure';
+		            $log->keterangan = $data->suhu.'C lebih tinggi dari '.$smax.'C';
+		            $log->monitoring_id = $monitor->id;
+		            $log->time = date('H:i:s');
+		            $log->save();
 		        }
 
 		        if($data->suhu < $smin){
 		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih rendah dari '.$smin.'C';
-		            // $log = new Log_alert;
-		            // $log->status = 'Low presure';
-		            // $log->keterangan = $data->suhu.'C lebih rendah dari '.$smin.'C';
-		            // $log->monitoring_id = $data->id;
-		            // $log->time = date('H:i:s');
-		            // $log->save();
-
+		            $log = new Log_alert;
+		            $log->status = 'Low presure';
+		            $log->keterangan = $data->suhu.'C lebih rendah dari '.$smin.'C';
+		            $log->monitoring_id = $monitor->id;
+		            $log->time = date('H:i:s');
+		            $log->save();
 		        }
 
 		        if($data->kelembapan > $kmax){
 		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih tinggi dari '.$kmax.'%';
-		            // $log = new Log_alert;
-		            // $log->status = 'High presure';
-		            // $log->keterangan = $data->kelembapan.'% lebih tinggi dari '.$kmax.'%';
-		            // $log->monitoring_id = $data->id;
-		            // $log->time = date('H:i:s');
-		            // $log->save();
+		            $log = new Log_alert;
+		            $log->status = 'High presure';
+		            $log->keterangan = $data->kelembapan.'% lebih tinggi dari '.$kmax.'%';
+		            $log->monitoring_id = $monitor->id;
+		            $log->time = date('H:i:s');
+		            $log->save();
 		        }
 
 		        if($data->kelembapan < $kmin){
 		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih rendah dari '.$kmin.'%';
-		            // $log = new Log_alert;
-		            // $log->status = 'Low presure';
-		            // $log->keterangan = $data->kelembapan.'% lebih rendah dari '.$kmin.'%';
-		            // $log->monitoring_id = $data->id;
-		            // $log->time = date('H:i:s');
-		            // $log->save();
+		            $log = new Log_alert;
+		            $log->status = 'Low presure';
+		            $log->keterangan = $data->kelembapan.'% lebih rendah dari '.$kmin.'%';
+		            $log->monitoring_id = $monitor->id;
+		            $log->time = date('H:i:s');
+		            $log->save();
 		        }
 
 		        if($data->tekanan > $tmax){
 		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
-		            // $log = new Log_alert;
-		            // $log->status = 'High presure';
-		            // $log->keterangan = $data->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
-		            // $log->monitoring_id = $data->id;
-		            // $log->time = date('H:i:s');
-		            // $log->save();
-
+		            $log = new Log_alert;
+		            $log->status = 'High presure';
+		            $log->keterangan = $data->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
+		            $log->monitoring_id = $monitor->id;
+		            $log->time = date('H:i:s');
+		            $log->save();
 		        }
 
 		        if($data->tekanan < $tmin){
 		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih rendah dari '.$tmin.'Pa';
-		            // $log = new Log_alert;
-		            // $log->status = 'Low presure';
-		            // $log->keterangan = $data->tekanan.'Pa lebih rendah dari '.$tmin.'Pa';
-		            // $log->monitoring_id = $data->id;
-		            // $log->time = date('H:i:s');
-		            // $log->save();
+		            $log = new Log_alert;
+		            $log->status = 'Low presure';
+		            $log->keterangan = $data->tekanan.'Pa lebih rendah dari '.$tmin.'Pa';
+		            $log->monitoring_id = $monitor->id;
+		            $log->time = date('H:i:s');
+		            $log->save();
 		        }
 
 

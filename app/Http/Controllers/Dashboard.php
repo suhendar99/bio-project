@@ -46,14 +46,42 @@ class Dashboard extends Controller
         $aktivasi = Aktivasi::orderBy('created_at','desc')->limit(10)->get();
         $operator = Operator::all();
         $data = Ruangan::all();
-        $alarm = Monitoring::where('alarm',1)->latest()->limit(10)->get();
-        // dd($alarm);
+        $monitor = Monitoring::with('alert')->latest()->limit(10)->get();
+
+        // dd($monitor);
+
+        $alert = [];
+
+        foreach ($monitor as $cops) {
+            $ruang = Ruangan::find($cops->ruangan_id);
+
+            if ($cops->suhu > $ruang->smax) {
+                $alert[] = $cops;
+            }
+            if ($cops->suhu < $ruang->smin) {
+                $alert[] = $cops;
+            }
+            if ($cops->kelembapan > $ruang->kmax) {
+                $alert[] = $cops;
+            }
+            if ($cops->kelembapan < $ruang->kmin) {
+                $alert[] = $cops;
+            }
+            if ($cops->tekanan > $ruang->tmax) {
+                $alert[] = $cops;
+            }
+            if ($cops->tekanan < $ruang->tmin) {
+                $alert[] = $cops;
+            }
+        }
+
+        // dd($alert);
         $suhu = Satuan::where('parameter','Suhu')->first();
         // dd($suhu->parameter);
         $kelembapan = Satuan::where('parameter','Kelembapan')->first();
         $tekanan = Satuan::where('parameter','Tekanan')->first();
         $suhu = Satuan::where('parameter','Suhu')->first();
-        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu, 'alarm'=>$alarm, 'suhu'=>$suhu, 'kelembapan'=>$kelembapan,'tekanan'=>$tekanan, 'aktivasi'=>$aktivasi,'operator'=>$operator]);
+        return view('Admin.Dashboard.index',['data'=>$data, 'suhu'=>$suhu, 'alarm'=>$alert, 'suhu'=>$suhu, 'kelembapan'=>$kelembapan,'tekanan'=>$tekanan, 'aktivasi'=>$aktivasi,'operator'=>$operator]);
     }
 
     public function login()

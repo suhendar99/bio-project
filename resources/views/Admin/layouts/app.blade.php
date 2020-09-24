@@ -283,8 +283,8 @@
 <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
 
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
-    <!-- <script src="{{ asset('js/paho.js') }}"></script> -->
-   <!-- <script src="{!! mix('js/app.js') !!}"></script> -->
+    <!-- <script src="{-{ asset('js/paho.js') }}"></script> -->
+   <!-- <script src="{-!! mix('js/app.js') !!}"></script> -->
 <script type="text/javascript">
     var data_monitoring = [1];
 
@@ -593,7 +593,7 @@
       const url = "{{ $url_broker }}";
       var clientId = "ws" + Math.random();
       // Create a client instance
-      var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 8888, clientId);
+      var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 12472, clientId);
 
       // set callback handlers
       client.onConnectionLost = onConnectionLost;

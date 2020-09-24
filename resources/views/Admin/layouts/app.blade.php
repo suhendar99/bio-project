@@ -282,9 +282,9 @@
 
 <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
 
-   {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script> --}}
-    <script src="{{ asset('js/paho.js') }}"></script>
-   {{-- <script src="{!! mix('js/app.js') !!}"></script> --}}
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
+    <!-- <script src="{{ asset('js/paho.js') }}"></script> -->
+   <!-- <script src="{!! mix('js/app.js') !!}"></script> -->
 <script type="text/javascript">
     var data_monitoring = [1];
 

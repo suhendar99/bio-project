@@ -47,9 +47,10 @@
 @push('script')
  <script>
     $.get("{{ route('monitoring.data') }}", function(data){
-    data_monitoring=data;
-    console.log(data_monitoring);
-    rew();
+        data_monitoring=data;
+        console.log(data_monitoring);
+
+        rew();
     });
  </script>
 @endpush

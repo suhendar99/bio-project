@@ -289,7 +289,7 @@
     const on = "ON";
     const off = "OFF";
 
-    const rew =()=>{
+    const rew = ()=>{
         var html='';
             data_monitoring.forEach((row) => {
             html+=`<tr>
@@ -347,51 +347,178 @@
         // var date = today.getFullYear()+'-'+("0" + today.getMonth()).slice(-2)+'-'+today.getDate();
         console.log(date);
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        const perangkat = "Dc234Zz"
 
         // console.log(message.payloadString);
         var data = JSON.parse(message.payloadString + "");
+
+        let percobaan = [];
+        let object1 = {};
+        let plus = "";
+
+        console.log(data);
+        
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>Airlock</td>
+                <td>${data.temp_airlock}</td>
+                <td>${data.rh_airlock}</td>
+                <td>${data.scaling_airlock}</td>
+                <td>${data.cvc_airlock}</td>
+                <td>${data.vvc_airlock}</td>
+                <td>OFF</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
+
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>dressing</td>
+                <td>${data.temp_dressing}</td>
+                <td>${data.rh_dressing}</td>
+                <td>${data.scaling_dressing}</td>
+                <td>${data.cvc_dressing}</td>
+                <td>${data.vvc_dressing}</td>
+                <td>OFF</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
+
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>sample</td>
+                <td>${data.temp_sample}</td>
+                <td>${data.rh_sample}</td>
+                <td>${data.scaling_sample}</td>
+                <td>${data.cvc_sample}</td>
+                <td>${data.vvc_sample}</td>
+                <td>OFF</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
+
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>Uji</td>
+                <td>${data.temp_uji}</td>
+                <td>${data.rh_uji}</td>
+                <td>${data.scaling_uji}</td>
+                <td>${data.cvc_uji}</td>
+                <td>${data.vvc_uji}</td>
+                <td>OFF</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
+
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>vest</td>
+                <td>${data.temp_vest}</td>
+                <td>${data.rh_vest}</td>
+                <td>${data.scaling_vest}</td>
+                <td>${data.cvc_vest}</td>
+                <td>${data.vvc_vest}</td>
+                <td>OFF</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
+
+        // $('#monitoring tbody tr:first').before(plus);
+
+
+        // for(const [key, value] of Object.entries(data)) {
+
+        //     const reg = /airlock/g;
+
+        //     console.log(key.search(reg));
+
+
+        //     if((key.search(reg) != -1) && plus < 6){
+        //         let word = key.split("_")
+
+        //         Object.defineProperty(object1, key, {
+        //             value: value
+        //         });
+        //         percobaan.push(object1)
+
+        //         console.log(percobaan);
+
+        //         plus++
+        //         // $('#monitoring tbody').html(`
+        //         //     <tr>
+        //         //         <td>${date}</td>
+        //         //         <td>${time}</td>
+        //         //         <td>${perangkat}</td>
+        //         //         <td>Airlock</td>
+        //         //         <td>${temp_airlock}</td>
+        //         //         <td>${date}</td>
+        //         //     </tr>
+        //         // `);
+        //     }
+        // }
+
 
         // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
 
 
         // }
 
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-          url:'api/checkSeri',
-          method:'GET',
-          data:{
-            no_seri:data.perangkat_id,
-          },
-          dataType:'JSON',
-          success:function(response){
-            console.log(response.status)
-            if (response.status == 1) {
-                data.date=date;
-                data.time=time;
-                data_monitoring.unshift(data);
-                data_monitoring.pop();
-                //  console.log(data_monitoring);
-                // //  raw();
-                rew();
-                insert_data(data);
-            } else {
-                Swal.fire({
-                    title: 'No Seri Harus Sesuai',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                })
-            }
-          },
-          error : function(e) {
-            console.log(e)
-          }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
+        // $.ajax({
+        //   url:'api/checkSeri',
+        //   method:'GET',
+        //   data:{
+        //     no_seri:data.perangkat_id,
+        //   },
+        //   dataType:'JSON',
+        //   success:function(response){
+        //     console.log(response.status)
+        //     if (response.status == 1) {
+        //         data.date=date;
+        //         data.time=time;
+        //         data_monitoring.unshift(data);
+        //         data_monitoring.pop();
+        //         //  console.log(data_monitoring);
+        //         // //  raw();
+        //         rew();
+        //         insert_data(data);
+        //     } else {
+        //         Swal.fire({
+        //             title: 'No Seri Harus Sesuai',
+        //             icon: 'warning',
+        //             confirmButtonColor: '#3085d6',
+        //             cancelButtonColor: '#d33',
+        //         })
+        //     }
+        //   },
+        //   error : function(e) {
+        //     console.log(e)
+        //   }
+        // });
 
 
 

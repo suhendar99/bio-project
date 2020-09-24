@@ -127,6 +127,12 @@ class MonitoringController extends Controller
         return response()->json($data);
     }
 
+    public function alert()
+    {
+        $data = Ruangan::all();
+        return response()->json($data);
+    }
+
 
     public function room($id)
     {

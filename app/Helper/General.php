@@ -46,7 +46,7 @@ if (!function_exists('subscribe_mqtt') ){
 	        	{
 	        		"suhu" : '.$payload->temp_airlock.',
 	        		"kelembapan" : '.$payload->rh_airlock.',
-	        		"tekanan" : '.$payload->scaling_airloc.',
+	        		"tekanan" : '.$payload->scaling_airlock.',
 	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 1,
 	        		"alarm" : 0,
@@ -56,7 +56,7 @@ if (!function_exists('subscribe_mqtt') ){
 	    	    {
 	        		"suhu" : '.$payload->temp_vest.',
 	        		"kelembapan" : '.$payload->rh_vest.',
-	        		"tekanan" : '.$payload->scaling_vesti.',
+	        		"tekanan" : '.$payload->scaling_vest.',
 	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 2,
 	        		"alarm" : 0,
@@ -64,14 +64,14 @@ if (!function_exists('subscribe_mqtt') ){
 	        		"vvc" : '.$payload->vvc_vest.'
 	    	    },
 	    	    {
-	        		"suhu" : '.$payload->temp_dr.',
-	        		"kelembapan" : '.$payload->rh_dr.',
-	        		"tekanan" : '.$payload->scaling_dr.',
+	        		"suhu" : '.$payload->temp_dressing.',
+	        		"kelembapan" : '.$payload->rh_dressing.',
+	        		"tekanan" : '.$payload->scaling_dressing.',
 	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 3,
 	        		"alarm" : 0,
 	        		"cvc" : '.$payload->cvc_dressing.',
-	        		"vvc" : '.$payload->vvc_dr.'
+	        		"vvc" : '.$payload->vvc_dressing.'
 	        	},
 	        	{
 	        		"suhu" : '.$payload->temp_sample.',
@@ -86,7 +86,7 @@ if (!function_exists('subscribe_mqtt') ){
 	        	{
 	        		"suhu" : '.$payload->temp_uji.',
 	        		"kelembapan" : '.$payload->rh_uji.',
-	        		"tekanan" : '.$payload->scaling_r.',
+	        		"tekanan" : '.$payload->scaling_uji.',
 	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 5,
 	        		"alarm" : 0,

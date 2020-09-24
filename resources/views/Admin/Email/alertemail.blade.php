@@ -1,4 +1,5 @@
 <p>Alert!!!</p>
+<p>Message:</p>
 <p>{{ $user }}</p>
 
 <ol>

@@ -197,7 +197,7 @@ if (!function_exists('subscribe_mqtt') ){
 		        }
 
 
-		        if ($data->alarm == 1) {
+		        if (count($sendAlert) > 0) {
 		            $toMail = KirimAlarm::all();
 		            foreach ($toMail as $send) {
 		                echo $send->id_operator."\n";
@@ -227,18 +227,18 @@ if (!function_exists('subscribe_mqtt') ){
 
 
 
-		            // $store = $pdf->download()->getOriginalContent();
-
-
-		            // $namePDF = time().'_file.pdf';
-
-		            // Storage::disk('public')->put($namePDF, $store);
-		                 Telegram::sendMessage([
-		                    'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+						Telegram::sendMessage([
+							'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
 		                    'parse_mode' => 'HTML',
 		                    'text' => $text
-		                ]);
+						]);
 
+							// $store = $pdf->download()->getOriginalContent();
+
+
+							// $namePDF = time().'_file.pdf';
+
+							// Storage::disk('public')->put($namePDF, $store);
 		            }
 		           // Telegram::sendDocument([
 		           //      'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),

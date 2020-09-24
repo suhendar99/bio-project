@@ -933,29 +933,29 @@
 
       }
 
-      function insert_data(data) {
-        var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-        let url = "{{ url('api/monitoringStore') }}";
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-          url:url,
-          method:'POST',
-          data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id,cvc:data.cvc,vvc:data.vvc},
-          dataType:'JSON',
-          success:function(){
-            console.log('BERHASILLL');
-          },
-          error : function(e) {
-            console.log(e)
-          }
-        });
-      }
+      // function insert_data(data) {
+      //   var today = new Date();
+      //   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      //   var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+      //   let url = "{{ url('api/monitoringStore') }}";
+      //   $.ajaxSetup({
+      //       headers: {
+      //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //       }
+      //   });
+      //   $.ajax({
+      //     url:url,
+      //     method:'POST',
+      //     data:{date:date,time:time,suhu:data.suhu,tekanan:data.tekanan,kelembapan:data.kelembapan,alarm:data.alarm,perangkat_id:data.perangkat_id,ruangan_id:data.ruangan_id,cvc:data.cvc,vvc:data.vvc},
+      //     dataType:'JSON',
+      //     success:function(){
+      //       console.log('BERHASILLL');
+      //     },
+      //     error : function(e) {
+      //       console.log(e)
+      //     }
+      //   });
+      // }
 
       const url = "{{ $url_broker }}"
       var clientId = "ws" + Math.random();

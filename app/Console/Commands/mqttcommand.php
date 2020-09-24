@@ -39,8 +39,7 @@ class mqttcommand extends Command
     public function handle()
     {
         $mqtt = Mqtt::find(1);
-
         $topic = $mqtt->topic;
-        subscribe_mqtt($topic);
+        subscribe_mqtt('123123');
     }
 }

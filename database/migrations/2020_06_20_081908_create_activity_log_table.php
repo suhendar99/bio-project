@@ -18,11 +18,13 @@ class CreateActivityLogTable extends Migration
             $table->integer('subject_id')->nullable();
             $table->string('subject_type')->nullable();
             $table->integer('causer_id')->nullable();
+            // $table->integer('causer_id')->unsigned();
             $table->string('causer_type')->nullable();
             $table->text('properties')->nullable();
-            $table->timestamps();
+            // $table->foreign('causer_id')->references('id')->on('users');
 
             $table->index('log_name');
+            $table->timestamps();
         });
     }
 

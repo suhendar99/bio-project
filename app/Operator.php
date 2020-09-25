@@ -10,7 +10,9 @@ class Operator extends Model
 	use LogsActivity;
     
     protected $table = "users";
-    protected $guarded = [];
+    protected $fillable = [
+        'name', 'email', 'password', 'nik', 'instansi', 'jabatan' ,'no_hp', 'foto', 'level'
+    ];
 
     public function setkirim()
     {
@@ -23,6 +25,6 @@ class Operator extends Model
     }
     public function aktivasi()
     {
-        return $this->hasMany('App\Aktivasi','causer_id','id');
+        return $this->hasMany('App\Aktivasi','id','causer_id');
     }
 }

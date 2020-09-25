@@ -77,8 +77,13 @@
                             @foreach($aktivasi as $a)                
                             <tr>
                                 <td>{{$no++}}</td>
+                                @if($a->causer_id == null)
+                                <td>Sistem</td>
+                                <td>Administrator</td>
+                                @else 
                                 <td>{{$a->operator->name}}</td>
                                 <td>{{$a->operator->level}}</td>
+                                @endif
                                 <td>{{$a->description}}</td>
                                 <td>
                                     @if($a->subject_type == "")

@@ -18,19 +18,27 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <style type="text/css">
+        @media only screen and (max-width: 600px) {
+            .img-col {
+                display: none;
+            }
+        }
+
+    </style>
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row" style="margin: 20px; padding: 20px;">
+        <div class="row" >
             <div class="col-md-12 col-sm-12">
-                <div class="card" style="border-radius: 20px;">
+                <div class="card" style="border: 0;">
                     <div class="row" style="margin: 30px;">
-                        <div class="col-md-7 col-sm-0" style="padding: 20px;">
+                        <div class="col-md-7 col-sm-0 img-col" style="padding: 20px; ">
                             <center>
                                 <img src="{{ asset('svg/medicine.svg') }}" alt="" width="100%">
                             </center>
                         </div>
-                        <div class="col-md-5 col-sm-12">
+                        <div class="col-md-5 col-sm-0" style="padding-top: 30px">
                             @if (session()->has('success'))
                                 <div class="alert alert-success">
                                     {{ session()->get('success') }}
@@ -39,8 +47,8 @@
                             <form method="post" action="{{ route('login') }}" >
                                 @csrf
                                 <center>
-                                    <img src="{{ asset('foto/app/'.$apps->icon) }}" class="rounded-circle" alt="" width="100px" height="100px">
-                                    <h2>{{ $apps->nama_apps }}</h2>
+                                    <img src="{{ asset('foto/app/'.$apps->icon) }}" class="rounded-circle" alt="" style=" width: 100px; height: 100px; object-fit: scale-down;">
+                                    <h2 style="margin-top: 10px;">{{ $apps->nama_apps }}</h2>
                                     <span>Login to Start Monitoring</span>
                                     <div class="form-group" style="margin-top: 20px;">
                                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" style="border-radius: 30px; height: 50px;" required>

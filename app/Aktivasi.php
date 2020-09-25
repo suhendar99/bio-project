@@ -18,7 +18,8 @@ class Aktivasi extends Model
      *
      * @var array
      */
-    protected $fillable = ['log_name', 'description', 'subject_id', 'subject_type', 'causer_id', 'causer_type', 'properties'];
+    
+    protected $guarded = [];
 
     public function operator()
     {

@@ -40,7 +40,11 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $r->id }}</td>
                                     <td>
-                                        <img src="{{ $r->foto }}" alt="" srcset="" style="width:100px; height:100px">
+                                        @if($r->foto == null)
+                                        <img src="https://images.unsplash.com/photo-1558882224-dda166733046?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=749&q=80" alt="" srcset="" style="width:100px; height:100px; object-fit:scale-down;">
+                                        @else
+                                        <img src="{{ $r->foto }}" alt="" srcset="" style="width:100px; height:100px; object-fit:scale-down;">
+                                        @endif
                                     </td>
                                     <td>{{ $r->nama }}</td>
                                     <td>Max : {{$r->smax}}<br>Min : {{$r->smin}}</td>

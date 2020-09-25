@@ -118,7 +118,7 @@ if (!function_exists('subscribe_mqtt') ){
 		        $sendAlert = [];
 
 		        if ($data->suhu > $smax) {
-		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih tinggi dari '.$smax.'C';
+		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih tinggi dari '.$smax."C\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'High presure';
 		            $log->keterangan = $data->suhu.'C lebih tinggi dari '.$smax.'C';
@@ -128,7 +128,7 @@ if (!function_exists('subscribe_mqtt') ){
 		        }
 
 		        if($data->suhu < $smin){
-		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih rendah dari '.$smin.'C';
+		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih rendah dari '.$smin."C\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'Low presure';
 		            $log->keterangan = $data->suhu.'C lebih rendah dari '.$smin.'C';
@@ -138,7 +138,7 @@ if (!function_exists('subscribe_mqtt') ){
 		        }
 
 		        if($data->kelembapan > $kmax){
-		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih tinggi dari '.$kmax.'%';
+		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih tinggi dari '.$kmax."%\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'High presure';
 		            $log->keterangan = $data->kelembapan.'% lebih tinggi dari '.$kmax.'%';
@@ -148,7 +148,7 @@ if (!function_exists('subscribe_mqtt') ){
 		        }
 
 		        if($data->kelembapan < $kmin){
-		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih rendah dari '.$kmin.'%';
+		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih rendah dari '.$kmin."%\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'Low presure';
 		            $log->keterangan = $data->kelembapan.'% lebih rendah dari '.$kmin.'%';
@@ -158,7 +158,7 @@ if (!function_exists('subscribe_mqtt') ){
 		        }
 
 		        if($data->tekanan > $tmax){
-		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
+		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih tinggi dari '.$tmax."Pa\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'High presure';
 		            $log->keterangan = $data->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
@@ -168,7 +168,7 @@ if (!function_exists('subscribe_mqtt') ){
 		        }
 
 		        if($data->tekanan < $tmin){
-		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih rendah dari '.$tmin.'Pa';
+		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih rendah dari '.$tmin."Pa\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'Low presure';
 		            $log->keterangan = $data->tekanan.'Pa lebih rendah dari '.$tmin.'Pa';
@@ -181,25 +181,9 @@ if (!function_exists('subscribe_mqtt') ){
 		        if (count($sendAlert) > 0) {
 		            $toMail = KirimAlarm::all();
 		            foreach ($toMail as $send) {
-		                echo $send->id_operator."\n";
+		                echo $send->operator->name."\n";
 		                Mail::to(Operator::where('id', $send->id_operator)->first())->send(new sendEmail($send->custom_teks, $sendAlert));
 		            }
-		            // $awal = date("Y-m-d");
-		            // $akhir = date("Y-m-d");
-
-		            // $set = Laporan::find(1)->first();
-		            // $data = Monitoring::whereBetween('date',[$awal, $akhir])->latest()->get();
-		            //     // dd($data);
-		            // $pos = 'Ruangan';
-		            // $pp = "kosong";
-		            // $sumber = "Semua Ruangan dan Parameter";
-
-		            // $pdf = app('dompdf.wrapper');
-		            // $pdf->getDomPDF()->set_option("enable_php", true);
-		            // $pdf = PDF::loadview('Admin.Laporan.email_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'email' => 'example@mail.com', 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
-
-		            // $awal = date("Y-m-d");
-		            // $akhir = date("Y-m-d");
 
 		            foreach ($sendAlert as $f) {
 		                $text = "Alert!!!\n"
@@ -214,18 +198,7 @@ if (!function_exists('subscribe_mqtt') ){
 		                    'text' => $text
 						]);
 
-							// $store = $pdf->download()->getOriginalContent();
-
-
-							// $namePDF = time().'_file.pdf';
-
-							// Storage::disk('public')->put($namePDF, $store);
 		            }
-		           // Telegram::sendDocument([
-		           //      'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
-		           //       'document' => InputFile::create(public_path().'/report/'.$namePDF),
-		           //       'caption' => 'This is a document',
-		           //  ]);
 		           }
 		        }
 	        }

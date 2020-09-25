@@ -304,7 +304,6 @@
                 <td>${row.tekanan}</td>
                 <td>${row.cvc}</td>
                 <td>${row.vvc}</td>
-                <td id="alertff">${row.alarm}</td>
             </tr>`;
         });
         $('#monitoring tbody').html(html);
@@ -365,13 +364,12 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>Airlock</td>
+                <td>1</td>
                 <td>${data.temp_airlock}</td>
                 <td>${data.rh_airlock}</td>
                 <td>${data.scaling_airlock}</td>
                 <td>${data.cvc_airlock}</td>
                 <td>${data.vvc_airlock}</td>
-                <td>OFF</td>
             </tr>
         `).prependTo("#monitoring > tbody");
 
@@ -382,186 +380,67 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>dressing</td>
-                <td>${data.temp_dressing}</td>
-                <td>${data.rh_dressing}</td>
-                <td>${data.scaling_dressing}</td>
-                <td>${data.cvc_dressing}</td>
-                <td>${data.vvc_dressing}</td>
-                <td>OFF</td>
-            </tr>
-        `).prependTo("#monitoring > tbody");
-
-        $('#monitoring > tbody > tr').last().remove();
-
-        $(`
-            <tr>
-                <td>${date}</td>
-                <td>${time}</td>
-                <td>${perangkat}</td>
-                <td>sample</td>
-                <td>${data.temp_sample}</td>
-                <td>${data.rh_sample}</td>
-                <td>${data.scaling_sample}</td>
-                <td>${data.cvc_sample}</td>
-                <td>${data.vvc_sample}</td>
-                <td>OFF</td>
-            </tr>
-        `).prependTo("#monitoring > tbody");
-
-        $('#monitoring > tbody > tr').last().remove();
-
-        $(`
-            <tr>
-                <td>${date}</td>
-                <td>${time}</td>
-                <td>${perangkat}</td>
-                <td>Uji</td>
-                <td>${data.temp_uji}</td>
-                <td>${data.rh_uji}</td>
-                <td>${data.scaling_uji}</td>
-                <td>${data.cvc_uji}</td>
-                <td>${data.vvc_uji}</td>
-                <td>OFF</td>
-            </tr>
-        `).prependTo("#monitoring > tbody");
-
-        $('#monitoring > tbody > tr').last().remove();
-
-        $(`
-            <tr>
-                <td>${date}</td>
-                <td>${time}</td>
-                <td>${perangkat}</td>
-                <td>vest</td>
+                <td>2</td>
                 <td>${data.temp_vest}</td>
                 <td>${data.rh_vest}</td>
                 <td>${data.scaling_vest}</td>
                 <td>${data.cvc_vest}</td>
                 <td>${data.vvc_vest}</td>
-                <td>OFF</td>
             </tr>
         `).prependTo("#monitoring > tbody");
 
         $('#monitoring > tbody > tr').last().remove();
 
-        // $('#monitoring tbody tr:first').before(plus);
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>3</td>
+                <td>${data.temp_dressing}</td>
+                <td>${data.rh_dressing}</td>
+                <td>${data.scaling_dressing}</td>
+                <td>${data.cvc_dressing}</td>
+                <td>${data.vvc_dressing}</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
+
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>4</td>
+                <td>${data.temp_sample}</td>
+                <td>${data.rh_sample}</td>
+                <td>${data.scaling_sample}</td>
+                <td>${data.cvc_sample}</td>
+                <td>${data.vvc_sample}</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
+
+        $(`
+            <tr>
+                <td>${date}</td>
+                <td>${time}</td>
+                <td>${perangkat}</td>
+                <td>5</td>
+                <td>${data.temp_uji}</td>
+                <td>${data.rh_uji}</td>
+                <td>${data.scaling_uji}</td>
+                <td>${data.cvc_uji}</td>
+                <td>${data.vvc_uji}</td>
+            </tr>
+        `).prependTo("#monitoring > tbody");
+
+        $('#monitoring > tbody > tr').last().remove();
 
 
-        // for(const [key, value] of Object.entries(data)) {
-
-        //     const reg = /airlock/g;
-
-        //     console.log(key.search(reg));
-
-
-        //     if((key.search(reg) != -1) && plus < 6){
-        //         let word = key.split("_")
-
-        //         Object.defineProperty(object1, key, {
-        //             value: value
-        //         });
-        //         percobaan.push(object1)
-
-        //         console.log(percobaan);
-
-        //         plus++
-        //         // $('#monitoring tbody').html(`
-        //         //     <tr>
-        //         //         <td>${date}</td>
-        //         //         <td>${time}</td>
-        //         //         <td>${perangkat}</td>
-        //         //         <td>Airlock</td>
-        //         //         <td>${temp_airlock}</td>
-        //         //         <td>${date}</td>
-        //         //     </tr>
-        //         // `);
-        //     }
-        // }
-
-
-        // if (data.ruangan_id == 1 || data.ruangan_id == 2 ||data.ruangan_id == 3 ||data.ruangan_id == 4 ||data.ruangan_id == 5) {
-
-
-        // }
-
-        // $.ajaxSetup({
-        //     headers: {
-        //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
-        // $.ajax({
-        //   url:'api/checkSeri',
-        //   method:'GET',
-        //   data:{
-        //     no_seri:data.perangkat_id,
-        //   },
-        //   dataType:'JSON',
-        //   success:function(response){
-        //     console.log(response.status)
-        //     if (response.status == 1) {
-        //         data.date=date;
-        //         data.time=time;
-        //         data_monitoring.unshift(data);
-        //         data_monitoring.pop();
-        //         //  console.log(data_monitoring);
-        //         // //  raw();
-        //         rew();
-        //         insert_data(data);
-        //     } else {
-        //         Swal.fire({
-        //             title: 'No Seri Harus Sesuai',
-        //             icon: 'warning',
-        //             confirmButtonColor: '#3085d6',
-        //             cancelButtonColor: '#d33',
-        //         })
-        //     }
-        //   },
-        //   error : function(e) {
-        //     console.log(e)
-        //   }
-        // });
-
-
-
-
-        // // var raw = '<tr id="'+data.id+'">';
-        // // raw += '<td>' + date + '</td>';
-        // // raw += '<td>' + time + '</td>';
-        // // raw += '<td>' + data.perangkat_id + '</td>';
-        // // raw += '<td>' + data.ruangan_id + '</td>';
-        // // raw += '<td>' + data.suhu + '</td>';
-        // // raw += '<td>' + data.tekanan + '</td>';
-        // // raw += '<td>' + data.kelembapan + '</td>';
-        // // raw += '<td>' + data.alarm + '</td>';
-        // // raw += '</tr>';
-        // // $('#monitorTable tbody').prepend(raw);
-
-        // var over = data.suhu;
-        // $('#suhuRoom').text(over);
-
-        // if (data.alarm == 1 ) {
-        //     var alarm = '<div class="cd-timeline__block js-cd-block">' ;
-        //     alarm += '<div class="cd-timeline__img cd-timeline__img--movie js-cd-img">';
-        //     alarm += '<img src="{asset('svg/alarm.svg')" alt="Movie" width="40px" height="40px">';
-        //     alarm += '</div>';
-        //     alarm += '<div class="cd-timeline__content js-cd-content">';
-        //     alarm += '<h3>Alarm 1</h3>';
-        //     alarm += '<p>Alarm ON :' + time + '</p>';
-        //     alarm += '<span class="cd-timeline__date">' + date + '</span>';
-        //     alarm += '</div>';
-        //     alarm += '</div>';
-
-        //     $('#alarmReal').prepend(alarm);
-        // } else {
-
-        // }
-
-
-         //console.log('BLOK MQTT');
-
-         // insert_data(data);
-         // console.log(html);
+        
       }
 
       function insert_data(data) {

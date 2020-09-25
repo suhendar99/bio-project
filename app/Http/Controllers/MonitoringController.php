@@ -123,7 +123,7 @@ class MonitoringController extends Controller
 
     public function data()
     {
-        $data = Monitoring::orderBy('created_at','desc')->limit(9)->get();
+        $data = Monitoring::orderBy('created_at','desc')->limit(10)->get();
         return response()->json($data);
     }
 

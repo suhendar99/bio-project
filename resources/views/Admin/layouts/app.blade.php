@@ -298,7 +298,7 @@
                 <td>${row.date}</td>
                 <td>${row.time}</td>
                 <td>${row.perangkat_id}</td>
-                <td>${row.ruangan_id}</td>
+                <td>${row.ruangan.nama}</td>
                 <td>${row.suhu}</td>
                 <td>${row.kelembapan}</td>
                 <td>${row.tekanan}</td>
@@ -382,7 +382,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>dressing</td>
+                <td>Dressing</td>
                 <td>${data.temp_dressing}</td>
                 <td>${data.rh_dressing}</td>
                 <td>${data.scaling_dressing}</td>
@@ -399,7 +399,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>sample</td>
+                <td>Sample</td>
                 <td>${data.temp_sample}</td>
                 <td>${data.rh_sample}</td>
                 <td>${data.scaling_sample}</td>
@@ -433,7 +433,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>vest</td>
+                <td>Vestibule</td>
                 <td>${data.temp_vest}</td>
                 <td>${data.rh_vest}</td>
                 <td>${data.scaling_vest}</td>
@@ -593,7 +593,7 @@
       const url = "{{ $url_broker }}";
       var clientId = "ws" + Math.random();
       // Create a client instance
-      var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 12472, clientId);
+      var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 32472, clientId);
 
       // set callback handlers
       client.onConnectionLost = onConnectionLost;

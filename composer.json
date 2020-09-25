@@ -12,6 +12,7 @@
         "barryvdh/laravel-dompdf": "^0.8.6",
         "consoletvs/charts": "6.*",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.9",
         "irazasyed/telegram-bot-sdk": "^3.1",
         "khill/lavacharts": "^3.1",
         "laravel-notification-channels/telegram": "^0.4.1",
@@ -24,7 +25,6 @@
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^7.5"

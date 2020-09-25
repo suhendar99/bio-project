@@ -8,11 +8,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Perangkat extends Model
 {
 	use LogsActivity;
-    protected $table = "perangkats";
-    protected $primarykey = "id";
-    protected $fillable = [
-        'no_seri', 'latitude', 'longitude', 'tgl_aktivasi', 'status'
-    ];
+    
+    protected $guarded = [];
 
     /**
      * Perangkat has many Monitoring.

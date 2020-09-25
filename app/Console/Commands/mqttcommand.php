@@ -40,6 +40,7 @@ class mqttcommand extends Command
     {
         $mqtt = Mqtt::find(1);
         $topic = $mqtt->topic;
-        subscribe_mqtt('123123');
+        // echo $topic;
+        subscribe_mqtt($topic);
     }
 }

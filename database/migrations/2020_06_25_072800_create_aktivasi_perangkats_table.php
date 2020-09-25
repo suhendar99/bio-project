@@ -15,9 +15,11 @@ class CreateAktivasiPerangkatsTable extends Migration
     {
         Schema::create('aktivasi_perangkats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_perangkat');
-            $table->integer('id_ruangan');
+            $table->unsignedInteger('id_perangkat');
+            $table->unsignedInteger('id_ruangan');
             $table->timestamps();
+            $table->foreign('id_perangkat')->references('id')->on('perangkats');
+            $table->foreign('id_ruangan')->references('id')->on('ruangans');
         });
     }
 

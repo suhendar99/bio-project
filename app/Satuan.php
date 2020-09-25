@@ -9,10 +9,8 @@ class Satuan extends Model
 {
 	use LogsActivity;
 
-    protected $table = 'satuans';
-    protected $fillable = [
-    	'parameter','satuan','max','min','id_ruangan'
-    ];
+    
+    protected $guarded = [];
 
     public function ruangan()
     {

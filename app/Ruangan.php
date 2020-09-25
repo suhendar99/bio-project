@@ -8,11 +8,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Ruangan extends Model
 {
     use LogsActivity;
-    protected $table = 'ruangans';
-    protected $primarykey = "id";
-    protected $fillable = [
-    	'foto','nama','smax','smin','kmax','kmin','tmax','tmin',
-    ];
+    
+    protected $guarded = [];
 
     public function monitoring()
     {

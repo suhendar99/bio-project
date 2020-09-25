@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKirimAlarmsTable extends Migration
+class CreateLogAlertsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateKirimAlarmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('kirim_alarms', function (Blueprint $table) {
+        Schema::create('log_alerts', function (Blueprint $table) {
             $table->Increments('id');
-            $table->unsignedInteger('id_operator');
-            $table->text('custom_teks');
+            $table->string('status', 100);
+            $table->text('keterangan');
+            $table->unsignedInteger('monitoring_id');
+            $table->time('time');
             $table->timestamps();
-
-            $table->foreign('id_operator')->references('id')->on('users');
+            $table->foreign('monitoring_id')->references('id_monitoring')->on('monitorings');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateKirimAlarmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kirim_alarms');
+        Schema::dropIfExists('log_alerts');
     }
 }

@@ -9,10 +9,8 @@ class Setapp extends Model
 {
 	use LogsActivity;
 
-    protected $table = 'setapps';
-    protected $fillable = [
-    	'icon','nama_apps','overview','tab'
-    ];
+    
+    protected $guarded = [];
 
     
 }

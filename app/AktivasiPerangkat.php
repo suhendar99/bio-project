@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AktivasiPerangkat extends Model
 {
-    protected $table = 'aktivasi_perangkats';
-    protected $fillable = [
-    	'id_perangkat','id_ruangan'
-    ];
+    
+    protected $guarded = [];
 
     public function ruangan()
     {

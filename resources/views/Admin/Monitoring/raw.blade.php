@@ -28,7 +28,6 @@
                                 <th>Tekanan</th>
                                 <th>CVC</th>
                                 <th>VVC</th>
-                                <th>Alarm</th>
                             </tr>
                         </thead>
                         <tbody>

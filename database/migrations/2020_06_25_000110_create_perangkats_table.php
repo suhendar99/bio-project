@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKirimAlarmsTable extends Migration
+class CreatePerangkatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateKirimAlarmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('kirim_alarms', function (Blueprint $table) {
+        Schema::create('perangkats', function (Blueprint $table) {
             $table->Increments('id');
-            $table->unsignedInteger('id_operator');
-            $table->text('custom_teks');
+            $table->string('no_seri', 10);
+            $table->string('latitude', 30)->nullable();
+            $table->string('longitude', 30)->nullable();
+            $table->date('tgl_aktivasi')->nullable();
+            $table->string('status', 50);
             $table->timestamps();
-
-            $table->foreign('id_operator')->references('id')->on('users');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateKirimAlarmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kirim_alarms');
+        Schema::dropIfExists('perangkats');
     }
 }

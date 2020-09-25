@@ -8,11 +8,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class SetKirim extends Model
 {
 	use LogsActivity;
-    protected $table="set_kirims";
-    protected $primarykey = "id";
-    protected $fillable = [
-        'id_operator','status_kirim','waktu_kirim'
-    ];  
+    
+    protected $guarded = [];
 
     public function Operator()
     {

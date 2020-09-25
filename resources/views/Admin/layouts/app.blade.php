@@ -298,7 +298,7 @@
                 <td>${row.date}</td>
                 <td>${row.time}</td>
                 <td>${row.perangkat_id}</td>
-                <td>${row.ruangan_id}</td>
+                <td>${row.ruangan.nama}</td>
                 <td>${row.suhu}</td>
                 <td>${row.kelembapan}</td>
                 <td>${row.tekanan}</td>
@@ -439,7 +439,6 @@
 
         $('#monitoring > tbody > tr').last().remove();
 
-
         
       }
 
@@ -472,7 +471,7 @@
       const url = "{{ $url_broker }}";
       var clientId = "ws" + Math.random();
       // Create a client instance
-      var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 12472, clientId);
+      var client = new Paho.MQTT.Client(url.replace(/(^\w+:|^)\/\//, ''), 32472, clientId);
 
       // set callback handlers
       client.onConnectionLost = onConnectionLost;

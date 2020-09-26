@@ -14,7 +14,7 @@ class SetlaporanSeeder extends Seeder
     public function run()
     {
         Laporan::create([
-        	'header-img' => 'header',
+        	'header_img' => 'Biofarma',
         	'footer' => 'Biofarma'
         ]);
     }

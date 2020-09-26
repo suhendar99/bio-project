@@ -9,7 +9,8 @@ use App\Exports\ExportLaporan;
 use App\Aktivasi;
 use Excel;
 use PDF;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 use App\Laporan;
 use App\Operator;
 use App\SetKirim;
@@ -227,37 +228,42 @@ class LaporanController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-    	$v = Validator::make($request->all(), [
-            'header_img' => 'required|',
-            'icon' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'footer' => 'required|',
-        ]);
-
+        if (!$request->file('icon')) {
+            $v = Validator::make($request->all(),[
+                'header_img' => 'required|',
+                'icon' => 'image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+        } else {
+            $v = Validator::make($request->all(),[
+                'header_img' => 'required|',
+                'icon' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'footer' => 'required|',
+            ]);
+        }
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
-        }else {
-            $setlaporan = Laporan::find($id);
-            $setlaporan->update([
-                'header_img' => $request->header_img,
-                'footer' => $request->footer,
-            ]);
+        } else {
+            if ($request->file('icon')) {
+                // Delete
+                $foto_public = Laporan::find($id);
+                File::delete($foto_public->foto);
 
-            if($request->hasfile('icon'))
-            {
-                $name = rand(). '-HEADER-' . $request->icon->getClientOriginalExtension();
-                $request->icon->move(public_path("foto/laporan/set"), $name);
-                $icon = 'foto/laporan/set/'.$name;
-                if(is_writable(public_path($setlaporan->icon))) {
-                    unlink(public_path($setlaporan->icon));
-                }
-                $icon = 'foto/laporan/set/'.$name;
+                // Update foto
+                $foto = $request->file('icon');
+                $name = time().'_'.$foto->getClientOriginalName();
+                $foto->move('foto/laporan/set', $name);
 
-                $setlaporan->update([
-                    'icon' => $icon,
-                ]);
+                Laporan::find($id)->update(
+                    array_merge($request->only('header_img','footer'),
+                        ['icon'=> 'foto/laporan/set/'.$name],
+                    )
+                );
+                return back()->with('success','Setting Laporan berhasil di update');
+            } else {
+                Laporan::findOrFail($id)->update($request->only('header_img','footer'),
+            );
+                return back()->with('success','Setting Laporan berhasil di update');
             }
-            return back()->with('success', 'Setting Laporan berhasil di update');
         }
     }
 

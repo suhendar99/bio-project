@@ -358,7 +358,7 @@
         let plus = "";
 
         console.log(data);
-        
+
         $(`
             <tr>
                 <td>${date}</td>
@@ -396,7 +396,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>Dressing</td>
+                <td>Dressing Room</td>
                 <td>${data.temp_dressing}</td>
                 <td>${data.rh_dressing}</td>
                 <td>${data.scaling_dressing}</td>
@@ -412,7 +412,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>Sample</td>
+                <td>Ruang Sample</td>
                 <td>${data.temp_sample}</td>
                 <td>${data.rh_sample}</td>
                 <td>${data.scaling_sample}</td>
@@ -428,7 +428,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>Uji</td>
+                <td>Ruang Uji</td>
                 <td>${data.temp_uji}</td>
                 <td>${data.rh_uji}</td>
                 <td>${data.scaling_uji}</td>
@@ -439,7 +439,7 @@
 
         $('#monitoring > tbody > tr').last().remove();
 
-        
+
       }
 
       function insert_data(data) {

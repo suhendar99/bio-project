@@ -15,7 +15,7 @@ class CreateSetlaporansTable extends Migration
     {
         Schema::create('setlaporans', function (Blueprint $table) {
             $table->Increments('id');
-            $table->text('header-img')->nullable();
+            $table->text('header_img')->nullable();
             $table->text('icon')->nullable();
             $table->string('footer')->nullable();
             $table->timestamps();

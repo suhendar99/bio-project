@@ -255,12 +255,12 @@ class LaporanController extends Controller
 
                 Laporan::find($id)->update(
                     array_merge($request->only('header_img','footer'),
-                        ['icon'=> 'foto/laporan/set/'.$name],
+                        ['icon'=> 'foto/laporan/set/'.$name]
                     )
                 );
                 return back()->with('success','Setting Laporan berhasil di update');
             } else {
-                Laporan::findOrFail($id)->update($request->only('header_img','footer'),
+                Laporan::findOrFail($id)->update($request->only('header_img','footer')
             );
                 return back()->with('success','Setting Laporan berhasil di update');
             }

@@ -76,20 +76,7 @@ if (!function_exists('subscribe_mqtt') ){
 	        		"vvc" : '.$payload->vvc_uji.'
 	        	}
 	    	]';
-				// $jsonobj = '[{"suhu":35,"tekanan":37,"kelembapan":43},{"suhu":40,"tekanan":55,"kelembapan":43}]';
-
-				$datas = json_decode($jsonobj);
-
-				// foreach ($obj as $o) {
-				// 	echo "suhu : ".$o->suhu."\n";
-				// 	echo "tekanan : ".$o->tekanan."\n";
-				// 	echo "kelembapan : ".$o->kelembapan."\n";
-				// }
-	    	// dd($datas);
-
-
-	    	// $all = json_decode($datas);
-	        // $payload = array();
+			$datas = json_decode($jsonobj);
 	        foreach ($datas as $data) {
 	        	$alert = 0;
 

@@ -364,7 +364,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>1</td>
+                <td>Airlock</td>
                 <td>${data.temp_airlock}</td>
                 <td>${data.rh_airlock}</td>
                 <td>${data.scaling_airlock}</td>
@@ -380,7 +380,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>2</td>
+                <td>Vestibule</td>
                 <td>${data.temp_vest}</td>
                 <td>${data.rh_vest}</td>
                 <td>${data.scaling_vest}</td>
@@ -396,7 +396,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>3</td>
+                <td>Dressing</td>
                 <td>${data.temp_dressing}</td>
                 <td>${data.rh_dressing}</td>
                 <td>${data.scaling_dressing}</td>
@@ -412,7 +412,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>4</td>
+                <td>Sample</td>
                 <td>${data.temp_sample}</td>
                 <td>${data.rh_sample}</td>
                 <td>${data.scaling_sample}</td>
@@ -428,7 +428,7 @@
                 <td>${date}</td>
                 <td>${time}</td>
                 <td>${perangkat}</td>
-                <td>5</td>
+                <td>Uji</td>
                 <td>${data.temp_uji}</td>
                 <td>${data.rh_uji}</td>
                 <td>${data.scaling_uji}</td>

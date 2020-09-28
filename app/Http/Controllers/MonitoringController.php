@@ -31,13 +31,17 @@ class MonitoringController extends Controller
 {
     public function checkSeri(Request $req)
     {
+        // dd($req->all());
         $data = Perangkat::where('no_seri',$req->no_seri)->first();
         if ($data === null) {
            echo "Gagal";
         } else {
             $status = 1;
+            $chart = Monitoring::where('ruangan_id', $req->id_ruangan)->latest()->first();
+            // dd($chart);
             return response()->json([
-                'status' => $status
+                'status' => $status,
+                'chart' => $chart
             ]);
         }
     }

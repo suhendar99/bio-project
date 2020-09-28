@@ -121,7 +121,7 @@
 			<tr>
 				<th>No</th>
 				<th>{{$parameter}}</th>
-				<th>Alarm</th>
+				{{-- <th>Alarm</th> --}}
 				<th>Nama Ruangan</th>
 				<th>No Seri Perangkat</th>
 			</tr>
@@ -138,11 +138,11 @@
 				@elseif($parameter == 'Tekanan')
 				<td>{{ $p->tekanan }}</td>
 				@endif
-				@if($p->alarm > 0)
+				{{-- @if($p->alarm > 0)
 					<td id="alertff">ON</td>
 				@else
 					<td id="alertff">OFF</td>
-				@endif
+				@endif --}}
 				<td>{{$p->ruangan->nama}}</td>
 				<td>{{$p->perangkat->no_seri}}</td>
 			</tr>
@@ -156,7 +156,7 @@
 				<th>Suhu</th>
 				<th>Kelembapan</th>
 				<th>Tekanan</th>
-				<th>Alarm</th>
+				{{-- <th>Alarm</th> --}}
 				<th>Nama Ruangan</th>
 				<th>No Seri Perangkat</th>
 			</tr>
@@ -170,11 +170,11 @@
 				<td>{{$p->suhu}}</td>
 				<td>{{$p->kelembapan}}</td>
 				<td>{{$p->tekanan}}</td>
-				@if($p->alarm > 0)
+				{{-- @if($p->alarm > 0)
 					<td id="alertff">ON</td>
 				@else
 					<td id="alertff">OFF</td>
-				@endif
+				@endif --}}
 				<td>{{$p->ruangan->nama}}</td>
 				<td>{{$p->perangkat->no_seri}}</td>
 			</tr>

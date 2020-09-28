@@ -1,6 +1,6 @@
 <style>
     .border{
-        
+
     }
 </style>
 <table>
@@ -10,15 +10,15 @@
         <td>Tanggal Monitoring</td>
         <td>Waktu Monitoring</td>
         @if ($satuan == 'suhu' || $satuan == 'allper')
-        <td>Suhu</td>            
+        <td>Suhu</td>
         @endif
-        @if ($satuan == 'kelembapan' || $satuan == 'allper')        
+        @if ($satuan == 'kelembapan' || $satuan == 'allper')
         <td>Kelembapan</td>
         @endif
-        @if ($satuan == 'tekanan' || $satuan == 'allper')        
+        @if ($satuan == 'tekanan' || $satuan == 'allper')
         <td>Tekanan</td>
         @endif
-        <td>Alarm Status</td>
+        {{-- <td>Alarm Status</td> --}}
         <td>Nama Ruangan</td>
     </tr>
     </thead>
@@ -32,17 +32,17 @@
                 @if ($satuan == 'suhu' || $satuan == 'allper')
                 <td>{{ $a->suhu }}</td>
                 @endif
-                @if ($satuan == 'kelembapan' || $satuan == 'allper')        
+                @if ($satuan == 'kelembapan' || $satuan == 'allper')
                 <td>{{ $a->kelembapan }}</td>
                 @endif
-                @if ($satuan == 'tekanan' || $satuan == 'allper')        
+                @if ($satuan == 'tekanan' || $satuan == 'allper')
                 <td>{{ $a->tekanan }}</td>
                 @endif
-                @if($a->alarm > 0)
+                {{-- @if($a->alarm > 0)
                     <td>ON</td>
                 @else
                     <td>OFF</td>
-                @endif
+                @endif --}}
                 <td>{{ $a->ruangan->nama }}</td>
             </tr>
         @endforeach

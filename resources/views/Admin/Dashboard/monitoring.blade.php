@@ -770,175 +770,171 @@
 
          var data = JSON.parse(message.payloadString);
         console.log(data);
+        console.log("MQTT Triggered");
         $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
-        var timeOutId = 0
-        var ajaxFn = function () {
-            $.ajax({
-              url:'/api/checkSeri',
-              method:'GET',
-              data:{
-                id_ruangan : `{{$id}}`,
-                no_seri : `Dc234Zz`,
-              },
-              dataType:'JSON',
-              success:function(response){
-                console.log("Pemanggilan Berhasil");
-                if (response.status == 1) {
-                    var today = new Date();
-                    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                    var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-                    
-                    if (suhu.length > 9) {
-                        suhu.splice(0,1)
-                        tekanan.splice(0,1)
-                        kelembapan.splice(0,1)        
-                    }
-
-                    
-                    // lastsuhu.splice(0,1)
-
-                    if (data.ruangan_id == {{$id}}) {
-                    suhu.push({
-                      x: time,
-                      y: response.chart.suhu
-                    })
-                    tekanan.push({
-                      x: time,
-                      y: response.chart.tekanan
-                    })
-                    kelembapan.push({
-                      x: time,
-                      y: response.chart.kelembapan
-                    })
-                    
-                    chartSuhu.updateSeries([
-                        {
-                            data: suhuMax
-                        },
-                        {
-                            data: suhu
-                        },
-                        {
-                            data: suhuMin
-                        },
-                    ])
-
-                    chartKelembapan.updateSeries([
-                        {
-                            data: kelembapanMax
-                        },
-                        {
-                            data: kelembapan
-                        },
-                        {
-                            data: kelembapanMin
-                        },
-                    ])
-
-                    chartTekanan.updateSeries([           
-                        {
-                            data: tekananMax
-                        },
-                        {
-                            data: tekanan
-                        },
-                        {
-                            data: tekananMin
-                        },
-                    ])
-
-                    var data1 = google.visualization.arrayToDataTable([
-                      ['Label', 'Value'],
-                      ['', 80],
-                    ]);
-
-                    var options1 = {
-                      width: 400, height: 120,
-                      redFrom: 70, redTo: 100,
-                      yellowFrom: 40, yellowTo: 70,
-                      greenFrom: 0, greenTo: 40,
-                      minorTicks: 5,
-                      animation:{
-                            duration: 1000,
-                            easing: 'out',
-                        },
-                    };
-
-                    var data2 = google.visualization.arrayToDataTable([
-                      ['Label', 'Value'],
-                      ['', 80],
-                    ]);
-
-                    var options2 = {  
-                      width: 400, height: 120,
-                      redFrom: 70, redTo: 100,
-                      yellowFrom: 40, yellowTo: 70,
-                      greenFrom: 0, greenTo: 40,
-                      minorTicks: 5,
-                      animation:{
-                            duration: 1000,
-                            easing: 'out',
-                        },
-                    };
-
-                    var data3 = google.visualization.arrayToDataTable([
-                      ['Label', 'Value'],
-                      ['', 80],
-                    ]);
-
-                    var options3 = {
-                      width: 400, height: 120,
-                      redFrom: 70, redTo: 100,
-                      yellowFrom: 40, yellowTo: 70,
-                      greenFrom: 0, greenTo: 40,
-                      minorTicks: 5,
-                      animation:{
-                            duration: 1000,
-                            easing: 'out',
-                        },
-                    };
-
-                    var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
-                    var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-                    var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
-
-                      try {
-                        data1.setValue(0,1,response.chart.suhu);
-                        chart1.draw(data1, options1)
-                        ;
-                        data2.setValue(0,1,response.chart.kelembapan);
-                        chart2.draw(data2, options2);
-
-                        data3.setValue(0,1,response.chart.tekanan);
-                        chart3.draw(data3, options3);
-
-                      } catch(e) {
-                          // statements
-                          console.log(e);
-                      }
-                    }
-                    // insert_data(data);
-                } else {
-                    Swal.fire({
-                        title: 'No Seri Harus Sesuai',
-                        icon: 'warning',
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                    })
+        $.ajax({
+          url:'/api/checkSeri',
+          method:'GET',
+          data:{
+            id_ruangan : `{{$id}}`,
+            no_seri : `Dc234Zz`,
+          },
+          dataType:'JSON',
+          success:function(response){
+            console.log("Pemanggilan Berhasil");
+            console.log(response.chart);
+            if (response.status == 1) {
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+                
+                if (suhu.length > 9) {
+                    suhu.splice(0,1)
+                    tekanan.splice(0,1)
+                    kelembapan.splice(0,1)        
                 }
-              },
-              error : function(e) {
-                console.log(e)
-              }
-            });
-        } 
 
-        setTimeout(ajaxFn(), 10000);
+                
+                // lastsuhu.splice(0,1)
+
+                if (data.ruangan_id == {{$id}}) {
+                suhu.push({
+                  x: time,
+                  y: response.chart.suhu
+                })
+                tekanan.push({
+                  x: time,
+                  y: response.chart.tekanan
+                })
+                kelembapan.push({
+                  x: time,
+                  y: response.chart.kelembapan
+                })
+                
+                chartSuhu.updateSeries([
+                    {
+                        data: suhuMax
+                    },
+                    {
+                        data: suhu
+                    },
+                    {
+                        data: suhuMin
+                    },
+                ])
+
+                chartKelembapan.updateSeries([
+                    {
+                        data: kelembapanMax
+                    },
+                    {
+                        data: kelembapan
+                    },
+                    {
+                        data: kelembapanMin
+                    },
+                ])
+
+                chartTekanan.updateSeries([           
+                    {
+                        data: tekananMax
+                    },
+                    {
+                        data: tekanan
+                    },
+                    {
+                        data: tekananMin
+                    },
+                ])
+
+                var data1 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
+
+                var options1 = {
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
+
+                var data2 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
+
+                var options2 = {  
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
+
+                var data3 = google.visualization.arrayToDataTable([
+                  ['Label', 'Value'],
+                  ['', 80],
+                ]);
+
+                var options3 = {
+                  width: 400, height: 120,
+                  redFrom: 70, redTo: 100,
+                  yellowFrom: 40, yellowTo: 70,
+                  greenFrom: 0, greenTo: 40,
+                  minorTicks: 5,
+                  animation:{
+                        duration: 1000,
+                        easing: 'out',
+                    },
+                };
+
+                var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+                var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+                var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+
+                  try {
+                    data1.setValue(0,1,response.chart.suhu);
+                    chart1.draw(data1, options1)
+                    ;
+                    data2.setValue(0,1,response.chart.kelembapan);
+                    chart2.draw(data2, options2);
+
+                    data3.setValue(0,1,response.chart.tekanan);
+                    chart3.draw(data3, options3);
+
+                  } catch(e) {
+                      // statements
+                      console.log(e);
+                  }
+                }
+                // insert_data(data);
+            } else {
+                Swal.fire({
+                    title: 'No Seri Harus Sesuai',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                })
+            }
+          },
+          error : function(e) {
+            console.log(e)
+          }
+        });
 
 
       }

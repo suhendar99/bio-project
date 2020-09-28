@@ -6,7 +6,8 @@
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
     $ruangan = App\Ruangan::where('id', $id)->first();
-    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('time','desc')->limit(10)->orderBy('time','asc')->get();
+    $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->limit(10)->orderBy('created_at','asc')->get();
+    // dd($monitoring);
     $gauge = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->first();
 @endphp
 
@@ -274,6 +275,7 @@
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
+        // console.log(`ID : {{$id}}`);
         function showTime() {
 		    var a_p = "";
 		    var today = new Date();
@@ -336,6 +338,7 @@
 
 
     <script>
+        // console.log(`ID : {{$id}}`);
         let monitoring = '@json($monitoring)'
         let suhuMaxs = '{{ $room->smax }}'
         let suhuMins = '{{ $room->smin }}'
@@ -767,6 +770,7 @@
 
          var data = JSON.parse(message.payloadString);
         console.log(data);
+        console.log("MQTT Triggered");
         $.ajaxSetup({
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -776,11 +780,13 @@
           url:'/api/checkSeri',
           method:'GET',
           data:{
-            no_seri:data.perangkat_id,
+            id_ruangan : `{{$id}}`,
+            no_seri : `Dc234Zz`,
           },
           dataType:'JSON',
           success:function(response){
-            console.log(response.status)
+            console.log("Pemanggilan Berhasil");
+            console.log(response.chart);
             if (response.status == 1) {
                 var today = new Date();
                 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -795,20 +801,20 @@
                 
                 // lastsuhu.splice(0,1)
 
-                if (data.ruangan_id == {{$id}}) {
+                if (response.chart.ruangan_id == {{$id}}) {
                 suhu.push({
                   x: time,
-                  y: data.suhu
+                  y: response.chart.suhu
                 })
                 tekanan.push({
                   x: time,
-                  y: data.tekanan
+                  y: response.chart.tekanan
                 })
                 kelembapan.push({
                   x: time,
-                  y: data.kelembapan
+                  y: response.chart.kelembapan
                 })
-                
+                console.log(suhu);
                 chartSuhu.updateSeries([
                     {
                         data: suhuMax
@@ -901,13 +907,13 @@
                 var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
 
                   try {
-                    data1.setValue(0,1,data.suhu);
+                    data1.setValue(0,1,response.chart.suhu);
                     chart1.draw(data1, options1)
                     ;
-                    data2.setValue(0,1,data.kelembapan);
+                    data2.setValue(0,1,response.chart.kelembapan);
                     chart2.draw(data2, options2);
 
-                    data3.setValue(0,1,data.tekanan);
+                    data3.setValue(0,1,response.chart.tekanan);
                     chart3.draw(data3, options3);
 
                   } catch(e) {
@@ -915,7 +921,7 @@
                       console.log(e);
                   }
                 }
-                insert_data(data);
+                // insert_data(data);
             } else {
                 Swal.fire({
                     title: 'No Seri Harus Sesuai',

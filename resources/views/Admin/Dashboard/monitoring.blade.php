@@ -46,6 +46,10 @@
       margin: 35px auto;
     }
 
+    .card {
+        padding: 2rem;
+    }
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

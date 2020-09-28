@@ -801,7 +801,7 @@
                 
                 // lastsuhu.splice(0,1)
 
-                if (data.ruangan_id == {{$id}}) {
+                if (response.chart.ruangan_id == {{$id}}) {
                 suhu.push({
                   x: time,
                   y: response.chart.suhu
@@ -814,7 +814,7 @@
                   x: time,
                   y: response.chart.kelembapan
                 })
-                
+                console.log(suhu);
                 chartSuhu.updateSeries([
                     {
                         data: suhuMax

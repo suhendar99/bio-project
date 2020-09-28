@@ -290,7 +290,6 @@ class LaporanController extends Controller
         $v = Validator::make($req->all(), [
             'email' => 'required|unique:set_kirims,id_operator',
             'status' => 'required|',
-            'waktu' => 'required|'
         ]);
 
         if ($v->fails()) {
@@ -301,8 +300,6 @@ class LaporanController extends Controller
             $employee = SetKirim::create([
                 'id_operator' => $req->email,
                 'status_kirim' => $req->status,
-                'waktu_kirim' => $req->waktu,
-
             ]);
 
 
@@ -325,7 +322,6 @@ class LaporanController extends Controller
         $v = Validator::make($req->all(), [
             'email' => 'required|unique:set_kirims,id_operator,'.$id,
             'status' => 'required|',
-            'waktu' => 'required|'
         ]);
 
         if ($v->fails()) {
@@ -338,7 +334,6 @@ class LaporanController extends Controller
             $operator->update([
                 'id_operator' => $req->email,
                 'status_kirim' => $req->status,
-                'waktu_kirim' => $req->waktu,
             ]);
 
             //  LogUser::create([

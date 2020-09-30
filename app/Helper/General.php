@@ -171,21 +171,21 @@ if (!function_exists('subscribe_mqtt') ){
 		                echo $send->operator->name."\n";
 		                Mail::to(Operator::where('id', $send->id_operator)->first())->send(new sendEmail($send->custom_teks, $sendAlert));
 		            }
+                
+                	$text = "";
 
 		            foreach ($sendAlert as $f) {
-		                $text = "Alert!!!\n"
+		                $text = $text."\n\n Alert!!!\n"
 		                . "<b>Message: </b>\n"
-		                . $f;
-
-
-
-						Telegram::sendMessage([
-							'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
-		                    'parse_mode' => 'HTML',
-		                    'text' => $text
-						]);
+		                . $f."\n\n";
 
 		            }
+                
+                	Telegram::sendMessage([
+                            'chat_id' => env('TELEGRAM_CHANNEL_ID', '-1001237937318'),
+                            'parse_mode' => 'HTML',
+                            'text' => $text
+                        ]);
 		           }
 		        }
 	        }

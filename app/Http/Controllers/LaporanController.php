@@ -161,9 +161,9 @@ class LaporanController extends Controller
             	// dd($kirim,$pos);
                 $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             }
-    		dd($pdf);
-    		return $pdf->download();
-            // return $pdf->stream('Monitoring-Report-'.$req->akhir);
+    		// dd($pdf);
+    		// return $pdf->download();
+            return $pdf->stream('Monitoring-Report-'.$req->akhir);
     	
             // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 

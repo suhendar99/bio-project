@@ -77,12 +77,12 @@ class everyMinute extends Command
                 }
             }
 
-            $awal = date("Y-m-d");
+            $awal = now()->yesterday()->format('Y-m-d');
             $akhir = date("Y-m-d");
 
             $yesterday = now()->yesterday()->format('Y-m-d');
             
-            $data = Monitoring::where('date', $yesterday)
+            $data = Monitoring::where('date', $awal)
             ->orWhere(function($query){
                 $yesterday = now()->yesterday()->format('Y-m-d');
                 $akhir = date("Y-m-d");

@@ -46,7 +46,7 @@
       margin: 35px auto;
     }
 
-    .card {
+    .chart-col .card {
         padding: 2rem;
     }
 
@@ -236,17 +236,17 @@
     <!--  -->
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 chart-col">
             <div class="card" id="chartSuhu" style="width: 100%"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 chart-col">
             <div class="card" id="chartTekanan" style="width: 100%"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 chart-col">
             <div class="card" id="chartKelembapan" style="width: 100%"></div>
         </div>
     </div>

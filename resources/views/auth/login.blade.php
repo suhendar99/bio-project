@@ -47,7 +47,11 @@
                             <form method="post" action="{{ route('login') }}" >
                                 @csrf
                                 <center>
-                                    <img src="{{ asset('foto/app/'.$apps->icon) }}" class="rounded-circle" alt="" style=" width: 100px; height: 100px; object-fit: scale-down;">
+                                 	@if($apps->icon == "")
+                                    	<i class="fa fa-sign-in fa-5x" style="margin-bottom: 20px;"></i>
+                                	@else
+                                    	<img src="{{ asset('foto/app/'.$apps->icon) }}" class="rounded-circle" alt="" style=" width: 100px; height: 100px; object-fit: scale-down;">
+                                	@endif
                                     <h2 style="margin-top: 10px;">{{ $apps->nama_apps }}</h2>
                                     <span>Login to Start Monitoring</span>
                                     <div class="form-group" style="margin-top: 20px;">

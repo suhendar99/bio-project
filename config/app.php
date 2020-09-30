@@ -179,7 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Salman\Mqtt\MqttServiceProvider::class,
-        App\Providers\UserServiceProvider::class,
+        // App\Providers\UserServiceProvider::class,
 
     ],
 
@@ -237,7 +237,7 @@ return [
         'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Mqtt' => \Salman\Mqtt\Facades\Mqtt::class,
-        'Mqttphp' => App\Helper\Mqttphp::class,
+        // 'Mqttphp' => App\Helper\Mqttphp::class,
     ],
 
 ];

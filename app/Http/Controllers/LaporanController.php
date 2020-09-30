@@ -9,7 +9,8 @@ use App\Exports\ExportLaporan;
 use App\Aktivasi;
 use Excel;
 use PDF;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 use App\Laporan;
 use App\Operator;
 use App\SetKirim;
@@ -34,30 +35,33 @@ class LaporanController extends Controller
     }
     public function downloadLaporan(Request $req)
     {
+    	
 
-        set_time_limit(99999);
+        // set_time_limit(99999);
         $v = Validator::make($req->all(), [
             'awal' => 'required|date',
             'akhir' => 'required|date',
             'ruang' => 'required',
-            'satuan' => 'required',
+            'satuan' => 'required'
         ]);
         $awal = $req->awal;
         $akhir = $req->akhir;
         $data2 = [];
         $set = Laporan::find(1)->first();
 
-        // dd($req->ckck);
+        // dd($req->all());
 
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
         }
         if ($awal > $akhir) {
+        	
              return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
         }
         if ($req->ruang === "all" && $req->satuan === "allper") {
             // Data monitoring
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
+        	// dd($data);
             if(count($data) == 0){
                 return back()->with('failed', "Tidak ada data dari ".$req->awal." sampai ".$req->akhir);
             }
@@ -65,6 +69,7 @@ class LaporanController extends Controller
             $pos = 'Ruangan';
             $kirim = 1;
             $sumber = "Semua Ruangan dan Parameter";
+        	// dd($sumber);
         } elseif ($req->ruang !== "all" && $req->satuan ==="allper"){
             // Data monitorign berdasarkan ID ruangan
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
@@ -111,7 +116,7 @@ class LaporanController extends Controller
             $sumber = $parameter;
         } elseif ($req->ruang !== "all" && $req->satuan !=="allper"){
             $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->latest()->get();
-
+			// dd($data);
             if(count($data) == 0){
                 return back()->with('failed', "Tidak ada data untuk ruangan dari ".$req->awal." sampai ".$req->akhir);
             }
@@ -138,43 +143,31 @@ class LaporanController extends Controller
             $kirim = 2;
             $sumber = $parameter." & ".$rooms->ruangan->nama;
         }
-        // dd($data);
-        // if ($req->satuan == "allpar") {
-        //     // $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->pluck($req->satuan);
-        //     // dd($data);
-        //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
-        // } else {
-        //     $data2 = Monitoring::select($req->satuan)->whereBetween('date',[$req->awal, $req->akhir])->where('ruangan_id', $req->ruang)->get();
+    	// dd($data);
 
-        // }
-
-        // if($req->ruang == "all" && $req->satuan == "allpar"){
-        //     $data = Monitoring::whereBetween('date',[$req->awal, $req->akhir])->latest()->get();
-        // }
-
-
-        if ($v->fails()) {
-            return back()->withErrors($v)->withInput();
-        }else {
-
-            // dd($count,$suhumax);
+            // dd($count);
             $pdf = app('dompdf.wrapper');
+			// dd($pdf);
             $pdf->getDomPDF()->set_option("enable_php", true);
             if ($kirim == 1 && $pos == "Ruangan"){
+            	// dd($kirim);
                 $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
-
+				// dd($pdf);
             }elseif ($kirim == 2 && $pos == 'Ruangan') {
+            	// dd($pos);
                 $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 
             }elseif($kirim == 2 && $pos == 'Parameter'){
+            	// dd($kirim,$pos);
                 $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
             }
-            set_time_limit(300);
-            return $pdf->stream('Monitoring-Report-'.$req->akhir);
-            return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+    		dd($pdf);
+    		return $pdf->download();
+            // return $pdf->stream('Monitoring-Report-'.$req->akhir);
+    	
+            // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 
-            return back();
-        }
+            // return back();
 
     }
 
@@ -227,37 +220,42 @@ class LaporanController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-    	$v = Validator::make($request->all(), [
-            'header_img' => 'required|',
-            'icon' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'footer' => 'required|',
-        ]);
-
+        if (!$request->file('icon')) {
+            $v = Validator::make($request->all(),[
+                'header_img' => 'required|',
+                'icon' => 'image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+        } else {
+            $v = Validator::make($request->all(),[
+                'header_img' => 'required|',
+                'icon' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'footer' => 'required|',
+            ]);
+        }
         if ($v->fails()) {
             return back()->withErrors($v)->withInput();
-        }else {
-            $setlaporan = Laporan::find($id);
-            $setlaporan->update([
-                'header_img' => $request->header_img,
-                'footer' => $request->footer,
-            ]);
+        } else {
+            if ($request->file('icon')) {
+                // Delete
+                $foto_public = Laporan::find($id);
+                File::delete($foto_public->foto);
 
-            if($request->hasfile('icon'))
-            {
-                $name = rand(). '-HEADER-' . $request->icon->getClientOriginalExtension();
-                $request->icon->move(public_path("foto/laporan/set"), $name);
-                $icon = 'foto/laporan/set/'.$name;
-                if(is_writable(public_path($setlaporan->icon))) {
-                    unlink(public_path($setlaporan->icon));
-                }
-                $icon = 'foto/laporan/set/'.$name;
+                // Update foto
+                $foto = $request->file('icon');
+                $name = time().'_'.$foto->getClientOriginalName();
+                $foto->move('foto/laporan/set', $name);
 
-                $setlaporan->update([
-                    'icon' => $icon,
-                ]);
+                Laporan::find($id)->update(
+                    array_merge($request->only('header_img','footer'),
+                        ['icon'=> 'foto/laporan/set/'.$name]
+                    )
+                );
+                return back()->with('success','Setting Laporan berhasil di update');
+            } else {
+                Laporan::findOrFail($id)->update($request->only('header_img','footer')
+            );
+                return back()->with('success','Setting Laporan berhasil di update');
             }
-            return back()->with('success', 'Setting Laporan berhasil di update');
         }
     }
 
@@ -284,7 +282,6 @@ class LaporanController extends Controller
         $v = Validator::make($req->all(), [
             'email' => 'required|unique:set_kirims,id_operator',
             'status' => 'required|',
-            'waktu' => 'required|'
         ]);
 
         if ($v->fails()) {
@@ -295,8 +292,6 @@ class LaporanController extends Controller
             $employee = SetKirim::create([
                 'id_operator' => $req->email,
                 'status_kirim' => $req->status,
-                'waktu_kirim' => $req->waktu,
-
             ]);
 
 
@@ -319,7 +314,6 @@ class LaporanController extends Controller
         $v = Validator::make($req->all(), [
             'email' => 'required|unique:set_kirims,id_operator,'.$id,
             'status' => 'required|',
-            'waktu' => 'required|'
         ]);
 
         if ($v->fails()) {
@@ -332,7 +326,6 @@ class LaporanController extends Controller
             $operator->update([
                 'id_operator' => $req->email,
                 'status_kirim' => $req->status,
-                'waktu_kirim' => $req->waktu,
             ]);
 
             //  LogUser::create([

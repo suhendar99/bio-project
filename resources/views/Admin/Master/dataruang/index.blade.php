@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="card-body">
                     @if(Auth::user()->level == "Admin")
-                    <a href="{{ route('data_ruang.create') }}" class="btn btn-primary">Tambah ruangan</a>
+                    {{-- <a href="{{ route('data_ruang.create') }}" class="btn btn-primary">Tambah ruangan</a> --}}
                     @endif
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered first">
@@ -53,7 +53,7 @@
                                     @if(Auth::user()->level == "Admin")
                                     <td>
                                         <a href="{{ route('data_ruang.edit', $r->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
-                                        <button onclick="deletes({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                        {{-- <button onclick="deletes({{ $r->id }})" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button> --}}
                                     </td>
                                     @endif
                                 </tr>

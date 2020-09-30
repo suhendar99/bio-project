@@ -168,7 +168,7 @@ class Dashboard extends Controller
             $date2 = $date2->addDays(1);
             // $data = Aktivasi::whereBetween('created_at',[$date1->format('Y-m-d'),$date2->format('Y-m-d')])->get();
             $data = Aktivasi::where('created_at','>=',$date1->format('Y-m-d'))->where('created_at','<=',$date2->format('Y-m-d'))->latest()->get();
-            // dd($req->all(),$data);
+            // dd($data);
 
             // dd($count,$suhumax);
             $pdf = app('dompdf.wrapper');

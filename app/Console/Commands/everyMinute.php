@@ -62,7 +62,7 @@ class everyMinute extends Command
         foreach ($setKirim as $po) {
             $set = Laporan::find(1)->first();
             $date = date("d");
-            $m = date("n")-1;
+            $m = date("m")-1;
 
             if($date <= 7){
                 if($m == 4 || $m == 6 || $m == 9 || $m == 11){
@@ -79,8 +79,16 @@ class everyMinute extends Command
 
             $awal = date("Y-m-d");
             $akhir = date("Y-m-d");
+
+            $yesterday = now()->yesterday()->format('Y-m-d');
             
-            $data = Monitoring::whereBetween('date',[$awal, $akhir])->latest()->get();
+            $data = Monitoring::where('date', $yesterday)
+            ->orWhere(function($query){
+                $yesterday = now()->yesterday()->format('Y-m-d');
+                $akhir = date("Y-m-d");
+                $query->whereBetween('date', [$yesterday, $akhir]);
+            })
+            ->latest()->get();
             $pos = 'Ruangan';
             $pp = "kosong";
             $sumber = "Semua Ruangan dan Parameter";

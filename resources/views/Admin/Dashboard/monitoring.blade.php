@@ -4,6 +4,8 @@
 
     $suhu = \App\Satuan::where('parameter','suhu' )->first();
     $kelembapan = \App\Satuan::where('parameter','kelembapan')->first();
+	$perangkat = \App\Perangkat::find(1);
+	$perangkat_id = $perangkat->no_seri;
     $tekanan = \App\Satuan::where('parameter','tekanan')->first();
     $ruangan = App\Ruangan::where('id', $id)->first();
     $monitoring = \App\Monitoring::where('ruangan_id', $id)->orderBy('created_at','desc')->limit(10)->orderBy('created_at','asc')->get();
@@ -50,6 +52,39 @@
         padding: 2rem;
     }
 
+	.wrapper {
+		display: flex;
+    	width: 100%;
+    	justify-content: center;
+    	align-items: center;
+    	margin: 0 auto;
+    	padding-right: 1rem !important;
+    	padding-left: 1rem !important;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+/*     	color: #3d405c; */
+	    margin: 0 !important;
+    	font-family: 'Circular Std Medium';
+	}
+
+	@media (max-width: 700px){
+    	.chart-col .card {
+        	padding: .5rem;
+    	}
+		.navbar-expand-lg>.container, .navbar-expand-lg>.container-fluid {
+    		padding-right: 1rem !important;
+    		padding-left: 1rem !important;
+    	}
+    	.clock {
+    		display: none;
+    	}
+    	
+    	.col-sm-0{
+			display:none;
+    	}
+	}
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -64,15 +99,23 @@
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
             <div class="container">
-                <a class="btn btn-danger rounded" href="{{ route('dashboard') }}"><i class="fas fa-arrow-left"></i> Back</a>
-                <div class="container">
-                    <center>
-                        <h3 class="text-white">{{ $ruangan->nama }}</h3>
-                    </center>
-                </div>
-                <div class="btn btn-default rounded ml-auto">
-                    <i class="fas fa-clock"></i><div id="waktu"></div>
-                </div>
+            	<div class="row wrapper">
+                	<div class="col-md-2 col-sm-0">
+                    	<a class="btn btn-danger rounded" href="{{ route('dashboard') }}"><i class="fas fa-arrow-left"></i> Back</a>
+	                </div>
+                	<div class="col-md-8 col-sm-12 wrapper">
+                		<center>
+                    		<h3 class="text-white">{{ $ruangan->nama }}</h3>
+                		</center>
+                	</div>
+                	<div class="col-md-2 col-sm-0">	
+                    	<center>
+                			<div class="btn btn-default rounded ml-auto  clock">
+                    			<i class="fas fa-clock"></i><div id="waktu"></div>
+			                </div>
+    	                </center>
+                	</div>
+            	</div>
             </div>
         </nav>
     </div>
@@ -88,17 +131,15 @@
                                 <div id="chart_div"></div>
                             </center>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6 col-sm-12">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-12 col-6">
                                     <center>Max</center>
                                     <div class="card bg-danger">
                                         <center>{{$room->smax}} C</center>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-12 col-6">
                                     <center>Min</center>
                                     <div class="card bg-primary">
                                         <center>{{$room->smin}} C</center>
@@ -132,17 +173,15 @@
                                 <div id="chart_div2" style="width: 100%;"></div>
                             </center>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6 col-sm-12">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-12 col-6">
                                     <center>Max</center>
                                     <div class="card bg-danger">
                                         <center>{{$room->kmax}} %</center>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-12 col-6">
                                     <center>Min</center>
                                     <div class="card bg-primary">
                                         <center>{{$room->kmin}} %</center>
@@ -176,17 +215,15 @@
                                 <div id="chart_div3" style="width: 100%;"></div>
                             </center>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6 col-sm-12">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-12 col-6">
                                     <center>Max</center>
                                     <div class="card bg-danger">
                                         <center>{{$room->tmax}} Pa</center>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-12 col-6">
                                     <center>Min</center>
                                     <div class="card bg-primary">
                                         <center>{{$room->tmin}} Pa</center>
@@ -785,7 +822,7 @@
           method:'GET',
           data:{
             id_ruangan : `{{$id}}`,
-            no_seri : `Dc234Zz`,
+            no_seri : `{{$perangkat_id}}`,
           },
           dataType:'JSON',
           success:function(response){

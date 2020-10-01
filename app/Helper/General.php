@@ -4,6 +4,7 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 use App\Monitoring;
 use App\Laporan;
 use App\KirimAlarm;
+use App\Perangkat;
 use App\Ruangan;
 use App\Operator;
 use App\Log_alert;
@@ -23,13 +24,14 @@ if (!function_exists('subscribe_mqtt') ){
 	        echo "Topic: {$topic}\n\n";
 	        echo "\t$msg\n\n";
 	        $payload = json_decode($msg);
-
+        	$perangkat = Perangkat::find(1);
+			$perangkat_id = $perangkat->no_seri;
+	        echo "\t$perangkat_id\n\n";
 	        $jsonobj = '[
 	        	{
 	        		"suhu" : '.$payload->temp_airlock.',
 	        		"kelembapan" : '.$payload->rh_airlock.',
 	        		"tekanan" : '.$payload->scaling_airlock.',
-	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 1,
 	        		"alarm" : 0,
 	        		"cvc" : '.$payload->cvc_airlock.',
@@ -39,7 +41,6 @@ if (!function_exists('subscribe_mqtt') ){
 	        		"suhu" : '.$payload->temp_vest.',
 	        		"kelembapan" : '.$payload->rh_vest.',
 	        		"tekanan" : '.$payload->scaling_vest.',
-	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 2,
 	        		"alarm" : 0,
 	        		"cvc" : '.$payload->cvc_vest.',
@@ -49,7 +50,6 @@ if (!function_exists('subscribe_mqtt') ){
 	        		"suhu" : '.$payload->temp_dressing.',
 	        		"kelembapan" : '.$payload->rh_dressing.',
 	        		"tekanan" : '.$payload->scaling_dressing.',
-	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 3,
 	        		"alarm" : 0,
 	        		"cvc" : '.$payload->cvc_dressing.',
@@ -59,7 +59,6 @@ if (!function_exists('subscribe_mqtt') ){
 	        		"suhu" : '.$payload->temp_sample.',
 	        		"kelembapan" : '.$payload->rh_sample.',
 	        		"tekanan" : '.$payload->scaling_sample.',
-	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 4,
 	        		"alarm" : 0,
 	        		"cvc" : '.$payload->cvc_sample.',
@@ -69,7 +68,6 @@ if (!function_exists('subscribe_mqtt') ){
 	        		"suhu" : '.$payload->temp_uji.',
 	        		"kelembapan" : '.$payload->rh_uji.',
 	        		"tekanan" : '.$payload->scaling_uji.',
-	        		"perangkat_id" : "Dc234Zz",
 	        		"ruangan_id" : 5,
 	        		"alarm" : 0,
 	        		"cvc" : '.$payload->cvc_uji.',
@@ -77,14 +75,15 @@ if (!function_exists('subscribe_mqtt') ){
 	        	}
 	    	]';
 			$datas = json_decode($jsonobj);
-	        foreach ($datas as $data) {
+	        // echo "\t$datas\n\n";
+	        foreach($datas as $data) {
 	        	$alert = 0;
 
 		        $monitor = Monitoring::create([
 		            'suhu' => $data->suhu,
 		            'kelembapan' => $data->kelembapan,
 		            'tekanan' => $data->tekanan,
-		            'perangkat_id' => $data->perangkat_id,
+		            'perangkat_id' => $perangkat_id,
 		            'ruangan_id' => $data->ruangan_id,
 		            'cvc' => $data->cvc,
 		            'vvc' => $data->vvc,

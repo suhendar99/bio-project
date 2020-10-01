@@ -17,7 +17,7 @@
                     {{ method_field('PUT') }}
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">URL Broker</label>
-                            <input id="inputText3" type="text" class="form-control @error('broker') is-invalid @enderror" placeholder="URL Broker" name="broker" value="{{ $mqtt->url_broker }}" readonly>
+                            <input id="inputText3" type="password" class="form-control @error('broker') is-invalid @enderror" placeholder="URL Broker" name="broker" value="{{ $mqtt->url_broker }}" readonly>
                             @error('broker')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Username</label>
-                            <input id="inputText3" type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Usename" name="username" value="{{ $mqtt->username }}" readonly>
+                            <input id="inputText3" type="password" class="form-control @error('username') is-invalid @enderror" placeholder="Usename" name="username" value="{{ $mqtt->username }}" readonly>
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText3" class="col-form-label">Password</label>
-                            <input id="inputText3" type="text" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ $mqtt->password }}" readonly>
+                            <input id="inputText3" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" value="{{ $mqtt->password }}" readonly>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group">
+<!--                         <div class="form-group">
                             <label for="" class="col-form-label">QOS</label>
                             <select name="qos" id="" class="form-control" disabled>
                                 <option value="0">0</option>
@@ -68,7 +68,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> -->
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
                 </div>

@@ -15,7 +15,7 @@ class CreatePerangkatsTable extends Migration
     {
         Schema::create('perangkats', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('no_seri', 10);
+            $table->string('no_seri', 20);
             $table->string('latitude', 30)->nullable();
             $table->string('longitude', 30)->nullable();
             $table->date('tgl_aktivasi')->nullable();

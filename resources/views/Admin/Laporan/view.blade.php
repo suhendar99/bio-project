@@ -1,6 +1,6 @@
 <style>
-    .border{
-
+    table {
+        border: 1px solid #000;
     }
 </style>
 <table>

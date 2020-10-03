@@ -29,13 +29,13 @@ class Kernel extends ConsoleKernel
         $setKirim = SetKirim::all();
         foreach ($setKirim as $user) {
             // if ($user->status_kirim == "Daily") {
-                $schedule->command('minute:email')->dailyAt("'08:00'");
+                $schedule->command('minute:email')->dailyAt('08:00');
             // } else {
                 // $schedule->command('minute:email')->weekly();
             // }
-            
+
         }
-        
+
     }
 
     /**

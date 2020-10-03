@@ -62,7 +62,7 @@ class LaporanController extends Controller
             if(count($data) == 0){
                 return back()->with('failed', "Tidak ada data dari ".$req->awal." sampai ".$req->akhir);
             }
-            // dd($data);
+            // dd($req->all());
             $pos = 'Ruangan';
             $kirim = 1;
             $sumber = "Semua Ruangan dan Parameter";

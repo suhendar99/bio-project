@@ -135,6 +135,7 @@
                                     </ul>
                                 </div>
                             </li>
+                            @if(Auth::user()->level == "Admin")
                             <li class="nav-item">
                                 <a class="nav-link
                                     {{ Request::is('monitoring*') ? 'active' : false }}
@@ -148,14 +149,13 @@
                                         <li class="nav-item">
                                             <a class="nav-link  {{ Request::is('monitoring*') ? 'active' : false }}" href="{{ route('monitoring') }}">Raw Data</a>
                                         </li>
-                                        @if(Auth::user()->level == "Admin")
                                         <!-- <li class="nav-item">
                                             <a class="nav-link {{ Request::is('set_monitoring*') ? 'active' : false }}" href="{{ route('setting.monitoring') }}">Pengaturan Monitoring</a>
                                         </li> -->
-                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link
                                    {{ Request::is('cetak_laporan*') ? 'active' : false }}

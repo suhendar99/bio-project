@@ -1,6 +1,8 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
+	$perangkat = \App\Perangkat::find(1);
+	$perangkat_id = $perangkat->no_seri;
 @endphp
 <!doctype html>
 <html lang="en">
@@ -286,6 +288,18 @@
     <!-- <script src="{-{ asset('js/paho.js') }}"></script> -->
    <!-- <script src="{-!! mix('js/app.js') !!}"></script> -->
 <script type="text/javascript">
+	$(document).ready(function() {
+        const timeout = 900000; // 15 minute
+        var idleTimer = null;
+        $('*').bind('mousemove click mouseup mousedown keydown keypress keyup submit change mouseenter scroll resize dblclick', function() {
+            clearTimeout(idleTimer);
+
+            idleTimer = setTimeout(() => {
+              document.getElementById('logout-form').submit();
+            }, timeout);
+        });
+        $('body').trigger('mousemove');
+    });
     var data_monitoring = [1];
 
     const on = "ON";
@@ -348,7 +362,7 @@
         // var date = today.getFullYear()+'-'+("0" + today.getMonth()).slice(-2)+'-'+today.getDate();
         console.log(date);
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-        const perangkat = "Dc234Zz"
+        const perangkat = `{{$perangkat_id}}`
 
         // console.log(message.payloadString);
         var data = JSON.parse(message.payloadString + "");

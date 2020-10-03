@@ -77,10 +77,16 @@ class everyMinute extends Command
                 }
             }
 
-            $awal = date("Y-m-d");
+            $awal = now()->yesterday()->format('Y-m-d');
             $akhir = date("Y-m-d");
             
-            $data = Monitoring::whereBetween('date',[$awal, $akhir])->latest()->get();
+            $data = Monitoring::where('date', $awal)
+            ->orWhere(function($query){
+                $yesterday = now()->yesterday()->format('Y-m-d');
+                $akhir = date("Y-m-d");
+                $query->whereBetween('date', [$yesterday, $akhir]);
+            })
+            ->latest()->get();
             $pos = 'Ruangan';
             $pp = "kosong";
             $sumber = "Semua Ruangan dan Parameter";

@@ -17,7 +17,6 @@ class CreateSetKirimsTable extends Migration
             $table->Increments('id');
             $table->unsignedInteger('id_operator');
             $table->enum('status_kirim', ['daily','weekly']);
-            $table->time('waktu_kirim');
             $table->timestamps();
         });
     }

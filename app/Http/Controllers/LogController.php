@@ -11,6 +11,7 @@ class LogController extends Controller
     {
     	# code...
     	$data = Log::latest();
+    	// dd($data);
     	return view('Admin.Log.index');
     }
 

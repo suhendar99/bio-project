@@ -26,20 +26,30 @@ class ExportLaporan implements FromView, ShouldAutoSize
 
     public function view(): view
     {
+        $event->getSheet()->getDelegate()->getStyle('A1:G1')->applyFromArray(
+            array(
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('rgb' => '000000')
+                    )
+                )
+            )
+        );
         $data = Monitoring::whereBetween('date',[$this->awal, $this->akhir]);
-        
+
 
         if ($this->ruangan != 'all') {
             $data = $data->where('ruangan_id',$this->ruangan);
         }
 
         $data = $data->get();
-        
+
         return view('Admin.Laporan.view', [
         'monitor' => $data,
         'satuan' => $this->satuan,
         ]);
-        
+
     }
     public static function afterSheet(AfterSheet $event)
     {

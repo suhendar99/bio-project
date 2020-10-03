@@ -12,7 +12,12 @@
 	$tmin = $data->min('tekanan');
 	$tavg = $data->avg('tekanan');
 
-	$date = date("d M Y");
+    $date = date("d M Y");
+    $ruanganAir = App\Ruangan::where('nama','Airlock')->first();
+    $ruanganDres = App\Ruangan::where('nama','Dressing')->first();
+    $ruanganSamp = App\Ruangan::where('nama','Sample')->first();
+    $ruanganUji = App\Ruangan::where('nama','Uji')->first();
+    $ruanganVest = App\Ruangan::where('nama','Vestibule')->first();
 
 @endphp
 
@@ -77,13 +82,10 @@
 	</style>
 </head>
 <body>
-	<img src="{{$set->icon}}" style="float: left;" width="50px" height="50px">
-	<h3 style=" margin-top: 30px; margin-right:20px;">
-		{{$set->header_img}}
-	</h3>
+	{{-- <img src="{{$set->icon}}" style="float: left;" width="50px" height="50px"> --}}
 
 	<div class="container">
-	<style type="text/css">
+        <style type="text/css">
 		table tr td{
 			text-align: center;
 		}
@@ -102,19 +104,62 @@
 
 		tr:nth-child(even) {background-color: #f2f2f2;}
 	</style>
-	<center>
-		<h3>Data Monitoring</h3><br>
-	</center>
-	<table style="margin-bottom:-10px;">
-		<tr>
-			<td rowspan="2" style="text-align:left; font-size:13px;">
-				Sumber Data : {{ $sumber }}
-			</td>
-			<td rowspan="2" style="text-align:right; font-size:13px;">
-				Waktu : {{$awal}} s.d. {{$akhir}}
-			</td>
-		</tr>
-	</table>
+    <div style="font-size: 13px;margin-left: 10px;">
+        <div style="font-weight: 900;font-size: 20px;">
+            {{$set->header_img}}
+        </div>
+        <div style="color: blue; margin-bottom: -15px;">
+            @if ($sumber == 'Suhu & Airlock')
+                SETPOINT ({{ $ruanganAir->smin }} s.d {{ $ruanganAir->smax }})
+            @endif
+           @if ($sumber == 'Kelembapan & Airlock')
+                SETPOINT ({{ $ruanganAir->kmin }} s.d {{ $ruanganAir->kmax}} )
+           @endif
+           @if ($sumber == 'Tekanan & Airlock')
+               SETPOINT ({{ $ruanganAir->tmin }} s.d {{ $ruanganAir->tmax }})
+           @endif
+           @if ($sumber == 'Suhu & Vestibule')
+                SETPOINT ({{ $ruanganVest->smin }} s.d {{ $ruanganVest->smax }})
+            @endif
+           @if ($sumber == 'Kelembapan & Vestibule')
+                SETPOINT ({{ $ruanganVest->kmin }} s.d {{ $ruanganVest->kmax}} )
+           @endif
+           @if ($sumber == 'Tekanan & Vestibule')
+               SETPOINT ({{ $ruanganVest->tmin }} s.d {{ $ruanganVest->tmax }})
+           @endif
+           @if ($sumber == 'Suhu & Dressing')
+                SETPOINT ({{ $ruanganDres->smin }} s.d {{ $ruanganDres->smax }})
+            @endif
+           @if ($sumber == 'Kelembapan & Dressing')
+                SETPOINT ({{ $ruanganDres->kmin }} s.d {{ $ruanganDres->kmax}} )
+           @endif
+           @if ($sumber == 'Tekanan & Dressing')
+               SETPOINT ({{ $ruanganDres->tmin }} s.d {{ $ruanganDres->tmax }})
+           @endif
+           @if ($sumber == 'Suhu & Sample')
+                SETPOINT ({{ $ruanganSamp->smin }} s.d {{ $ruanganSamp->smax }})
+            @endif
+           @if ($sumber == 'Kelembapan & Sample')
+                SETPOINT ({{ $ruanganSamp->kmin }} s.d {{ $ruanganSamp->kmax}} )
+           @endif
+           @if ($sumber == 'Tekanan & Sample')
+               SETPOINT ({{ $ruanganSamp->tmin }} s.d {{ $ruanganSamp->tmax }})
+           @endif
+           @if ($sumber == 'Suhu & Uji')
+                SETPOINT ({{ $ruanganUji->smin }} s.d {{ $ruanganUji->smax }})
+            @endif
+           @if ($sumber == 'Kelembapan & Uji')
+                SETPOINT ({{ $ruanganUji->kmin }} s.d {{ $ruanganUji->kmax}} )
+           @endif
+           @if ($sumber == 'Tekanan & Uji')
+               SETPOINT ({{ $ruanganUji->tmin }} s.d {{ $ruanganUji->tmax }})
+           @endif
+        </div>
+    <br>
+        Sumber Data : {{ $sumber }}
+    <br>
+        Waktu : {{$awal}} s.d. {{$akhir}}
+    </div>
 	<table width="100%" style="margin-bottom: -10px; " id="customers">
 		@if($pos == 'Parameter')
 		<thead>

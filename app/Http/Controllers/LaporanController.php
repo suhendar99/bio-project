@@ -35,9 +35,9 @@ class LaporanController extends Controller
     }
     public function downloadLaporan(Request $req)
     {
-    	
 
-        // set_time_limit(99999);
+
+        set_time_limit(99999);
         $v = Validator::make($req->all(), [
             'awal' => 'required|date',
             'akhir' => 'required|date',
@@ -55,7 +55,7 @@ class LaporanController extends Controller
             return back()->withErrors($v)->withInput();
         }
         if ($awal > $akhir) {
-        	
+
              return back()->with('failed','Tanggal Awal Dilarang Melampaui Tanggal Akhir');
         }
         if ($req->ruang === "all" && $req->satuan === "allper") {
@@ -65,7 +65,7 @@ class LaporanController extends Controller
             if(count($data) == 0){
                 return back()->with('failed', "Tidak ada data dari ".$req->awal." sampai ".$req->akhir);
             }
-            // dd($data);
+            // dd($req->all());
             $pos = 'Ruangan';
             $kirim = 1;
             $sumber = "Semua Ruangan dan Parameter";
@@ -164,7 +164,7 @@ class LaporanController extends Controller
     		// dd($pdf);
     		// return $pdf->download();
             return $pdf->stream('Monitoring-Report-'.$req->akhir);
-    	
+
             // return view('Admin.Laporan.laporan_pdf',['data'=>$data, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
 
             // return back();

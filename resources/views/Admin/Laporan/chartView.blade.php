@@ -77,7 +77,7 @@
         <div class="col-6">
             <div class="btn btn-primary" style="text-align: right;" id="myBtn">Show Chart</div>
             <span>*) Hanya menampilkan 10 data terakhir</span>
-        </div> 
+        </div>
     </div>
 </form>
 
@@ -138,13 +138,13 @@
                 cancelButtonColor: '#d33',
                })
         } else {
-            
+
             render()
         }
 
 
     };
-    
+
     function render() {
         $.ajaxSetup({
             headers: {
@@ -191,9 +191,9 @@
             console.log(kelembapanMins);
             console.log(tekananMaxs);
             console.log(tekananMins);
-            
+            var timeChart = Date.now();
             var optionsSuhu = {
-          
+
               series: [
                 {
                   data  : suhuMax,
@@ -209,7 +209,7 @@
                 }
               ],
               chart: {
-                id: 'realtime',
+                id: timeChart,
                 height: 350,
                 type: 'line',
                 animations: {
@@ -220,7 +220,31 @@
                   }
                 },
                 toolbar: {
-                  show: false
+                    show: true,
+                    offsetX: 0,
+                    offsetY: 0,
+                    tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true | '<img src="/static/icons/reset.png" width="20">',
+                    customIcons: []
+                    },
+                    export: {
+                    csv: {
+                        filename: undefined,
+                        columnDelimiter: ',',
+                        headerCategory: 'category',
+                        headerValue: 'value',
+                        dateFormatter(timestamp) {
+                        return new Date(timestamp).toDateString()
+                        }
+                    }
+                    },
+                    autoSelected: 'zoom'
                 },
                 zoom: {
                   enabled: false
@@ -247,14 +271,14 @@
               },
               legend: {
                 show: true
-              },          
+              },
             colors: ['#ff0000', '#26a0fc' ,'#546E7A']
             };
 
-          
-            
+
+
             var optionsKelembapan = {
-              
+
               series: [
                 {
                   data  : kelembapanMax,
@@ -281,8 +305,32 @@
                   }
                 },
                 toolbar: {
-                  show: false
-                },
+                    show: true,
+                    offsetX: 0,
+                    offsetY: 0,
+                    tools: {
+                        download: true,
+                        selection: true,
+                        zoom: true,
+                        zoomin: true,
+                        zoomout: true,
+                        pan: true,
+                        reset: true | '<img src="/static/icons/reset.png" width="20">',
+                        customIcons: []
+                    },
+                    export: {
+                        csv: {
+                        filename: undefined,
+                        columnDelimiter: ',',
+                        headerCategory: 'category',
+                        headerValue: 'value',
+                        dateFormatter(timestamp) {
+                            return new Date(timestamp).toDateString()
+                        }
+                        }
+                    },
+                    autoSelected: 'zoom'
+                    },
                 zoom: {
                   enabled: false
                 }
@@ -302,7 +350,7 @@
               },
               xaxis: {
               },
-              yaxis: {            
+              yaxis: {
                 max: parseInt(kelembapanMaxs) + 30,
                 min: parseInt(kelembapanMins) - 30,
               },
@@ -312,10 +360,10 @@
               colors: ['#ff0000', '#26a0fc' ,'#546E7A']
             };
 
-          
+
 
             var optionsTekanan = {
-              
+
               series: [
                  {
                   data  : tekananMax,
@@ -331,6 +379,7 @@
                 }
               ],
               chart: {
+
                 id: 'realtime',
                 height: 350,
                 type: 'line',
@@ -342,7 +391,31 @@
                   }
                 },
                 toolbar: {
-                  show: false
+                    show: true,
+                    offsetX: 0,
+                    offsetY: 0,
+                    tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true | '<img src="/static/icons/reset.png" width="20">',
+                    customIcons: []
+                    },
+                    export: {
+                    csv: {
+                        filename: undefined,
+                        columnDelimiter: ',',
+                        headerCategory: 'category',
+                        headerValue: 'value',
+                        dateFormatter(timestamp) {
+                        return new Date(timestamp).toDateString()
+                        }
+                    }
+                    },
+                    autoSelected: 'zoom'
                 },
                 zoom: {
                   enabled: false
@@ -363,7 +436,7 @@
               },
               xaxis: {
               },
-              yaxis: {            
+              yaxis: {
                 max: parseInt(tekananMaxs) + 30,
                 min: parseInt(tekananMins) - 30,
               },
@@ -440,10 +513,10 @@
                   x: element.time,
                   y: tekananMins
                 })
-                
-            });        
 
-              
+            });
+
+
             chartSuhu.updateSeries([
                 {
                     data: suhuMax
@@ -468,7 +541,7 @@
                 },
             ])
 
-            chartTekanan.updateSeries([           
+            chartTekanan.updateSeries([
                 {
                     data: tekananMax
                 },

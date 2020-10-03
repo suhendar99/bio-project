@@ -33,9 +33,9 @@ class Kernel extends ConsoleKernel
             // } else {
                 // $schedule->command('minute:email')->weekly();
             // }
-            
+
         }
-        
+
     }
 
     /**

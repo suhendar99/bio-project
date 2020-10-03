@@ -31,7 +31,7 @@
                     </div>
                     <form action="/updateSetlaporan/{{$data->id}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-6">
                                 Icon Laporan
                             </div>
@@ -46,10 +46,10 @@
                                     <span>*Jika ingin bagus beri ukuran 450 x 450</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-6">
-                                Header Laporan
+                                Judul Laporan
                             </div>
                             <div class="col-6">
                                 <div class="form-group">

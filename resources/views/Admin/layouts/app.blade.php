@@ -1,6 +1,8 @@
 @php
     $mqtt = \App\Mqtt::where('id',1)->first();
     $app = \App\Setapp::where('id',1)->first();
+	$perangkat = \App\Perangkat::find(1);
+	$perangkat_id = $perangkat->no_seri;
 @endphp
 <!doctype html>
 <html lang="en">
@@ -133,6 +135,7 @@
                                     </ul>
                                 </div>
                             </li>
+                            @if(Auth::user()->level == "Admin")
                             <li class="nav-item">
                                 <a class="nav-link
                                     {{ Request::is('monitoring*') ? 'active' : false }}
@@ -146,14 +149,13 @@
                                         <li class="nav-item">
                                             <a class="nav-link  {{ Request::is('monitoring*') ? 'active' : false }}" href="{{ route('monitoring') }}">Raw Data</a>
                                         </li>
-                                        @if(Auth::user()->level == "Admin")
                                         <!-- <li class="nav-item">
                                             <a class="nav-link {{ Request::is('set_monitoring*') ? 'active' : false }}" href="{{ route('setting.monitoring') }}">Pengaturan Monitoring</a>
                                         </li> -->
-                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link
                                    {{ Request::is('cetak_laporan*') ? 'active' : false }}
@@ -361,7 +363,7 @@
         // var date = today.getFullYear()+'-'+("0" + today.getMonth()).slice(-2)+'-'+today.getDate();
         console.log(date);
         var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-        const perangkat = "Dc234Zz"
+        const perangkat = `{{$perangkat_id}}`
 
         // console.log(message.payloadString);
         var data = JSON.parse(message.payloadString + "");

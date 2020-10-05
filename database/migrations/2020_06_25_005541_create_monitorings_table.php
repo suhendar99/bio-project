@@ -24,7 +24,7 @@ class CreateMonitoringsTable extends Migration
             $table->unsignedInteger('ruangan_id');
             $table->string('cvc', 10);
             $table->string('vvc', 10);
-            $table->foreign('ruangan_id')->references('id')->on('ruangans');
+            $table->foreign('ruangan_id')->references('id')->on('ruangans')->onDelete('cascade');
             $table->timestamps();
         });
     }

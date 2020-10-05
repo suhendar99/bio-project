@@ -62,7 +62,7 @@ class everyMinute extends Command
         foreach ($setKirim as $po) {
             $set = Laporan::find(1)->first();
             $date = date("d");
-            $m = date("n")-1;
+            $m = date("m")-1;
 
             if($date <= 7){
                 if($m == 4 || $m == 6 || $m == 9 || $m == 11){
@@ -79,6 +79,8 @@ class everyMinute extends Command
 
             $awal = now()->yesterday()->format('Y-m-d');
             $akhir = date("Y-m-d");
+
+            $yesterday = now()->yesterday()->format('Y-m-d');
             
             $data = Monitoring::where('date', $awal)
             ->orWhere(function($query){

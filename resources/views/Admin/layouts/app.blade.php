@@ -288,7 +288,7 @@
     <!-- <script src="{-{ asset('js/paho.js') }}"></script> -->
    <!-- <script src="{-!! mix('js/app.js') !!}"></script> -->
 <script type="text/javascript">
-	$(document).ready(function() {
+    $(document).ready(function() {
         const timeout = 900000; // 15 minute
         var idleTimer = null;
         $('*').bind('mousemove click mouseup mousedown keydown keypress keyup submit change mouseenter scroll resize dblclick', function() {
@@ -300,6 +300,7 @@
         });
         $('body').trigger('mousemove');
     });
+
     var data_monitoring = [1];
 
     const on = "ON";

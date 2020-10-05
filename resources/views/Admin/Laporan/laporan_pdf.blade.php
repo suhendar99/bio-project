@@ -104,6 +104,8 @@
 
 		tr:nth-child(even) {background-color: #f2f2f2;}
 	</style>
+    <img src="https://quickchart.io/chart?width=500&height=300&c={{ $chart }}" width="700px" style="margin-top: 20px;">
+
     <div style="font-size: 13px;margin-left: 10px;">
         <div style="font-weight: 900;font-size: 20px;">
             {{$set->header_img}}
@@ -160,6 +162,8 @@
     <br>
         Waktu : {{$awal}} s.d. {{$akhir}}
     </div>
+
+
 	<table width="100%" style="margin-bottom: -10px; " id="customers">
 		@if($pos == 'Parameter')
 		<thead>
@@ -275,26 +279,15 @@
 		{{$set->footer}},  {{$date}}<br>
 		{{Auth::user()->name}}
 	</div>
+
+
+
 	<div id="footer">
 	  <div class="page-number"></div>
 	</div>
 
 <script>
 
-	const rero = ()=>{
-        const alrm = document.querySelectorAll("#alertff");
-    	const on = "ON";
-    	const off = "OFF";
-        alrm.forEach(r =>{
-            if(r.innerHTML == 1){
-                r.innerHTML = on;
-            }else{
-                r.innerHTML = off;
-            }
-        })
-    }
-    console.log('hai');
-    rero();
 </script>
 </body>
 </html>

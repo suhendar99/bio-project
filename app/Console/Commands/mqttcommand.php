@@ -53,7 +53,6 @@ class mqttcommand extends Command
         $dbMqtt = Mqtt::find(1);
         $topic = $dbMqtt->topic;
         subscribe_mqtt($topic);
-
     }
 
 }

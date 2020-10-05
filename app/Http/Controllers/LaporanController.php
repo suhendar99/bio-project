@@ -145,21 +145,95 @@ class LaporanController extends Controller
         }
     	// dd($data);
 
+        $suhu = "";
+        $kelembapan = "";
+        $tekanan = "";
+        $timeSet = "";
+
+        foreach ($data as $minimal) {
+            $suhu = $suhu.((string) $minimal->suhu).",";
+            $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
+            $tekanan = $tekanan.((string) $minimal->tekanan).",";
+            $timeSet = $timeSet."'".((string) $minimal->time)."',";
+        }
+
+        // dd($timeSet);
+
             // dd($count);
             $pdf = app('dompdf.wrapper');
 			// dd($pdf);
             $pdf->getDomPDF()->set_option("enable_php", true);
+
+            $chart = "{
+        type: 'line',
+        data: {
+         labels: [".$timeSet."],
+         datasets: [{
+            label: 'Suhu',
+            backgroundColor: 'rgba(24,46,184,72)',
+            borderColor: 'rgba(24,46,184,72)',
+            pointBorderWidth: 1,
+            fill: false, data: [".$suhu."]}, {
+            label: 'Kelembapan',
+            backgroundColor: 'rgba(219,18,38,86)',
+            borderColor: 'rgba(219,18,38,86)',
+            pointBorderWidth: 1,
+            fill: false, data: [".$kelembapan."]}, {
+            label: 'Tekanan',
+            backgroundColor: 'rgba(1,184,29,72)',
+            borderColor: 'rgba(1,184,29,72)',
+            pointBorderWidth: 1,
+            fill: false, data: [".$tekanan."]
+         }]
+        }, options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'BIOFARMA'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            max: 100,
+                            min: -30,
+                            stepSize: 10
+                        },
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
+            }
+}";
+
             if ($kirim == 1 && $pos == "Ruangan"){
             	// dd($kirim);
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>"Semua", 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir, 'chart' => urlencode($chart)]);
 				// dd($pdf);
             }elseif ($kirim == 2 && $pos == 'Ruangan') {
             	// dd($pos);
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter->ruangan->nama, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir, 'chart' => urlencode($chart)]);
 
             }elseif($kirim == 2 && $pos == 'Parameter'){
             	// dd($kirim,$pos);
-                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir]);
+                $pdf = PDF::loadview('Admin.Laporan.laporan_pdf',['data'=>$data, 'pos'=>$pos, 'parameter'=>$parameter, 'sumber' => $sumber, 'set'=>$set, 'awal'=>$awal, 'akhir'=>$akhir, 'chart' => urlencode($chart)]);
             }
     		// dd($pdf);
     		// return $pdf->download();

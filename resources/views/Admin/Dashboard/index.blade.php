@@ -141,6 +141,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="contact-tab-justify" data-toggle="tab" href="#contact-justify" role="tab" aria-controls="contact" aria-selected="false">Alarm</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="log-tab-justify" data-toggle="tab" href="#log-justify" role="tab" aria-controls="log" aria-selected="false">Log</a>
+                            </li>
                         </ul>
                         <div class="tab-content" id="myTabContent7" bg-dark>
                             <div class="tab-pane fade show active" id="home-justify" role="tabpanel" aria-labelledby="home-tab-justify">
@@ -156,6 +159,9 @@
                             </div>
                             <div class="tab-pane fade" id="contact-justify" role="tabpanel" aria-labelledby="contact-tab-justify">
                             @include('Admin.Dashboard.alarm')
+                            </div>
+                            <div class="tab-pane fade" id="log-justify" role="tabpanel" aria-labelledby="log-tab-justify">
+                            @include('Admin.Dashboard.log')
                             </div>
                         </div>
                     </div>

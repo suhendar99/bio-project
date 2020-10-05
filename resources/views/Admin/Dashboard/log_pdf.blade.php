@@ -119,7 +119,7 @@
 			<tr>
 				<td>{{ $i++ }}</td>
 				<td>{{$p->operator->name}}</td>
-				<td>{{$p->operator}}</td>
+				<td>{{$p->operator->level}}</td>
 				<td>{{$p->description}}</td>
 				<td>{{$p->created_at}}</td>
 			</tr>

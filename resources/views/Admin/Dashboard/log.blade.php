@@ -25,7 +25,8 @@
             </thead>
             <tbody>
                 @php $no = 1 @endphp
-                @foreach($aktivasi as $a)                
+                @foreach($aktivasi as $a)    
+                @if($a->operator->level != 'Admin')            
                 <tr>
                     <td>{{$no++}}</td>
                     @if($a->causer_id == null)
@@ -61,6 +62,7 @@
                     </td>
                     <td>{{$a->created_at}}</td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>

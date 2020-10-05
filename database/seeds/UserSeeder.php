@@ -35,5 +35,13 @@ class UserSeeder extends Seeder
             "level" => "Operator",
             "password" => Hash::make("09870987"),
         ]);
+
+        User::create([
+            "name" => "Operator Biofarma",
+            "email" => "operator.biofarma@gmail.com",
+            "nik" => "123456",
+            "level" => "Operator",
+            "password" => Hash::make("123456"),
+        ]);
     }
 }

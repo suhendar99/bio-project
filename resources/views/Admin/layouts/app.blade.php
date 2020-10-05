@@ -454,6 +454,38 @@
         $('#monitoring > tbody > tr').last().remove();
 
 
+        // Realtime AHU
+        // 
+        $('#uji-suhu').text(data.temp_uji);
+        $('#uji-kelembapan').text(data.rh_uji);
+        $('#uji-tekanan').text(data.scaling_uji);
+        $('#uji-cvc').text(data.cvc_uji);
+        $('#uji-vvc').text(data.vvc_uji);
+
+        $('#airlock-suhu').text(data.temp_airlock);
+        $('#airlock-kelembapan').text(data.rh_airlock);
+        $('#airlock-tekanan').text(data.scaling_airlock);
+        $('#airlock-cvc').text(data.cvc_airlock);
+        $('#airlock-vvc').text(data.vvc_airlock);
+
+        $('#vestibule-suhu').text(data.temp_vest);
+        $('#vestibule-kelembapan').text(data.rh_vest);
+        $('#vestibule-tekanan').text(data.scaling_vest);
+        $('#vestibule-cvc').text(data.cvc_vest);
+        $('#vestibule-vvc').text(data.vvc_vest);
+
+        $('#sample-suhu').text(data.temp_sample);
+        $('#sample-kelembapan').text(data.rh_sample);
+        $('#sample-tekanan').text(data.scaling_sample);
+        $('#sample-cvc').text(data.cvc_sample);
+        $('#sample-vvc').text(data.vvc_sample);
+
+        $('#dressing-suhu').text(data.temp_dressing);
+        $('#dressing-kelembapan').text(data.rh_dressing);
+        $('#dressing-tekanan').text(data.scaling_dressing);
+        $('#dressing-cvc').text(data.cvc_dressing);
+        $('#dressing-vvc').text(data.vvc_dressing);
+
       }
 
       function insert_data(data) {
@@ -503,5 +535,4 @@
 </script>
 @stack('script')
 </body>
-https://github.com/suhendar99/bio-project
 </html>

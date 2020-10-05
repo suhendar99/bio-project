@@ -17,7 +17,7 @@ class SetmqttSeeder extends Seeder
 			'url_broker' => 'm15.cloudmqtt.com',
 			'username' => 'aqeiblzz',
 			'password' => 'SMXz9EyJcRmB',
-			'topic' => 'qwerty',
+			'topic' => 'bsl-biofarma',
 			'qos' => '0',
 			'keep_alive' => 1,
 		]);

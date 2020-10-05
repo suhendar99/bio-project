@@ -1,3 +1,11 @@
+@php
+$airlock = \App\Monitoring::where('ruangan_id',1)->latest()->first();
+// dd($airlock);
+$vestibule = \App\Monitoring::where('ruangan_id',2)->latest()->first();
+$dressing = \App\Monitoring::where('ruangan_id',3)->latest()->first();
+$sample = \App\Monitoring::where('ruangan_id',4)->latest()->first();
+$uji = \App\Monitoring::where('ruangan_id',5)->latest()->first();
+@endphp
 <style type="text/css">
     .ahu-outer {
         padding: 1rem;
@@ -25,7 +33,7 @@
     }
 
     .room-ahu {
-        padding: 2rem;
+        padding: 1rem;
         border: 1px solid;
     }
 
@@ -51,47 +59,39 @@
                     <span>Suhu</span>
                 </div>
                 <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-suhu">{{$uji->suhu}}</span> °C</button>
                 </div>
             </div>
             <div class="col-4 my-2 px-4">
                 <div class="row wrapper">
-                    <span>Suhu</span>
+                    <span>Kelembapan</span>
                 </div>
                 <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                </div>
-            </div>
-            <div class="col-4 my-2 px-4">
-                <div class="row wrapper">
-                    <span>Suhu</span>
-                </div>
-                <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-kelembapan">{{$uji->kelembapan}}</span> %</button>
                 </div>
             </div>
             <div class="col-4 my-2 px-4">
                 <div class="row wrapper">
-                    <span>Suhu</span>
+                    <span>Tekanan</span>
                 </div>
                 <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                </div>
-            </div>
-            <div class="col-4 my-2 px-4">
-                <div class="row wrapper">
-                    <span>Suhu</span>
-                </div>
-                <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-tekanan">{{$uji->tekanan}}</span> Pa</button>
                 </div>
             </div>
-            <div class="col-4 my-2 px-4">
+            <div class="col-6 my-2 px-4">
                 <div class="row wrapper">
-                    <span>Suhu</span>
+                    <span>CVC</span>
                 </div>
                 <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-cvc">{{$uji->cvc}}</span> CMH</button>
+                </div>
+            </div>
+            <div class="col-6 my-2 px-4">
+                <div class="row wrapper">
+                    <span>VVC</span>
+                </div>
+                <div class="row wrapper">
+                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-vvc">{{$uji->vvc}}</span> CMH</button>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
                                     <span>Suhu</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36 °C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-suhu">{{$airlock->suhu}}</span> °C</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
@@ -118,7 +118,7 @@
                                     <span>Kelembapan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">10 %</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-kelembapan">{{$airlock->kelembapan}}</span> %</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
@@ -126,31 +126,23 @@
                                     <span>Tekanan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">20 Pa</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-tekanan">{{$airlock->tekanan}}</span> Pa</button>
                                 </div>
                             </div>
-                            <div class="col-4 my-2 px-4">
+                            <div class="col-6 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>CVC</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-cvc">{{$airlock->cvc}}</span> CMH</button>
                                 </div>
                             </div>
-                            <div class="col-4 my-2 px-4">
+                            <div class="col-6 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>VVC</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-vvc">{{$airlock->vvc}}</span> CMH</button>
                                 </div>
                             </div>
                         </div>
@@ -165,47 +157,39 @@
                                     <span>Suhu</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-suhu">{{$sample->suhu}}</span> °C</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>Kelembapan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-kelembapan">{{$sample->kelembapan}}</span> %</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>Tekanan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-tekanan">{{$sample->tekanan}}</span> Pa</button>
                                 </div>
                             </div>
-                            <div class="col-4 my-2 px-4">
+                            <div class="col-6 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>CVC</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-cvc">{{$sample->cvc}}</span> CMH</button>
+                                </div>
+                            </div>
+                            <div class="col-6 my-2 px-4">
+                                <div class="row wrapper">
+                                    <span>VVC</span>
+                                </div>
+                                <div class="row wrapper">
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-vvc">{{$sample->vvc}}</span> CMH</button>
                                 </div>
                             </div>
                         </div>
@@ -224,47 +208,39 @@
                                     <span>Suhu</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-suhu">{{$dressing->suhu}}</span> °C</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>Kelembapan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-kelembapan">{{$dressing->kelembapan}}</span> %</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>Tekanan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-tekanan">{{$dressing->tekanan}}</span> Pa</button>
                                 </div>
                             </div>
-                            <div class="col-4 my-2 px-4">
+                            <div class="col-6 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>CVC</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-cvc">{{$dressing->cvc}}</span> CMH</button>
+                                </div>
+                            </div>
+                            <div class="col-6 my-2 px-4">
+                                <div class="row wrapper">
+                                    <span>VVC</span>
+                                </div>
+                                <div class="row wrapper">
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-vvc">{{$dressing->vvc}}</span> CMH</button>
                                 </div>
                             </div>
                         </div>
@@ -279,47 +255,39 @@
                                     <span>Suhu</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-suhu">{{$vestibule->suhu}}</span> °C</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>Kelembapan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-kelembapan">{{$vestibule->kelembapan}}</span> %</button>
                                 </div>
                             </div>
                             <div class="col-4 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>Tekanan</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-tekanan">{{$vestibule->tekanan}}</span> Pa</button>
                                 </div>
                             </div>
-                            <div class="col-4 my-2 px-4">
+                            <div class="col-6 my-2 px-4">
                                 <div class="row wrapper">
-                                    <span>Suhu</span>
+                                    <span>CVC</span>
                                 </div>
                                 <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger">36°C</button>
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-cvc">{{$vestibule->cvc}}</span> CMH</button>
+                                </div>
+                            </div>
+                            <div class="col-6 my-2 px-4">
+                                <div class="row wrapper">
+                                    <span>VVC</span>
+                                </div>
+                                <div class="row wrapper">
+                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-vvc">{{$vestibule->vvc}}</span> CMH</button>
                                 </div>
                             </div>
                         </div>

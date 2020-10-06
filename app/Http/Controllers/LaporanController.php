@@ -65,6 +65,77 @@ class LaporanController extends Controller
             if(count($data) == 0){
                 return back()->with('failed', "Tidak ada data dari ".$req->awal." sampai ".$req->akhir);
             }
+
+            $suhu = "";
+            $kelembapan = "";
+            $tekanan = "";
+            $timeSet = "";
+
+            foreach ($data as $minimal) {
+                $suhu = $suhu.((string) $minimal->suhu).",";
+                $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
+                $tekanan = $tekanan.((string) $minimal->tekanan).",";
+                $timeSet = $timeSet."'".((string) $minimal->time)."',";
+            }
+
+            $chart = "{
+                type: 'line',
+                data: {
+                 labels: [".$timeSet."],
+                 datasets: [{
+                    label: 'Suhu',
+                    backgroundColor: 'rgba(24,46,184,72)',
+                    borderColor: 'rgba(24,46,184,72)',
+                    pointBorderWidth: 1,
+                    fill: false, data: [".$suhu."]}, {
+                    label: 'Kelembapan',
+                    backgroundColor: 'rgba(219,18,38,86)',
+                    borderColor: 'rgba(219,18,38,86)',
+                    pointBorderWidth: 1,
+                    fill: false, data: [".$kelembapan."]}, {
+                    label: 'Tekanan',
+                    backgroundColor: 'rgba(1,184,29,72)',
+                    borderColor: 'rgba(1,184,29,72)',
+                    pointBorderWidth: 1,
+                    fill: false, data: [".$tekanan."]
+                 }]
+                }, options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'BIOFARMA'
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Time'
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    max: 100,
+                                    min: -30,
+                                    stepSize: 10
+                                },
+                                display: true,
+                                scaleLabel: {
+                                    display: true
+                                }
+                            }]
+                        }
+                    }
+                }";
+
             // dd($req->all());
             $pos = 'Ruangan';
             $kirim = 1;
@@ -86,6 +157,76 @@ class LaporanController extends Controller
                 return back()->with('failed', "Tidak ada ruangan");
             }
 
+            $suhu = "";
+            $kelembapan = "";
+            $tekanan = "";
+            $timeSet = "";
+
+            foreach ($data as $minimal) {
+                $suhu = $suhu.((string) $minimal->suhu).",";
+                $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
+                $tekanan = $tekanan.((string) $minimal->tekanan).",";
+                $timeSet = $timeSet."'".((string) $minimal->time)."',";
+            }
+
+            $chart = "{
+                type: 'line',
+                data: {
+                 labels: [".$timeSet."],
+                 datasets: [{
+                    label: 'Suhu',
+                    backgroundColor: 'rgba(24,46,184,72)',
+                    borderColor: 'rgba(24,46,184,72)',
+                    pointBorderWidth: 1,
+                    fill: false, data: [".$suhu."]}, {
+                    label: 'Kelembapan',
+                    backgroundColor: 'rgba(219,18,38,86)',
+                    borderColor: 'rgba(219,18,38,86)',
+                    pointBorderWidth: 1,
+                    fill: false, data: [".$kelembapan."]}, {
+                    label: 'Tekanan',
+                    backgroundColor: 'rgba(1,184,29,72)',
+                    borderColor: 'rgba(1,184,29,72)',
+                    pointBorderWidth: 1,
+                    fill: false, data: [".$tekanan."]
+                 }]
+                }, options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'BIOFARMA'
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Time'
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    max: 100,
+                                    min: -30,
+                                    stepSize: 10
+                                },
+                                display: true,
+                                scaleLabel: {
+                                    display: true
+                                }
+                            }]
+                        }
+                    }
+                }";
+
             $pos = 'Ruangan';
             $kirim = 2;
             $sumber = $parameter->ruangan->nama;
@@ -99,12 +240,180 @@ class LaporanController extends Controller
 
             if ($req->satuan == "suhu") {
                 $parameter = 'Suhu';
+
+                $suhu = "";
+                $timeSet = "";
+
+                foreach ($data as $minimal) {
+                    $suhu = $suhu.((string) $minimal->suhu).",";
+                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                }
+
+                $chart = "{
+                    type: 'line',
+                    data: {
+                     labels: [".$timeSet."],
+                     datasets: [{
+                        label: 'Suhu',
+                        backgroundColor: 'rgba(24,46,184,72)',
+                        borderColor: 'rgba(24,46,184,72)',
+                        pointBorderWidth: 1,
+                        fill: false, data: [".$suhu."]
+                     }]
+                    }, options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'BIOFARMA'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        max: 100,
+                                        min: -30,
+                                        stepSize: 10
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }]
+                            }
+                        }
+                    }";
                 // echo "satuan".$req->satuan;
             } elseif ($req->satuan == "kelembapan") {
                 $parameter = 'Kelembapan';
+
+                $kelembapan = "";
+                $timeSet = "";
+
+                foreach ($data as $minimal) {
+                    $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
+                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                }
+
+                $chart = "{
+                    type: 'line',
+                    data: {
+                     labels: [".$timeSet."],
+                     datasets: [{
+                        label: 'Kelembapan',
+                        backgroundColor: 'rgba(219,18,38,86)',
+                        borderColor: 'rgba(219,18,38,86)',
+                        pointBorderWidth: 1,
+                        fill: false, data: [".$kelembapan."]
+                     }]
+                    }, options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'BIOFARMA'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        max: 100,
+                                        min: -30,
+                                        stepSize: 10
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }]
+                            }
+                        }
+                    }";
                 // echo "satuan".$req->satuan;
             } elseif ($req->satuan == "tekanan"){
                 $parameter = 'Tekanan';
+
+                $tekanan = "";
+                $timeSet = "";
+
+                foreach ($data as $minimal) {
+                    $tekanan = $tekanan.((string) $minimal->tekanan).",";
+                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                }
+
+                $chart = "{
+                    type: 'line',
+                    data: {
+                     labels: [".$timeSet."],
+                     datasets: [{
+                        label: 'Tekanan',
+                        backgroundColor: 'rgba(1,184,29,72)',
+                        borderColor: 'rgba(1,184,29,72)',
+                        pointBorderWidth: 1,
+                        fill: false, data: [".$tekanan."]
+                     }]
+                    }, options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'BIOFARMA'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        max: 100,
+                                        min: -30,
+                                        stepSize: 10
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }]
+                            }
+                        }
+                    }";
                 // echo "satuan".$req->satuan;
             }
 
@@ -129,12 +438,180 @@ class LaporanController extends Controller
 
             if ($req->satuan == "suhu") {
                 $parameter = 'Suhu';
+
+                $suhu = "";
+                $timeSet = "";
+
+                foreach ($data as $minimal) {
+                    $suhu = $suhu.((string) $minimal->suhu).",";
+                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                }
+
+                $chart = "{
+                    type: 'line',
+                    data: {
+                     labels: [".$timeSet."],
+                     datasets: [{
+                        label: 'Suhu',
+                        backgroundColor: 'rgba(24,46,184,72)',
+                        borderColor: 'rgba(24,46,184,72)',
+                        pointBorderWidth: 1,
+                        fill: false, data: [".$suhu."]
+                     }]
+                    }, options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'BIOFARMA'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        max: 100,
+                                        min: -30,
+                                        stepSize: 10
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }]
+                            }
+                        }
+                    }";
                 // echo "satuan".$req->satuan;
             } elseif ($req->satuan == "kelembapan") {
                 $parameter = 'Kelembapan';
+
+                $kelembapan = "";
+                $timeSet = "";
+
+                foreach ($data as $minimal) {
+                    $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
+                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                }
+
+                $chart = "{
+                    type: 'line',
+                    data: {
+                     labels: [".$timeSet."],
+                     datasets: [{
+                        label: 'Kelembapan',
+                        backgroundColor: 'rgba(219,18,38,86)',
+                        borderColor: 'rgba(219,18,38,86)',
+                        pointBorderWidth: 1,
+                        fill: false, data: [".$kelembapan."]
+                     }]
+                    }, options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'BIOFARMA'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        max: 100,
+                                        min: -30,
+                                        stepSize: 10
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }]
+                            }
+                        }
+                    }";
                 // echo "satuan".$req->satuan;
             } elseif ($req->satuan == "tekanan"){
                 $parameter = 'Tekanan';
+
+                $tekanan = "";
+                $timeSet = "";
+
+                foreach ($data as $minimal) {
+                    $tekanan = $tekanan.((string) $minimal->tekanan).",";
+                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                }
+
+                $chart = "{
+                    type: 'line',
+                    data: {
+                     labels: [".$timeSet."],
+                     datasets: [{
+                        label: 'Tekanan',
+                        backgroundColor: 'rgba(1,184,29,72)',
+                        borderColor: 'rgba(1,184,29,72)',
+                        pointBorderWidth: 1,
+                        fill: false, data: [".$tekanan."]
+                     }]
+                    }, options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'BIOFARMA'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        max: 100,
+                                        min: -30,
+                                        stepSize: 10
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }]
+                            }
+                        }
+                    }";
                 // echo "satuan".$req->satuan;
             }
 
@@ -145,17 +622,7 @@ class LaporanController extends Controller
         }
     	// dd($data);
 
-        $suhu = "";
-        $kelembapan = "";
-        $tekanan = "";
-        $timeSet = "";
-
-        foreach ($data as $minimal) {
-            $suhu = $suhu.((string) $minimal->suhu).",";
-            $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
-            $tekanan = $tekanan.((string) $minimal->tekanan).",";
-            $timeSet = $timeSet."'".((string) $minimal->time)."',";
-        }
+        
 
         // dd($timeSet);
 
@@ -164,64 +631,7 @@ class LaporanController extends Controller
 			// dd($pdf);
             $pdf->getDomPDF()->set_option("enable_php", true);
 
-            $chart = "{
-        type: 'line',
-        data: {
-         labels: [".$timeSet."],
-         datasets: [{
-            label: 'Suhu',
-            backgroundColor: 'rgba(24,46,184,72)',
-            borderColor: 'rgba(24,46,184,72)',
-            pointBorderWidth: 1,
-            fill: false, data: [".$suhu."]}, {
-            label: 'Kelembapan',
-            backgroundColor: 'rgba(219,18,38,86)',
-            borderColor: 'rgba(219,18,38,86)',
-            pointBorderWidth: 1,
-            fill: false, data: [".$kelembapan."]}, {
-            label: 'Tekanan',
-            backgroundColor: 'rgba(1,184,29,72)',
-            borderColor: 'rgba(1,184,29,72)',
-            pointBorderWidth: 1,
-            fill: false, data: [".$tekanan."]
-         }]
-        }, options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'BIOFARMA'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Time'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            max: 100,
-                            min: -30,
-                            stepSize: 10
-                        },
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Value'
-                        }
-                    }]
-                }
-            }
-}";
+            
 
             if ($kirim == 1 && $pos == "Ruangan"){
             	// dd($kirim);

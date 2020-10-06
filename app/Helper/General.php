@@ -3,6 +3,7 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 // use Mqtt;
 use App\Monitoring;
 use App\Laporan;
+use App\Satuan;
 use App\KirimAlarm;
 use App\Perangkat;
 use App\Ruangan;
@@ -79,6 +80,10 @@ if (!function_exists('subscribe_mqtt') ){
 	        foreach($datas as $data) {
 	        	$alert = 0;
 
+	        	$satuanSuhu = Satuan::find(1);
+	        	$satuanKelembapan = Satuan::find(2);
+	        	$satuanTekanan = Satuan::find(3);
+
 		        $monitor = Monitoring::create([
 		            'suhu' => $data->suhu,
 		            'kelembapan' => $data->kelembapan,
@@ -104,60 +109,60 @@ if (!function_exists('subscribe_mqtt') ){
 		        $sendAlert = [];
 
 		        if ($data->suhu > $smax) {
-		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih tinggi dari '.$smax."C\nRuangan: ".$ruang->nama;
+		            $sendAlert[] = "Suhu: ".$data->suhu.''.$satuanSuhu.' lebih tinggi dari '.$smax."".$satuanSuhu."\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'High presure';
-		            $log->keterangan = $data->suhu.'C lebih tinggi dari '.$smax.'C';
+		            $log->keterangan = $data->suhu.''.$satuanSuhu.' lebih tinggi dari '.$smax."".$satuanSuhu."";
 		            $log->monitoring_id = $monitor->id;
 		            $log->time = date('H:i:s');
 		            $log->save();
 		        }
 
 		        if($data->suhu < $smin){
-		            $sendAlert[] = "Suhu: ".$data->suhu.'C lebih rendah dari '.$smin."C\nRuangan: ".$ruang->nama;
+		            $sendAlert[] = "Suhu: ".$data->suhu.''.$satuanSuhu.' lebih rendah dari '.$smin."".$satuanSuhu."\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'Low presure';
-		            $log->keterangan = $data->suhu.'C lebih rendah dari '.$smin.'C';
+		            $log->keterangan = $data->suhu.''.$satuanSuhu.' lebih rendah dari '.$smin."".$satuanSuhu."";
 		            $log->monitoring_id = $monitor->id;
 		            $log->time = date('H:i:s');
 		            $log->save();
 		        }
 
 		        if($data->kelembapan > $kmax){
-		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih tinggi dari '.$kmax."%\nRuangan: ".$ruang->nama;
+		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.''.$satuanKelembapan.' lebih tinggi dari '.$kmax."".$satuanKelembapan."\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'High presure';
-		            $log->keterangan = $data->kelembapan.'% lebih tinggi dari '.$kmax.'%';
+		            $log->keterangan = $data->kelembapan.''.$satuanKelembapan.' lebih tinggi dari '.$kmax."".$satuanKelembapan;
 		            $log->monitoring_id = $monitor->id;
 		            $log->time = date('H:i:s');
 		            $log->save();
 		        }
 
 		        if($data->kelembapan < $kmin){
-		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.'% lebih rendah dari '.$kmin."%\nRuangan: ".$ruang->nama;
+		            $sendAlert[] = "Kelembapan: ".$data->kelembapan.''.$satuanKelembapan.' lebih rendah dari '.$kmin."".$satuanKelembapan."\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'Low presure';
-		            $log->keterangan = $data->kelembapan.'% lebih rendah dari '.$kmin.'%';
+		            $log->keterangan = $data->kelembapan.''.$satuanKelembapan.' lebih rendah dari '.$kmin."".$satuanKelembapan;
 		            $log->monitoring_id = $monitor->id;
 		            $log->time = date('H:i:s');
 		            $log->save();
 		        }
 
 		        if($data->tekanan > $tmax){
-		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih tinggi dari '.$tmax."Pa\nRuangan: ".$ruang->nama;
+		            $sendAlert[] = "Tekanan: ".$data->tekanan.''.$satuanTekanan.' lebih tinggi dari '.$tmax."".$satuanTekanan."\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'High presure';
-		            $log->keterangan = $data->tekanan.'Pa lebih tinggi dari '.$tmax.'Pa';
+		            $log->keterangan = $data->tekanan.''.$satuanTekanan.' lebih tinggi dari '.$tmax."".$satuanTekanan;
 		            $log->monitoring_id = $monitor->id;
 		            $log->time = date('H:i:s');
 		            $log->save();
 		        }
 
 		        if($data->tekanan < $tmin){
-		            $sendAlert[] = "Tekanan: ".$data->tekanan.'Pa lebih rendah dari '.$tmin."Pa\nRuangan: ".$ruang->nama;
+		            $sendAlert[] = "Tekanan: ".$data->tekanan.''.$satuanTekanan.' lebih rendah dari '.$tmin."".$satuanTekanan."\nRuangan: ".$ruang->nama;
 		            $log = new Log_alert;
 		            $log->status = 'Low presure';
-		            $log->keterangan = $data->tekanan.'Pa lebih rendah dari '.$tmin.'Pa';
+		            $log->keterangan = $data->tekanan.''.$satuanTekanan.' lebih rendah dari '.$tmin."".$satuanTekanan;
 		            $log->monitoring_id = $monitor->id;
 		            $log->time = date('H:i:s');
 		            $log->save();

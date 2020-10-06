@@ -10,6 +10,7 @@ $uji = \App\Monitoring::where('ruangan_id',5)->latest()->first();
     .ahu-outer {
         padding: 1rem;
         height: auto;
+        /*transform: scale(.5,.5);*/
     }
 
     .ruji {
@@ -47,323 +48,678 @@ $uji = \App\Monitoring::where('ruangan_id',5)->latest()->first();
     .btn-block {
         border-radius: 0 !important;
     }
+
+    .img-ahu {
+        width: 1020px;
+        height: 667px;
+        object-fit: scale-down;
+    }
+
+    .tab-content{
+        padding: 0 !important;
+    }
+
+    .text-dyn {
+        border: 1px solid;
+        padding: 5px 10px 5px 10px;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        /* margin: 5px; */
+        background: white;
+    }
+
+    .wrap {
+        position: absolute;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(.8,.8);
+        width: 100px;
+        height: 50px;
+    }
+
+    /*START UJI POSTION*/
+
+    .wrap-uji-title {
+        left: 7rem;
+        top: 18rem;
+        width: 16.5rem;
+    }
+
+    .wrap-uji-suhu {
+        left: 7rem;
+        top: 22rem;
+    }
+
+    .wrap-uji-suhu::before {
+        position: absolute;
+        content: 'Suhu';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    .wrap-uji-kelembapan {
+        left: 12rem;
+        top: 22rem;
+    }
+
+    .wrap-uji-kelembapan::before {
+        position: absolute;
+        content: 'Kelembapan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    .wrap-uji-tekanan {
+        left: 17rem;
+        top: 22rem;
+    }
+
+    .wrap-uji-tekanan:before{
+        position: absolute;
+        content: 'Kelembapan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    .wrap-uji-cvc {
+        left: 9rem;
+        top: 26rem;
+    }
+
+    .wrap-uji-cvc::before {
+        position: absolute;
+        content: 'CVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    .wrap-uji-vvc {
+        left: 15rem;
+        top: 26rem;
+    }
+
+    .wrap-uji-vvc::before {
+        position: absolute;
+        content: 'VVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    /*END UJI POSTION*/
+
+    /*START AIRLOCK POSITION*/
+
+    .wrap-airlock-title {
+        left: 37.5%;
+        top: 23%;
+        width: 16.5rem;
+    }
+    .wrap-airlock-suhu {
+        left: 42%;
+        top: 37.5%;
+    }
+    .wrap-airlock-suhu::before {
+        position: absolute;
+        content: 'Suhu';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-airlock-kelembapan {
+        left: 42%;
+        top: 44%;
+    }
+    .wrap-airlock-kelembapan::before {
+        position: absolute;
+        content: 'Kelembapan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-airlock-tekanan {
+        left: 42%;
+        top: 50.5%;
+    }
+    .wrap-airlock-tekanan::before {
+        position: absolute;
+        content: 'Tekanan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-airlock-cvc {
+        left: 50%;
+        top: 37.5%;
+    }
+    .wrap-airlock-cvc::before {
+        position: absolute;
+        content: 'CVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-airlock-vvc {
+        left: 50%;
+        top: 44%;
+    }
+    .wrap-airlock-vvc::before {
+        position: absolute;
+        content: 'VVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    /*END AIRLOCK POSITION*/
+
+    /*START sample POSITION*/
+
+    .wrap-sample-title {
+        left: 33.5%;
+        top: 61%;
+        width: 16.5rem;
+    }
+    .wrap-sample-suhu {
+        left: 37%;
+        top: 72.5%;
+    }
+    .wrap-sample-suhu::before {
+        position: absolute;
+        content: 'Suhu';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-sample-kelembapan {
+        left: 37%;
+        top: 79.5%;
+    }
+    .wrap-sample-kelembapan::before {
+        position: absolute;
+        content: 'Kelembapan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-sample-tekanan {
+        left: 37%;
+        top: 86%;
+    }
+    .wrap-sample-tekanan::before {
+        position: absolute;
+        content: 'Tekanan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-sample-cvc {
+        left: 45%;
+        top: 72.5%;
+    }
+    .wrap-sample-cvc::before {
+        position: absolute;
+        content: 'CVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-sample-vvc {
+        left: 45%;
+        top: 79.5%;
+    }
+    .wrap-sample-vvc::before {
+        position: absolute;
+        content: 'VVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    /*END sample POSITION*/
+
+    /*START dressing POSITION*/
+
+    .wrap-dressing-title {
+        left: 64%;
+        top: 23%;
+        width: 16.5rem;
+    }
+    .wrap-dressing-suhu {
+        left: 66%;
+        top: 38%;
+    }
+    .wrap-dressing-suhu::before {
+        position: absolute;
+        content: 'Suhu';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-dressing-kelembapan {
+        left: 66%;
+        top: 44.5%;
+    }
+    .wrap-dressing-kelembapan::before {
+        position: absolute;
+        content: 'Kelembapan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-dressing-tekanan {
+        left: 66%;
+        top: 51%;
+    }
+    .wrap-dressing-tekanan::before {
+        position: absolute;
+        content: 'Tekanan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-dressing-cvc {
+        left: 75%;
+        top: 38%;
+    }
+    .wrap-dressing-cvc::before {
+        position: absolute;
+        content: 'CVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-dressing-vvc {
+        left: 75%;
+        top: 44.5%;
+    }
+    .wrap-dressing-vvc::before {
+        position: absolute;
+        content: 'VVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    /*END dressing POSITION*/
+
+    /*START vestibule POSITION*/
+
+    .wrap-vestibule-title {
+        left: 60%;
+        top: 60%;
+        width: 16.5rem;
+    }
+    .wrap-vestibule-suhu {
+        left: 57%;
+        top: 73%;
+    }
+    .wrap-vestibule-suhu::before {
+        position: absolute;
+        content: 'Suhu';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-vestibule-kelembapan {
+        left: 65%;
+        top: 73%;
+    }
+    .wrap-vestibule-kelembapan::before {
+        position: absolute;
+        content: 'Kelembapan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-vestibule-tekanan {
+        left: 73%;
+        top: 73%;
+    }
+    .wrap-vestibule-tekanan::before {
+        position: absolute;
+        content: 'Tekanan';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-vestibule-cvc {
+        left: 60%;
+        top: 80%;
+    }
+    .wrap-vestibule-cvc::before {
+        position: absolute;
+        content: 'CVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+    .wrap-vestibule-vvc {
+        left: 70%;
+        top: 80%;
+    }
+    .wrap-vestibule-vvc::before {
+        position: absolute;
+        content: 'VVC';
+        z-index: 1001;
+        top: -1rem;
+        text-align: center;
+    }
+
+    /*END vestibule POSITION*/
+
+
+    @media only screen and (max-width: 680px) {
+        
+        .ahu-outer {
+            /*transform: scale(.5,.5);
+            transform: rotate(90deg);*/
+        }
+
+        .ahu-wrapper {
+            overflow: scroll;
+            /*transform: rotate(90deg);*/
+        }
+
+        .img-ahu {
+            position: relative;
+        }
+    }
 </style>
- <div class="row ahu-outer">
-    <div class="col-4 ruji room-ahu wrapper">
-        <div class="row">
-            <div class="col-12 wrapper">
-                <h4>Ruang Uji</h4>
-            </div>
-            <div class="col-4 my-2 px-4">
-                <div class="row wrapper">
-                    <span>Suhu</span>
-                </div>
-                <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-suhu">{{$uji->suhu}}</span> °C</button>
-                </div>
-            </div>
-            <div class="col-4 my-2 px-4">
-                <div class="row wrapper">
-                    <span>Kelembapan</span>
-                </div>
-                <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-kelembapan">{{$uji->kelembapan}}</span> %</button>
-                </div>
-            </div>
-            <div class="col-4 my-2 px-4">
-                <div class="row wrapper">
-                    <span>Tekanan</span>
-                </div>
-                <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-tekanan">{{$uji->tekanan}}</span> Pa</button>
-                </div>
-            </div>
-            <div class="col-6 my-2 px-4">
-                <div class="row wrapper">
-                    <span>CVC</span>
-                </div>
-                <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-cvc">{{$uji->cvc}}</span> CMH</button>
-                </div>
-            </div>
-            <div class="col-6 my-2 px-4">
-                <div class="row wrapper">
-                    <span>VVC</span>
-                </div>
-                <div class="row wrapper">
-                    <button class="btn btn-sm btn-block btn-danger"><span id="uji-vvc">{{$uji->vvc}}</span> CMH</button>
-                </div>
-            </div>
+{{-- <div class="card-body"> --}}
+    <div class="row">
+        <div class="wrap wrap-uji-title"><h3>Ruang Uji</h3></div>
+        <div class="wrap wrap-uji-suhu"><div class="text-dyn"><span id="uji-suhu">{{$uji->suhu}}</span> °C <br></div></div>
+        <div class="wrap wrap-uji-kelembapan"><div class="text-dyn"><span id="uji-kelembapan">{{$uji->kelembapan}}</span> % <br></div></div>
+        <div class="wrap wrap-uji-tekanan"><div class="text-dyn"><span id="uji-tekanan">{{$uji->tekanan}}</span> Pa <br></div></div>
+        <div class="wrap wrap-uji-cvc"><div class="text-dyn"><span id="uji-cvc">{{$uji->cvc}}</span> CMH <br></div></div>
+        <div class="wrap wrap-uji-vvc"><div class="text-dyn"><span id="uji-vvc">{{$uji->vvc}}</span> CMH <br></div></div>
+
+        <div class="wrap wrap-airlock-title"><h3>Ruang Airlock</h3></div>
+        <div class="wrap wrap-airlock-suhu"><div class="text-dyn"><span id="airlock-suhu">{{$airlock->suhu}}</span> °C <br></div></div>
+        <div class="wrap wrap-airlock-kelembapan"><div class="text-dyn"><span id="airlock-kelembapan">{{$airlock->kelembapan}}</span> % <br></div></div>
+        <div class="wrap wrap-airlock-tekanan"><div class="text-dyn"><span id="airlock-tekanan">{{$airlock->tekanan}}</span> Pa <br></div></div>
+        <div class="wrap wrap-airlock-cvc"><div class="text-dyn"><span id="airlock-cvc">{{$airlock->cvc}}</span> CMH <br></div></div>
+        <div class="wrap wrap-airlock-vvc"><div class="text-dyn"><span id="airlock-vvc">{{$airlock->vvc}}</span> CMH <br></div></div>
+
+        <div class="wrap wrap-sample-title"><h3>Ruang Sample</h3></div>
+        <div class="wrap wrap-sample-suhu"><div class="text-dyn"><span id="sample-suhu">{{$sample->suhu}}</span> °C <br></div></div>
+        <div class="wrap wrap-sample-kelembapan"><div class="text-dyn"><span id="sample-kelembapan">{{$sample->kelembapan}}</span> % <br></div></div>
+        <div class="wrap wrap-sample-tekanan"><div class="text-dyn"><span id="sample-tekanan">{{$sample->tekanan}}</span> Pa <br></div></div>
+        <div class="wrap wrap-sample-cvc"><div class="text-dyn"><span id="sample-cvc">{{$sample->cvc}}</span> CMH <br></div></div>
+        <div class="wrap wrap-sample-vvc"><div class="text-dyn"><span id="sample-vvc">{{$sample->vvc}}</span> CMH <br></div></div>
+
+        <div class="wrap wrap-dressing-title"><h3>Ruang Dressing</h3></div>
+        <div class="wrap wrap-dressing-suhu"><div class="text-dyn"><span id="dressing-suhu">{{$dressing->suhu}}</span> °C <br></div></div>
+        <div class="wrap wrap-dressing-kelembapan"><div class="text-dyn"><span id="dressing-kelembapan">{{$dressing->kelembapan}}</span> % <br></div></div>
+        <div class="wrap wrap-dressing-tekanan"><div class="text-dyn"><span id="dressing-tekanan">{{$dressing->tekanan}}</span> Pa <br></div></div>
+        <div class="wrap wrap-dressing-cvc"><div class="text-dyn"><span id="dressing-cvc">{{$dressing->cvc}}</span> CMH <br></div></div>
+        <div class="wrap wrap-dressing-vvc"><div class="text-dyn"><span id="dressing-vvc">{{$dressing->vvc}}</span> CMH <br></div></div>
+
+        <div class="wrap wrap-vestibule-title"><h3>Ruang Vestibule</h3></div>
+        <div class="wrap wrap-vestibule-suhu"><div class="text-dyn"><span id="vestibule-suhu">{{$vestibule->suhu}}</span> °C <br></div></div>
+        <div class="wrap wrap-vestibule-kelembapan"><div class="text-dyn"><span id="vestibule-kelembapan">{{$vestibule->kelembapan}}</span> % <br></div></div>
+        <div class="wrap wrap-vestibule-tekanan"><div class="text-dyn"><span id="vestibule-tekanan">{{$vestibule->tekanan}}</span> Pa <br></div></div>
+        <div class="wrap wrap-vestibule-cvc"><div class="text-dyn"><span id="vestibule-cvc">{{$vestibule->cvc}}</span> CMH <br></div></div>
+        <div class="wrap wrap-vestibule-vvc"><div class="text-dyn"><span id="vestibule-vvc">{{$vestibule->vvc}}</span> CMH <br></div></div>
+        <div class="col-12 ahu-wrapper">
+            <img class="img-ahu" src="{{asset('ahu.png')}}">
         </div>
     </div>
-    <div class="col-8">
-        <div class="row">
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-12 airlock room-ahu wrapper">
-                        <div class="row">
-                            <div class="col-12 wrapper">
-                                <h4>Ruang Airlock</h4>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-suhu">{{$airlock->suhu}}</span> °C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Kelembapan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-kelembapan">{{$airlock->kelembapan}}</span> %</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Tekanan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-tekanan">{{$airlock->tekanan}}</span> Pa</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>CVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-cvc">{{$airlock->cvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>VVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="airlock-vvc">{{$airlock->vvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                        </div>
+    {{-- <div class="row ahu-outer"> 
+        <div class="col-4 ruji room-ahu wrapper">
+            <div class="row">
+                <div class="col-12 wrapper">
+                    <h4>Ruang Uji</h4>
+                </div>
+                <div class="col-4 my-2 px-4">
+                    <div class="row wrapper">
+                        <span>Suhu</span>
                     </div>
-                    <div class="col-12 sample room-ahu wrapper">
-                        <div class="row">
-                            <div class="col-12 wrapper">
-                                <h4>Ruang Sample</h4>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-suhu">{{$sample->suhu}}</span> °C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Kelembapan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-kelembapan">{{$sample->kelembapan}}</span> %</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Tekanan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-tekanan">{{$sample->tekanan}}</span> Pa</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>CVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-cvc">{{$sample->cvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>VVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="sample-vvc">{{$sample->vvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row wrapper">
+                        <button class="btn btn-sm btn-block btn-danger"><span id="uji-suhu">{{$uji->suhu}}</span> °C</button>
                     </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-12 dr room-ahu wrapper">
-                        <div class="row">
-                            <div class="col-12 wrapper">
-                                <h4>Ruang Dressing</h4>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-suhu">{{$dressing->suhu}}</span> °C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Kelembapan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-kelembapan">{{$dressing->kelembapan}}</span> %</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Tekanan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-tekanan">{{$dressing->tekanan}}</span> Pa</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>CVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-cvc">{{$dressing->cvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>VVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="dressing-vvc">{{$dressing->vvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-4 my-2 px-4">
+                    <div class="row wrapper">
+                        <span>Kelembapan</span>
                     </div>
-                    <div class="col-12 vest room-ahu wrapper">
-                        <div class="row">
-                            <div class="col-12 wrapper">
-                                <h4>Ruang Vestibule</h4>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Suhu</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-suhu">{{$vestibule->suhu}}</span> °C</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Kelembapan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-kelembapan">{{$vestibule->kelembapan}}</span> %</button>
-                                </div>
-                            </div>
-                            <div class="col-4 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>Tekanan</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-tekanan">{{$vestibule->tekanan}}</span> Pa</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>CVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-cvc">{{$vestibule->cvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                            <div class="col-6 my-2 px-4">
-                                <div class="row wrapper">
-                                    <span>VVC</span>
-                                </div>
-                                <div class="row wrapper">
-                                    <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-vvc">{{$vestibule->vvc}}</span> CMH</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row wrapper">
+                        <button class="btn btn-sm btn-block btn-danger"><span id="uji-kelembapan">{{$uji->kelembapan}}</span> %</button>
+                    </div>
+                </div>
+                <div class="col-4 my-2 px-4">
+                    <div class="row wrapper">
+                        <span>Tekanan</span>
+                    </div>
+                    <div class="row wrapper">
+                        <button class="btn btn-sm btn-block btn-danger"><span id="uji-tekanan">{{$uji->tekanan}}</span> Pa</button>
+                    </div>
+                </div>
+                <div class="col-6 my-2 px-4">
+                    <div class="row wrapper">
+                        <span>CVC</span>
+                    </div>
+                    <div class="row wrapper">
+                        <button class="btn btn-sm btn-block btn-danger"><span id="uji-cvc">{{$uji->cvc}}</span> CMH</button>
+                    </div>
+                </div>
+                <div class="col-6 my-2 px-4">
+                    <div class="row wrapper">
+                        <span>VVC</span>
+                    </div>
+                    <div class="row wrapper">
+                        <button class="btn btn-sm btn-block btn-danger"><span id="uji-vvc">{{$uji->vvc}}</span> CMH</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-{{-- @foreach($data as $d)
-    <div class="col-xl-4 col-md-12"  style="width:20rem;">
-        <div class="card bg-dark">
-            <div class="card-header bg-dark text-white">
-                <h3 style="color: white;">
-                    <center>{{$d->nama}}</center>
-                </h3>
-            </div>
-            <div class="card-body bg-dark text-white rounded">
-                <div class="row">
-                    <div class="col-4">
-                        <center>
-                            <small>Suhu(C)</small>
-                        </center> 
+        <div class="col-8">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12 airlock room-ahu wrapper">
+                            <div class="row">
+                                <div class="col-12 wrapper">
+                                    <h4>Ruang Airlock</h4>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Suhu</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="airlock-suhu">{{$airlock->suhu}}</span> °C</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Kelembapan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="airlock-kelembapan">{{$airlock->kelembapan}}</span> %</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Tekanan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="airlock-tekanan">{{$airlock->tekanan}}</span> Pa</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>CVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="airlock-cvc">{{$airlock->cvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>VVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="airlock-vvc">{{$airlock->vvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sample room-ahu wrapper">
+                            <div class="row">
+                                <div class="col-12 wrapper">
+                                    <h4>Ruang Sample</h4>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Suhu</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="sample-suhu">{{$sample->suhu}}</span> °C</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Kelembapan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="sample-kelembapan">{{$sample->kelembapan}}</span> %</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Tekanan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="sample-tekanan">{{$sample->tekanan}}</span> Pa</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>CVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="sample-cvc">{{$sample->cvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>VVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="sample-vvc">{{$sample->vvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <center>
-                            <small>Kelempan(%)</small>
-                        </center> 
-                    </div>
-                    <div class="col-4">
-                        <center>
-                            <small>Tekanan(Pa)</small>
-                        </center> 
-                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-4 border-right" id="suhuRoom">
-                        <center> {{$d->monitoring? $d->monitoring->suhu:"0"}} {{$suhu->satuan}}
-                        </center>
-                    </div>
-                    <div class="col-4" id="suhuRoom">
-                         <center> {{$d->monitoring? $d->monitoring->kelembapan:"0"}} {{$kelembapan->satuan}}
-                        </center>
-                    </div>
-                    <div class="col-4 border-left" id="suhuRoom">
-                        <center> {{$d->monitoring? $d->monitoring->tekanan:"0"}} {{$tekanan->satuan}}
-                        </center>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12 dr room-ahu wrapper">
+                            <div class="row">
+                                <div class="col-12 wrapper">
+                                    <h4>Ruang Dressing</h4>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Suhu</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="dressing-suhu">{{$dressing->suhu}}</span> °C</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Kelembapan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="dressing-kelembapan">{{$dressing->kelembapan}}</span> %</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Tekanan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="dressing-tekanan">{{$dressing->tekanan}}</span> Pa</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>CVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="dressing-cvc">{{$dressing->cvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>VVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="dressing-vvc">{{$dressing->vvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 vest room-ahu wrapper">
+                            <div class="row">
+                                <div class="col-12 wrapper">
+                                    <h4>Ruang Vestibule</h4>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Suhu</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-suhu">{{$vestibule->suhu}}</span> °C</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Kelembapan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-kelembapan">{{$vestibule->kelembapan}}</span> %</button>
+                                    </div>
+                                </div>
+                                <div class="col-4 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>Tekanan</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-tekanan">{{$vestibule->tekanan}}</span> Pa</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>CVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-cvc">{{$vestibule->cvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-2 px-4">
+                                    <div class="row wrapper">
+                                        <span>VVC</span>
+                                    </div>
+                                    <div class="row wrapper">
+                                        <button class="btn btn-sm btn-block btn-danger"><span id="vestibule-vvc">{{$vestibule->vvc}}</span> CMH</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <center>
-                            <small>CVC</small>
-                        </center> 
-                    </div>
-                    <div class="col-6">
-                        <center>
-                            <small>VVC </small>
-                        </center> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 border-right">
-                        <center> {{$d->monitoring? $d->monitoring->cvc:"0"}} %
-                        </center>
-                    </div>
-                    <div class="col-6">
-                        <center> {{$d->monitoring ? $d->monitoring->vvc:"0"}} %
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center bg-dark">
-                
             </div>
         </div>
-    </div>
-<!-- $ruangan->monitoring->suhu()->id; -->
-@endforeach --}}
-</div>
+    </div> --}}
+{{-- </div> --}}

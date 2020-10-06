@@ -80,9 +80,9 @@ if (!function_exists('subscribe_mqtt') ){
 	        foreach($datas as $data) {
 	        	$alert = 0;
 
-	        	$satuanSuhu = Satuan::find(1);
-	        	$satuanKelembapan = Satuan::find(2);
-	        	$satuanTekanan = Satuan::find(3);
+	        	$satuanSuhu = Satuan::find(1)->satuan;
+	        	$satuanKelembapan = Satuan::find(2)->satuan;
+	        	$satuanTekanan = Satuan::find(3)->satuan;
 
 		        $monitor = Monitoring::create([
 		            'suhu' => $data->suhu,

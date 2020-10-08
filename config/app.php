@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Salman\Mqtt\MqttServiceProvider::class,
+        // Barryvdh\Snappy\ServiceProvider::class,
         // App\Providers\UserServiceProvider::class,
 
     ],
@@ -237,6 +238,8 @@ return [
         'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Mqtt' => \Salman\Mqtt\Facades\Mqtt::class,
+        // 'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        // 'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         // 'Mqttphp' => App\Helper\Mqttphp::class,
     ],
 

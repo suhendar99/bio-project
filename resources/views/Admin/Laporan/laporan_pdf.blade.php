@@ -13,6 +13,7 @@
 	$tavg = $data->avg('tekanan');
 
     $date = date("d M Y");
+    $semuaRuangan = App\Ruangan::all();
     $ruanganAir = App\Ruangan::where('nama','Airlock')->first();
     $ruanganDres = App\Ruangan::where('nama','Dressing')->first();
     $ruanganSamp = App\Ruangan::where('nama','Sample')->first();
@@ -155,6 +156,14 @@
            @endif
            @if ($sumber == 'Tekanan & Uji')
                SETPOINT ({{ $ruanganUji->tmin }} s.d {{ $ruanganUji->tmax }})
+           @endif
+           @if($sumber == "Semua Ruangan dan Parameter")
+           		@foreach($semuaRuangan as $all)
+	           		Ruangan : {{ $all->nama }}<br>
+	           		SETPOINT: 	Suhu: ({{ $all->smin }} s.d {{ $all->smax }})<br>
+	           					Kelembapan: ({{ $all->kmin }} s.d {{ $all->kmax }})<br>
+	           					Tekanan: ({{ $all->tmin }} s.d {{ $all->tmax }})<br><br>
+           		@endforeach
            @endif
         </div>
     <br>

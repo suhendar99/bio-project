@@ -70,12 +70,13 @@ class LaporanController extends Controller
             $kelembapan = "";
             $tekanan = "";
             $timeSet = "";
+            $cous = 1;
 
-            foreach ($data as $minimal) {
-                $suhu = $suhu.((string) $minimal->suhu).",";
-                $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
-                $tekanan = $tekanan.((string) $minimal->tekanan).",";
-                $timeSet = $timeSet."'".((string) $minimal->time)."',";
+            for ($i=0; $i < 100; $i++){
+                $suhu = $suhu.((string) $data[$i]->suhu).",";
+                $kelembapan = $kelembapan.((string) $data[$i]->kelembapan).",";
+                $tekanan = $tekanan.((string) $data[$i]->tekanan).",";
+                $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
             }
 
             $chart = "{
@@ -86,17 +87,32 @@ class LaporanController extends Controller
                     label: 'Suhu',
                     backgroundColor: 'rgba(24,46,184,72)',
                     borderColor: 'rgba(24,46,184,72)',
-                    pointBorderWidth: 1,
+                    lineTension: 0,
+                    borderWidth: 1,
+                    pointStyle: 'circle',
+                    pointRadius: 1,
+                    pointBorderWidth: .5,
+                    pointBorderColor: 'transparent',
                     fill: false, data: [".$suhu."]}, {
                     label: 'Kelembapan',
+                    lineTension: 0,
                     backgroundColor: 'rgba(219,18,38,86)',
                     borderColor: 'rgba(219,18,38,86)',
-                    pointBorderWidth: 1,
+                    borderWidth: 1,
+                    pointStyle: 'circle',
+                    pointRadius: 1,
+                    pointBorderWidth: .5,
+                    pointBorderColor: 'transparent',
                     fill: false, data: [".$kelembapan."]}, {
                     label: 'Tekanan',
+                    lineTension: 0,
                     backgroundColor: 'rgba(1,184,29,72)',
                     borderColor: 'rgba(1,184,29,72)',
-                    pointBorderWidth: 1,
+                    borderWidth: 1,
+                    pointStyle: 'circle',
+                    pointRadius: 1,
+                    pointBorderWidth: .5,
+                    pointBorderColor: 'transparent',
                     fill: false, data: [".$tekanan."]
                  }]
                 }, options: {
@@ -161,12 +177,13 @@ class LaporanController extends Controller
             $kelembapan = "";
             $tekanan = "";
             $timeSet = "";
+            $cous = 1;
 
-            foreach ($data as $minimal) {
-                $suhu = $suhu.((string) $minimal->suhu).",";
-                $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
-                $tekanan = $tekanan.((string) $minimal->tekanan).",";
-                $timeSet = $timeSet."'".((string) $minimal->time)."',";
+            for ($i=0; $i < 100; $i++){
+                $suhu = $suhu.((string) $data[$i]->suhu).",";
+                $kelembapan = $kelembapan.((string) $data[$i]->kelembapan).",";
+                $tekanan = $tekanan.((string) $data[$i]->tekanan).",";
+                $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
             }
 
             $chart = "{
@@ -177,17 +194,32 @@ class LaporanController extends Controller
                     label: 'Suhu',
                     backgroundColor: 'rgba(24,46,184,72)',
                     borderColor: 'rgba(24,46,184,72)',
-                    pointBorderWidth: 1,
+                    pointBorderWidth: .5,
+                    lineTension: 0,
+                    borderWidth: 1,
+                    pointStyle: 'circle',
+                    pointRadius: 1,
+                    pointBorderColor: 'transparent',
                     fill: false, data: [".$suhu."]}, {
                     label: 'Kelembapan',
                     backgroundColor: 'rgba(219,18,38,86)',
                     borderColor: 'rgba(219,18,38,86)',
-                    pointBorderWidth: 1,
+                    pointBorderWidth: .5,
+                    lineTension: 0,
+                    borderWidth: 1,
+                    pointStyle: 'circle',
+                    pointRadius: 1,
+                    pointBorderColor: 'transparent',
                     fill: false, data: [".$kelembapan."]}, {
                     label: 'Tekanan',
                     backgroundColor: 'rgba(1,184,29,72)',
                     borderColor: 'rgba(1,184,29,72)',
-                    pointBorderWidth: 1,
+                    pointBorderWidth: .5,
+                    lineTension: 0,
+                    borderWidth: 1,
+                    pointStyle: 'circle',
+                    pointRadius: 1,
+                    pointBorderColor: 'transparent',
                     fill: false, data: [".$tekanan."]
                  }]
                 }, options: {
@@ -243,10 +275,11 @@ class LaporanController extends Controller
 
                 $suhu = "";
                 $timeSet = "";
+                $cous = 1;
 
-                foreach ($data as $minimal) {
-                    $suhu = $suhu.((string) $minimal->suhu).",";
-                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                for ($i=0; $i < 100; $i++){
+                    $suhu = $suhu.((string) $data[$i]->suhu).",";
+                    $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
                 }
 
                 $chart = "{
@@ -257,7 +290,12 @@ class LaporanController extends Controller
                         label: 'Suhu',
                         backgroundColor: 'rgba(24,46,184,72)',
                         borderColor: 'rgba(24,46,184,72)',
-                        pointBorderWidth: 1,
+                        pointBorderWidth: .5,
+                        lineTension: 0,
+                        borderWidth: 1,
+                        pointStyle: 'circle',
+                        pointRadius: 1,
+                        pointBorderColor: 'transparent',
                         fill: false, data: [".$suhu."]
                      }]
                     }, options: {
@@ -302,10 +340,11 @@ class LaporanController extends Controller
 
                 $kelembapan = "";
                 $timeSet = "";
+                $cous = 1;
 
-                foreach ($data as $minimal) {
-                    $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
-                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                for ($i=0; $i < 100; $i++){
+                    $kelembapan = $kelembapan.((string) $data[$i]->kelembapan).",";
+                    $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
                 }
 
                 $chart = "{
@@ -316,7 +355,12 @@ class LaporanController extends Controller
                         label: 'Kelembapan',
                         backgroundColor: 'rgba(219,18,38,86)',
                         borderColor: 'rgba(219,18,38,86)',
-                        pointBorderWidth: 1,
+                        pointBorderWidth: .5,
+                        lineTension: 0,
+                        borderWidth: 1,
+                        pointStyle: 'circle',
+                        pointRadius: 1,
+                        pointBorderColor: 'transparent',
                         fill: false, data: [".$kelembapan."]
                      }]
                     }, options: {
@@ -361,10 +405,11 @@ class LaporanController extends Controller
 
                 $tekanan = "";
                 $timeSet = "";
+                $cous = 1;
 
-                foreach ($data as $minimal) {
-                    $tekanan = $tekanan.((string) $minimal->tekanan).",";
-                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                for ($i=0; $i < 100; $i++){
+                    $tekanan = $tekanan.((string) $data[$i]->tekanan).",";
+                    $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
                 }
 
                 $chart = "{
@@ -375,7 +420,12 @@ class LaporanController extends Controller
                         label: 'Tekanan',
                         backgroundColor: 'rgba(1,184,29,72)',
                         borderColor: 'rgba(1,184,29,72)',
-                        pointBorderWidth: 1,
+                        pointBorderWidth: .5,
+                        lineTension: 0,
+                        borderWidth: 1,
+                        pointStyle: 'circle',
+                        pointRadius: 1,
+                        pointBorderColor: 'transparent',
                         fill: false, data: [".$tekanan."]
                      }]
                     }, options: {
@@ -441,10 +491,11 @@ class LaporanController extends Controller
 
                 $suhu = "";
                 $timeSet = "";
+                $cous = 1;
 
-                foreach ($data as $minimal) {
-                    $suhu = $suhu.((string) $minimal->suhu).",";
-                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                for ($i=0; $i < 100; $i++){
+                    $suhu = $suhu.((string) $data[$i]->suhu).",";
+                    $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
                 }
 
                 $chart = "{
@@ -455,7 +506,12 @@ class LaporanController extends Controller
                         label: 'Suhu',
                         backgroundColor: 'rgba(24,46,184,72)',
                         borderColor: 'rgba(24,46,184,72)',
-                        pointBorderWidth: 1,
+                        pointBorderWidth: .5,
+                        lineTension: 0,
+                        borderWidth: 1,
+                        pointStyle: 'circle',
+                        pointRadius: 1,
+                        pointBorderColor: 'transparent',
                         fill: false, data: [".$suhu."]
                      }]
                     }, options: {
@@ -500,10 +556,11 @@ class LaporanController extends Controller
 
                 $kelembapan = "";
                 $timeSet = "";
+                $cous = 1;
 
-                foreach ($data as $minimal) {
-                    $kelembapan = $kelembapan.((string) $minimal->kelembapan).",";
-                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                for ($i=0; $i < 100; $i++){
+                    $kelembapan = $kelembapan.((string) $data[$i]->kelembapan).",";
+                    $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
                 }
 
                 $chart = "{
@@ -514,7 +571,12 @@ class LaporanController extends Controller
                         label: 'Kelembapan',
                         backgroundColor: 'rgba(219,18,38,86)',
                         borderColor: 'rgba(219,18,38,86)',
-                        pointBorderWidth: 1,
+                        pointBorderWidth: .5,
+                        lineTension: 0,
+                        borderWidth: 1,
+                        pointStyle: 'circle',
+                        pointRadius: 1,
+                        pointBorderColor: 'transparent',
                         fill: false, data: [".$kelembapan."]
                      }]
                     }, options: {
@@ -559,10 +621,11 @@ class LaporanController extends Controller
 
                 $tekanan = "";
                 $timeSet = "";
+                $cous = 1;
 
-                foreach ($data as $minimal) {
-                    $tekanan = $tekanan.((string) $minimal->tekanan).",";
-                    $timeSet = $timeSet."'".((string) $minimal->time)."',";
+                for ($i=0; $i < 100; $i++){
+                    $tekanan = $tekanan.((string) $data[$i]->tekanan).",";
+                    $timeSet = $timeSet."'".((string) $data[$i]->time)."',";
                 }
 
                 $chart = "{
@@ -573,7 +636,12 @@ class LaporanController extends Controller
                         label: 'Tekanan',
                         backgroundColor: 'rgba(1,184,29,72)',
                         borderColor: 'rgba(1,184,29,72)',
-                        pointBorderWidth: 1,
+                        pointBorderWidth: .5,
+                        lineTension: 0,
+                        borderWidth: 1,
+                        pointStyle: 'circle',
+                        pointRadius: 1,
+                        pointBorderColor: 'transparent',
                         fill: false, data: [".$tekanan."]
                      }]
                     }, options: {
@@ -630,6 +698,8 @@ class LaporanController extends Controller
             $pdf = app('dompdf.wrapper');
 			// dd($pdf);
             $pdf->getDomPDF()->set_option("enable_php", true);
+
+            // dd("https://quickchart.io/chart?width=500&height=300&c=".urlencode($chart));
 
             
 

@@ -14,23 +14,28 @@ class MonitoringSeeder extends Seeder
      */
     public function run()
     {
-    	for ($i=0; $i < 6; $i++) { 
+    	$data = [];
+    	$ruangan = Ruangan::all();
     		# code...
-	    	$ruangan = Ruangan::all();
+    	for ($i=0; $i < 500; $i++) { 
+    		$data[] = [
+	        	'date' => date("Y-m-d"),
+	        	'time' => date("h:i:s"),
+	        	'suhu' => rand(0, 45),
+	        	'kelembapan' => rand(0, 45),
+	        	'tekanan' => rand(0, 45),
+	        	'perangkat_id' => 'Dc234Zz',
+	        	'ruangan_id' => 1,
+	        	'cvc' => '20',
+	        	'vvc' => '20'
+	        ];
+	    	
+    	}
 
-	    	foreach ($ruangan as $r) {
-		        Monitoring::create([
-		        	'date' => date("Y-m-d"),
-		        	'time' => date("h:i:s"),
-		        	'suhu' => '30',
-		        	'kelembapan' => '30',
-		        	'tekanan' => '30',
-		        	'perangkat_id' => 'Dc234Zz',
-		        	'ruangan_id' => $r->id,
-		        	'cvc' => '20',
-		        	'vvc' => '20'
-		        ]);
-	    	}
+    	$chunks = array_chunk($data, 500);
+
+    	foreach ($chunks as $chunk) {
+	        Monitoring::insert($chunk);
     	}
     }
 }

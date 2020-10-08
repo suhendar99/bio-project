@@ -45,6 +45,13 @@ class MonitoringController extends Controller
             ]);
         }
     }
+
+    public function loadmon(){
+        $data = Monitoring::all();
+        $json = json_encode($data);
+        $decode = json_decode($json);
+        dd($decode);
+    }
     public function getData(Request $req)
     {
         $room = Ruangan::where('id', $req->room)->first();

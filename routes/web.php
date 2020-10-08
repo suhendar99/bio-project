@@ -15,7 +15,8 @@ route::get('/publish/{topic}/{message}','MonitoringController@sendMsgViaMqtt');
 route::post('/subscribe/{topic}','MonitoringController@subscribeToTopic');
 Auth::routes();
 Route::get('/phpinfo', function() {
-    phpinfo();
+    // /App/Models/
+    // phpinfo();
 });
 Route::middleware(['auth'])->group(function () {
 	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');

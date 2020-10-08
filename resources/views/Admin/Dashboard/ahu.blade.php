@@ -49,10 +49,14 @@ $uji = \App\Monitoring::where('ruangan_id',5)->latest()->first();
         border-radius: 0 !important;
     }
 
-    .img-ahu {
-        width: 100%;
+    .img-ahu {    
+        width: 1025px;
         height: auto;
         object-fit: scale-down;
+    }
+
+    .ahu-wrapper {
+        overflow: scroll;
     }
 
     .tab-content{

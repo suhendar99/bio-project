@@ -16,8 +16,9 @@ route::post('/subscribe/{topic}','MonitoringController@subscribeToTopic');
 Auth::routes();
 Route::get('/phpinfo', function() {
     // /App/Models/
-    // phpinfo();
+    phpinfo();
 });
+Route::get('/loadmon', 'MonitoringController@loadmon');
 Route::middleware(['auth'])->group(function () {
 	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');
     Route::get('/','Dashboard@index')->name('dashboard');

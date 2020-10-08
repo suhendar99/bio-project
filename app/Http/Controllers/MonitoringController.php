@@ -436,7 +436,13 @@ class MonitoringController extends Controller
     }
     public function cek(Request $request)
     {
-        dispatch(new Mqttjob());
+        Monitoring::chunk(200,function ($monitorings) {
+            // foreach ($monitorings as $m) {
+            //     echo $m->suhu;
+            // }
+            dd($monitorings);
+        });
+        // dispatch(new Mqttjob());
 
     }
 }

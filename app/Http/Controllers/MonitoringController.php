@@ -45,6 +45,13 @@ class MonitoringController extends Controller
             ]);
         }
     }
+
+    public function loadmon(){
+        $data = Monitoring::all();
+        $json = json_encode($data);
+        $decode = json_decode($json);
+        dd($decode);
+    }
     public function getData(Request $req)
     {
         $room = Ruangan::where('id', $req->room)->first();
@@ -436,7 +443,13 @@ class MonitoringController extends Controller
     }
     public function cek(Request $request)
     {
-        dispatch(new Mqttjob());
+        Monitoring::chunk(200,function ($monitorings) {
+            // foreach ($monitorings as $m) {
+            //     echo $m->suhu;
+            // }
+            dd($monitorings);
+        });
+        // dispatch(new Mqttjob());
 
     }
 }

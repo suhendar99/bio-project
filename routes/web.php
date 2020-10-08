@@ -14,6 +14,11 @@ Route::get('/cek','MonitoringController@cek');
 route::get('/publish/{topic}/{message}','MonitoringController@sendMsgViaMqtt');
 route::post('/subscribe/{topic}','MonitoringController@subscribeToTopic');
 Auth::routes();
+Route::get('/phpinfo', function() {
+    // /App/Models/
+    phpinfo();
+});
+Route::get('/loadmon', 'MonitoringController@loadmon');
 Route::middleware(['auth'])->group(function () {
 	Route::get('/room/{id}','MonitoringController@room')->name('room.monitor');
     Route::get('/','Dashboard@index')->name('dashboard');
@@ -126,6 +131,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/updated-activity', 'TelegramBotController@updatedActivity');
     Route::get('/send-telegram', 'TelegramBotController@sendMessage');
 });
+
+Route::get('/ahu', function() {
+    return view('Admin.Dashboard.ahu');
+});
+
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('config:clear');
